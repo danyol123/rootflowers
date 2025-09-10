@@ -32,7 +32,7 @@ body {
   padding: 15px 30px;
   border: 2px solid #928473;
   background-color: #928473;
-  color: #ffffff;
+  color: #f4f1ed;
   font-size: 1.2rem;
   cursor: pointer;
   transition: all 0.4s ease;
@@ -66,4 +66,14 @@ body {
 .navbarbutton:hover {
   border-color: #928473;
   background: #463b2b;
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #928473;
+  color: #f4f1ed;
+  text-align: center;
 }
