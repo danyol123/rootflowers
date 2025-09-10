@@ -1,6 +1,8 @@
 body {
     margin: 0;
+    padding: 0;
     background-color: #f4f1ed;
+    font-family: Arial, sans-serif;
 }
 
 #logo {
@@ -25,6 +27,14 @@ body {
   text-align: center;
   padding: 14px;
   text-decoration: none;
+}
+
+#navbar li {
+  list-style-type: none;
+}
+
+.dropdown-content {
+  display: none
 }
 
 /* Page content */
