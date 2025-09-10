@@ -1,0 +1,28 @@
+/* Body of the website */
+body {
+  background-color : #f4f1ed ;
+}
+
+/* Navigation Bar*/
+#navbar {
+  position: sticky;
+  top: 0;
+  overflow: hidden;
+  background-color: #928473;
+}
+
+/* The Links used for the Navigation Bar */
+#navbar a {
+  float: left;
+  display: block;
+  color: #928473;
+  text-align: center;
+  padding: 14px;
+  text-decoration: none;
+}
+
+/* Page content */
+.content {
+  padding: 16px;
+}
+
