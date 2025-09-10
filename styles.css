@@ -1,9 +1,15 @@
-/* Body of the website */
 body {
-  background-color : #f4f1ed ;
+    margin: 0;
+    background-color: #f4f1ed;
 }
 
-/* Navigation Bar*/
+#logo {
+    width: 100px;
+    height: 100px;
+    float: left;
+    display: block;
+}
+
 #navbar {
   position: sticky;
   top: 0;
@@ -15,7 +21,7 @@ body {
 #navbar a {
   float: left;
   display: block;
-  color: #928473;
+  color: #0b0824;
   text-align: center;
   padding: 14px;
   text-decoration: none;
@@ -25,4 +31,3 @@ body {
 .content {
   padding: 16px;
 }
-
