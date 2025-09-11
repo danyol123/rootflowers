@@ -5,6 +5,11 @@ body {
     font-family: Arial, sans-serif;
 }
 
+@font-face {
+  font-family: Reach_Story;
+  src: url(Reach_Story.otf);
+  font-weight: bold;
+}
 .logo {
     width: 100px;
     height: 100px;
