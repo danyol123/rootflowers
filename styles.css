@@ -27,6 +27,7 @@ div {
   overflow: hidden;
   background-color: #928473;
   border-radius: 0px 0px 30px 30px;
+  font-size: 30px;
 }
 
 /* The Links used for the Navigation Bar */
@@ -104,4 +105,14 @@ div.main div {
   background-color: #928473;
   color: #f4f1ed;
   text-align: center;
+}
+
+.thirtythree{
+  float: left;
+  width: 33%;
+}
+
+.sixtysix{
+  float: left;
+  width: 66%;
 }
