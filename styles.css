@@ -87,6 +87,15 @@ div {
   background: #463b2b;
 }
 
+div.main {
+  width:100%;
+  overflow:auto;
+}
+div.main div {
+  width:50%;  
+  float:left;
+}
+
 .footer {
   position: fixed;
   left: 0;
