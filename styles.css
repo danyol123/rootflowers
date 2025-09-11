@@ -10,6 +10,11 @@ body {
   src: url(Reach_Story.otf);
   font-weight: bold;
 }
+
+div {
+  font-family: myFirstFont;
+}
+
 .logo {
     width: 100px;
     height: 100px;
