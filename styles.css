@@ -1,8 +1,9 @@
 body {
-    margin: 0;
-    padding: 0;
-    background-color: #f4f1ed;
-    font-family: Arial, sans-serif;
+
+  margin: 0;
+  padding: 0;
+  background-color: #f4f1ed;
+  font-family: Arial, sans-serif;
 }
 
 @font-face {
@@ -16,11 +17,12 @@ div {
 }
 
 .logo {
-    width: 100px;
-    height: 100px;
-    float: left;
-    display: block;
+  width: 100px;
+  height: 100px;
+  float: left;
+  display: block;
 }
+
 .navbar {
   position: sticky;
   top: 0;
@@ -69,11 +71,9 @@ div {
   left: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(
-    circle,
-    rgba(255, 255, 255, 0.25) 0%,
-    rgba(255, 255, 255, 0) 70%
-  );
+  background: radial-gradient(circle,
+      rgba(255, 255, 255, 0.25) 0%,
+      rgba(255, 255, 255, 0) 70%);
   transform: scale(0);
   transition: transform 0.5s ease;
 }
@@ -88,9 +88,10 @@ div {
 }
 
 div.main {
-  width:100%;
-  overflow:auto;
+  width: 100%;
+  overflow: auto;
 }
+
 div.main div {
   width:50%;  
   float:left;
@@ -109,12 +110,12 @@ footer div{
   text-align: center;
 }
 
-.thirtythree{
+.thirtythree {
   float: left;
   width: 33%;
 }
 
-.sixtysix{
+.sixtysix {
   float: left;
   width: 67%;
 }
