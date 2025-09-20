@@ -233,16 +233,35 @@ input[type="submit"]:hover {
   background-color: #9c8c7b; 
   color: #2c2230;
   padding: 30px;
-}
-
-.footer-table {
-  width: 100%;
-  border-collapse: collapse;
+  font-family: Reach_Story;
+  font-size: 20px;
 }
 
 .footer-left {
   width: 25%;
   vertical-align: top;
+  text-align: left;
+}
+
+.logo {
+  width: 120px;
+  display: block;
+  margin-bottom: 15px;
+}
+
+.social-section {
+  margin-bottom: 15px;
+}
+
+.social-icon {
+  width: 30px;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+.footer-table {
+  width: 100%;
+  border-collapse: collapse;
 }
 
 .footer-center {
