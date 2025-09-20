@@ -28,7 +28,6 @@ div {
   top: 0;
   overflow: hidden;
   background-color: #928473;
-  border-radius: 0px 0px 30px 30px;
   font-size: 30px;
 }
 
@@ -96,11 +95,6 @@ div.main {
 div.main div {
   width:50%;  
   float:left;
-}
-
-.navbar .logo {
-  height: 50px;
-  margin-right: 1rem;
 }
 
 .nav-links {
@@ -283,11 +277,6 @@ input[type="submit"]:hover {
 .footer-contact {
   padding: 20px 20px 0 20px;
   vertical-align: top;
-}
-
-.logo {
-  width: 100px;
-  margin-bottom: 10px;
 }
 
 .social-icon {
