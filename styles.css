@@ -26,7 +26,6 @@ div {
   top: 0;
   overflow: hidden;
   background-color: #928473;
-  border-radius: 0px 0px 30px 30px;
   font-size: 30px;
 }
 
@@ -97,8 +96,11 @@ div.main div {
   float:left;
 }
 
+footer div{
+  background-color: #928473
+}
+
 .footer {
-  position: fixed;
   left: 0;
   bottom: 0;
   width: 100%;
@@ -114,5 +116,5 @@ div.main div {
 
 .sixtysix{
   float: left;
-  width: 66%;
+  width: 67%;
 }
