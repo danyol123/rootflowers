@@ -17,74 +17,117 @@ div {
 }
 
 .logo {
-  width: 100px;
-  height: 100px;
+  width: 75px;
+  height: 75px;
   float: left;
   display: block;
+  border-radius: 50%;
+  margin: 10px 15px;
 }
 
 .navbar {
   position: sticky;
   top: 0;
-  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1rem;
+  padding: 0.6rem 1rem;
+  margin: 0;
   background-color: #928473;
-  font-size: 30px;
+  font-size: 25px;
+  z-index: 1000;
+  overflow: visible; /* allow dropdown to overflow */
 }
 
-/* The Links used for the Navigation Bar */
-.navbar a {
-  float: left;
-  display: block;
-  color: #0b0824;
-  text-align: center;
-  padding: 14px;
-  text-decoration: none;
+.navbar,.navbar ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
+/* horizontal menu container (use .menu if you wrap links in a ul.menu) */
+.navbar > ul,
+.navbar .menu {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+/* top-level items */
 .navbar li {
-  list-style-type: none;
-}
-
-.dropdown-content {
-  display: none
-}
-
-.navbarbutton {
-  padding: 15px 30px;
-  border: 2px solid #928473;
-  background-color: #928473;
-  color: #f4f1ed;
-  font-size: 1.2rem;
-  cursor: pointer;
-  transition: all 0.4s ease;
-  border-radius: 5px;
-  outline: none;
+  margin: 0;
+  padding: 0;
   position: relative;
-  overflow: hidden;
-  font-weight: bold;
 }
 
-.navbarbutton::after {
-  content: "";
+/* links styling */
+.navbar a {
+  display: inline-block;
+  color: #000;
+  text-decoration: none;
+  padding: 1em 14px;
+  border-radius: 6px;
+  transition: background 0.18s ease, color 0.18s ease;
+}
+.navbar a:hover,
+.navbar a:focus {
+  background: rgba(255,255,255,0.12);
+  color: #000000;
+}
+
+/* Dropdown parent */
+.dropdown {
+  cursor: pointer;
+}
+
+/* Dropdown content - opens downward under parent */
+.dropdown-content {
+  display: none;
   position: absolute;
-  top: 0;
+  top: calc(100% + 8px); /* place below parent */
   left: 0;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle,
-      rgba(255, 255, 255, 0.25) 0%,
-      rgba(255, 255, 255, 0) 70%);
-  transform: scale(0);
-  transition: transform 0.5s ease;
+  background: #fff;
+  min-width: 220px;
+  padding: 6px 0;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+  border-radius: 8px;
+  z-index: 1000;
+  list-style: none;
+  flex-direction: column;
 }
 
-.navbarbutton:hover::after {
-  transform: scale(4);
+/* show dropdown on hover or when focused inside (keyboard accessible) */
+.dropdown:hover .dropdown-content,
+.dropdown:focus-within .dropdown-content {
+  display: flex;
 }
 
-.navbarbutton:hover {
-  border-color: #928473;
-  background: #463b2b;
+/* Dropdown items */
+.dropdown-content li {
+  margin: 0;
+  padding: 0;
+}
+.dropdown-content li a {
+  display: block;
+  padding: 12px 20px;
+  color: #222;
+  text-decoration: none;
+  font-size: 25px;
+}
+.dropdown-content li a:hover,
+.dropdown-content li a:focus {
+  background-color: #f4f1ed;
+}
+
+/*main*/
+.main-title {
+  font-family:system-ui;
+  text-align: left;
+  background-color: #f4f1ed;
+  font-size: 50px;
 }
 
 div.main {
@@ -95,47 +138,6 @@ div.main {
 div.main div {
   width:50%;  
   float:left;
-}
-
-.nav-links {
-  list-style: none;
-  display: flex;
-  margin: 0;
-  padding: 0;
-}
-
-.nav-links li {
-  margin: 0 1rem;
-  position: relative;
-}
-
-.nav-links a {
-  color: #fff;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #fff;
-  min-width: 160px;
-  border: 1px solid #C4B6A4;
-  /* Secondary */
-  border-radius: 6px;
-  top: 100%;
-  left: 0;
-  z-index: 1000;
-}
-
-.dropdown-content a {
-  display: block;
-  padding: 0.5rem;
-  color: #0b0824;
-}
-
-.nav-links li:hover .dropdown-content {
-  display: block;
 }
 
 header {
@@ -235,12 +237,6 @@ input[type="submit"]:hover {
   width: 25%;
   vertical-align: top;
   text-align: left;
-}
-
-.logo {
-  width: 120px;
-  display: block;
-  margin-bottom: 15px;
 }
 
 .social-section {
