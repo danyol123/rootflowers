@@ -83,6 +83,10 @@ div {
   cursor: pointer;
 }
 
+.dropdown a{
+  color: #f4f1ed;
+}
+
 /* Dropdown content - opens downward under parent */
 .dropdown-content {
   display: none;
@@ -150,8 +154,44 @@ header {
 
 main {
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  padding: 2rem;
+}
+
+main div{
+  width: 100%;
+}
+
+.main-title-section {
+  display: flex;
+  align-items: center;
+  justify-content: center
+}
+
+.main-title-section .title-text h1, .main-title-section .title-text h2{
+  text-align: center;
+}
+
+.main-title-section div img {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  border-radius: 16px;
+}
+
+main .section2 {
+  background-color: #918473;
+  padding: 4rem 0rem;
+}
+
+.section2 .section2-text h1, .section2 .section2-text h2{
+  text-align: center;
+}
+
+.section2 .section2-text h1 {
+  font-size: 4em;
+  font-family: "Times New Roman", Times, serif;
+  font-weight: lighter;
 }
 
 .form-container {
@@ -212,16 +252,6 @@ input[type="submit"] {
 
 input[type="submit"]:hover {
   background-color: #928473;
-}
-
-.thirtythree {
-  float: left;
-  width: 33%;
-}
-
-.sixtysix {
-  float: left;
-  width: 66%;
 }
 
 /* Footer Styles */
