@@ -19,61 +19,7 @@
             /* Text */
             margin: 0;
         }
-
-        .navbar {
-            background-color: #928473;
-            /* Primary */
-            padding: 0.5rem 1rem;
-            display: flex;
-            align-items: center;
-        }
-
-        .navbar .logo {
-            height: 50px;
-            margin-right: 1rem;
-        }
-
-        .nav-links {
-            list-style: none;
-            display: flex;
-            margin: 0;
-            padding: 0;
-        }
-
-        .nav-links li {
-            margin: 0 1rem;
-            position: relative;
-        }
-
-        .nav-links a {
-            color: #fff;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #fff;
-            min-width: 160px;
-            border: 1px solid #C4B6A4;
-            /* Secondary */
-            border-radius: 6px;
-            top: 100%;
-            left: 0;
-            z-index: 1000;
-        }
-
-        .dropdown-content a {
-            display: block;
-            padding: 0.5rem;
-            color: #0b0824;
-        }
-
-        .nav-links li:hover .dropdown-content {
-            display: block;
-        }
-
+        
         header {
             text-align: center;
             padding: 2rem 1rem;
@@ -159,31 +105,42 @@
 </head>
 
 <body>
-    <!-- Navbar -->
-    <div class="navbar">
-        <img src="logo.png" class="logo" alt="Rootflower Logo">
+       <div class="navbar">
+        <a href="index.html"><img src="logo.png" class="logo"></a>
         <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li class="dropdown">
-                <a href="#">Product Selection</a>
-                <div class="dropdown-content">
-                    <a href="/product1.html">Hand bouquet</a>
-                    <a href="/product2.html">CNY decoration</a>
-                    <a href="/product3.html">Grand Opening</a>
-                    <a href="/product4.html">Graduation</a>
-                </div>
-            </li>
-            <li class="dropdown">
-                <a href="#">Activities</a>
-                <div class="dropdown-content">
-                    <a href="/workshop.html">Workshop</a>
-                    <a href="/promotion.html">Promotion</a>
-                </div>
-            </li>
-            <li><a href="register.html">Workshop Registration</a></li>
-            <li><a href="enquiry.html">Enquiry Form</a></li>
-            <li><a href="registration.html">Membership Registration</a></li>
-            <li><a href="login.html">Login</a></li>
+          <li class="dropdown"><a href="index.html">Home</a></li>
+          <li class="dropdown">
+            <a href="#">Products</i></a>
+              <div>
+                  <ul class="dropdown-content">
+                    <li><a href="/product1.html">Hand bouquet</a></li>
+                    <li><a href="/product2.html">CNY decoration</a></li>
+                    <li><a href="/product3.html">Grand Opening</a></li>
+                    <li><a href="/product4.html">Graduation</a></li>
+                  </ul>
+              </div>
+          </li>
+          <li class="dropdown">
+            <a href="#">Activities</a>
+              <div>
+                  <ul class="dropdown-content">
+                      <li><a href="/workshop.html">Workshop</a></li>
+                      <li><a href="/promotion.html">Promotion</a></li>
+                  </ul>
+              </div>
+          </li>
+          <li class="dropdown">
+            <a href="#">Forms</a>
+              <div class="dropdown-content">
+                <ul>
+                  <li><a href="register.html">Workshop Registration</a></li>
+                  <li><a href="enquiry.html">Enquiry Form</a></li>
+                  <li><a href="registration.html">Membership Registration</a></li>
+                  <li><a href="login.html">Login</a></li>
+                </ul>
+              </div>
+          </li>
+          <li class="dropdown"><a href="about_us.html">About Us</a></li>
         </ul>
     </div>
 
