@@ -379,3 +379,16 @@ input[type="submit"]:hover {
   margin-top: 20px;
   font-size: 12px;
 }
+
+.product4-title1 {
+  background-image: url('Pictures/product4_title.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 300px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+
+}
