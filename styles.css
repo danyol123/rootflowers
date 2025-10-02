@@ -55,6 +55,13 @@ body {
   overflow: visible; /* allow dropdown to overflow */
 }
 
+.navbar .nav-links-container {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  margin-right: 2rem;
+}
+
 .navbar,.navbar ul {
   list-style: none;
   margin: 0;
@@ -62,10 +69,10 @@ body {
 }
 
 /* horizontal menu container (use .menu if you wrap links in a ul.menu) */
-.navbar > ul,
+.nav-links,
 .navbar .menu {
   display: flex;
-  gap: 1rem;
+  gap: 3rem;
   align-items: center;
   margin: 0;
   padding: 0;
@@ -105,7 +112,7 @@ body {
 .dropdown-content {
   display: none;
   position: absolute;
-  top: calc(100% + 8px); /* place below parent */
+  top: calc(100%); /* place below parent */
   left: 0;
   background: #fff;
   min-width: 220px;
@@ -171,9 +178,6 @@ main {
   justify-content: center;
 }
 
-main div{
-  width: 100%;
-}
 
 .main-title-section {
   display: flex;
@@ -182,7 +186,13 @@ main div{
 }
 
 .main-title-section .title-text h1, .main-title-section .title-text h2{
-  text-align: center;
+  text-align: right;
+  padding-right: 2rem;
+}
+
+.main-title-section .title-image {
+  display: flex;
+  justify-content: left;
 }
 
 .main-title-section div img {
@@ -220,6 +230,10 @@ main div{
   display: flex;
   align-items: center;
   text-align: center;
+}
+
+.section3-content div{
+  width: 100%;
 }
 
 .section3-content p{
@@ -263,18 +277,19 @@ main div{
 	top:1px;
 }
 
-.section4 {
+.section4, .section5, .section6 {
   background-color: #918473;
   padding: 3rem 0rem;
 }
 
-.section4 div {
+.section4 h1, .section5 h1, .section6 h1 {
   font-size: 2em;
   text-align: center;
   color: #f4f1ed;
   font-family: Work_Sans_bold, arial, sans-serif;
 }
 
+/* Cards */
 :root{
   --background-dark: #2d3548;
   --text-light: rgba(255,255,255,0.6);
@@ -284,7 +299,7 @@ main div{
   --spacing-l: 24px;
   --spacing-xl: 32px;
   --spacing-xxl: 64px;
-  --width-container: 1200px;
+  --width-container: 2000px;
 }
 
 .hero-section{
@@ -376,6 +391,252 @@ main div{
   word-spacing: 100vw;
 }
 
+.promotion-grid {
+  display: flex;
+  justify-content: center;
+  padding: 0px var(--spacing-l);
+}
+
+.promotion-card {
+    max-width: 380px;
+    position: relative;
+    box-shadow: 0 2px 7px #dfdfdf;
+    margin: 50px auto;
+    background: #fafafa;
+}
+
+.promotion-badge {
+    position: absolute;
+    left: 0;
+    top: 20px;
+    text-transform: uppercase;
+    font-size: 13px;
+    font-weight: 700;
+    background: red;
+    color: #fff;
+    padding: 3px 10px;
+}
+
+.promotion-tumb {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 300px;
+    padding: 50px;
+    background: #f0f0f0;
+}
+
+.promotion-tumb img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.promotion-details {
+    padding: 30px;
+}
+
+.promotion-catagory {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #ccc;
+    margin-bottom: 18px;
+}
+
+.promotion-details h4 a {
+    font-weight: 500;
+    display: block;
+    margin-bottom: 18px;
+    text-transform: uppercase;
+    color: #363636;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.promotion-details h4 a:hover {
+    color: #fbb72c;
+}
+
+.promotion-details p {
+    font-size: 15px;
+    line-height: 22px;
+    margin-bottom: 18px;
+    color: #999;
+}
+
+.promotion-bottom-details {
+    overflow: hidden;
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+}
+
+.promotion-bottom-details div {
+    float: left;
+    width: 50%;
+}
+
+.promotion-price {
+    font-size: 18px;
+    color: #fbb72c;
+    font-weight: 600;
+}
+
+.promotion-price small {
+    font-size: 80%;
+    font-weight: 400;
+    text-decoration: line-through;
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.promotion-links {
+    text-align: right;
+}
+
+.promotion-links a {
+    display: inline-block;
+    margin-left: 5px;
+    color: #e1e1e1;
+    transition: 0.3s;
+    font-size: 17px;
+}
+
+.promotion-links a:hover {
+    color: #fbb72c;
+}
+
+/* carousel */
+.carousel {
+    padding: 2rem;
+}
+
+ul.slides {
+    display: block;
+    position: relative;
+    height: 600px;
+    max-width: 2000px;
+    margin: auto;
+    padding: 0;
+    overflow: hidden;
+    list-style: none;
+}
+
+.slides * {
+    user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+}
+
+ul.slides input {
+    display: none; 
+}
+
+
+.slide-container { 
+    display: block; 
+}
+
+.slide-image {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    opacity: 0;
+    transition: all .7s ease-in-out;
+}   
+
+.slide-image img {
+    width: auto;
+    object-fit: cover;
+    min-width: 100%;
+    height: 100%;
+}
+
+.carousel-controls {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    font-size: 100px;
+    line-height: 600px;
+    color: #fff;
+}
+
+.carousel-controls label {
+    display: none;
+    position: absolute;
+    padding: 0 20px;
+    opacity: 0;
+    transition: opacity .2s;
+    cursor: pointer;
+}
+
+.slide-image:hover + .carousel-controls label{
+    opacity: 0.5;
+}
+
+.carousel-controls label:hover {
+    opacity: 1;
+}
+
+.carousel-controls .prev-slide {
+    width: 49%;
+    text-align: left;
+    left: 0;
+}
+
+.carousel-controls .next-slide {
+    width: 49%;
+    text-align: right;
+    right: 0;
+}
+
+.carousel-dots {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 20px;
+    z-index: 999;
+    text-align: center;
+}
+
+.carousel-dots .carousel-dot {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #fff;
+    opacity: 0.5;
+    margin: 10px;
+}
+
+input:checked + .slide-container .slide-image {
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 1s ease-in-out;
+}
+
+input:checked + .slide-container .carousel-controls label {
+     display: block; 
+}
+
+input#img-1:checked ~ .carousel-dots label#img-dot-1,
+input#img-2:checked ~ .carousel-dots label#img-dot-2,
+input#img-3:checked ~ .carousel-dots label#img-dot-3,
+input#img-4:checked ~ .carousel-dots label#img-dot-4,
+input#img-5:checked ~ .carousel-dots label#img-dot-5,
+input#img-6:checked ~ .carousel-dots label#img-dot-6 {
+	opacity: 1;
+}
+
+
+input:checked + .slide-container .nav label { display: block; }
 
 
 .form-container {
