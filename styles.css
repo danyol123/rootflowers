@@ -837,3 +837,55 @@ Grid layout
   font-weight: bold;
   margin-bottom: 10px;
 }
+
+
+.product1-title1 {
+  background-image: url('Pictures/Product1/product1_title.png');
+  background-size: cover;
+  background-position: center;
+  height: 300px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;}
+
+.product2-title1 {
+  background-image: url('Pictures/Product2/product2_title.png');
+  background-size: cover;
+  background-position: center;
+  height: 300px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;}
+
+  .product3-title1 {
+  background-image: url('Pictures/Product3/product3_title.png');
+  background-size: cover;
+  background-position: center;
+  height: 300px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+
+}
+
+.product4-title1 {
+  background-image: url('Pictures/Product4/product4_title.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 300px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+
+}
+
+
+}
