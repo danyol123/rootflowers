@@ -45,8 +45,12 @@ body {
   display: block;
   border-radius: 50%;
   margin: 10px 15px;
+  transition: 0.3s;
 }
 
+.logo:hover {
+  border-radius: 10%;
+}
 .navbar {
   font-family: Reach_Story;
   position: sticky;
@@ -853,14 +857,13 @@ input[type="submit"]:hover {
 }
 
 /* Footer Styles */
-* {
+footer * {
   margin: 0;
   padding: 0px;
   box-sizing: border-box;
 }
 
 footer {
-  width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: auto auto;
