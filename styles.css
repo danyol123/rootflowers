@@ -701,76 +701,118 @@ input[type="submit"]:hover {
 }
 
 /* Footer Styles */
-.footer {
-  background-color: #9c8c7b; 
-  color: #2c2230;
+* {
+  margin: 0;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+footer {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: auto auto;
   padding: 20px;
+  background: #9c8c7b;;
+  color: #0b0824;
   font-family: Reach_Story;
   font-size: 20px;
 }
 
-.footer-left {
-  width: 25%;
-  vertical-align: top;
-  text-align: left;
-}
-
-.social-section {
-  margin-bottom: 15px;
-}
-
-.social-icon {
-  width: 30px;
-  margin-right: 8px;
-  vertical-align: middle;
-}
-
-.footer-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.footer-center {
-  width: 75%;
-  text-align: center;
-}
-
-.footer-center table {
-  width: 100%;
-}
-
-.footer-center td {
-  width: 33%;
-  vertical-align: top;
-  text-align: left;
-  padding: 0 20px;
-}
-
-.footer-contact {
-  padding: 20px 20px 0 20px;
-  vertical-align: top;
-}
-
-.social-icon {
-  width: 40px;
-  margin: 10px 0;
-}
-
-.footer h3 {
-  margin-bottom: 10px;
-}
-
-.footer p, 
-.footer a {
-  margin: 5px 0;
-  text-decoration: none;
+footer a {
   color: inherit;
-  font-size: 14px;
+  text-decoration: none;
 }
 
-.copy {
-  margin-top: 20px;
-  font-size: 12px;
+footer a:hover {
+  color: #423e38;
+}
+
+.footer-left {
+  grid-column: 1 / 2;
+  grid-row: 1 / 3;
+  background: #9c8c7b;;
+  padding: 20px;
+}
+
+.footer-col {
+  background: #9c8c7b;;
+  padding: 20px;
+}
+
+.footer-bottom {
+  grid-column: 2 / 5;
+  grid-row: 2 / 3;
+  background: #9c8c7b;;
+  padding: 20px;
+}
+
+.socials-container {
+  display: flex;
+  gap: 10px;
+}
+
+.socials-container a {
+  padding: 8px;
+  border-radius: 50%;
+  background: white;
+  height: 32px;
+  width: 32px;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.05);
+}
+.socials-container a svg {
+  color: black;
+  height: 16px;
+}
+
+.socials-container a::before {
+  content: attr(data-social);
+  position: absolute;
+  background-color: var(--accent-color);
+  color: white;
+  text-decoration: none;
+  padding: 0.5em 1em;
+  border-radius: 100px;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.05);
+  transform: translateY(-30px) rotate(25deg);
+  opacity: 0;
+  transition: 200ms cubic-bezier(.42, 0, .44, 1.68);
+}
+
+.socials-container a:hover {
+  background-color: var(--accent-color);
+  fill: white;
+}
+
+.socials-container a:hover svg {
+  color: white;
+}
+
+.socials-container a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 10px solid var(--accent-color);
+  opacity: 0;
+  transform: translateY(0) rotate(25deg);
+  transition: 200ms cubic-bezier(.42, 0, .44, 1.68);
+}
+
+.socials-container a:hover::before {
+  opacity: 1;
+  transform: translateY(-45px) rotate(0deg);
+}
+
+.socials-container a:hover::after {
+  opacity: 1;
+  transform: translateY(-25px) rotate(0);
 }
 
 /*
@@ -888,5 +930,62 @@ Grid layout
 
 }
 
+.form-container {
+            background: #ffffff;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 420px;
+        }
 
-}
+        .form-container h2 {
+            text-align: center;
+            color: #463b2b;
+            /* Accent */
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.4rem;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 0.6rem;
+            margin-bottom: 1.2rem;
+            border: 1px solid #C4B6A4;
+            border-radius: 8px;
+            font-size: 1rem;
+            color: #0b0824;
+            background-color: #f4f1ed;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="password"]:focus {
+            border-color: #928473;
+            outline: none;
+            box-shadow: 0 0 4px #928473;
+        }
+
+        input[type="submit"] {
+            background-color: #463b2b;
+            color: #fff;
+            border: none;
+            padding: 0.8rem;
+            width: 100%;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #928473;
+        }
