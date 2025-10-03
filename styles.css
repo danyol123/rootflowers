@@ -190,8 +190,6 @@ main {
   flex-direction: column;
   justify-content: center;
   flex: 1;
-  padding: 40px;
-  margin-bottom: 60px;
 }
 
 /* Main Title */
@@ -1086,7 +1084,7 @@ input[type="submit"]:hover {
 .gallery {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
+  gap: 50px;
   justify-items: center; 
   align-items: center;
 }
@@ -1096,7 +1094,7 @@ input[type="submit"]:hover {
   height: 400px;
   background: var(--bg) center/cover no-repeat;
   cursor: pointer;
-  box-shadow: 0 0 10px #000;
+  box-shadow: 0 0 3px #000;
   position: relative;
 }
 
@@ -1236,7 +1234,8 @@ input[type="submit"]:hover {
   display: none;
   text-align: center;
   padding: 10px;
-  font-size: 14px;
+  font-size: 12px;
+  font-family: Work_Sans, sans-serif;
 }
 
 /* When checked → hide add-btn, show confirmation */
@@ -1275,9 +1274,16 @@ input[type="submit"]:hover {
 .confirmation .btn.no {
   background: rgba(77, 77, 77, .9);
   color: #FEF5DF;
+  font-family: 'Lato', sans-serif;
 }
 
-.confirmation .btn.yes {
-  background: rgba(77, 77, 77, .9);
-  color: #FEF5DF;
+.btn.no:hover {
+  background: #FEF5DF;
+  color: rgba(77, 77, 77, .9);
+  border: 1px solid rgba(77, 77, 77, .9);
+}
+
+.section_product {
+  padding: 40px;
+  margin-bottom: 60px;
 }
