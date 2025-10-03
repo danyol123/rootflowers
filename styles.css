@@ -793,9 +793,15 @@ input#img-6:checked ~ .carousel-dots label#img-dot-6 {
 	opacity: 1;
 }
 
-
 input:checked + .slide-container .nav label { display: block; }
 
+/* Forms */
+.form-section {
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
 
 .form-container {
   background: #ffffff;
@@ -821,8 +827,13 @@ label {
 
 input[type="text"],
 input[type="email"],
-input[type="password"] {
+input[type="password"],
+input[type="tel"],
+input[type="date"],
+select,
+textarea {
   width: 100%;
+  box-sizing: border-box;
   padding: 0.6rem;
   margin-bottom: 1.2rem;
   border: 1px solid #C4B6A4;
@@ -834,7 +845,11 @@ input[type="password"] {
 
 input[type="text"]:focus,
 input[type="email"]:focus,
-input[type="password"]:focus {
+input[type="password"]:focus,
+input[type="tel"]:focus,
+input[type="date"]:focus,
+select:focus,
+textarea:focus {
   border-color: #928473;
   outline: none;
   box-shadow: 0 0 4px #928473;
@@ -855,6 +870,46 @@ input[type="submit"] {
 
 input[type="submit"]:hover {
   background-color: #928473;
+}
+
+.form-container fieldset {
+  margin-bottom: 1rem;
+  border-radius: 5%;
+}
+
+/* Align radio and checkbox groups nicely */
+.form-container .input-group {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 1.2rem;
+  align-items: center;
+}
+
+.form-container .input-group label {
+  margin-bottom: 0;
+  font-weight: normal;
+  cursor: pointer;
+}
+
+.form-container .input-group input[type="radio"],
+.form-container .input-group input[type="checkbox"] {
+  accent-color: #928473;
+  margin-right: 0.5em;
+  transform: scale(1.2);
+  transition: box-shadow 0.2s;
+}
+
+.form-container .input-group input[type="radio"]:focus,
+.form-container .input-group input[type="checkbox"]:focus {
+  box-shadow: 0 0 0 2px #92847355;
+  outline: none;
+}
+
+/* Add a subtle hover effect for radio/checkbox labels */
+.form-container .input-group label:hover {
+  color: #928473;
+  text-shadow: 0 1px 6px #92847322;
+  transition: color 0.2s, text-shadow 0.2s;
 }
 
 /* Footer Styles */
@@ -1018,67 +1073,6 @@ footer a:hover {
   color: white;
 
 }
-
-.form-container {
-    background: #ffffff;
-    padding: 2rem;
-    border-radius: 16px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 420px;
-}
-
-.form-container h2 {
-    text-align: center;
-    color: #463b2b;
-    /* Accent */
-    margin-bottom: 1.5rem;
-}
-
-label {
-    display: block;
-    margin-bottom: 0.4rem;
-    font-weight: bold;
-}
-
-input[type="text"],
-input[type="email"],
-input[type="password"] {
-    width: 100%;
-    padding: 0.6rem;
-    margin-bottom: 1.2rem;
-    border: 1px solid #C4B6A4;
-    border-radius: 8px;
-    font-size: 1rem;
-    color: #0b0824;
-    background-color: #f4f1ed;
-}
-
-input[type="text"]:focus,
-input[type="email"]:focus,
-input[type="password"]:focus {
-    border-color: #928473;
-    outline: none;
-    box-shadow: 0 0 4px #928473;
-}
-
-input[type="submit"] {
-    background-color: #463b2b;
-    color: #fff;
-    border: none;
-    padding: 0.8rem;
-    width: 100%;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background 0.3s ease;
-}
-
-input[type="submit"]:hover {
-    background-color: #928473;
-}
-
 
 /* Products */
 .gallery {
@@ -1286,4 +1280,37 @@ input[type="submit"]:hover {
 .section_product {
   padding: 40px;
   margin-bottom: 60px;
+}
+
+/* Profile */
+
+.profile-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.profile-pic {
+  max-width: 100%;
+  height: auto;
+}
+
+.profile-pic img{
+  width: 200px;
+  height: 200px;
+  border-style: groove;
+  border-radius: 20px;
+  border-width: 5px;
+}
+
+.profile-section h1{
+  font-size: 200%;
+}
+
+.profile-section table,
+.profile-section th,
+.profile-section td{
+  border:1px solid black;
 }
