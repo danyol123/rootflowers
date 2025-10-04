@@ -793,9 +793,15 @@ input#img-6:checked ~ .carousel-dots label#img-dot-6 {
 	opacity: 1;
 }
 
-
 input:checked + .slide-container .nav label { display: block; }
 
+/* Forms */
+.form-section {
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
 
 .form-container {
   background: #ffffff;
@@ -821,8 +827,13 @@ label {
 
 input[type="text"],
 input[type="email"],
-input[type="password"] {
+input[type="password"],
+input[type="tel"],
+input[type="date"],
+select,
+textarea {
   width: 100%;
+  box-sizing: border-box;
   padding: 0.6rem;
   margin-bottom: 1.2rem;
   border: 1px solid #C4B6A4;
@@ -834,7 +845,11 @@ input[type="password"] {
 
 input[type="text"]:focus,
 input[type="email"]:focus,
-input[type="password"]:focus {
+input[type="password"]:focus,
+input[type="tel"]:focus,
+input[type="date"]:focus,
+select:focus,
+textarea:focus {
   border-color: #928473;
   outline: none;
   box-shadow: 0 0 4px #928473;
@@ -855,6 +870,46 @@ input[type="submit"] {
 
 input[type="submit"]:hover {
   background-color: #928473;
+}
+
+.form-container fieldset {
+  margin-bottom: 1rem;
+  border-radius: 5%;
+}
+
+/* Align radio and checkbox groups nicely */
+.form-container .input-group {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 1.2rem;
+  align-items: center;
+}
+
+.form-container .input-group label {
+  margin-bottom: 0;
+  font-weight: normal;
+  cursor: pointer;
+}
+
+.form-container .input-group input[type="radio"],
+.form-container .input-group input[type="checkbox"] {
+  accent-color: #928473;
+  margin-right: 0.5em;
+  transform: scale(1.2);
+  transition: box-shadow 0.2s;
+}
+
+.form-container .input-group input[type="radio"]:focus,
+.form-container .input-group input[type="checkbox"]:focus {
+  box-shadow: 0 0 0 2px #92847355;
+  outline: none;
+}
+
+/* Add a subtle hover effect for radio/checkbox labels */
+.form-container .input-group label:hover {
+  color: #928473;
+  text-shadow: 0 1px 6px #92847322;
+  transition: color 0.2s, text-shadow 0.2s;
 }
 
 /* Footer Styles */
@@ -1238,92 +1293,4 @@ input[type="submit"]:hover {
 .section_product {
   padding: 40px;
   margin-bottom: 60px;
-}
-
-/* Sticky sidebar/aside */
-.sidebar {
-  position: sticky;
-  top: 100px;
-  background: white;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  height: fit-content;
-}
-
-.sidebar h2 {
-  margin-bottom: 10px;
-  font-family: 'Lato', sans-serif;
-}
-
-.category-list {
-  list-style: none;
-  padding: 0;
-}
-
-.category-item {
-  display: block;
-  text-decoration: none;
-  color: #222;
-  padding: 8px 0;
-  transition: 0.3s;
-}
-
-.category-item:hover,
-.category-item.active {
-  color: #463b2b;
-  font-weight: bold;
-}
-
-.sidebar-banner {
-  margin-top: 20px;
-  text-align: center;
-  background: #928473;
-  color: white;
-  padding: 20px;
-  border-radius: 8px;
-}
-
-.sidebar-banner .btn {
-  display: inline-block;
-  margin-top: 10px;
-  background: #C4B6A4;
-  color: White;
-  padding: 8px 12px;
-  border-radius: 4px;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-/* Responsive */
-@media (max-width: 1200px) {
-  .gallery { grid-template-columns: repeat(2, 1fr); }
-}
-@media (max-width: 768px) {
-  .page { grid-template-columns: 1fr; }
-  aside.sidebar { position: static; width: 100%; margin-top: 18px; }
-  .gallery { grid-template-columns: 1fr; }
-}
-
-
-/* Parallax */
-.section-background {
-  background: var(--bg) center/cover fixed no-repeat;
-  height: 100vh;
-  width: 100%;
-  color: #fff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 2rem;
-  text-shadow: 0 2px 6px rgba(0,0,0,0.5);
-}
-
-.parallax {
-  background-image: var(--Par);
-}
-
-.text-bloc p {
-  margin: 75px;
-  font-size: 22px;
 }
