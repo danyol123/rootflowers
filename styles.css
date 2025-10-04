@@ -1314,3 +1314,42 @@ footer a:hover {
 .profile-section td{
   border:1px solid black;
 }
+
+/* Workshop */
+
+/*section2*/
+.workshop-carousel {
+  margin: 100px auto;
+  width: 90%;
+  border: 5px solid red;
+  display: flex;
+  overflow-x: auto;
+  gap: 1em;}
+
+.workshop-carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.workshop-group {
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 1em;
+animation: spin 5s infinite linear;
+padding-right: 1em;}
+
+.workshop-card {
+  flex: 0 0 5em;
+  height: 5em;
+  padding: 1em;
+  background: #ce8989;
+  font-size: 3rem;
+  border-radius: .2em;
+  text-align: center;
+  align-content: center;
+}
+
+@keyframes spin {
+  from {translate: 0;}
+  to {translate: -100%;}
+}
