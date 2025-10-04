@@ -1314,3 +1314,145 @@ footer a:hover {
 .profile-section td{
   border:1px solid black;
 }
+
+/* About Us */
+
+.aboutus_cardBox {
+  float: left;
+  font-size: 1.2em;
+  margin: 1% 0 0 1%;
+  perspective: 800px;
+  transition: all 0.3s ease 0s;
+  width: 23.7%;
+}
+
+.aboutus_cardBox:hover .aboutus_card {
+  transform: rotateY( 180deg);
+}
+
+.aboutus_card {
+  background: #222;
+  cursor: default;
+  height: 300px;
+  transform-style: preserve-3d;
+  transition: transform 0.4s ease 0s;
+  width: 100%;
+  -webkit-animation: giro 1s 1;
+  animation: giro 1s 1;
+}
+
+.aboutus_card p {
+  margin-bottom: 1.8em;
+}
+
+.aboutus_card .front,
+.aboutus_card .back {
+  backface-visibility: hidden;
+  box-sizing: border-box;
+  color: white;
+  display: block;
+  font-size: 1.2em;
+  height: 100%;
+  padding: 0.8em;
+  position: absolute;
+  text-align: center;
+  width: 100%;
+}
+
+.aboutus_card .front img{
+  border-radius: 25%;
+  max-width: 100%;
+  height: 100%;
+}
+
+.aboutus_card .back {
+  transform: rotateY( 180deg);
+}
+
+.aboutus_card .back a {
+  padding: 0.3em 0.5em;
+  background: #333;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 1px;
+  font-size: 0.9em;
+  transition: all 0.2s ease 0s;
+}
+
+.aboutus_card .back a:hover {
+  background: #fff;
+  color: #333;
+  text-shadow: 0 0 1px #333;
+}
+
+.aboutus_cardBox:nth-child(1) .aboutus_card .back {
+  background: cornflowerblue;
+}
+
+.aboutus_cardBox:nth-child(2) .aboutus_card .back {
+  background: orange;
+}
+
+.aboutus_cardBox:nth-child(3) .aboutus_card .back {
+  background: yellowgreen;
+}
+
+.aboutus_cardBox:nth-child(4) .aboutus_card .back {
+  background: tomato;
+}
+
+.aboutus_cardBox:nth-child(2) .aboutus_card {
+  -webkit-animation: giro 1.5s 1;
+  animation: giro 1.5s 1;
+}
+
+.aboutus_cardBox:nth-child(3) .aboutus_card {
+  -webkit-animation: giro 2s 1;
+  animation: giro 2s 1;
+}
+
+.aboutus_cardBox:nth-child(4) .aboutus_card {
+  -webkit-animation: giro 2.5s 1;
+  animation: giro 2.5s 1;
+}
+
+@-webkit-keyframes giro {
+  from {
+    transform: rotateY( 180deg);
+  }
+  to {
+    transform: rotateY( 0deg);
+  }
+}
+
+@keyframes giro {
+  from {
+    transform: rotateY( 180deg);
+  }
+  to {
+    transform: rotateY( 0deg);
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .aboutus_cardBox {
+    margin-left: 2.8%;
+    margin-top: 3%;
+    width: 46%;
+  }
+  .aboutus_card {
+    height: 285px;
+  }
+  .aboutus_cardBox:last-child {
+    margin-bottom: 3%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .aboutus_cardBox {
+    width: 94.5%;
+  }
+  .aboutus_card {
+    height: 260px;
+  }
+}
