@@ -1571,8 +1571,10 @@ input[type="submit"]:hover {
 }
 
 /*Workshop*/
-
-/*section2*/
+.flex-container {
+  display: flex;
+  justify-content: center;
+}
 .workshop-carousel {
   margin: 100px auto;
   width: 90%;
@@ -1610,10 +1612,15 @@ input[type="submit"]:hover {
 
 .workshop-section1{
   display: flex;
-  justify-content: space-between;
-  gap: 1em;
-  align-items: center;
-  flex-direction: column;
+  flex-direction: row;    /* <-- changed from column */
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 0 1rem;
+  box-sizing: border-box;
 }
 
 .workshop-content {
@@ -1622,37 +1629,10 @@ input[type="submit"]:hover {
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  max-width: 350px;
+  max-width: 28vw;
   margin: 20px;
   max-height: fit-content;
   padding: 50px;
-}
-.workshop-price-container {
-  position: relative;
-  top: -35px;
-  left: 185px;
-  padding: 10px;
-  background-color: #f4f1ed;
-  border-radius: 10px;
-  text-align: center;
-  width: fit-content;
-  height: min-content;
-
-}
-.workshop-price {
-  font-size: 1em;
-  font-weight: bold;
-  color: #463b2b;
-  margin: 0;
-}
-
-.workshop-images {
-  display: flex;
-}
-
-.workshop-images img {
-  width: 50%;
-  height: auto;
 }
 
 .workshop-title {
@@ -1695,4 +1675,159 @@ input[type="submit"]:hover {
 .book-now-btn:hover {
   background-color: #0056b3;
 }
-/* End of Workshop */
+.workshop-section3 {
+  padding: 20px;
+  width: fit-content;
+}
+.workshop-sidebar {
+  position: sticky;
+  top: 2rem;
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  height: fit-content;
+  z-index: 100;
+}
+
+/* Course Introduction Section */
+.woekshop-intro {
+  background: #fff;
+  padding: 4rem 1rem;
+  margin-bottom: 2rem;
+}
+
+.workshop-content1 {
+  max-width: 1000px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.workshop-intro-title {
+  font-size: 2.5rem;
+  color: #6e5b4a;
+  margin-bottom: 2rem;
+  line-height: 1.2;
+}
+
+.workshop-features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  text-align: left;
+  border-radius: 10px;
+  padding:15px;
+  border: 2px solid #ddd;
+}
+
+.feature-icon {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.feature-item p {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #4a4a4a;
+}
+
+.feature-item span {
+  display: block;
+  font-size: 0.9rem;
+  color: #888;
+  margin-top: 0.25rem;
+}
+
+/* Giveaway Section Styles */
+.giveaway-content {
+  padding: 2rem;
+  background: #fff;
+}
+
+.giveaway-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+.giveaway-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.giveaway-details {
+  padding: 2rem;
+  background: #faf7f4;
+  border-radius: 12px;
+}
+
+.giveaway-details h2 {
+  color: #6e5b4a;
+  margin-bottom: 0.5rem;
+}
+
+.giveaway-note {
+  color: #918473;
+  font-style: italic;
+  margin-bottom: 2rem;
+}
+
+.how-to-win h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: #6e5b4a;
+}
+
+.giveaway-steps {
+  list-style: none;
+  padding: 0;
+}
+
+.giveaway-steps li {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.step-icon {
+  font-size: 1.5rem;
+  margin-right: 0.5rem;
+}
+
+.step-title {
+  font-weight: bold;
+  color: #6e5b4a;
+  display: inline-block;
+  margin-bottom: 0.5rem;
+}
+
+.giveaway-steps p {
+  margin: 0.5rem 0 0 2.5rem;
+  color: #666;
+}
+
+.giveaway-steps small {
+  color: #918473;
+  font-size: 0.9em;
+}
+
+.disclaimer {
+  margin-top: 2rem;
+  color: #918473;
+  font-size: 0.9em;
+  text-align: center;
+}
