@@ -53,78 +53,48 @@
       </ul>
       </div>
   </div>
-<main>
-    <h1 class="workshop-title">Workshop</h1>
-    <p>Activities / Workshop</p>
+<div class="content-wrapper">
+  <main>
+    <!-- Banner -->
+    <section class="section-background" style="--bg:url('Pictures/Workshop/');">
+      <div class="banner-text">
+        <h1>Workshop</h1>
+      </div>
+    </section>
+
     <h2>Upcoming Workshops</h2>
-    <section>
-            <!-- WORKSHOP CARD 1 (Based on your image) -->
-            <div class="theme-bg-subtle rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300">
-                <div class="p-6">
-                    <div class="flex justify-between items-start mb-4">
-                        <h3 class="text-xl font-bold text-gray-800">Hand-tied Bouquet</h3>
-                        <span class="theme-bg-accent theme-text-accent text-sm font-semibold px-3 py-1 rounded-full">RM150</span>
-                    </div>
-                    <div class="text-sm text-gray-600 mb-4">
-                        <span>2h</span> &bull; <span>Beginner</span>
-                    </div>
-                    <p class="text-gray-700 mb-6">Learn the classic spiral technique to create a beautiful, professional-looking hand-tied bouquet.</p>
-                </div>
-                <div class="grid grid-cols-2 gap-2 px-6 pb-6">
-                  <img src="" alt="Woman arranging flowers for a hand-tied bouquet" class="rounded-lg w-full h-32 object-cover">
-                  <img src="" alt="Finished hand-tied bouquet" class="rounded-lg w-full h-32 object-cover">
-                </div>
-                <div class="px-6 pb-6">
-                    <button class="w-full theme-btn text-white font-bold py-2 px-4 rounded-lg transition duration-300">Book Now</button>
-                </div>
-            </div>
 
-            <!-- WORKSHOP CARD 2 -->
-            <div class="theme-bg-subtle rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300">
-                <div class="p-6">
-                    <div class="flex justify-between items-start mb-4">
-                        <h3 class="text-xl font-bold text-gray-800">Vase Arrangement</h3>
-                        <span class="theme-bg-accent theme-text-accent text-sm font-semibold px-3 py-1 rounded-full">RM180</span>
-                    </div>
-                    <div class="text-sm text-gray-600 mb-4">
-                        <span>2.5h</span> &bull; <span>Beginner</span>
-                    </div>
-                    <p class="text-gray-700 mb-6">Master the fundamentals of floral design and create a stunning arrangement in a stylish vase.</p>
-                </div>
-                <div class="grid grid-cols-2 gap-2 px-6 pb-6">
-                  <img src="" alt="Vase arrangement in progress" class="rounded-lg w-full h-32 object-cover">
-                  <img src="" alt="A beautiful vase of flowers" class="rounded-lg w-full h-32 object-cover">
-                </div>
-                <div class="px-6 pb-6">
-                    <button class="w-full theme-btn text-white font-bold py-2 px-4 rounded-lg transition duration-300">Book Now</button>
-                </div>
-            </div>
-
-            <!-- WORKSHOP CARD 3 -->
-            <div class="theme-bg-subtle rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300">
-                <div class="p-6">
-                    <div class="flex justify-between items-start mb-4">
-                        <h3 class="text-xl font-bold text-gray-800">Wedding Centerpiece</h3>
-                        <span class="theme-bg-accent theme-text-accent text-sm font-semibold px-3 py-1 rounded-full">RM250</span>
-                    </div>
-                    <div class="text-sm text-gray-600 mb-4">
-                        <span>3h</span> &bull; <span>Intermediate</span>
-                    </div>
-                    <p class="text-gray-700 mb-6">Create a lush, romantic centerpiece perfect for weddings or special events using premium flowers.</p>
-                </div>
-                <div class="grid grid-cols-2 gap-2 px-6 pb-6">
-                  <img src="" alt="Making a wedding centerpiece" class="rounded-lg w-full h-32 object-cover">
-                  <img src="" alt="Elegant wedding centerpiece on a table" class="rounded-lg w-full h-32 object-cover">
-                </div>
-                <div class="px-6 pb-6">
-                    <button class="w-full theme-btn text-white font-bold py-2 px-4 rounded-lg transition duration-300">Book Now</button>
-                </div>
-            </div>
-
+    <section class="workshop-section1">
+      <!-- WORKSHOP 1 -->
+      <div class="workshop-content">
+        <h2 class="workshop-title">Hand-tied Bouquet</h2>
+        <div class="workshop-details">
+          <p>2h • Beginner</p>
+          <div class="workshop-price-container"><p class="workshop-price">RM150</p></div>
         </div>
+        <p class="workshop-description">Learn the classic spiral technique to create a beautiful, professional-looking hand-tied bouquet.</p>
+        <button class="book-now-btn">Book Now</button>
+      </div>
+
+      <!-- WORKSHOP 2 -->
+      <div class="workshop-content">
+        <h2 class="workshop-title">Floral Workshop</h2>
+        <div class="workshop-details"><p>3h • Intermediate</p></div>
+        <p class="workshop-description">Learn to create an elegant oval bloom vase flower arrangement by using seasonally selected flowers. Floral basics for every flower enthusiast.</p>
+        <button class="book-now-btn">Book Now</button>
+      </div>
+
+      <!-- WORKSHOP 3 -->
+      <div class="workshop-content">
+        <h2 class="workshop-title">Natural Mix Bouquet</h2>
+        <div class="workshop-details"><p>2.5h • All Level</p></div>
+        <p class="workshop-description">You will learn to create a mix bunch of hand tied/wrap bouquets with beautiful seasonal mix blooms & foliage.</p>
+        <button class="book-now-btn">Book Now</button>
+      </div>
     </div>
 </section>
 <section>
+  <h2>Past Workshops</h2>
   <div class="workshop-carousel">
     <div class="workshop-group">
       <div class="workshop-card">1</div>
@@ -143,8 +113,18 @@
       <div class="workshop-card">6</div>
     </div>
   </div>
-
 </section>
+  <aside class="sidebar">
+    <h2>Workshop</h2>
+    <ul class="category-list">
+      <li><a href="#" class="category-item active">All Workshop</a></li>
+      <li><a href="product1.html" class="category-item">Hand Bouquet</a></li>
+      <li><a href="product2.html" class="category-item">CNY Decorations</a></li>
+      <li><a href="product3.html" class="category-item">Grand Opening</a></li>
+      <li><a href="product4.html" class="category-item">Past Workshops</a></li>
+    </ul>
+  </aside>
+
 <!-- Footer -->
 <footer>
   <div class="footer-left">

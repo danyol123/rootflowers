@@ -1569,3 +1569,130 @@ input[type="submit"]:hover {
     height: 260px;
   }
 }
+
+/*Workshop*/
+
+/*section2*/
+.workshop-carousel {
+  margin: 100px auto;
+  width: 90%;
+  display: flex;
+  overflow-x: auto;
+  gap: 1em;}
+
+.workshop-carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.workshop-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
+  animation: spin 30s infinite linear;
+}
+
+.workshop-card {
+  flex: 0 0 5em;
+  height: 5em;
+  padding: 1em;
+  background: #ffffff;
+  font-size: 3rem;
+  border-radius: .2em;
+  text-align: center;
+  align-content: center;
+}
+
+@keyframes spin {
+  from {translate: 0;}
+  to {translate: -100%;}
+}
+
+.workshop-section1{
+  display: flex;
+  justify-content: space-between;
+  gap: 1em;
+  align-items: center;
+  flex-direction: column;
+}
+
+.workshop-content {
+  background-color: #fefefe;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 350px;
+  margin: 20px;
+  max-height: fit-content;
+  padding: 50px;
+}
+.workshop-price-container {
+  position: relative;
+  top: -35px;
+  left: 185px;
+  padding: 10px;
+  background-color: #f4f1ed;
+  border-radius: 10px;
+  text-align: center;
+  width: fit-content;
+  height: min-content;
+
+}
+.workshop-price {
+  font-size: 1em;
+  font-weight: bold;
+  color: #463b2b;
+  margin: 0;
+}
+
+.workshop-images {
+  display: flex;
+}
+
+.workshop-images img {
+  width: 50%;
+  height: auto;
+}
+
+.workshop-title {
+  text-align: left;
+  position: relative;
+  font-size: 1.2em;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.workshop-details {
+  position: relative;
+  left: auto;
+  display: flex;
+  margin-bottom: 15px;
+  color: #555;
+  font-size: 15px;
+}
+
+.workshop-description {
+  line-height: 1.5;
+  margin-bottom: 20px;
+  font-size: 20px;
+  text-align: left;}
+
+.book-now-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: 100%;
+}
+
+.book-now-btn:hover {
+  background-color: #0056b3;
+}
+/* End of Workshop */
