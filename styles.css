@@ -1026,69 +1026,93 @@ footer a:hover {
   transform: translateY(-25px) rotate(0);
 }
 
-.product1-title1 {
-  background-image: url('Pictures/Product1/product1_title.png');
-  background-size: cover;
-  background-position: center;
-  height: 300px;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;}
-
-.product2-title1 {
-  background-image: url('Pictures/Product2/product2_title.png');
-  background-size: cover;
-  background-position: center;
-  height: 300px;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;}
-
-  .product3-title1 {
-  background-image: url('Pictures/Product3/product3_title.png');
-  background-size: cover;
-  background-position: center;
-  height: 300px;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-
+.form-container {
+    background: #ffffff;
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 420px;
 }
 
-.product4-title1 {
-  background-image: url('Pictures/Product4/product4_title.jpg');
-  background-size: cover;
-  background-position: center;
-  height: 300px;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
+.form-container h2 {
+    text-align: center;
+    color: #463b2b;
+    /* Accent */
+    margin-bottom: 1.5rem;
+}
 
+label {
+    display: block;
+    margin-bottom: 0.4rem;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 0.6rem;
+    margin-bottom: 1.2rem;
+    border: 1px solid #C4B6A4;
+    border-radius: 8px;
+    font-size: 1rem;
+    color: #0b0824;
+    background-color: #f4f1ed;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+    border-color: #928473;
+    outline: none;
+    box-shadow: 0 0 4px #928473;
+}
+
+input[type="submit"] {
+    background-color: #463b2b;
+    color: #fff;
+    border: none;
+    padding: 0.8rem;
+    width: 100%;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: #928473;
+}
+
+
+/* Layout for product */
+.page {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 40px;
+  max-width: 1400px;
+  margin: 30px auto;
+  padding: 0 20px;
+  align-items: start;
 }
 
 /* Products */
 .gallery {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 50px;
+  gap: 40px;
   justify-items: center; 
   align-items: center;
 }
 
 .container {
-  width: 300px;
-  height: 400px;
+  width: 220px;
+  height: 300px;
   background: var(--bg) center/cover no-repeat;
   cursor: pointer;
-  box-shadow: 0 0 3px #000;
+  box-shadow: 0 0 4px #000;
   position: relative;
 }
 
@@ -1115,8 +1139,8 @@ footer a:hover {
 }
 
 .head {
-  font-size: 30px;
-  line-height: 40px;
+  font-size: 25px;
+  line-height: 30px;
   
   transform: translateY(40px);
   transition: all 0.7s;
@@ -1135,7 +1159,7 @@ footer a:hover {
 }
 
 .price {
-  font-size: 22px;
+  font-size: 11px;
   line-height: 10px;
   font-weight: bold;  
   opacity: 0;
@@ -1186,17 +1210,6 @@ footer a:hover {
   }
 }
 
-@media (max-width: 1200px) {
-  .gallery {
-    grid-template-columns: repeat(2, 1fr); /* 2 per row */
-  }
-}
-@media (max-width: 768px) {
-  .gallery {
-    grid-template-columns: 1fr; /* 1 per row */
-  }
-}
-
 .hidden-checkbox {
   display: none;
 }
@@ -1205,7 +1218,7 @@ footer a:hover {
 .add-btn {
   display: inline-flex;          /* align icon + text in a row */
   align-items: center;           /* vertically center them */
-  gap: 8px;                      /* space between icon and text */
+  gap: 4px;                      /* space between icon and text */
   background: rgba(77, 77, 77, .9);
   padding: 6px 12px;
   border: 2px solid #FEF5DF;
@@ -1228,7 +1241,7 @@ footer a:hover {
   display: none;
   text-align: center;
   padding: 10px;
-  font-size: 12px;
+  font-size: 10px;
   font-family: Work_Sans, sans-serif;
 }
 
