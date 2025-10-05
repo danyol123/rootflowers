@@ -51,6 +51,14 @@ body {
 .logo:hover {
   border-radius: 10%;
 }
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  overflow: visible; /* allow dropdown to overflow */
+}
+
 .navbar {
   font-family: Reach_Story;
   position: sticky;
@@ -175,14 +183,6 @@ div.main {
 div.main div {
   width:50%;  
   float:left;
-}
-
-header {
-  text-align: center;
-  padding: 2rem 1rem;
-  background-color: #C4B6A4;
-  /* Secondary */
-  color: #0b0824;
 }
 
 main {
@@ -855,7 +855,12 @@ textarea:focus {
   box-shadow: 0 0 4px #928473;
 }
 
-input[type="submit"] {
+.submit-buttons {
+  display: flex; 
+  gap: 1rem;
+}
+
+input[type="submit"], input[type="reset"] {
   background-color: #463b2b;
   color: #fff;
   border: none;
@@ -868,7 +873,11 @@ input[type="submit"] {
   transition: background 0.3s ease;
 }
 
-input[type="submit"]:hover {
+input[type="reset"]{
+  width: 25%;
+}
+
+input[type="submit"]:hover, input[type="reset"]:hover {
   background-color: #928473;
 }
 
@@ -1025,67 +1034,6 @@ footer a:hover {
   opacity: 1;
   transform: translateY(-25px) rotate(0);
 }
-
-.form-container {
-    background: #ffffff;
-    padding: 2rem;
-    border-radius: 16px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 420px;
-}
-
-.form-container h2 {
-    text-align: center;
-    color: #463b2b;
-    /* Accent */
-    margin-bottom: 1.5rem;
-}
-
-label {
-    display: block;
-    margin-bottom: 0.4rem;
-    font-weight: bold;
-}
-
-input[type="text"],
-input[type="email"],
-input[type="password"] {
-    width: 100%;
-    padding: 0.6rem;
-    margin-bottom: 1.2rem;
-    border: 1px solid #C4B6A4;
-    border-radius: 8px;
-    font-size: 1rem;
-    color: #0b0824;
-    background-color: #f4f1ed;
-}
-
-input[type="text"]:focus,
-input[type="email"]:focus,
-input[type="password"]:focus {
-    border-color: #928473;
-    outline: none;
-    box-shadow: 0 0 4px #928473;
-}
-
-input[type="submit"] {
-    background-color: #463b2b;
-    color: #fff;
-    border: none;
-    padding: 0.8rem;
-    width: 100%;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background 0.3s ease;
-}
-
-input[type="submit"]:hover {
-    background-color: #928473;
-}
-
 
 /* Layout for product */
 .page {
@@ -1633,6 +1581,10 @@ input[type="submit"]:hover {
   .aboutus_card {
     height: 260px;
   }
+}
+
+.enhancement, .acknowledgement {
+  padding: 2rem;
 }
 
 /*Workshop*/
