@@ -327,6 +327,7 @@ h2.section2-text {
   display: flex;
   align-items: center;
   text-align: center;
+  gap: 1rem;
 }
 
 .section3-content div{
@@ -339,10 +340,21 @@ h2.section2-text {
   padding: 0.5rem 1rem;
 }
 
-.section3-content iframe {
+.section3-content map {
+  padding: 2rem;
+  display: flex;
+}
+
+.section3-content img {
   border:0;
-  width: 80%;
+  max-width: 100%;
   height: 20rem;
+  object-fit: cover;
+  transition: 0.5s;
+}
+
+.section3-content img:hover {
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
 }
 
 .section3-header {
@@ -1285,12 +1297,13 @@ footer a:hover {
 
 /* Profile */
 
-.profile-section {
+.profile-main {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
+  padding: 2rem;
 }
 
 .profile-pic {
@@ -1301,19 +1314,55 @@ footer a:hover {
 .profile-pic img{
   width: 200px;
   height: 200px;
-  border-style: groove;
+  border: 5px groove #918473;
   border-radius: 20px;
-  border-width: 5px;
 }
 
-.profile-section h1{
+.profile-main h1{
   font-size: 200%;
 }
 
-.profile-section table,
-.profile-section th,
-.profile-section td{
-  border:1px solid black;
+.profile-main table,
+.profile-main th,
+.profile-main td, 
+.profile-main tr{
+  border:2px solid black;
+  padding: 1rem;
+  border-collapse: collapse;
+}
+
+.profile-main table{
+  max-width: 50rem;
+  height: auto;
+}
+
+.profile-main button {
+  color: #fff;
+  border: 2px solid black;
+  padding: 0.8rem;
+  width: 50%;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  margin-top: 2rem;
+}
+
+.daniel th{
+  background-color: #DA7297;
+}
+
+.daniel td{
+  background-color: #FFB4C2;
+}
+
+.daniel button{
+  background-color: #DA7297;
+}
+
+.daniel button:hover {
+  background-color: #FFB4C2;
 }
 
 /* Sticky sidebar/aside */
@@ -1511,33 +1560,33 @@ footer a:hover {
   text-shadow: 0 0 1px #333;
 }
 
-.aboutus_cardBox:nth-child(1) .aboutus_card .back {
-  background: cornflowerblue;
-}
-
 .aboutus_cardBox:nth-child(2) .aboutus_card .back {
-  background: orange;
+  background: #DA7297;
 }
 
 .aboutus_cardBox:nth-child(3) .aboutus_card .back {
-  background: yellowgreen;
+  background: orange;
 }
 
 .aboutus_cardBox:nth-child(4) .aboutus_card .back {
+  background: yellowgreen;
+}
+
+.aboutus_cardBox:nth-child(5) .aboutus_card .back {
   background: tomato;
 }
 
-.aboutus_cardBox:nth-child(2) .aboutus_card {
+.aboutus_cardBox:nth-child(3) .aboutus_card {
   -webkit-animation: giro 1.5s 1;
   animation: giro 1.5s 1;
 }
 
-.aboutus_cardBox:nth-child(3) .aboutus_card {
+.aboutus_cardBox:nth-child(4) .aboutus_card {
   -webkit-animation: giro 2s 1;
   animation: giro 2s 1;
 }
 
-.aboutus_cardBox:nth-child(4) .aboutus_card {
+.aboutus_cardBox:nth-child(5) .aboutus_card {
   -webkit-animation: giro 2.5s 1;
   animation: giro 2.5s 1;
 }
