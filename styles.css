@@ -1116,6 +1116,46 @@ input[type="submit"]:hover {
   position: relative;
 }
 
+/* Bouquet */
+.gallery_bouquet .B1 { --bg: url("Pictures/Product1/B1.jpg"); }
+.gallery_bouquet .B2 { --bg: url("Pictures/Product1/B2.jpg"); }
+.gallery_bouquet .B3 { --bg: url("Pictures/Product1/B3.jpg"); }
+.gallery_bouquet .B4 { --bg: url("Pictures/Product1/B4.jpg"); }
+.gallery_bouquet .B5 { --bg: url("Pictures/Product1/B5.jpg"); }
+.gallery_bouquet .B6 { --bg: url("Pictures/Product1/B6.jpg"); }
+.gallery_bouquet .B7 { --bg: url("Pictures/Product1/B7.jpg"); }
+.gallery_bouquet .B8 { --bg: url("Pictures/Product1/B8.jpg"); }
+
+/* CNY */
+.gallery_cny .C1 { --bg: url("Pictures/Product2/C1.jpg"); }
+.gallery_cny .C2 { --bg: url("Pictures/Product2/C2.jpg"); }
+.gallery_cny .C3 { --bg: url("Pictures/Product2/C3.jpg"); }
+.gallery_cny .C4 { --bg: url("Pictures/Product2/C4.jpg"); }
+.gallery_cny .C5 { --bg: url("Pictures/Product2/C5.jpg"); }
+.gallery_cny .C6 { --bg: url("Pictures/Product2/C6.jpg"); }
+.gallery_cny .C7 { --bg: url("Pictures/Product2/C7.jpg"); }
+.gallery_cny .C8 { --bg: url("Pictures/Product2/C8.jpg"); }
+
+/* Grand Opening */
+.gallery_grand_opening .G1 { --bg: url("Pictures/Product3/G1.jpg"); }
+.gallery_grand_opening .G2 { --bg: url("Pictures/Product3/G2.jpg"); }
+.gallery_grand_opening .G3 { --bg: url("Pictures/Product3/G3.jpg"); }
+.gallery_grand_opening .G4 { --bg: url("Pictures/Product3/G4.jpg"); }
+.gallery_grand_opening .G5 { --bg: url("Pictures/Product3/G5.jpg"); }
+.gallery_grand_opening .G6 { --bg: url("Pictures/Product3/G6.jpg"); }
+.gallery_grand_opening .G7 { --bg: url("Pictures/Product3/G7.jpg"); }
+.gallery_grand_opening .G8 { --bg: url("Pictures/Product3/G8.jpg"); }
+
+/* Graduation */
+.gallery_graduation .G1 { --bg: url("Pictures/Product4/G1.jpg"); }
+.gallery_graduation .G2 { --bg: url("Pictures/Product4/G2.jpg"); }
+.gallery_graduation .G3 { --bg: url("Pictures/Product4/G3.jpg"); }
+.gallery_graduation .G4 { --bg: url("Pictures/Product4/G4.jpg"); }
+.gallery_graduation .G5 { --bg: url("Pictures/Product4/G5.jpg"); }
+.gallery_graduation .G6 { --bg: url("Pictures/Product4/G6.jpg"); }
+.gallery_graduation .G7 { --bg: url("Pictures/Product4/G7.jpg"); }
+.gallery_graduation .G8 { --bg: url("Pictures/Product4/G8.jpg"); }
+
 .overlay {
   width: 100%;
   height: 100%;
@@ -1363,7 +1403,6 @@ input[type="submit"]:hover {
 
 /* Parallax */
 .section-background {
-  background: var(--bg) center/cover fixed no-repeat;
   height: 100vh;
   width: 100%;
   color: #fff;
@@ -1388,6 +1427,27 @@ input[type="submit"]:hover {
 
 .parallax {
   background-image: var(--Par);
+}
+
+/* Banners */
+.banner-bouquet {
+  --bg: url("Pictures/Product1/Banner1.jpg");
+  background: var(--bg) center/cover fixed no-repeat;
+}
+
+.banner-CNY {
+  --bg: url("Pictures/Product2/Banner2.jpeg");
+  background: var(--bg) center/cover fixed no-repeat;
+}
+
+.banner-grand-opening {
+  --bg: url("Pictures/Product3/Banner3.jpeg");
+  background: var(--bg) center/cover fixed no-repeat;
+}
+
+.banner-graduation {
+  --bg: url("Pictures/Product4/Banner4.jpeg");
+  background: var(--bg) center/cover fixed no-repeat;
 }
 
 .text-bloc p {
