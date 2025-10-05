@@ -1430,6 +1430,11 @@ input[type="submit"]:hover {
 
 /* About Us */
 
+.aboutus_section {
+  padding: 2rem;
+  text-align: center;
+}
+
 .aboutus_cardBox {
   float: left;
   font-size: 1.2em;
@@ -1444,7 +1449,7 @@ input[type="submit"]:hover {
 }
 
 .aboutus_card {
-  background: #222;
+  background: #918473;
   cursor: default;
   height: 300px;
   transform-style: preserve-3d;
