@@ -1335,6 +1335,39 @@ input[type="submit"]:hover {
   margin-bottom: 60px;
 }
 
+/* Profile */
+
+.profile-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.profile-pic {
+  max-width: 100%;
+  height: auto;
+}
+
+.profile-pic img{
+  width: 200px;
+  height: 200px;
+  border-style: groove;
+  border-radius: 20px;
+  border-width: 5px;
+}
+
+.profile-section h1{
+  font-size: 200%;
+}
+
+.profile-section table,
+.profile-section th,
+.profile-section td{
+  border:1px solid black;
+}
+
 /* Sticky sidebar/aside */
 .sidebar {
   position: sticky;
@@ -1453,4 +1486,413 @@ input[type="submit"]:hover {
 .text-bloc p {
   margin: 75px;
   font-size: 22px;
+}
+
+/* About Us */
+
+.aboutus_section {
+  padding: 2rem;
+  text-align: center;
+}
+
+.aboutus_cardBox {
+  float: left;
+  font-size: 1.2em;
+  margin: 1% 0 0 1%;
+  perspective: 800px;
+  transition: all 0.3s ease 0s;
+  width: 23.7%;
+}
+
+.aboutus_cardBox:hover .aboutus_card {
+  transform: rotateY( 180deg);
+}
+
+.aboutus_card {
+  background: #918473;
+  cursor: default;
+  height: 300px;
+  transform-style: preserve-3d;
+  transition: transform 0.4s ease 0s;
+  width: 100%;
+  -webkit-animation: giro 1s 1;
+  animation: giro 1s 1;
+}
+
+.aboutus_card p {
+  margin-bottom: 1.8em;
+}
+
+.aboutus_card .front,
+.aboutus_card .back {
+  backface-visibility: hidden;
+  box-sizing: border-box;
+  color: white;
+  display: block;
+  font-size: 1.2em;
+  height: 100%;
+  padding: 0.8em;
+  position: absolute;
+  text-align: center;
+  width: 100%;
+}
+
+.aboutus_card .front img{
+  border-radius: 25%;
+  max-width: 100%;
+  height: 100%;
+}
+
+.aboutus_card .back {
+  transform: rotateY( 180deg);
+}
+
+.aboutus_card .back a {
+  padding: 0.3em 0.5em;
+  background: #333;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 1px;
+  font-size: 0.9em;
+  transition: all 0.2s ease 0s;
+}
+
+.aboutus_card .back a:hover {
+  background: #fff;
+  color: #333;
+  text-shadow: 0 0 1px #333;
+}
+
+.aboutus_cardBox:nth-child(1) .aboutus_card .back {
+  background: cornflowerblue;
+}
+
+.aboutus_cardBox:nth-child(2) .aboutus_card .back {
+  background: orange;
+}
+
+.aboutus_cardBox:nth-child(3) .aboutus_card .back {
+  background: yellowgreen;
+}
+
+.aboutus_cardBox:nth-child(4) .aboutus_card .back {
+  background: tomato;
+}
+
+.aboutus_cardBox:nth-child(2) .aboutus_card {
+  -webkit-animation: giro 1.5s 1;
+  animation: giro 1.5s 1;
+}
+
+.aboutus_cardBox:nth-child(3) .aboutus_card {
+  -webkit-animation: giro 2s 1;
+  animation: giro 2s 1;
+}
+
+.aboutus_cardBox:nth-child(4) .aboutus_card {
+  -webkit-animation: giro 2.5s 1;
+  animation: giro 2.5s 1;
+}
+
+@-webkit-keyframes giro {
+  from {
+    transform: rotateY( 180deg);
+  }
+  to {
+    transform: rotateY( 0deg);
+  }
+}
+
+@keyframes giro {
+  from {
+    transform: rotateY( 180deg);
+  }
+  to {
+    transform: rotateY( 0deg);
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .aboutus_cardBox {
+    margin-left: 2.8%;
+    margin-top: 3%;
+    width: 46%;
+  }
+  .aboutus_card {
+    height: 285px;
+  }
+  .aboutus_cardBox:last-child {
+    margin-bottom: 3%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .aboutus_cardBox {
+    width: 94.5%;
+  }
+  .aboutus_card {
+    height: 260px;
+  }
+}
+
+/*Workshop*/
+.flex-container {
+  display: flex;
+  justify-content: center;
+}
+.workshop-carousel {
+  margin: 100px auto;
+  width: 90%;
+  display: flex;
+  overflow-x: auto;
+  gap: 1em;}
+
+.workshop-carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.workshop-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
+  animation: spin 30s infinite linear;
+}
+
+.workshop-card {
+  flex: 0 0 5em;
+  height: 5em;
+  padding: 1em;
+  background: #ffffff;
+  font-size: 3rem;
+  border-radius: .2em;
+  text-align: center;
+  align-content: center;
+}
+
+@keyframes spin {
+  from {translate: 0;}
+  to {translate: -100%;}
+}
+
+.workshop-section1{
+  display: flex;
+  flex-direction: row;    /* <-- changed from column */
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 0 1rem;
+  box-sizing: border-box;
+}
+
+.workshop-content {
+  background-color: #fefefe;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 28vw;
+  margin: 20px;
+  max-height: fit-content;
+  padding: 50px;
+}
+
+.workshop-title {
+  text-align: left;
+  position: relative;
+  font-size: 1.2em;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.workshop-details {
+  position: relative;
+  left: auto;
+  display: flex;
+  margin-bottom: 15px;
+  color: #555;
+  font-size: 15px;
+}
+
+.workshop-description {
+  line-height: 1.5;
+  margin-bottom: 20px;
+  font-size: 20px;
+  text-align: left;}
+
+.book-now-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: 100%;
+}
+
+.book-now-btn:hover {
+  background-color: #0056b3;
+}
+.workshop-section3 {
+  padding: 20px;
+  width: fit-content;
+}
+.workshop-sidebar {
+  position: sticky;
+  top: 2rem;
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  height: fit-content;
+  z-index: 100;
+}
+
+/* Course Introduction Section */
+.woekshop-intro {
+  background: #fff;
+  padding: 4rem 1rem;
+  margin-bottom: 2rem;
+}
+
+.workshop-content1 {
+  max-width: 1000px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.workshop-intro-title {
+  font-size: 2.5rem;
+  color: #6e5b4a;
+  margin-bottom: 2rem;
+  line-height: 1.2;
+}
+
+.workshop-features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  text-align: left;
+  border-radius: 10px;
+  padding:15px;
+  border: 2px solid #ddd;
+}
+
+.feature-icon {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.feature-item p {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #4a4a4a;
+}
+
+.feature-item span {
+  display: block;
+  font-size: 0.9rem;
+  color: #888;
+  margin-top: 0.25rem;
+}
+
+/* Giveaway Section Styles */
+.giveaway-content {
+  padding: 2rem;
+  background: #fff;
+}
+
+.giveaway-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+.giveaway-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.giveaway-details {
+  padding: 2rem;
+  background: #faf7f4;
+  border-radius: 12px;
+}
+
+.giveaway-details h2 {
+  color: #6e5b4a;
+  margin-bottom: 0.5rem;
+}
+
+.giveaway-note {
+  color: #918473;
+  font-style: italic;
+  margin-bottom: 2rem;
+}
+
+.how-to-win h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: #6e5b4a;
+}
+
+.giveaway-steps {
+  list-style: none;
+  padding: 0;
+}
+
+.giveaway-steps li {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.step-icon {
+  font-size: 1.5rem;
+  margin-right: 0.5rem;
+}
+
+.step-title {
+  font-weight: bold;
+  color: #6e5b4a;
+  display: inline-block;
+  margin-bottom: 0.5rem;
+}
+
+.giveaway-steps p {
+  margin: 0.5rem 0 0 2.5rem;
+  color: #666;
+}
+
+.giveaway-steps small {
+  color: #918473;
+  font-size: 0.9em;
+}
+
+.disclaimer {
+  margin-top: 2rem;
+  color: #918473;
+  font-size: 0.9em;
+  text-align: center;
 }
