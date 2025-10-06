@@ -1343,6 +1343,22 @@ footer a:hover {
   background-color: #FFB4C2;
 }
 
+.kheldy th{
+  background-color: #AA60C8
+}
+
+.kheldy td{
+  background-color: #D69ADE;
+}
+
+.kheldy button{
+  background-color: #AA60C8;
+}
+
+.kheldy button:hover {
+  background-color: #D69ADE;
+}
+
 /* Sticky sidebar/aside */
 .sidebar {
   position: sticky;
@@ -1551,7 +1567,7 @@ footer a:hover {
 }
 
 .aboutus_cardBox:nth-child(5) .aboutus_card .back {
-  background: tomato;
+  background: #AA60C8;
 }
 
 .aboutus_cardBox:nth-child(3) .aboutus_card {
