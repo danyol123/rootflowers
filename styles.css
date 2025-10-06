@@ -1026,8 +1026,7 @@ footer a:hover {
 .page {
   display: grid;
   grid-template-columns: 1fr minmax(180px, 240px);
-  gap: 20px;
-  max-width: 1400px;
+  max-width: 100%;
   margin: 30px auto;
   align-items: start;
 }
@@ -1274,13 +1273,12 @@ footer a:hover {
 
 .section_product {
   padding: 40px;
-  margin-bottom: 60px;
 }
 
 /* Sticky sidebar/aside */
 .sidebar {
   position: sticky;
-  top: 100px;
+  top: 120px;
   background: white;
   padding: 20px;
   border-radius: 12px;
