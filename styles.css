@@ -1025,7 +1025,9 @@ footer a:hover {
 /* Layout for product */
 .page {
   display: grid;
-  grid-template-columns: 1fr minmax(180px, 280px);
+  grid-template-columns: 1fr minmax(180px, 240px);
+  gap: 20px;
+  max-width: 1400px;
   margin: 30px auto;
   align-items: start;
 }
@@ -1335,15 +1337,19 @@ footer a:hover {
 }
 
 /* Responsive */
+@media (max-width: 1600px) {
+  .gallery {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
 @media (max-width: 1200px) {
   .gallery { grid-template-columns: repeat(2, 1fr); }
 }
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .page { grid-template-columns: 1fr 180px; gap: 16px; }
   aside.sidebar { position: static; width: 100%; margin-top: 18px; }
   .gallery { grid-template-columns: 1fr; padding: 16px; }
 }
-
 @media (max-width: 600px) {
   .sidebar {
     display: none;
