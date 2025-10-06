@@ -191,10 +191,6 @@ main {
   padding: 4rem 1rem;
 }
 
-.main-title-section .title-text h1, .main-title-section .title-text h2{
-  text-align: center;
-}
-
 @keyframes pop-word {
   to {
     transform: rotateX(0);
@@ -211,6 +207,10 @@ main {
   to {
     transform: scaleY(1);
   }
+}
+
+.main-title-section .title-text h1, .main-title-section .title-text h2{
+  text-align: center;
 }
 
 .main-title-section .title-text h1 {
@@ -251,10 +251,6 @@ main {
 
   vertical-align: text-bottom;
   transition: 0.6s;
-}
-
-.superscript:hover {
-  font-size: 5rem;
 }
 
 .sub-title {
@@ -762,6 +758,7 @@ ul.slides input {
     background-color: #fff;
     opacity: 0.5;
     margin: 10px;
+    cursor: pointer;
 }
 
 input:checked + .slide-container .slide-image {
@@ -1273,92 +1270,6 @@ footer a:hover {
   margin-bottom: 60px;
 }
 
-/* Profile */
-
-.profile-main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 2rem;
-}
-
-.profile-pic {
-  max-width: 100%;
-  height: auto;
-}
-
-.profile-pic img{
-  width: 200px;
-  height: 200px;
-  border: 5px groove #918473;
-  border-radius: 20px;
-}
-
-.profile-main h1{
-  font-size: 200%;
-}
-
-.profile-main table,
-.profile-main th,
-.profile-main td, 
-.profile-main tr{
-  border:2px solid black;
-  padding: 1rem;
-  border-collapse: collapse;
-}
-
-.profile-main table{
-  max-width: 50rem;
-  height: auto;
-}
-
-.profile-main button {
-  color: #fff;
-  border: 2px solid black;
-  padding: 0.8rem;
-  width: 50%;
-  border-radius: 8px;
-  font-size: 1rem;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background 0.3s ease;
-  margin-top: 2rem;
-}
-
-.daniel th{
-  background-color: #DA7297;
-}
-
-.daniel td{
-  background-color: #FFB4C2;
-}
-
-.daniel button{
-  background-color: #DA7297;
-}
-
-.daniel button:hover {
-  background-color: #FFB4C2;
-}
-
-.kheldy th{
-  background-color: #AA60C8
-}
-
-.kheldy td{
-  background-color: #D69ADE;
-}
-
-.kheldy button{
-  background-color: #AA60C8;
-}
-
-.kheldy button:hover {
-  background-color: #D69ADE;
-}
-
 /* Sticky sidebar/aside */
 .sidebar {
   position: sticky;
@@ -1423,7 +1334,6 @@ footer a:hover {
   aside.sidebar { position: static; width: 100%; margin-top: 18px; }
   .gallery { grid-template-columns: 1fr; }
 }
-
 
 /* Parallax */
 .section-background {
@@ -1505,7 +1415,7 @@ footer a:hover {
   height: 300px;
   transform-style: preserve-3d;
   transition: transform 0.4s ease 0s;
-  width: 100%;
+  max-width: 100%;
   -webkit-animation: giro 1s 1;
   animation: giro 1s 1;
 }
@@ -1624,6 +1534,76 @@ footer a:hover {
   .aboutus_card {
     height: 260px;
   }
+}
+
+/* Profile */
+
+.profile-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+}
+
+.profile-pic {
+  max-width: 100%;
+  height: auto;
+}
+
+.profile-pic img{
+  width: 200px;
+  height: 200px;
+  border: 5px groove #918473;
+  border-radius: 20px;
+}
+
+.profile-main h1{
+  font-size: 200%;
+}
+
+.profile-main table,
+.profile-main th,
+.profile-main td, 
+.profile-main tr{
+  border:2px solid black;
+  padding: 1rem;
+  border-collapse: collapse;
+}
+
+.profile-main table{
+  max-width: 50rem;
+  height: auto;
+}
+
+.profile-main button {
+  color: #fff;
+  border: 2px solid black;
+  padding: 0.8rem;
+  width: 50%;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  margin-top: 2rem;
+}
+
+.daniel th, .daniel button{
+  background-color: #DA7297;
+}
+
+.daniel td, .daniel button:hover{
+  background-color: #FFB4C2;
+}
+
+.kheldy th, .kheldy button{
+  background-color: #AA60C8
+}
+
+.kheldy td, .kheldy button:hover{
+  background-color: #D69ADE;
 }
 
 /*Enhancement & Acknowledgement*/
