@@ -1025,7 +1025,7 @@ footer a:hover {
 /* Layout for product */
 .page {
   display: grid;
-  grid-template-columns: 1fr 205px;
+  grid-template-columns: 1fr minmax(180px, 280px);
   gap: 20px;
   max-width: 1400px;
   margin: 30px auto;
@@ -1330,9 +1330,9 @@ footer a:hover {
   .gallery { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 768px) {
-  .page { grid-template-columns: 1fr; }
+  .page { grid-template-columns: 1fr 180px; gap: 16px; }
   aside.sidebar { position: static; width: 100%; margin-top: 18px; }
-  .gallery { grid-template-columns: 1fr; }
+  .gallery { grid-template-columns: 1fr; padding: 16px; }
 }
 
 /* Parallax */
