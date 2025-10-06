@@ -1496,6 +1496,16 @@ footer a:hover {
   background: var(--bg) center/cover fixed no-repeat;
 }
 
+.banner-workshop {
+  --bg: url("Pictures/Workshop/Banner1.jpg");
+  background: var(--bg) center/cover fixed no-repeat;
+}
+
+.banner-promotion {
+  --bg: url("Pictures/Promotion/Banner1.jpeg");
+  background: var(--bg) center/cover fixed no-repeat;
+}
+
 .text-bloc p {
   margin: 75px;
   font-size: 22px;
