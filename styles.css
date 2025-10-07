@@ -1828,7 +1828,7 @@ footer a:hover {
   padding-right: 10vw;
 
 }
-figure {
+.workshop-figure {
     display: flex;
     height: 400px;
     width: max-content;
@@ -1839,7 +1839,7 @@ figure {
     background-color: #fff;
   }
 
-figure img {
+.workshop-figure img {
  max-width: 300px;
   display: inline-block;
   resize: both;
