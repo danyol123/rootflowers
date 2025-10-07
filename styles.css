@@ -1627,7 +1627,7 @@ footer a:hover {
   justify-content: center;
 }
 .workshop-carousel {
-  margin: 100px auto;
+  margin: auto;
   width: 90%;
   display: flex;
   overflow-x: auto;
@@ -1655,6 +1655,42 @@ footer a:hover {
   text-align: center;
   align-content: center;
 }
+
+.card1 {
+  background-image: url(Pictures/Workshop/pic1.jpg);
+  background-size: cover;
+  background-position: center;
+}
+.card2 {
+  background-image: url(Pictures/Workshop/pic2.jpg);
+  background-size: cover;
+  background-position: center;
+}
+
+.card3 {
+  background-image: url(Pictures/Workshop/pic2.jpg);
+  background-size: cover;
+  background-position: center;
+}
+
+.card4 {
+  background-image: url(Pictures/Workshop/pic4.jpg);
+  background-size: cover;
+  background-position: center;
+}
+
+.card5 {
+  background-image: url(Pictures/Workshop/pic5.jpg);
+  background-size: cover;
+  background-position: center;
+}
+
+.card6 {
+  background-image: url(Pictures/Workshop/pic6.jpg);
+  background-size: cover;
+  background-position: center;
+}
+
 
 @keyframes spin {
   from {translate: 0;}
@@ -1710,7 +1746,7 @@ footer a:hover {
   text-align: left;}
 
 .book-now-btn {
-  background-color: #007bff;
+  background-color:#463b2b ;
   color: white;
   border: none;
   padding: 12px 24px;
@@ -1724,7 +1760,7 @@ footer a:hover {
 }
 
 .book-now-btn:hover {
-  background-color: #0056b3;
+  background-color:#928473 ;
 }
 .workshop-section3 {
   padding: 20px;
@@ -1742,16 +1778,11 @@ footer a:hover {
 }
 
 /* Course Introduction Section */
-.woekshop-intro {
-  background: #fff;
-  padding: 4rem 1rem;
-  margin-bottom: 2rem;
-}
-
 .workshop-content1 {
   max-width: 1000px;
-  margin: 0 auto;
+  margin: 100px auto;
   text-align: center;
+  padding: 3rem;
 }
 
 .workshop-intro-title {
@@ -1766,6 +1797,41 @@ footer a:hover {
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 2rem;
   margin-top: 3rem;
+}
+
+.workshop-section4 {
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-left: 10vw;
+  padding-right: 10vw;
+
+}
+figure {
+    display: flex;
+    height: 400px;
+    width: max-content;
+    margin: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #fff;
+  }
+
+figure img {
+ max-width: 300px;
+  display: inline-block;
+  resize: both;
+}
+
+figcaption {
+  background-color: white;
+  position: absolute;
+  color: rgb(0, 0, 0);
+  font: italic smaller sans-serif;
+  padding: 3px;
 }
 
 .feature-item {
