@@ -268,7 +268,7 @@ main {
   height: 480px;
 }
 
-.main-title-section div img {
+.main-title-section img {
   max-width: 100%;
   height: auto;
   object-fit: cover;
@@ -276,7 +276,7 @@ main {
   transition: 0.3s;
 }
 
-.main-title-section div img:hover {
+.main-title-section img:hover {
   box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
   transform: scale(1.05);
   filter:brightness(1.1);
@@ -286,7 +286,7 @@ main {
 
 .section2 {
   background-color: #918473;
-  padding: 1.5rem 0rem;
+  padding: 0.5rem 0rem;
 }
 
 .section2-text{
@@ -377,7 +377,7 @@ h2.section2-text {
 
 .section4, .section5, .section6 {
   background-color: #918473;
-  padding: 3rem 0rem;
+  padding: 1rem 0rem;
 }
 
 .section4 h1, .section5 h1, .section6 h1 {
@@ -1033,10 +1033,8 @@ a[data-social="Youtube"] { --accent-color: #FF0000; }
 .page {
   display: grid;
   grid-template-columns: 1fr minmax(180px, 240px);
-  gap: 20px;
-  max-width: 1400px;
+  max-width: 100%;
   margin: 30px auto;
-  padding: 0 20px;
   align-items: start;
 }
 
@@ -1053,9 +1051,15 @@ a[data-social="Youtube"] { --accent-color: #FF0000; }
   width: 220px;
   height: 300px;
   background: var(--bg) center/cover no-repeat;
-  cursor: pointer;
-  box-shadow: 0 0 4px #000;
+  cursor: pointer;    
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   position: relative;
+  transition: 0.5s;
+}
+
+.container:hover {
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      transform:translateY(-5px);
 }
 
 /* Bouquet */
@@ -1208,6 +1212,8 @@ a[data-social="Youtube"] { --accent-color: #FF0000; }
   cursor: pointer;
   font-weight: bold;
   transition: background 0.1s, color 0.1s;
+  width: 75%;
+  margin: auto;
 }
 
 .add-btn i {
@@ -1269,18 +1275,17 @@ a[data-social="Youtube"] { --accent-color: #FF0000; }
 .btn.no:hover {
   background: #FEF5DF;
   color: rgba(77, 77, 77, .9);
-  border: 1px solid rgba(77, 77, 77, .9);
+  border: 2px solid rgba(77, 77, 77, .9);
 }
 
 .section_product {
   padding: 40px;
-  margin-bottom: 60px;
 }
 
 /* Sticky sidebar/aside */
 .sidebar {
   position: sticky;
-  top: 100px;
+  top: 120px;
   background: white;
   padding: 20px;
   border-radius: 12px;
@@ -1667,7 +1672,7 @@ a[data-social="Youtube"] { --accent-color: #FF0000; }
   justify-content: center;
 }
 .workshop-carousel {
-  margin: 100px auto;
+  margin: auto;
   width: 90%;
   display: flex;
   overflow-x: auto;
@@ -1695,6 +1700,42 @@ a[data-social="Youtube"] { --accent-color: #FF0000; }
   text-align: center;
   align-content: center;
 }
+
+.card1 {
+  background-image: url(Pictures/Workshop/pic1.jpg);
+  background-size: cover;
+  background-position: center;
+}
+.card2 {
+  background-image: url(Pictures/Workshop/pic2.jpg);
+  background-size: cover;
+  background-position: center;
+}
+
+.card3 {
+  background-image: url(Pictures/Workshop/pic3.jpg);
+  background-size: cover;
+  background-position: center;
+}
+
+.card4 {
+  background-image: url(Pictures/Workshop/pic4.jpg);
+  background-size: cover;
+  background-position: center;
+}
+
+.card5 {
+  background-image: url(Pictures/Workshop/pic5.jpg);
+  background-size: cover;
+  background-position: center;
+}
+
+.card6 {
+  background-image: url(Pictures/Workshop/pic6.jpg);
+  background-size: cover;
+  background-position: center;
+}
+
 
 @keyframes spin {
   from {translate: 0;}
@@ -1750,7 +1791,7 @@ a[data-social="Youtube"] { --accent-color: #FF0000; }
   text-align: left;}
 
 .book-now-btn {
-  background-color: #007bff;
+  background-color:#463b2b ;
   color: white;
   border: none;
   padding: 12px 24px;
@@ -1764,15 +1805,15 @@ a[data-social="Youtube"] { --accent-color: #FF0000; }
 }
 
 .book-now-btn:hover {
-  background-color: #0056b3;
+  background-color:#928473 ;
 }
 .workshop-section3 {
   padding: 20px;
-  width: fit-content;
+  width: 30vw;
 }
 .workshop-sidebar {
   position: sticky;
-  top: 2rem;
+  top: 150px;
   background: white;
   padding: 20px;
   border-radius: 12px;
@@ -1782,16 +1823,11 @@ a[data-social="Youtube"] { --accent-color: #FF0000; }
 }
 
 /* Course Introduction Section */
-.woekshop-intro {
-  background: #fff;
-  padding: 4rem 1rem;
-  margin-bottom: 2rem;
-}
-
 .workshop-content1 {
   max-width: 1000px;
-  margin: 0 auto;
+  margin: 100px auto;
   text-align: center;
+  padding: 3rem;
 }
 
 .workshop-intro-title {
@@ -1806,6 +1842,41 @@ a[data-social="Youtube"] { --accent-color: #FF0000; }
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 2rem;
   margin-top: 3rem;
+}
+
+.workshop-section4 {
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-left: 10vw;
+  padding-right: 10vw;
+
+}
+.workshop-figure {
+    display: flex;
+    height: 400px;
+    width: max-content;
+    margin: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #fff;
+  }
+
+.workshop-figure img {
+ max-width: 300px;
+  display: inline-block;
+  resize: both;
+}
+
+figcaption {
+  background-color: white;
+  position: absolute;
+  color: rgb(0, 0, 0);
+  font: italic smaller sans-serif;
+  padding: 3px;
 }
 
 .feature-item {

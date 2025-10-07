@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="description" content="Root Flowersss">
-    <meta name="keywords" content="Flowers">
-    <meta name="author" content="Daniel, Josiah, Alvin, Kheldy">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="Pictures/Index/logo.png" type="image/png">
-    <title>Root Flower</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="description" content="Root Flowersss">
+  <meta name="keywords" content="Flowers">
+  <meta name="author" content="Daniel, Josiah, Alvin, Kheldy">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="Pictures/Index/logo.png" type="image/png">
+  <title>Root Flower - Login</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
 
-<!-- Navbar -->
+  <!-- Navbar -->
   <header>
     <nav class="navbar">
       <a href="index.html"><img src="Pictures/Index/logo.png" class="logo"></a>
@@ -20,23 +22,23 @@
         <ul class="nav-links">
           <li class="dropdown"><a href="index.html">Home</a></li>
           <li class="dropdown">
-            <a href="#">Products</i></a>
+            <a href="#">Products</a>
             <div>
-                <ul class="dropdown-content">
-                  <li><a href="product1.html">Hand bouquet</a></li>
-                  <li><a href="product2.html">CNY decoration</a></li>
-                  <li><a href="product3.html">Grand Opening</a></li>
-                  <li><a href="product4.html">Graduation</a></li>
-                </ul>
+              <ul class="dropdown-content">
+                <li><a href="product1.html">Hand bouquet</a></li>
+                <li><a href="product2.html">CNY decoration</a></li>
+                <li><a href="product3.html">Grand Opening</a></li>
+                <li><a href="product4.html">Graduation</a></li>
+              </ul>
             </div>
           </li>
           <li class="dropdown">
             <a href="#">Activities</a>
             <div>
-                <ul class="dropdown-content">
-                  <li><a href="workshop.html">Workshop</a></li>
-                  <li><a href="promotion.html">Promotion</a></li>
-                </ul>
+              <ul class="dropdown-content">
+                <li><a href="workshop.html">Workshop</a></li>
+                <li><a href="promotion.html">Promotion</a></li>
+              </ul>
             </div>
           </li>
           <li class="dropdown">
@@ -55,12 +57,164 @@
       </div>
     </nav>
   </header>
-<!-- End of Navbar -->
+  <!-- End of Navbar -->
 
-<!-- Footer -->
+  <!-- ====== LOGIN PAGE CONTENT ====== -->
+  <section class="login-section">
+    <div class="login-container">
+      <h2 class="login-title">Welcome Back</h2>
+      <p class="login-subtitle">Please log in to continue</p>
+      <form class="login-form">
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" placeholder="Enter your email" required>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="Enter your password" required>
+        </div>
+
+        <button type="submit" class="login-btn">Login</button>
+
+        <div class="login-links">
+          <a href="#">Forgot Password?</a>
+          <a href="#">Create an Account</a>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ====== LOGIN PAGE CSS ====== -->
+  <style>
+    /* Base styling */
+    body {
+      background-color: #f4f1ed;
+      color: #0b0824;
+      font-family: "Poppins", sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Login Section */
+    .login-section {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 85vh;
+      background-color: #f4f1ed;
+    }
+
+    /* Login Container */
+    .login-container {
+      background-color: #ffffff;
+      border: 1px solid #C4B6A4;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(70, 59, 43, 0.1);
+      padding: 40px 50px;
+      width: 100%;
+      max-width: 420px;
+      text-align: center;
+    }
+
+    /* Titles */
+    .login-title {
+      font-size: 28px;
+      color: #463b2b;
+      margin-bottom: 8px;
+    }
+
+    .login-subtitle {
+      font-size: 15px;
+      color: #928473;
+      margin-bottom: 30px;
+    }
+
+    /* Form */
+    .login-form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* Input fields */
+    .form-group {
+      text-align: left;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 14px;
+      color: #0b0824;
+      margin-bottom: 6px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #C4B6A4;
+      border-radius: 10px;
+      font-size: 14px;
+      color: #0b0824;
+      background-color: #f4f1ed;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    .form-group input:focus {
+      border-color: #928473;
+      box-shadow: 0 0 5px rgba(146, 132, 115, 0.5);
+      outline: none;
+    }
+
+    /* Button */
+    .login-btn {
+      background-color: #463b2b;
+      color: #f4f1ed;
+      padding: 12px;
+      font-size: 16px;
+      font-weight: 500;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.2s;
+    }
+
+    .login-btn:hover {
+      background-color: #928473;
+      transform: translateY(-2px);
+    }
+
+    /* Links */
+    .login-links {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+
+    .login-links a {
+      font-size: 14px;
+      color: #928473;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .login-links a:hover {
+      color: #463b2b;
+    }
+
+    /* Responsive */
+    @media (max-width: 480px) {
+      .login-container {
+        padding: 30px 25px;
+      }
+    }
+  </style>
+
+
+  <!-- Footer -->
   <footer>
     <div class="footer-left">
-      <a href="index.html"><img src="Pictures/Index/logo.png" class="logo"></a> 
+      <a href="index.html"><img src="Pictures/Index/logo.png" class="logo"></a>
       <h3>Follow us on social media</h3>
       <br>
         <div class="socials-container">
@@ -77,36 +231,38 @@
 
     <div class="footer-col">
       <h2>Information</h2>
-          <br>
-          <p><a href="about_us.html">About Us</a></p>
-          <p><a href="enhancement.html">Enhancements</a></p>
-          <p><a href="acknowledgement.html">Acknowledgement</a></p>
+      <br>
+      <p><a href="about_us.html">About Us</a></p>
+      <p><a href="enhancement.html">Enhancements</a></p>
+      <p><a href="acknowledgement.html">Acknowledgement</a></p>
     </div>
 
     <div class="footer-col">
       <h2>Products</h2>
-          <br>
-          <p><a href="product1.html">Hand Bouquet</a></p>
-          <p><a href="product2.html">CNY Decorations</a></p>
-          <p><a href="product3.html">Grand Opening</a></p>
-          <p><a href="product4.html">Graduation</a></p>
+      <br>
+      <p><a href="product1.html">Hand Bouquet</a></p>
+      <p><a href="product2.html">CNY Decorations</a></p>
+      <p><a href="product3.html">Grand Opening</a></p>
+      <p><a href="product4.html">Graduation</a></p>
     </div>
 
     <div class="footer-col">
-        <h2>Activities</h2>
-          <br>
-          <p><a href="workshop.html">Workshop</a></p>
-          <p><a href="promotion.html">Promotion</a></p>
-
+      <h2>Activities</h2>
+      <br>
+      <p><a href="workshop.html">Workshop</a></p>
+      <p><a href="promotion.html">Promotion</a></p>
     </div>
 
     <div class="footer-bottom">
       <h2>Contact Us</h2>
-          <br>
-          <p><strong>Address :</strong><a href="https://share.google/wSsj3Dpq6rCoB3mSp" target="_blank"> Lorong Bdc, 93350 Kuching, Sarawak, Malaysia</a></p>
-          <p><strong>Phone No :</strong><a href="tel:+600143399709"> (+60) 014-339 9709</a></p>
-          <p><strong>Email Id :</strong><a href="mailto:therootflower@gmail.com"> therootflower@gmail.com</a></p>
+      <br>
+      <p><strong>Address :</strong><a href="https://share.google/wSsj3Dpq6rCoB3mSp" target="_blank"> Lorong Bdc, 93350
+          Kuching, Sarawak, Malaysia</a></p>
+      <p><strong>Phone No :</strong><a href="tel:+600143399709"> (+60) 014-339 9709</a></p>
+      <p><strong>Email Id :</strong><a href="mailto:therootflower@gmail.com"> therootflower@gmail.com</a></p>
     </div>
   </footer>
+
 </body>
+
 </html>
