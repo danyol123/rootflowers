@@ -1687,7 +1687,7 @@ footer a:hover {
 }
 
 .card3 {
-  background-image: url(Pictures/Workshop/pic2.jpg);
+  background-image: url(Pictures/Workshop/pic3.jpg);
   background-size: cover;
   background-position: center;
 }
@@ -1783,11 +1783,11 @@ footer a:hover {
 }
 .workshop-section3 {
   padding: 20px;
-  width: fit-content;
+  width: 30vw;
 }
 .workshop-sidebar {
   position: sticky;
-  top: 2rem;
+  top: 150px;
   background: white;
   padding: 20px;
   border-radius: 12px;
