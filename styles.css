@@ -919,7 +919,6 @@ footer {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: auto auto;
-  padding: 20px;
   background: #9c8c7b;;
   color: #0b0824;
   font-family: Reach_Story;
@@ -954,6 +953,9 @@ footer a:hover {
   padding: 20px;
 }
 
+.copy{
+  font-style: italic;
+}
 .socials-container {
   display: flex;
   gap: 10px;
@@ -975,6 +977,11 @@ footer a:hover {
   color: black;
   height: 16px;
 }
+
+/* The accent colors for the sosmeds */
+a[data-social="Facebook"] { --accent-color: #0866ff; }
+a[data-social="Instagram"] { --accent-color: #fe107c; }
+a[data-social="Youtube"] { --accent-color: #FF0000; }
 
 .socials-container a::before {
   content: attr(data-social);
@@ -1327,6 +1334,25 @@ footer a:hover {
   text-decoration: none;
   font-weight: bold;
   font-size: clamp(0.8rem, 0.9vw, 1rem);
+}
+
+/* Sidebar Table */
+.sidebar-banner {
+  border-collapse: collapse;
+  width: 100%;
+}
+.sidebar-banner td {
+  padding: 10px;
+  vertical-align: middle;
+}
+.sidebar-banner .sb-heading h3 {
+  margin: 0 0 8px;
+}
+.sidebar-banner .sb-text p {
+  margin: 0;
+}
+.sidebar-banner .sb-action {
+  padding-top: 8px;
 }
 
 /* Responsive */
