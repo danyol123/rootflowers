@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="description" content="Root Flowersss">
-    <meta name="keywords" content="Flowers">
-    <meta name="author" content="Daniel, Josiah, Alvin, Kheldy">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="Pictures/Index/logo.png" type="image/png">
-    <title>Root Flower</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="description" content="Root Flowersss">
+  <meta name="keywords" content="Flowers">
+  <meta name="author" content="Daniel, Josiah, Alvin, Kheldy">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="Pictures/Index/logo.png" type="image/png">
+  <title>Root Flower</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
-<!-- Navbar -->
+  <!-- Navbar -->
   <header>
     <nav class="navbar">
       <a href="index.html"><img src="Pictures/Index/logo.png" class="logo"></a>
@@ -21,21 +23,21 @@
           <li class="dropdown">
             <a href="#">Products</i></a>
             <div>
-                <ul class="dropdown-content">
-                  <li><a href="product1.html">Hand bouquet</a></li>
-                  <li><a href="product2.html">CNY decoration</a></li>
-                  <li><a href="product3.html">Grand Opening</a></li>
-                  <li><a href="product4.html">Graduation</a></li>
-                </ul>
+              <ul class="dropdown-content">
+                <li><a href="product1.html">Hand bouquet</a></li>
+                <li><a href="product2.html">CNY decoration</a></li>
+                <li><a href="product3.html">Grand Opening</a></li>
+                <li><a href="product4.html">Graduation</a></li>
+              </ul>
             </div>
           </li>
           <li class="dropdown">
             <a href="#">Activities</a>
             <div>
-                <ul class="dropdown-content">
-                  <li><a href="workshop.html">Workshop</a></li>
-                  <li><a href="promotion.html">Promotion</a></li>
-                </ul>
+              <ul class="dropdown-content">
+                <li><a href="workshop.html">Workshop</a></li>
+                <li><a href="promotion.html">Promotion</a></li>
+              </ul>
             </div>
           </li>
           <li class="dropdown">
@@ -54,62 +56,269 @@
       </div>
     </nav>
   </header>
-<!-- End of Navbar -->
+  <!-- End of Navbar -->
 
+  <!-- ====== ENQUIRY PAGE CONTENT ====== -->
   <main>
-    
+    <section class="enquiry-section">
+      <div class="enquiry-container">
+        <h1 class="enquiry-title">Enquiry Form</h1>
+        <p class="enquiry-subtitle">Please fill in the form below and we’ll get back to you as soon as possible.</p>
+
+        <form action="mailto:therootflower@gmail.com" method="post" enctype="text/plain" class="enquiry-form">
+          <!-- First Name -->
+          <div class="form-group">
+            <label for="first-name">First Name</label>
+            <input type="text" id="first-name" name="first-name" maxlength="25" pattern="[A-Za-z]+"
+              placeholder="Enter your first name" required />
+          </div>
+
+          <!-- Last Name -->
+          <div class="form-group">
+            <label for="last-name">Last Name</label>
+            <input type="text" id="last-name" name="last-name" maxlength="25" pattern="[A-Za-z]+"
+              placeholder="Enter your last name" required />
+          </div>
+
+          <!-- Email -->
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email address" required />
+          </div>
+
+          <!-- Phone -->
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" maxlength="10" pattern="[0-9]{10}" placeholder="e.g. 0123456789"
+              required />
+          </div>
+
+          <!-- Enquiry Type -->
+          <div class="form-group">
+            <label for="enquiry-type">Type of Enquiry</label>
+            <select id="enquiry-type" name="enquiry-type" required>
+              <option value="">-- Please select an option --</option>
+              <option value="products">Products</option>
+              <option value="membership">Membership</option>
+              <option value="workshop">Workshop</option>
+            </select>
+          </div>
+
+          <!-- Comments -->
+          <div class="form-group">
+            <label for="comments">Comments</label>
+            <textarea id="comments" name="comments" rows="5" cols="30" placeholder="Write your enquiry here..."
+              required></textarea>
+          </div>
+
+          <!-- Buttons -->
+          <div class="button-group">
+            <button type="submit" class="submit-btn">Submit Enquiry</button>
+            <button type="reset" class="reset-btn">Reset</button>
+          </div>
+        </form>
+      </div>
+    </section>
   </main>
-<!-- Footer -->
+
+  <style>
+    body {
+      background-color: #f4f1ed;
+      color: #0b0824;
+      font-family: "Poppins", sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .enquiry-section {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 60px 20px;
+      background-color: #f4f1ed;
+      min-height: 85vh;
+    }
+
+    .enquiry-container {
+      background-color: #ffffff;
+      border: 1px solid #C4B6A4;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(70, 59, 43, 0.1);
+      padding: 40px 50px;
+      width: 100%;
+      max-width: 650px;
+    }
+
+    .enquiry-title {
+      text-align: center;
+      font-size: 30px;
+      color: #463b2b;
+      margin-bottom: 10px;
+    }
+
+    .enquiry-subtitle {
+      text-align: center;
+      font-size: 15px;
+      color: #928473;
+      margin-bottom: 30px;
+    }
+
+    .enquiry-form {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-group label {
+      font-size: 14px;
+      margin-bottom: 6px;
+      color: #0b0824;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      padding: 12px;
+      border: 1px solid #C4B6A4;
+      border-radius: 10px;
+      background-color: #f4f1ed;
+      font-size: 14px;
+      color: #0b0824;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: #928473;
+      box-shadow: 0 0 5px rgba(146, 132, 115, 0.5);
+      outline: none;
+    }
+
+
+    .button-group {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .submit-btn,
+    .reset-btn {
+      padding: 12px 20px;
+      font-size: 15px;
+      font-weight: 500;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.2s;
+    }
+
+    .submit-btn {
+      background-color: #463b2b;
+      color: #f4f1ed;
+    }
+
+    .submit-btn:hover {
+      background-color: #928473;
+      transform: translateY(-2px);
+    }
+
+    .reset-btn {
+      background-color: #C4B6A4;
+      color: #0b0824;
+    }
+
+    .reset-btn:hover {
+      background-color: #928473;
+      color: #f4f1ed;
+    }
+
+
+    @media (max-width: 600px) {
+      .enquiry-container {
+        padding: 30px 25px;
+      }
+
+      .button-group {
+        flex-direction: column;
+        align-items: stretch;
+      }
+    }
+  </style>
+
+
+
+  </main>
+  <!-- Footer -->
   <footer>
     <div class="footer-left">
-      <a href="index.html"><img src="Pictures/Index/logo.png" class="logo"></a> 
+      <a href="index.html"><img src="Pictures/Index/logo.png" class="logo"></a>
       <h3>Follow us on social media</h3>
       <br>
-        <div class="socials-container">
-          <a data-social="Facebook" style="--accent-color: #0866ff;" href="https://www.facebook.com/theRootFlowerGift" target="_blank">
-            <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Facebook</title><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"/></svg>
-          </a>
-          <a data-social="Instagram" style="--accent-color: #fe107c;" href="https://www.instagram.com/root.flowersss" target="_blank">
-            <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Instagram</title><path d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"/></svg>
-          </a>
-        </div>
-        <br>
-        <p class="copy">Copyright &#169; 2025, all rights reserved</p>
+      <div class="socials-container">
+        <a data-social="Facebook" style="--accent-color: #0866ff;" href="https://www.facebook.com/theRootFlowerGift"
+          target="_blank">
+          <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <title>Facebook</title>
+            <path
+              d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z" />
+          </svg>
+        </a>
+        <a data-social="Instagram" style="--accent-color: #fe107c;" href="https://www.instagram.com/root.flowersss"
+          target="_blank">
+          <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <title>Instagram</title>
+            <path
+              d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077" />
+          </svg>
+        </a>
+      </div>
+      <br>
+      <p class="copy">Copyright &#169; 2025, all rights reserved</p>
     </div>
 
     <div class="footer-col">
       <h2>Information</h2>
-          <br>
-          <p><a href="about_us.html">About Us</a></p>
-          <p><a href="enhancement.html">Enhancements</a></p>
-          <p><a href="acknowledgement.html">Acknowledgement</a></p>
+      <br>
+      <p><a href="about_us.html">About Us</a></p>
+      <p><a href="enhancement.html">Enhancements</a></p>
+      <p><a href="acknowledgement.html">Acknowledgement</a></p>
     </div>
 
     <div class="footer-col">
       <h2>Products</h2>
-          <br>
-          <p><a href="product1.html">Hand Bouquet</a></p>
-          <p><a href="product2.html">CNY Decorations</a></p>
-          <p><a href="product3.html">Grand Opening</a></p>
-          <p><a href="product4.html">Graduation</a></p>
+      <br>
+      <p><a href="product1.html">Hand Bouquet</a></p>
+      <p><a href="product2.html">CNY Decorations</a></p>
+      <p><a href="product3.html">Grand Opening</a></p>
+      <p><a href="product4.html">Graduation</a></p>
     </div>
 
     <div class="footer-col">
-        <h2>Activities</h2>
-          <br>
-          <p><a href="workshop.html">Workshop</a></p>
-          <p><a href="promotion.html">Promotion</a></p>
+      <h2>Activities</h2>
+      <br>
+      <p><a href="workshop.html">Workshop</a></p>
+      <p><a href="promotion.html">Promotion</a></p>
 
     </div>
 
     <div class="footer-bottom">
       <h2>Contact Us</h2>
-          <br>
-          <p><strong>Address :</strong><a href="https://share.google/wSsj3Dpq6rCoB3mSp" target="_blank"> Lorong Bdc, 93350 Kuching, Sarawak, Malaysia</a></p>
-          <p><strong>Phone No :</strong><a href="tel:+600143399709"> (+60) 014-339 9709</a></p>
-          <p><strong>Email Id :</strong><a href="mailto:therootflower@gmail.com"> therootflower@gmail.com</a></p>
+      <br>
+      <p><strong>Address :</strong><a href="https://share.google/wSsj3Dpq6rCoB3mSp" target="_blank"> Lorong Bdc, 93350
+          Kuching, Sarawak, Malaysia</a></p>
+      <p><strong>Phone No :</strong><a href="tel:+600143399709"> (+60) 014-339 9709</a></p>
+      <p><strong>Email Id :</strong><a href="mailto:therootflower@gmail.com"> therootflower@gmail.com</a></p>
     </div>
   </footer>
 
 </body>
+
 </html>
