@@ -63,38 +63,26 @@
     <section class="enquiry-section">
       <div class="enquiry-container">
         <h1 class="enquiry-title">Enquiry Form</h1>
-        <p class="enquiry-subtitle">Please fill in the form below and we’ll get back to you as soon as possible.</p>
 
-        <form action="mailto:therootflower@gmail.com" method="post" enctype="text/plain" class="enquiry-form">
+        <form action="register_process.php" method="post" enctype="text/plain" class="enquiry-form">
           <!-- First Name -->
-          <div class="form-group">
-            <label for="first-name">First Name</label>
-            <input type="text" id="first-name" name="first-name" maxlength="25" pattern="[A-Za-z]+"
-              placeholder="Enter your first name" required />
-          </div>
+            <label for="firstname">First Name:</label>
+            <input type="text" id="firstname" name="firstname" maxlength="25" pattern="[A-Za-z]+" required>
 
           <!-- Last Name -->
-          <div class="form-group">
-            <label for="last-name">Last Name</label>
-            <input type="text" id="last-name" name="last-name" maxlength="25" pattern="[A-Za-z]+"
-              placeholder="Enter your last name" required />
-          </div>
+          
+            <label for="lastname">Last Name:</label>
+            <input type="text" id="lastname" name="lastname" maxlength="25" pattern="[A-Za-z]+" required>
 
           <!-- Email -->
-          <div class="form-group">
-            <label for="email">Email Address</label>
-            <input type="email" id="email" name="email" placeholder="Enter your email address" required />
-          </div>
+            <label for="email">Email Address:</label>
+            <input type="email" id="email" name="email" required>
 
           <!-- Phone -->
-          <div class="form-group">
             <label for="phone">Phone Number</label>
-            <input type="tel" id="phone" name="phone" maxlength="10" pattern="[0-9]{10}" placeholder="e.g. 0123456789"
-              required />
-          </div>
+            <input type="tel" id="phone" name="phone" maxlength="10" pattern="[0-9]{10}" placeholder="0123456789" required>
 
           <!-- Enquiry Type -->
-          <div class="form-group">
             <label for="enquiry-type">Type of Enquiry</label>
             <select id="enquiry-type" name="enquiry-type" required>
               <option value="">-- Please select an option --</option>
@@ -102,14 +90,10 @@
               <option value="membership">Membership</option>
               <option value="workshop">Workshop</option>
             </select>
-          </div>
 
           <!-- Comments -->
-          <div class="form-group">
             <label for="comments">Comments</label>
-            <textarea id="comments" name="comments" rows="5" cols="30" placeholder="Write your enquiry here..."
-              required></textarea>
-          </div>
+            <textarea id="comments" name="comments" rows="5" cols="30" placeholder="Write your enquiry here..." required></textarea>
 
           <!-- Buttons -->
           <div class="submit-buttons">
