@@ -2211,12 +2211,12 @@ a[data-social="Youtube"] {
   background-color: #928473;
 }
 
-.workshop-section3 {
+.activity-sidebar-container {
   padding: 20px;
-  width: 30vw;
+  width: fit-content;
 }
 
-.workshop-sidebar {
+.activity-sidebar {
   position: sticky;
   top: 150px;
   background: white;
@@ -2311,7 +2311,58 @@ figcaption {
   color: #888;
   margin-top: 0.25rem;
 }
+/* Promotion */
+#promotion-main {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
 
+.join-us-button {
+  padding:2rem
+}
+.join-us-button a {
+  text-decoration: none;
+  background-color: #463b2b;
+  color: #fff;
+  border: none;
+  padding: 0.8rem;
+  width: 100%;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+
+}
+
+.join-us-button a:hover {
+  background-color: #928473;
+
+}
+
+.discount, .early-bird {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.discount figure, .early-bird figure {
+    display: flex;
+    margin: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #fff;
+    max-width: fit-content;
+    cursor: zoom-in;
+  }
+
+  .discount img, .early-bird img {
+  width: 20vw;
+  }
+
+    .discount img:hover, .early-bird img:hover {
+  width: 20vw;
+  transform: scale(1.5);
+  }
 /* Giveaway Section Styles */
 .giveaway-content {
   padding: 2rem;
