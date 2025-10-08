@@ -60,7 +60,7 @@
 <main>
   <section class="form-section">
     <div class="form-container">
-      <h2>Workshop Registration</h2>
+      <h1>Workshop Registration</h1>
       <form action="register_process.php" method="post" autocomplete="on">
         <!-- Name Inputs -->
         <label for="firstName">First Name:</label>
@@ -118,19 +118,27 @@
         <!-- Radio Workshop Type -->
         <label>Workshop Type:</label>
         <div class="input-group">
+          <div>
           <input type="radio" id="basic" name="workshopType" value="Basic" required>
           <label for="basic">Basic</label>
+          </div>
+          <div>
           <input type="radio" id="advanced" name="workshopType" value="Advanced">
           <label for="advanced">Advanced</label>
+          </div>
         </div>
 
         <!-- Checkbox Add-ons -->
         <label>Add-ons:</label>
         <div class="input-group">
+          <div>
           <input type="checkbox" id="materials" name="addons[]" value="Materials">
           <label for="materials">Include Materials</label>
+          </div>
+          <div>
           <input type="checkbox" id="certificate" name="addons[]" value="Certificate">
           <label for="certificate">Certificate</label>
+          </div>
         </div>
 
         <!-- Comments -->
