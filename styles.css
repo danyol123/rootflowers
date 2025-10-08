@@ -1017,17 +1017,13 @@ input[type="reset"]:hover {
 
 .submit-btn,
 .reset-btn {
-  padding: 12px 20px;
+  padding: 12px 60px;
   font-size: 15px;
   font-weight: 500;
   border-radius: 15px;
   border: none;
   cursor: pointer;
   transition: background-color 0.3s, transform 0.2s;
-}
-
-.submit-btn button {
-  width: 500px;
 }
 
 .submit-btn {
