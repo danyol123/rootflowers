@@ -1635,6 +1635,16 @@ footer a:hover {
   background-color: #D69ADE;
 }
 
+.josiah th, .josiah button {
+  background-color: #4c5bae;
+}
+
+.josiah td, .josiah button:hover{
+  background-color: #B2B0E8;
+
+}
+
+
 /*Enhancement & Acknowledgement*/
 .enhancement, .acknowledgement {
   padding: 2rem;
@@ -1823,14 +1833,13 @@ footer a:hover {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
   padding-left: 10vw;
   padding-right: 10vw;
 
 }
 .workshop-figure {
     display: flex;
-    height: 400px;
     width: max-content;
     margin: 20px;
     padding: 10px;
