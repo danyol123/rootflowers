@@ -63,38 +63,26 @@
     <section class="enquiry-section">
       <div class="enquiry-container">
         <h1 class="enquiry-title">Enquiry Form</h1>
-        <p class="enquiry-subtitle">Please fill in the form below and we’ll get back to you as soon as possible.</p>
 
-        <form action="mailto:therootflower@gmail.com" method="post" enctype="text/plain" class="enquiry-form">
+        <form action="register_process.php" method="post" enctype="text/plain" class="enquiry-form">
           <!-- First Name -->
-          <div class="form-group">
-            <label for="first-name">First Name</label>
-            <input type="text" id="first-name" name="first-name" maxlength="25" pattern="[A-Za-z]+"
-              placeholder="Enter your first name" required />
-          </div>
+            <label for="firstname">First Name:</label>
+            <input type="text" id="firstname" name="firstname" maxlength="25" pattern="[A-Za-z]+" required>
 
           <!-- Last Name -->
-          <div class="form-group">
-            <label for="last-name">Last Name</label>
-            <input type="text" id="last-name" name="last-name" maxlength="25" pattern="[A-Za-z]+"
-              placeholder="Enter your last name" required />
-          </div>
+          
+            <label for="lastname">Last Name:</label>
+            <input type="text" id="lastname" name="lastname" maxlength="25" pattern="[A-Za-z]+" required>
 
           <!-- Email -->
-          <div class="form-group">
-            <label for="email">Email Address</label>
-            <input type="email" id="email" name="email" placeholder="Enter your email address" required />
-          </div>
+            <label for="email">Email Address:</label>
+            <input type="email" id="email" name="email" required>
 
           <!-- Phone -->
-          <div class="form-group">
             <label for="phone">Phone Number</label>
-            <input type="tel" id="phone" name="phone" maxlength="10" pattern="[0-9]{10}" placeholder="e.g. 0123456789"
-              required />
-          </div>
+            <input type="tel" id="phone" name="phone" maxlength="10" pattern="[0-9]{10}" placeholder="0123456789" required>
 
           <!-- Enquiry Type -->
-          <div class="form-group">
             <label for="enquiry-type">Type of Enquiry</label>
             <select id="enquiry-type" name="enquiry-type" required>
               <option value="">-- Please select an option --</option>
@@ -102,177 +90,36 @@
               <option value="membership">Membership</option>
               <option value="workshop">Workshop</option>
             </select>
-          </div>
 
           <!-- Comments -->
-          <div class="form-group">
             <label for="comments">Comments</label>
-            <textarea id="comments" name="comments" rows="5" cols="30" placeholder="Write your enquiry here..."
-              required></textarea>
-          </div>
+            <textarea id="comments" name="comments" rows="5" cols="30" placeholder="Write your enquiry here..." required></textarea>
 
           <!-- Buttons -->
-          <div class="button-group">
-            <button type="submit" class="submit-btn">Submit Enquiry</button>
-            <button type="reset" class="reset-btn">Reset</button>
+          <div class="submit-buttons">
+            <input type="submit" value="Submit Enquiry">
+            <input type="reset" value="Reset">
           </div>
         </form>
       </div>
     </section>
   </main>
 
-  <style>
-    body {
-      background-color: #f4f1ed;
-      color: #0b0824;
-      font-family: "Poppins", sans-serif;
-      margin: 0;
-      padding: 0;
-    }
-
-    .enquiry-section {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 60px 20px;
-      background-color: #f4f1ed;
-      min-height: 85vh;
-    }
-
-    .enquiry-container {
-      background-color: #ffffff;
-      border: 1px solid #C4B6A4;
-      border-radius: 16px;
-      box-shadow: 0 4px 12px rgba(70, 59, 43, 0.1);
-      padding: 40px 50px;
-      width: 100%;
-      max-width: 650px;
-    }
-
-    .enquiry-title {
-      text-align: center;
-      font-size: 30px;
-      color: #463b2b;
-      margin-bottom: 10px;
-    }
-
-    .enquiry-subtitle {
-      text-align: center;
-      font-size: 15px;
-      color: #928473;
-      margin-bottom: 30px;
-    }
-
-    .enquiry-form {
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-    }
-
-
-    .form-group {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .form-group label {
-      font-size: 14px;
-      margin-bottom: 6px;
-      color: #0b0824;
-    }
-
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-      padding: 12px;
-      border: 1px solid #C4B6A4;
-      border-radius: 10px;
-      background-color: #f4f1ed;
-      font-size: 14px;
-      color: #0b0824;
-      transition: border-color 0.3s, box-shadow 0.3s;
-    }
-
-    .form-group input:focus,
-    .form-group select:focus,
-    .form-group textarea:focus {
-      border-color: #928473;
-      box-shadow: 0 0 5px rgba(146, 132, 115, 0.5);
-      outline: none;
-    }
-
-
-    .button-group {
-      display: flex;
-      justify-content: flex-end;
-      gap: 12px;
-      margin-top: 10px;
-    }
-
-    .submit-btn,
-    .reset-btn {
-      padding: 12px 20px;
-      font-size: 15px;
-      font-weight: 500;
-      border-radius: 10px;
-      border: none;
-      cursor: pointer;
-      transition: background-color 0.3s, transform 0.2s;
-    }
-
-    .submit-btn {
-      background-color: #463b2b;
-      color: #f4f1ed;
-    }
-
-    .submit-btn:hover {
-      background-color: #928473;
-      transform: translateY(-2px);
-    }
-
-    .reset-btn {
-      background-color: #C4B6A4;
-      color: #0b0824;
-    }
-
-    .reset-btn:hover {
-      background-color: #928473;
-      color: #f4f1ed;
-    }
-
-
-    @media (max-width: 600px) {
-      .enquiry-container {
-        padding: 30px 25px;
-      }
-
-      .button-group {
-        flex-direction: column;
-        align-items: stretch;
-      }
-    }
-  </style>
-
-
-
-  </main>
   <!-- Footer -->
   <footer>
-    <div class="footer-left">
-      <a href="index.html"><img src="Pictures/Index/logo.png" class="logo"></a>
+    <div class="footer-col">
+      <a href="index.html"><img src="Pictures/Index/logo.png" class="logo" alt="Logo"></a> 
       <h3>Follow us on social media</h3>
       <br>
       <div class="socials-container">
-        <a data-social="Facebook" style="--accent-color: #0866ff;" href="https://www.facebook.com/theRootFlowerGift"
-          target="_blank">
+        <a data-social="Facebook" href="https://www.facebook.com/theRootFlowerGift" target="_blank">
           <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <title>Facebook</title>
             <path
               d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z" />
           </svg>
         </a>
-        <a data-social="Instagram" style="--accent-color: #fe107c;" href="https://www.instagram.com/root.flowersss"
-          target="_blank">
+        <a data-social="Instagram" href="https://www.instagram.com/root.flowersss" target="_blank">
           <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <title>Instagram</title>
             <path
@@ -286,39 +133,45 @@
 
     <div class="footer-col">
       <h2>Information</h2>
-      <br>
-      <p><a href="about_us.html">About Us</a></p>
-      <p><a href="enhancement.html">Enhancements</a></p>
-      <p><a href="acknowledgement.html">Acknowledgement</a></p>
+          <br>
+          <p><a href="about_us.html">About Us</a></p>
+          <p><a href="enhancement.html">Enhancements</a></p>
+          <p><a href="acknowledgement.html">Acknowledgement</a></p>
     </div>
 
     <div class="footer-col">
       <h2>Products</h2>
-      <br>
-      <p><a href="product1.html">Hand Bouquet</a></p>
-      <p><a href="product2.html">CNY Decorations</a></p>
-      <p><a href="product3.html">Grand Opening</a></p>
-      <p><a href="product4.html">Graduation</a></p>
+          <br>
+          <p><a href="product1.html">Hand Bouquet</a></p>
+          <p><a href="product2.html">CNY Decorations</a></p>
+          <p><a href="product3.html">Grand Opening</a></p>
+          <p><a href="product4.html">Graduation</a></p>
     </div>
 
     <div class="footer-col">
-      <h2>Activities</h2>
-      <br>
-      <p><a href="workshop.html">Workshop</a></p>
-      <p><a href="promotion.html">Promotion</a></p>
-
+        <h2>Activities</h2>
+          <br>
+          <p><a href="workshop.html">Workshop</a></p>
+          <p><a href="promotion.html">Promotion</a></p>
+    </div>
+    
+    <div class="footer-col">
+        <h2>Forms</h2>
+          <p><a href="register.html">Workshop Registration</a></p>
+          <p><a href="enquiry.html">Enquiry Form</a></p>
+          <p><a href="registration.html">Membership Registration</a></p>
+          <p><a href="login.html">Login</a></p>
     </div>
 
-    <div class="footer-bottom">
+    <div class="footer-col">
       <h2>Contact Us</h2>
-      <br>
-      <p><strong>Address :</strong><a href="https://share.google/wSsj3Dpq6rCoB3mSp" target="_blank"> Lorong Bdc, 93350
-          Kuching, Sarawak, Malaysia</a></p>
-      <p><strong>Phone No :</strong><a href="tel:+600143399709"> (+60) 014-339 9709</a></p>
-      <p><strong>Email Id :</strong><a href="mailto:therootflower@gmail.com"> therootflower@gmail.com</a></p>
+          <br>
+          <p><strong>Address :</strong><a href="https://share.google/wSsj3Dpq6rCoB3mSp" target="_blank"> Lorong Bdc, 93350 Kuching, Sarawak, Malaysia</a></p>
+          <p><strong>Phone No :</strong><a href="tel:+600143399709"> (+60) 014-339 9709</a></p>
+          <p><strong>Email Id :</strong><a href="mailto:therootflower@gmail.com"> therootflower@gmail.com</a></p>
     </div>
+
   </footer>
 
 </body>
-
 </html>
