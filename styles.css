@@ -286,7 +286,6 @@ main {
 
 .section2 {
   background-color: #918473;
-  padding: 0.5rem 0rem;
 }
 
 .section2-text{
@@ -306,7 +305,7 @@ h2.section2-text {
 /* Section 3 */
 
 .section3 {
-  padding: 4rem 1rem;
+  padding: 2rem 1rem;
 }
 
 .section3-content {
@@ -377,7 +376,6 @@ h2.section2-text {
 
 .section4, .section5, .section6 {
   background-color: #918473;
-  padding: 1rem 0rem;
 }
 
 .section4 h1, .section5 h1, .section6 h1 {
@@ -630,14 +628,14 @@ h2.section2-text {
 
 .section6-workshop-image img{
   object-fit: cover;
-  max-width: 100%;
+  width: 480px;
   height: 600px;
 }
 
 .section6-workshop-text {
   padding: 0rem 2rem;
   background-color: #918473;
-  max-width: 100%;
+  max-width: 200px;
   height: 600px;
   font-size: 1.2em;
   line-height: 1.6;
@@ -1856,8 +1854,13 @@ a[data-social="Youtube"] { --accent-color: #FF0000; }
 .profile-pic img{
   width: 200px;
   height: 200px;
-  border: 5px groove #918473;
+  border: 5px groove #DA7297;
   border-radius: 20px;
+  transition: 0.3s ease;
+}
+
+.profile-pic img:hover{
+  transform: scale(1.1);
 }
 
 .profile-main h1{
