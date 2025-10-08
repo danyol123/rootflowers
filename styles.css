@@ -1885,15 +1885,14 @@ figcaption {
 .giveaway-content {
   padding: 2rem;
   background: #fff;
+  display: flex;
+  justify-content:c ;
 }
 
 .giveaway-container {
   max-width: 1200px;
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
   gap: 3rem;
-  align-items: start;
 }
 
 .giveaway-image img {
@@ -1912,6 +1911,7 @@ figcaption {
 .giveaway-details h2 {
   color: #6e5b4a;
   margin-bottom: 0.5rem;
+  height: fit-content;
 }
 
 .giveaway-note {
