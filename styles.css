@@ -2288,9 +2288,8 @@ gap: 5px;}
 }
 
 .workshop-section3 div {
-  font-size: 15px;
   text-align: center;
-  display: flex;
+  display : flex;
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: space-around;
@@ -2298,8 +2297,15 @@ gap: 5px;}
   padding-right: 10vw;
 
 }
+.workshop-section3 div h1{
+font-size:30px;
+padding:0;
+margin-bottom: 0;
+}
+
 .workshop-title h1 {
-  font-size:100px;}
+font-size:30px;
+}
 
 .workshop-figure {
     display: flex;
