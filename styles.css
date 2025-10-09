@@ -2393,6 +2393,8 @@ display: block;
 
   .discount img, .early-bird img {
   width: 20vw;
+  transition: 0.3s;
+
   }
 
     .discount img:hover, .early-bird img:hover {
