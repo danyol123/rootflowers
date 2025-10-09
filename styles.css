@@ -30,6 +30,9 @@
 }
 
 /* Global Styles */
+html {
+  scroll-padding: 110px;
+}
 body {
   margin: 0;
   padding: 0;
@@ -2060,7 +2063,11 @@ a[data-social="Youtube"] {
 }
 
 /*Workshop*/
-
+.workshop-title h1{
+  font-size: 30px;
+  position: relative;
+  text-align: center;
+}
 .workshop-carousel {
   margin: auto;
   width: 90%;
@@ -2281,6 +2288,7 @@ gap: 5px;}
 }
 
 .workshop-section3 div {
+  font-size: 15px;
   text-align: center;
   display: flex;
   flex-wrap: wrap;
@@ -2290,6 +2298,8 @@ gap: 5px;}
   padding-right: 10vw;
 
 }
+.workshop-title h1 {
+  font-size:100px;}
 
 .workshop-figure {
     display: flex;
@@ -2327,7 +2337,42 @@ display: block;
   border-radius: 10px;
   padding: 15px;
   border: 2px solid #ddd;
+  position: relative;  
+  overflow: hidden;  
+  transition: all 0.5s ease;
 }
+
+.feature-item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px #928473; 
+}
+
+.feature-item::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  
+  background: linear-gradient(
+    0deg,
+    transparent,
+    transparent 10%,
+    #928473,
+    transparent 50%
+  );
+  
+  transform: rotate(-45eg); 
+  opacity: 0;    
+  transition: all 2s ease; 
+}
+
+.feature-item:hover::before {
+  opacity: 1;
+  transform: rotate(-45deg) translateY(100%);
+}
+  
 
 .feature-icon {
   font-size: 2rem;
@@ -2397,93 +2442,7 @@ display: block;
 
   }
 
-    .discount img:hover, .early-bird img:hover {
+  .discount img:hover, .early-bird img:hover {
   width: 20vw;
   transform: scale(1.5);
   }
-/* Giveaway Section Styles */
-.giveaway-content {
-  padding: 2rem;
-  background: #fff;
-  display: flex;
-  justify-content:c ;
-}
-
-.giveaway-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  gap: 3rem;
-}
-
-.giveaway-image img {
-  width: 100%;
-  height: auto;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.giveaway-details {
-  padding: 2rem;
-  background: #faf7f4;
-  border-radius: 12px;
-}
-
-.giveaway-details h2 {
-  color: #6e5b4a;
-  margin-bottom: 0.5rem;
-  height: fit-content;
-}
-
-.giveaway-note {
-  color: #918473;
-  font-style: italic;
-  margin-bottom: 2rem;
-}
-
-.how-to-win h3 {
-  font-size: 1.5rem;
-  margin-bottom: 1.5rem;
-  color: #6e5b4a;
-}
-
-.giveaway-steps {
-  list-style: none;
-  padding: 0;
-}
-
-.giveaway-steps li {
-  margin-bottom: 1.5rem;
-  padding: 1rem;
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-}
-
-.step-icon {
-  font-size: 1.5rem;
-  margin-right: 0.5rem;
-}
-
-.step-title {
-  font-weight: bold;
-  color: #6e5b4a;
-  display: inline-block;
-  margin-bottom: 0.5rem;
-}
-
-.giveaway-steps p {
-  margin: 0.5rem 0 0 2.5rem;
-  color: #666;
-}
-
-.giveaway-steps small {
-  color: #918473;
-  font-size: 0.9em;
-}
-
-.disclaimer {
-  margin-top: 2rem;
-  color: #918473;
-  font-size: 0.9em;
-  text-align: center;
-}
