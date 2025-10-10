@@ -464,6 +464,19 @@ h2.section2-text {
     transform 200ms linear;
 }
 
+.card:nth-child(1) .card__background{
+  background-image: url('Pictures/Index/cny.jpg');
+}
+.card:nth-child(2) .card__background{
+  background-image: url('Pictures/Index/hand.jpg');
+}
+.card:nth-child(3) .card__background{
+  background-image: url('Pictures/Index/grandopening.jpg');
+}
+.card:nth-child(4) .card__background{
+  background-image: url('Pictures/Index/graduation.jpg');
+}
+
 .card:hover .card__background {
   transform: scale(1.05) translateZ(0);
   filter: brightness(1.1);
@@ -1441,7 +1454,7 @@ a[data-social="Youtube"] {
     text-decoration: line-through;
     color: #ceccbe;
   }
-  
+
 .new {
   font-size: 14px;
 }
