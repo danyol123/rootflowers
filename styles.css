@@ -20,7 +20,7 @@
 @font-face {
   font-family: Work_Sans_light;
   src: url(WorkSans-Thin.otf);
-  font-weight: lighter;
+  font-weight: normal;
 }
 
 @font-face {
@@ -1412,8 +1412,9 @@ a[data-social="Youtube"] {
 
   transform: translateY(40px);
   transition: all 0.7s;
+}
 
-  hr {
+.head hr {
     display: block;
     width: 0;
 
@@ -1426,7 +1427,6 @@ a[data-social="Youtube"] {
 
     transition: all .5s;
   }
-}
 
 .price {
   font-size: 11px;
@@ -1435,11 +1435,14 @@ a[data-social="Youtube"] {
   opacity: 0;
   transform: translateY(40px);
   transition: all 0.7s;
+}
 
-  .old {
+.old {
     text-decoration: line-through;
-    color: lighten(rgb(77, 77, 77), 40%);
+    color: #ceccbe;
   }
+.new {
+  font-size: 14px;
 }
 
 .cart {
@@ -1449,39 +1452,38 @@ a[data-social="Youtube"] {
   font-family: 'Lato', sans-serif;
   transform: translateY(40px);
   transition: all 0.7s;
+}
 
-  i {
+.cart i {
     font-size: 16px;
   }
 
-  span {
+.cart span {
     margin-left: 10px;
-  }
 }
 
 .container:hover .overlay {
   opacity: 1;
+}
 
-  & .head {
+.container:hover .overlay .head {
     transform: translateY(0px);
-  }
+}
 
-  & hr {
-    width: 75px;
-    transition-delay: 0.4s;
-  }
+.container:hover .overlay hr {
+  width: 75px;
+  transition-delay: 0.4s;
+}
 
-  & .price {
-    transform: translateY(0px);
-    transition-delay: 0.3s;
-    opacity: 1;
-  }
+.container:hover .overlay .price {
+  transform: translateY(0px);
+  transition-delay: 0.3s;
+  opacity: 1;
+}
 
-  & .cart {
-    transform: translateY(0px);
-    transition-delay: 0.6s;
-    opacity: 1;
-  }
+.container:hover .overlay .cart {
+  transform: translateY(0px);
+  opacity: 1;
 }
 
 .hidden-checkbox {
@@ -1946,13 +1948,14 @@ a[data-social="Youtube"] {
 
 .profile-main table {
   max-width: 50rem;
+  margin-bottom: 2rem;
   height: auto;
 }
 
-.profile-main button {
+.profile-main a {
   color: #fff;
   border: 2px solid black;
-  padding: 0.8rem;
+  padding: 1rem;
   width: 50%;
   border-radius: 8px;
   font-size: 1rem;
@@ -1963,34 +1966,112 @@ a[data-social="Youtube"] {
 }
 
 .daniel th,
-.daniel button {
+.daniel a {
   background-color: #DA7297;
 }
 
 .daniel td,
-.daniel button:hover {
+.daniel a:hover {
   background-color: #FFB4C2;
 }
 
 .kheldy th,
-.kheldy button {
+.kheldy a {
   background-color: #AA60C8
 }
 
 .kheldy td,
-.kheldy button:hover {
+.kheldy a:hover {
   background-color: #D69ADE;
 }
 
-.josiah th, .josiah button {
+.josiah th, .josiah a {
   background-color: #4c5bae;
 }
 
-.josiah td, .josiah button:hover{
+.josiah td, .josiah a:hover{
   background-color: #B2B0E8;
 
 }
 
+.alvin-profile-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.alvin-profile-pic img {
+    border-radius: 50%;
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border: 4px solid #f2b6b6;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.alvin-profile-main h1 {
+    margin-top: 20px;
+    font-size: 2rem;
+    color: #c54b4b;
+}
+
+.alvin-profile-main h2 {
+    color: #666;
+    font-size: 1.1rem;
+}
+
+.alvin table {
+    margin-top: 30px;
+    border-collapse: collapse;
+    width: 90%;
+    max-width: 800px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.alvin th {
+    background: #f4b7b7;
+    color: #fff;
+    text-align: left;
+    padding: 15px;
+    width: 30%;
+    vertical-align: top;
+}
+
+.alvin td {
+    padding: 15px;
+    text-align: left;
+    line-height: 1.6;
+}
+
+.alvin tr:nth-child(even) {
+    background-color: #fdf1f1;
+}
+
+.alvin button {
+    background-color: #ff7f7f;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 25px;
+    margin-top: 20px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.alvin button:hover {
+    background-color: #ff4d4d;
+    transform: scale(1.05);
+}
+
+.alvin footer {
+    margin-top: 50px;
+}
 
 /*Enhancement & Acknowledgement*/
 .enhancement,
@@ -2083,7 +2164,7 @@ a[data-social="Youtube"] {
     transparent 50%
   );
   
-  transform: rotate(-45eg); 
+  transform: rotate(-45deg); 
   opacity: 0;    
   transition: all 2s ease; 
 }
