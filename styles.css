@@ -534,6 +534,8 @@ h2.section2-text {
 
   .promotion-index figure:hover {
   transform: scale(1.2);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  filter: brightness(1.05);
   }
 
   @media(min-width: 540px) {
@@ -567,7 +569,7 @@ h2.section2-text {
   }
 }
 
-@media (min-width: 900px) {
+@media (min-width: 1000px) {
   .section6-content {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -584,7 +586,7 @@ h2.section2-text {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  width: 100%;
+  width: 550px;
 }
 
 .section6-workshop-content {
@@ -606,7 +608,7 @@ h2.section2-text {
 .section6-workshop-text {
   padding: 0rem 2rem;
   background-color: #918473;
-  max-width: 100%;
+  width: 200px;
   height: 600px;
   font-size: 1.2em;
   line-height: 1.6;
@@ -956,6 +958,8 @@ input[type="reset"]:hover {
   display: flex;
   justify-content: flex-start;
   gap: 12px;
+  max-width: 100%;
+  flex-wrap: wrap;
 }
 
 .submit-btn,
@@ -1825,6 +1829,8 @@ a[data-social="Youtube"] {
   border-radius: 25%;
   max-width: 100%;
   height: 100%;
+  object-fit: cover;
+  
 }
 
 .aboutus_card .back {
@@ -2146,6 +2152,11 @@ a[data-social="Youtube"] {
   gap: 2rem;
   margin-top: 3rem;
 }
+
+.activities-features-promotion{
+  margin-top: 1rem;
+}
+
 .feature-item {
   display: flex;
   align-items: flex-start;
@@ -2426,7 +2437,7 @@ display: block;
   background-color: #463b2b;
   color: white;
   border: none;
-  padding: 12px 24px;
+  padding: 12px 36px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -2455,15 +2466,15 @@ display: block;
     background-color: #fff;
     max-width: fit-content;
     cursor: zoom-in;
+    transition: 0.3s;
 }
 
   .discount img, .earlybird img, .giveaway img {
   width: 20vw;
-  transition: 0.3s;
-
 }
 
-  .discount img:hover, .earlybird img:hover,.giveaway img:hover {
-  width: 20vw;
-  transform: scale(1.5);
+  .discount figure:hover, .earlybird figure:hover,.giveaway figure:hover {
+  transform: scale(1.2);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  filter: brightness(1.05);
   }
