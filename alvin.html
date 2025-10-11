@@ -10,143 +10,56 @@
     <link rel="icon" href="Pictures/Index/logo.png" type="image/png">
     <title>Root Flower - Alvin Profile</title>
     <link rel="stylesheet" href="styles.css">
-    <style>
-        /* Personal info page styling tweaks */
-        body {
-            background-color: #faf9f6;
-            font-family: "Poppins", sans-serif;
-            color: #333;
-        }
-
-        .profile-main {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 50px 20px;
-            text-align: center;
-        }
-
-        .profile-pic img {
-            border-radius: 50%;
-            width: 180px;
-            height: 180px;
-            object-fit: cover;
-            border: 4px solid #f2b6b6;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        .profile-main h1 {
-            margin-top: 20px;
-            font-size: 2rem;
-            color: #c54b4b;
-        }
-
-        .profile-main h2 {
-            color: #666;
-            font-size: 1.1rem;
-        }
-
-        table {
-            margin-top: 30px;
-            border-collapse: collapse;
-            width: 90%;
-            max-width: 800px;
-            background: #fff;
-            border-radius: 10px;
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-        }
-
-        th {
-            background: #f4b7b7;
-            color: #fff;
-            text-align: left;
-            padding: 15px;
-            width: 30%;
-            vertical-align: top;
-        }
-
-        td {
-            padding: 15px;
-            text-align: left;
-            line-height: 1.6;
-        }
-
-        tr:nth-child(even) {
-            background-color: #fdf1f1;
-        }
-
-        button {
-            background-color: #ff7f7f;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 25px;
-            margin-top: 20px;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        button:hover {
-            background-color: #ff4d4d;
-            transform: scale(1.05);
-        }
-
-        footer {
-            margin-top: 50px;
-        }
-    </style>
 </head>
 
 <body>
     <!-- Navbar -->
-    <header>
-        <nav class="navbar">
-            <a href="index.html"><img src="Pictures/Index/logo.png" class="logo"></a>
-            <div class="nav-links-container">
-                <ul class="nav-links">
-                    <li class="dropdown"><a href="index.html">Home</a></li>
-                    <li class="dropdown">
-                        <a href="#">Products</a>
-                        <div>
-                            <ul class="dropdown-content">
-                                <li><a href="product1.html">Hand bouquet</a></li>
-                                <li><a href="product2.html">CNY decoration</a></li>
-                                <li><a href="product3.html">Grand Opening</a></li>
-                                <li><a href="product4.html">Graduation</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#">Activities</a>
-                        <div>
-                            <ul class="dropdown-content">
-                                <li><a href="workshop.html">Workshop</a></li>
-                                <li><a href="promotion.html">Promotion</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#">Forms</a>
-                        <div class="dropdown-content">
-                            <ul>
-                                <li><a href="register.html">Workshop Registration</a></li>
-                                <li><a href="enquiry.html">Enquiry Form</a></li>
-                                <li><a href="registration.html">Membership Registration</a></li>
-                                <li><a href="login.html">Login</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="dropdown"><a href="about_us.html">About Us</a></li>
+  <header>
+    <nav class="navbar">
+      <a href="index.html"><img src="Pictures/Index/logo.png" class="logo" alt=""></a>
+      <div class="nav-links-container">
+        <ul class="nav-links">
+          <li class="dropdown"><a href="index.html">Home</a></li>
+          <li class="dropdown">
+            <a href="#">Products</a>
+            <div>
+                <ul class="dropdown-content">
+                  <li><a href="product1.html">Hand bouquet</a></li>
+                  <li><a href="product2.html">CNY decoration</a></li>
+                  <li><a href="product3.html">Grand Opening</a></li>
+                  <li><a href="product4.html">Graduation</a></li>
                 </ul>
             </div>
-        </nav>
-    </header>
+          </li>
+          <li class="dropdown">
+            <a href="#">Activities</a>
+            <div>
+                <ul class="dropdown-content">
+                  <li><a href="workshop.html">Workshop</a></li>
+                  <li><a href="promotion.html">Promotion</a></li>
+                </ul>
+            </div>
+          </li>
+          <li class="dropdown">
+            <a href="#">Forms</a>
+            <div class="dropdown-content">
+              <ul>
+                <li><a href="register.html">Workshop Registration</a></li>
+                <li><a href="enquiry.html">Enquiry Form</a></li>
+                <li><a href="registration.html">Membership Registration</a></li>
+                <li><a href="login.html">Login</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="dropdown"><a href="about_us.html">About Us</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
     <!-- End Navbar -->
 
-    <main class="profile-main">
-        <figure class="profile-pic">
+    <main class="alvin-profile-main">
+        <figure class="alvin-profile-pic">
             <img src="Pictures/Profile/Alvin.jpg" alt="Alvin Tiong Profile Picture">
         </figure>
 
@@ -240,6 +153,7 @@
     
     <div class="footer-col">
         <h2>Forms</h2>
+          <br>
           <p><a href="register.html">Workshop Registration</a></p>
           <p><a href="enquiry.html">Enquiry Form</a></p>
           <p><a href="registration.html">Membership Registration</a></p>
@@ -251,7 +165,7 @@
           <br>
           <p><strong>Address :</strong><a href="https://share.google/wSsj3Dpq6rCoB3mSp" target="_blank"> Lorong Bdc, 93350 Kuching, Sarawak, Malaysia</a></p>
           <p><strong>Phone No :</strong><a href="tel:+600143399709"> (+60) 014-339 9709</a></p>
-          <p><strong>Email Id :</strong><a href="mailto:therootflower@gmail.com"> therootflower@gmail.com</a></p>
+          <p><strong>Email Id :</strong><a href="enquiry.html"> therootflower@gmail.com</a></p>
     </div>
 
   </footer>
