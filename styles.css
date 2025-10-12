@@ -337,6 +337,11 @@ h2.section2-text {
   padding: 0.5rem 1rem;
 }
 
+.section3-content map {
+  padding: 2rem;
+  display: flex;
+}
+
 .section3-content img {
   border: 0;
   max-width: 100%;
@@ -347,8 +352,6 @@ h2.section2-text {
 
 .section3-content img:hover {
   box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
-  filter: brightness(1.05) saturate(1.1);
-  transform: translateY(-5px);
 }
 
 .section3-header {
@@ -643,6 +646,7 @@ ul.slides input {
   display: none;
 }
 
+
 .slide-container {
   display: block;
 }
@@ -748,7 +752,6 @@ input:checked+.slide-container .nav label {
 }
 
 /* Forms */
-
 .form-section {
   display: flex;
   justify-content: center;
@@ -770,6 +773,12 @@ input:checked+.slide-container .nav label {
   text-align: center;
   color: #463b2b;
   margin-bottom: 1.5rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-weight: bold;
 }
 
 input[type="text"],
@@ -839,6 +848,7 @@ input[type="reset"]:hover {
   border-radius: 5%;
 }
 
+/* Align radio and checkbox groups nicely */
 .form-container .input-group {
   display: flex;
   gap: 25%;
@@ -872,6 +882,7 @@ input[type="reset"]:hover {
   outline: none;
 }
 
+/* Add a subtle hover effect for radio/checkbox labels */
 .form-container .input-group label:hover {
   color: #928473;
   text-shadow: 0 1px 6px #92847322;
@@ -937,6 +948,7 @@ input[type="reset"]:hover {
   box-shadow: 0 0 5px rgba(146, 132, 115, 0.5);
   outline: none;
 }
+
 
 .button-group {
   display: flex;
@@ -1977,12 +1989,24 @@ a[data-social="Youtube"] {
   background-color: #FFB4C2;
 }
 
+.kheldy th,
+.kheldy a {
+  background-color: #AA60C8;
+}
+
+.kheldy td,
+.kheldy a:hover {
+  background-color: #D69ADE;
+}
+
 .josiah th, .josiah a {
   background-color: #4c5bae;
+  text-decoration: none;
 }
 
 .josiah td, .josiah a:hover{
   background-color: #B2B0E8;
+  text-decoration: none;
 
 }
 
@@ -2504,6 +2528,28 @@ display: block;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
+}
+
+.join-us-button {
+  padding:2rem
+}
+.join-us-button a {
+  background-color: #463b2b;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+
+}
+
+.join-us-button a:hover {
+  background-color: #928473;
+
 }
 
 .discount, .earlybird, .giveaway {
