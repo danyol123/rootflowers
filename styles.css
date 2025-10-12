@@ -41,21 +41,7 @@ body {
   overflow-x: hidden;
 }
 
-/* Navbar */
-.logo {
-  width: 75px;
-  height: 75px;
-  float: left;
-  display: block;
-  border-radius: 50%;
-  margin: 10px 15px;
-  transition: 0.3s;
-}
-
-.logo:hover {
-  border-radius: 10%;
-}
-
+/* General Header & Navbar Structure */
 header {
   position: sticky;
   top: 0;
@@ -81,13 +67,6 @@ header {
   /* allow dropdown to overflow */
 }
 
-.navbar .nav-links-container {
-  display: flex;
-  justify-content: flex-end;
-  width: 100%;
-  margin-right: 2rem;
-}
-
 .navbar,
 .navbar ul {
   list-style: none;
@@ -95,7 +74,29 @@ header {
   padding: 0;
 }
 
-/* horizontal menu container (use .menu if you wrap links in a ul.menu) */
+.navbar .nav-links-container {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  margin-right: 2rem;
+}
+
+/* Logo Styling */
+.logo {
+  width: 75px;
+  height: 75px;
+  float: left;
+  display: block;
+  border-radius: 50%;
+  margin: 10px 15px;
+  transition: 0.3s;
+}
+
+.logo:hover {
+  border-radius: 10%;
+}
+
+/* Top-Level Navigation Links */
 .nav-links,
 .navbar .menu {
   display: flex;
@@ -105,14 +106,12 @@ header {
   padding: 0;
 }
 
-/* top-level items */
 .navbar li {
   margin: 0;
   padding: 0;
   position: relative;
 }
 
-/* links styling */
 .navbar ul a {
   display: inline-block;
   text-decoration: none;
@@ -127,7 +126,7 @@ header {
   color: #000000;
 }
 
-/* Dropdown parent */
+/* Dropdown Menu Styling */
 .dropdown {
   cursor: pointer;
 }
@@ -136,7 +135,6 @@ header {
   color: #f4f1ed;
 }
 
-/* Dropdown content - opens downward under parent */
 .dropdown-content {
   display: none;
   position: absolute;
@@ -159,7 +157,6 @@ header {
   display: flex;
 }
 
-/* Dropdown items */
 .dropdown-content li {
   margin: 0;
   padding: 0;
@@ -2057,16 +2054,40 @@ a[data-social="Youtube"] {
 .kheldy a:hover {
   background-color: #D69ADE;
 }
+#josiah-profile-pic img{
 
+}
 .josiah th, .josiah a {
-  background-color: #4c5bae;
+  background-color: #4c5baec6;
   text-decoration: none;
 }
 
 .josiah td, .josiah a:hover{
   background-color: #B2B0E8;
   text-decoration: none;
+}
 
+#josiah-title {
+  display: inline-block;
+  position: relative;
+  padding: 0;
+  margin: 0;
+}
+#josiah-title::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #4c5bae;
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+#josiah-title:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
 }
 
 .kheldy-profile {
