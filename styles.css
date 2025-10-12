@@ -226,7 +226,7 @@ main {
 
 .main-title-section .title-text h1 {
   color: #918473;
-  font-family: "Visconte", 'Times New Roman', serif;
+  font-family: "Visconte", "Times New Roman", serif;
   font-size: 8rem;
 
   line-height: 0.6;
@@ -265,7 +265,7 @@ main {
 }
 
 .sub-title {
-  font-family: Work_Sans_light, Times, serif;
+  font-family: Work_Sans_light, "Times New Roman", serif;
   font-size: 2rem;
   color: #918473;
   transform: translate(-1rem, -6rem);
@@ -306,18 +306,18 @@ main {
 
 h1.section2-text {
   font-size: 3em;
-  font-family: "Times New Roman", Times, serif;
+  font-family: "Times New Roman", serif;
   font-weight: lighter;
 }
 
 h2.section2-text {
-  font-family: Work_Sans_light, Times, serif;
+  font-family: Work_Sans_light, "Times New Roman", serif;
 }
 
 /* Section 3 */
 
 .section3 {
-  padding: 4rem 1rem;
+  padding: 1rem;
 }
 
 .section3-content {
@@ -605,7 +605,7 @@ h2.section2-text {
   height: 600px;
   font-size: 1.2em;
   line-height: 1.6;
-  font-family: Work_Sans_light, Times, serif;
+  font-family: Work_Sans_light, "Times New Roman", serif;
 }
 
 .section6-workshop-text h1 {
@@ -1967,14 +1967,73 @@ a[data-social="Youtube"] {
   margin-top: 2rem;
 }
 
-.daniel th,
-.daniel a {
+.daniel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.daniel img{
+  transition: 0.3s ease;
+  border: 5px groove #DA7297;
+}
+
+.daniel img:hover{
+  transform: scale(1.1);
+  filter: brightness(1.1);
+  border: 15px groove #DA7297;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.daniel h1{
+  background-color: #DA7297;
+  color: #fff;
+  padding: 0.5rem;
+  border-radius: 10px;
+  transition: 0.3s ease;
+}
+
+.daniel h1:hover{
+  box-shadow: 0 10px 0px #FFB4C2;
+  transform: translateY(-5px);
+}
+
+.daniel table{
+  border: 5px groove #DA7297;
+}
+
+.daniel th{
   background-color: #DA7297;
 }
 
-.daniel td,
+.daniel td{
+  background-color: #FFB4C2;
+}
+
+.daniel a {
+  color: #fff;
+  background-color: #DA7297;
+  border: 0px;
+  padding: 1rem;
+  width: 50%;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s ease;
+  margin-top: 0rem;
+}
+
 .daniel a:hover {
   background-color: #FFB4C2;
+  box-shadow: 0 10px 0px #DA7297;
+  transform: translateY(-5px);
+}
+
+.daniel a:active {
+  background-color: #FFB4C2;
+  box-shadow: 0 0px 0px rgba(0,0,0,0);
+  transform: translateY(0px);
 }
 
 .josiah th, .josiah a {
