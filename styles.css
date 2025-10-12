@@ -1638,7 +1638,6 @@ a[data-social="Youtube"] {
   padding: 8px 12px;
   border-radius: 4px;
   text-decoration: none;
-  font-weight: light;
   font-size: clamp(0.8rem, 0.9vw, 1rem);
   transition: transform 0.3s ease, background-color 0.3s ease;
 }
@@ -2061,9 +2060,7 @@ a[data-social="Youtube"] {
 .kheldy a:hover {
   background-color: #D69ADE;
 }
-#josiah-profile-pic img{
 
-}
 .josiah th, .josiah a {
   background-color: #4c5baec6;
   text-decoration: none;
