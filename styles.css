@@ -857,6 +857,7 @@ input[type="reset"]:hover {
   margin-bottom: 0;
   font-weight: normal;
   cursor: pointer;
+  transition: color 0.2s, text-shadow 0.2s;
 }
 
 .form-container .input-group div {
@@ -883,7 +884,6 @@ input[type="reset"]:hover {
 .form-container .input-group label:hover {
   color: #928473;
   text-shadow: 0 1px 6px #92847322;
-  transition: color 0.2s, text-shadow 0.2s;
 }
 
 /* Enquiry */
