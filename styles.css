@@ -1977,16 +1977,6 @@ a[data-social="Youtube"] {
   background-color: #FFB4C2;
 }
 
-.kheldy th,
-.kheldy a {
-  background-color: #AA60C8;
-}
-
-.kheldy td,
-.kheldy a:hover {
-  background-color: #D69ADE;
-}
-
 .josiah th, .josiah a {
   background-color: #4c5bae;
 }
@@ -2351,23 +2341,27 @@ gap: 5px;
   background-color: #f5f5f4;
 
 }
-
-.book-now-btn {
+.activities-button {  
   text-align: center;
-  padding-top: 20px;
-}
-.book-now-btn a{
+  padding-top: 20px;}
+
+.activities-button a {
   background-color: #463b2b;
   color: white;
-  border: none;
-  padding: 12px 24px;
   text-align: center;
+  text-decoration: none;
+  display: inline-block;
   border-radius: 10px;
   cursor: pointer;
-  text-decoration: none;
+  transition: background-color 0.3s;
+  color: white;
+  padding: 12px 24px;
 }
-.book-now-btn a:hover {
+
+.activities-button a:hover {
   background-color: #928473;
+  transform: translateY(-2px);
+
 }
 
 /* A side */
@@ -2510,28 +2504,6 @@ display: block;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-}
-
-.join-us-button {
-  padding:2rem
-}
-.join-us-button a {
-  background-color: #463b2b;
-  color: white;
-  border: none;
-  padding: 12px 36px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-
-}
-
-.join-us-button a:hover {
-  background-color: #928473;
-
 }
 
 .discount, .earlybird, .giveaway {
