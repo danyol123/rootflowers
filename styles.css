@@ -1640,6 +1640,13 @@ a[data-social="Youtube"] {
   text-decoration: none;
   font-weight: light;
   font-size: clamp(0.8rem, 0.9vw, 1rem);
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.sidebar-banner .btn:hover {
+  background-color: #bdae99;;
+  transform: scale(1.05);
+  transition: all 0.3s ease;
 }
 
 /* Sidebar Table */
