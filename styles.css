@@ -1,31 +1,31 @@
 /* Custom font */
 @font-face {
   font-family: Reach_Story;
-  src: url(Reach_Story.otf);
+  src: url("Fonts/Reach_Story.otf");
   font-weight: bold;
 }
 
 @font-face {
   font-family: Work_Sans;
-  src: url(WorkSans-Regular.otf);
+  src: url("Fonts/WorkSans-Regular.otf");
   font-weight: normal;
 }
 
 @font-face {
   font-family: Work_Sans_bold;
-  src: url(WorkSans-Bold.otf);
+  src: url("Fonts/WorkSans-Bold.otf");
   font-weight: bold;
 }
 
 @font-face {
   font-family: Work_Sans_light;
-  src: url(WorkSans-Thin.otf);
+  src: url("Fonts/WorkSans-Thin.otf");
   font-weight: normal;
 }
 
 @font-face {
   font-family: Visconte;
-  src: url(VisconteBanner-Black.ttf);
+  src: url("Fonts/VisconteBanner-Black.ttf");
   font-weight: bold;
 }
 
