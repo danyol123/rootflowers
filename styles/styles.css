@@ -2257,6 +2257,11 @@ a[data-social="Youtube"] {
     transition: all 0.3s ease;
 }
 
+.alvin button a {
+    color: white;
+    text-decoration: none;
+}
+
 .alvin button:hover {
     background-color: #ff4d4d;
     transform: scale(1.05);
