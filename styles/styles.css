@@ -1,31 +1,31 @@
 /* Custom font */
 @font-face {
   font-family: Reach_Story;
-  src: url("Fonts/Reach_Story.otf");
+  src: url("../Fonts/Reach_Story.otf");
   font-weight: bold;
 }
 
 @font-face {
   font-family: Work_Sans;
-  src: url("Fonts/WorkSans-Regular.otf");
+  src: url("../Fonts/WorkSans-Regular.otf");
   font-weight: normal;
 }
 
 @font-face {
   font-family: Work_Sans_bold;
-  src: url("Fonts/WorkSans-Bold.otf");
+  src: url("../Fonts/WorkSans-Bold.otf");
   font-weight: bold;
 }
 
 @font-face {
   font-family: Work_Sans_light;
-  src: url("Fonts/WorkSans-Thin.otf");
+  src: url("../Fonts/WorkSans-Thin.otf");
   font-weight: normal;
 }
 
 @font-face {
   font-family: Visconte;
-  src: url("Fonts/VisconteBanner-Black.ttf");
+  src: url("../Fonts/VisconteBanner-Black.ttf");
   font-weight: bold;
 }
 
@@ -458,16 +458,16 @@ h2.section2-text {
 }
 
 .card:nth-child(1) .card__background{
-  background-image: url('Pictures/Index/cny.jpg');
+  background-image: url('../Pictures/Index/cny.jpg');
 }
 .card:nth-child(2) .card__background{
-  background-image: url('Pictures/Index/hand.jpg');
+  background-image: url('../Pictures/Index/hand.jpg');
 }
 .card:nth-child(3) .card__background{
-  background-image: url('Pictures/Index/grandopening.jpg');
+  background-image: url('../Pictures/Index/grandopening.jpg');
 }
 .card:nth-child(4) .card__background{
-  background-image: url('Pictures/Index/graduation.jpg');
+  background-image: url('../Pictures/Index/graduation.jpg');
 }
 
 .card:hover .card__background {
@@ -1264,134 +1264,134 @@ a[data-social="Youtube"] {
 
 /* Bouquet */
 .gallery_bouquet .B1 {
-  --bg: url("Pictures/Product1/B1.jpg");
+  --bg: url("../Pictures/Product1/B1.jpg");
 }
 
 .gallery_bouquet .B2 {
-  --bg: url("Pictures/Product1/B2.jpg");
+  --bg: url("../Pictures/Product1/B2.jpg");
 }
 
 .gallery_bouquet .B3 {
-  --bg: url("Pictures/Product1/B3.jpg");
+  --bg: url("../Pictures/Product1/B3.jpg");
 }
 
 .gallery_bouquet .B4 {
-  --bg: url("Pictures/Product1/B4.jpg");
+  --bg: url("../Pictures/Product1/B4.jpg");
 }
 
 .gallery_bouquet .B5 {
-  --bg: url("Pictures/Product1/B5.jpg");
+  --bg: url("../Pictures/Product1/B5.jpg");
 }
 
 .gallery_bouquet .B6 {
-  --bg: url("Pictures/Product1/B6.jpg");
+  --bg: url("../Pictures/Product1/B6.jpg");
 }
 
 .gallery_bouquet .B7 {
-  --bg: url("Pictures/Product1/B7.jpg");
+  --bg: url("../Pictures/Product1/B7.jpg");
 }
 
 .gallery_bouquet .B8 {
-  --bg: url("Pictures/Product1/B8.jpg");
+  --bg: url("../Pictures/Product1/B8.jpg");
 }
 
 /* CNY */
 .gallery_cny .C1 {
-  --bg: url("Pictures/Product2/C1.jpg");
+  --bg: url("../Pictures/Product2/C1.jpg");
 }
 
 .gallery_cny .C2 {
-  --bg: url("Pictures/Product2/C2.jpg");
+  --bg: url("../Pictures/Product2/C2.jpg");
 }
 
 .gallery_cny .C3 {
-  --bg: url("Pictures/Product2/C3.jpg");
+  --bg: url("../Pictures/Product2/C3.jpg");
 }
 
 .gallery_cny .C4 {
-  --bg: url("Pictures/Product2/C4.jpg");
+  --bg: url("../Pictures/Product2/C4.jpg");
 }
 
 .gallery_cny .C5 {
-  --bg: url("Pictures/Product2/C5.jpg");
+  --bg: url("../Pictures/Product2/C5.jpg");
 }
 
 .gallery_cny .C6 {
-  --bg: url("Pictures/Product2/C6.jpg");
+  --bg: url("../Pictures/Product2/C6.jpg");
 }
 
 .gallery_cny .C7 {
-  --bg: url("Pictures/Product2/C7.jpg");
+  --bg: url("../Pictures/Product2/C7.jpg");
 }
 
 .gallery_cny .C8 {
-  --bg: url("Pictures/Product2/C8.jpg");
+  --bg: url("../Pictures/Product2/C8.jpg");
 }
 
 /* Grand Opening */
 .gallery_grand_opening .G1 {
-  --bg: url("Pictures/Product3/G1.jpg");
+  --bg: url("../Pictures/Product3/G1.jpg");
 }
 
 .gallery_grand_opening .G2 {
-  --bg: url("Pictures/Product3/G2.jpg");
+  --bg: url("../Pictures/Product3/G2.jpg");
 }
 
 .gallery_grand_opening .G3 {
-  --bg: url("Pictures/Product3/G3.jpg");
+  --bg: url("../Pictures/Product3/G3.jpg");
 }
 
 .gallery_grand_opening .G4 {
-  --bg: url("Pictures/Product3/G4.jpg");
+  --bg: url("../Pictures/Product3/G4.jpg");
 }
 
 .gallery_grand_opening .G5 {
-  --bg: url("Pictures/Product3/G5.jpg");
+  --bg: url("../Pictures/Product3/G5.jpg");
 }
 
 .gallery_grand_opening .G6 {
-  --bg: url("Pictures/Product3/G6.jpg");
+  --bg: url("../Pictures/Product3/G6.jpg");
 }
 
 .gallery_grand_opening .G7 {
-  --bg: url("Pictures/Product3/G7.jpg");
+  --bg: url("../Pictures/Product3/G7.jpg");
 }
 
 .gallery_grand_opening .G8 {
-  --bg: url("Pictures/Product3/G8.jpg");
+  --bg: url("../Pictures/Product3/G8.jpg");
 }
 
 /* Graduation */
 .gallery_graduation .G1 {
-  --bg: url("Pictures/Product4/G1.jpg");
+  --bg: url("../Pictures/Product4/G1.jpg");
 }
 
 .gallery_graduation .G2 {
-  --bg: url("Pictures/Product4/G2.jpg");
+  --bg: url("../Pictures/Product4/G2.jpg");
 }
 
 .gallery_graduation .G3 {
-  --bg: url("Pictures/Product4/G3.jpg");
+  --bg: url("../Pictures/Product4/G3.jpg");
 }
 
 .gallery_graduation .G4 {
-  --bg: url("Pictures/Product4/G4.jpg");
+  --bg: url("../Pictures/Product4/G4.jpg");
 }
 
 .gallery_graduation .G5 {
-  --bg: url("Pictures/Product4/G5.jpg");
+  --bg: url("../Pictures/Product4/G5.jpg");
 }
 
 .gallery_graduation .G6 {
-  --bg: url("Pictures/Product4/G6.jpg");
+  --bg: url("../Pictures/Product4/G6.jpg");
 }
 
 .gallery_graduation .G7 {
-  --bg: url("Pictures/Product4/G7.jpg");
+  --bg: url("../Pictures/Product4/G7.jpg");
 }
 
 .gallery_graduation .G8 {
-  --bg: url("Pictures/Product4/G8.jpg");
+  --bg: url("../Pictures/Product4/G8.jpg");
 }
 
 /* Products */
@@ -1739,32 +1739,32 @@ a[data-social="Youtube"] {
 
 /* Banners */
 .banner-bouquet {
-  --bg: url("Pictures/Product1/Banner1.jpg");
+  --bg: url("../Pictures/Product1/Banner1.jpg");
   background: var(--bg) center/cover fixed no-repeat;
 }
 
 .banner-CNY {
-  --bg: url("Pictures/Product2/Banner2.jpeg");
+  --bg: url("../Pictures/Product2/Banner2.jpeg");
   background: var(--bg) center/cover fixed no-repeat;
 }
 
 .banner-grand-opening {
-  --bg: url("Pictures/Product3/Banner3.jpeg");
+  --bg: url("../Pictures/Product3/Banner3.jpeg");
   background: var(--bg) center/cover fixed no-repeat;
 }
 
 .banner-graduation {
-  --bg: url("Pictures/Product4/Banner4.jpeg");
+  --bg: url("../Pictures/Product4/Banner4.jpeg");
   background: var(--bg) center/cover fixed no-repeat;
 }
 
 .banner-workshop {
-  --bg: url("Pictures/Workshop/Banner1.jpg");
+  --bg: url("../Pictures/Workshop/Banner1.jpg");
   background: var(--bg) center/cover fixed no-repeat;
 }
 
 .banner-promotion {
-  --bg: url("Pictures/Promotion/Banner1.jpeg");
+  --bg: url("../Pictures/Promotion/Banner1.jpeg");
   background: var(--bg) center/cover fixed no-repeat;
 }
 
@@ -2520,37 +2520,37 @@ gap: 5px;
 }
 
 .card1 {
-  background-image: url(Pictures/Workshop/pic1.jpg);
+  background-image: url(../Pictures/Workshop/pic1.jpg);
   background-size: cover;
   background-position: center;
 }
 
 .card2 {
-  background-image: url(Pictures/Workshop/pic2.jpg);
+  background-image: url(../Pictures/Workshop/pic2.jpg);
   background-size: cover;
   background-position: center;
 }
 
 .card3 {
-  background-image: url(Pictures/Workshop/pic3.jpg);
+  background-image: url(../Pictures/Workshop/pic3.jpg);
   background-size: cover;
   background-position: center;
 }
 
 .card4 {
-  background-image: url(Pictures/Workshop/pic4.jpg);
+  background-image: url(../Pictures/Workshop/pic4.jpg);
   background-size: cover;
   background-position: center;
 }
 
 .card5 {
-  background-image: url(Pictures/Workshop/pic5.jpg);
+  background-image: url(../Pictures/Workshop/pic5.jpg);
   background-size: cover;
   background-position: center;
 }
 
 .card6 {
-  background-image: url(Pictures/Workshop/pic6.jpg);
+  background-image: url(../Pictures/Workshop/pic6.jpg);
   background-size: cover;
   background-position: center;
 }
