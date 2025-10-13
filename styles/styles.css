@@ -617,6 +617,8 @@ h2.section2-text {
 /* Image carousel */
 .carousel {
   width: 30rem;
+  position: relative;
+  margin: auto;
 }
 
 ul.slides {
@@ -634,15 +636,14 @@ ul.slides {
   user-select: none;
   -ms-user-select: none;
   -moz-user-select: none;
-  -khtml-user-select: none;
   -webkit-user-select: none;
   -webkit-touch-callout: none;
 }
 
-ul.slides input {
+/* Hide radio inputs */
+.carousel input[type="radio"] {
   display: none;
 }
-
 
 .slide-container {
   display: block;
@@ -654,23 +655,25 @@ ul.slides input {
   width: 100%;
   height: 100%;
   top: 0;
+  left: 0;
   opacity: 0;
-  transition: all .7s ease-in-out;
+  transform: scale(1.05);
+  transition: all 0.7s ease-in-out;
 }
 
 .slide-image img {
-  width: auto;
-  object-fit: cover;
-  min-width: 100%;
+  width: 100%;
   height: 100%;
+  object-fit: cover;
 }
 
+/* Controls (Prev / Next) */
 .carousel-controls {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  z-index: 999;
+  z-index: 2;
   font-size: 100px;
   line-height: 600px;
   color: #fff;
@@ -681,11 +684,11 @@ ul.slides input {
   position: absolute;
   padding: 0 20px;
   opacity: 0;
-  transition: opacity .2s;
+  transition: opacity 0.2s;
   cursor: pointer;
 }
 
-.slide-image:hover+.carousel-controls label {
+.slide-image:hover + .carousel-controls label {
   opacity: 0.5;
 }
 
@@ -705,47 +708,48 @@ ul.slides input {
   right: 0;
 }
 
+/* Dots */
 .carousel-dots {
   position: absolute;
   left: 0;
   right: 0;
   bottom: 20px;
-  z-index: 999;
+  z-index: 3;
   text-align: center;
 }
 
 .carousel-dots .carousel-dot {
   display: inline-block;
-  width: 30px;
-  height: 30px;
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
   background-color: #fff;
   opacity: 0.5;
-  margin: 10px;
+  margin: 8px;
   cursor: pointer;
+  transition: opacity 0.3s;
 }
 
-input:checked+.slide-container .slide-image {
+#img-1:checked ~ .slides li:nth-child(1) .slide-image,
+#img-2:checked ~ .slides li:nth-child(2) .slide-image,
+#img-3:checked ~ .slides li:nth-child(3) .slide-image {
   opacity: 1;
   transform: scale(1);
-  transition: opacity 1s ease-in-out;
+  transition: opacity 1s ease-in-out, transform 1s ease-in-out;
 }
 
-input:checked+.slide-container .carousel-controls label {
+#img-1:checked ~ .slides li:nth-child(1) .carousel-controls label,
+#img-2:checked ~ .slides li:nth-child(2) .carousel-controls label,
+#img-3:checked ~ .slides li:nth-child(3) .carousel-controls label {
   display: block;
 }
 
-input#img-1:checked~.carousel-dots label#img-dot-1,
-input#img-2:checked~.carousel-dots label#img-dot-2,
-input#img-3:checked~.carousel-dots label#img-dot-3,
-input#img-4:checked~.carousel-dots label#img-dot-4,
-input#img-5:checked~.carousel-dots label#img-dot-5,
-input#img-6:checked~.carousel-dots label#img-dot-6 {
+/* Highlight the active dot */
+#img-1:checked ~ .carousel-dots label#img-dot-1,
+#img-2:checked ~ .carousel-dots label#img-dot-2,
+#img-3:checked ~ .carousel-dots label#img-dot-3 {
   opacity: 1;
-}
-
-input:checked+.slide-container .nav label {
-  display: block;
+  background-color: #ff4081;
 }
 
 /* Forms */
