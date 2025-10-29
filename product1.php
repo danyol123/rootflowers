@@ -288,7 +288,7 @@
         </tr>
         <tr>
           <td class="sb-action">
-            <a href="registration.php" class="btn">Register Now</a>
+            <a href="membership.php" class="btn">Register Now</a>
           </td>
         </tr>
       </table>

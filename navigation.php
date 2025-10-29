@@ -28,7 +28,7 @@
             <ul class="dropdown-content">
               <li><a href="register.php">Workshop Registration</a></li>
               <li><a href="enquiry.php">Enquiry Form</a></li>
-              <li><a href="registration.php">Membership Registration</a></li>
+              <li><a href="membership.php">Membership Registration</a></li>
               <li><a href="login.php">Login</a></li>
             </ul>
           </li>

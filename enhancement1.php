@@ -68,7 +68,7 @@
       <a href="promotion.php" class="contact_us">Promotion</a>
       <a href="register.php" class="contact_us">Workshop Registration</a>
       <a href="enquiry.php" class="contact_us">Enquiry Form</a>
-      <a href="registration.php" class="contact_us">Membership Registration</a>
+      <a href="membership.php" class="contact_us">Membership Registration</a>
       <a href="login.php" class="contact_us">Login</a>
       <a href="about_us.php" class="contact_us">About Us</a>
       <a href="daniel.php" class="contact_us">Daniel</a>
@@ -186,7 +186,7 @@
       <a href="promotion.php" class="contact_us">Promotion</a>
       <a href="register.php" class="contact_us">Workshop Registration</a>
       <a href="enquiry.php" class="contact_us">Enquiry Form</a>
-      <a href="registration.php" class="contact_us">Membership Registration</a>
+      <a href="membership.php" class="contact_us">Membership Registration</a>
       <a href="login.php" class="contact_us">Login</a>
       <a href="about_us.php" class="contact_us">About Us</a>
       <a href="daniel.php" class="contact_us">Daniel</a>
@@ -215,7 +215,7 @@
       <a href="promotion.php" class="contact_us">Promotion</a>
       <a href="register.php" class="contact_us">Workshop Registration</a>
       <a href="enquiry.php" class="contact_us">Enquiry Form</a>
-      <a href="registration.php" class="contact_us">Membership Registration</a>
+      <a href="membership.php" class="contact_us">Membership Registration</a>
       <a href="login.php" class="contact_us">Login</a>
       <a href="about_us.php" class="contact_us">About Us</a>
       <a href="daniel.php" class="contact_us">Daniel</a>
@@ -261,7 +261,7 @@
       <a href="promotion.php" class="contact_us">Promotion</a>
       <a href="register.php" class="contact_us">Workshop Registration</a>
       <a href="enquiry.php" class="contact_us">Enquiry Form</a>
-      <a href="registration.php" class="contact_us">Membership Registration</a>
+      <a href="membership.php" class="contact_us">Membership Registration</a>
       <a href="login.php" class="contact_us">Login</a>
       <a href="about_us.php" class="contact_us">About Us</a>
       <a href="daniel.php" class="contact_us">Daniel</a>

@@ -39,7 +39,7 @@
 
         <div class="login-links">
           <a href="#">Forgot Password?</a>
-          <a href="registration.php">Create an Account</a>
+          <a href="membership.php">Create an Account</a>
         </div>
       </form>
     </div>

@@ -249,7 +249,7 @@
           <br>
           <p><a href="register.php">Workshop Registration</a></p>
           <p><a href="enquiry.php">Enquiry Form</a></p>
-          <p><a href="registration.php">Membership Registration</a></p>
+          <p><a href="membership.php">Membership Registration</a></p>
           <p><a href="login.php">Login</a></p>
     </div>
 

@@ -48,7 +48,7 @@
     </div>
 
     <div class="activities-button">
-        <a href="registration.php">Join Us Now</a>
+        <a href="membership.php">Join Us Now</a>
     </div>
   </div>
 </section>
