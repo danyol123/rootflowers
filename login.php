@@ -24,7 +24,7 @@
     <div class="login-container">
       <h2 class="login-title">Welcome Back</h2>
       <p class="login-subtitle">Please log in to continue</p>
-      <form class="login-form">
+      <form class="login-form" action="login_process.php">
         <div class="form-group">
           <label for="email">Email Address</label>
           <input type="email" id="email" placeholder="Enter your email" required>

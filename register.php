@@ -20,7 +20,7 @@
   <section class="form-section">
     <div class="form-container">
       <h1>Workshop Registration</h1>
-      <form action="register_process.php" method="post" autocomplete="on">
+      <form action="register_process.php" method="get" autocomplete="on">
         <!-- Name Inputs -->
         <label for="firstName">First Name:</label>
         <input type="text" id="firstName" name="firstName" maxlength="25" pattern="[A-Za-z\s]+" required title="Alphabetical characters only">
