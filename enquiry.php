@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,8 +25,22 @@
     <section class="enquiry-section">
       <div class="enquiry-container">
         <h1 class="enquiry-title">Enquiry Form</h1>
+        
+        <?php
+        // Display success message if set
+        if (isset($_SESSION['success_message'])) {
+            echo '<div class="success-message">' . htmlspecialchars($_SESSION['success_message']) . '</div>';
+            unset($_SESSION['success_message']);
+        }
+        
+        // Display error message if set
+        if (isset($_SESSION['error_message'])) {
+            echo '<div class="error-message">' . htmlspecialchars($_SESSION['error_message']) . '</div>';
+            unset($_SESSION['error_message']);
+        }
+        ?>
 
-        <form action="enquiry_process.php" method="post" enctype="text/plain" class="enquiry-form">
+        <form action="enquiry_process.php" method="post" class="enquiry-form">
           <!-- First Name -->
             <label for="firstname">First Name:</label>
             <input type="text" id="firstname" name="firstname" maxlength="25" pattern="[A-Za-z]+" required>

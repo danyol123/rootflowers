@@ -11,6 +11,10 @@
     <link rel="stylesheet" href="styles/styles.css">
 </head>
 <body>
+  <!-- Database & Table -->
+  <?php include 'CDataBase.php'; ?>
+  <?php include 'CTable.php'; ?>
+
   <!-- Navbar -->
   <?php include 'navigation.php'; ?>
   <!-- End of Navbar -->
