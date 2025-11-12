@@ -36,11 +36,7 @@
 
             <!-- Password -->
             <label for="password">Password:</label>
-            <input type="password" id="password" name="password"
-                   maxlength="25"
-                   pattern="^[A-Za-z0-9@#$%^&+=!]{6,25}$"
-                   title="Password must be 6–25 characters long and can include letters, numbers, and @#$%^&+=!"
-                   required>
+            <input type="password" id="password" name="password" maxlength="25" pattern="[A-Za-z]+" required>
 
             <!-- Submit -->
             <div class="submit-buttons">
