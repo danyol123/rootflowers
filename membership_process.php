@@ -47,26 +47,11 @@ if (count($errors) > 0) {
     exit();
 }
 
-// Step 4: Hash password (for security)
-$hashed_password = password_hash($password, PASSWORD_DEFAULT);
-
-// Step 5: Insert into database
+// Step 4: Insert into database
 $sql = "INSERT INTO membership (firstname, lastname, email, password)
         VALUES (?, ?, ?, ?)";
-        
-$stmt = mysqli_prepare($conn, $sql);
-mysqli_stmt_bind_param($stmt, "ssss", $firstname, $lastname, $email, $hashed_password);
-
-if (mysqli_stmt_execute($stmt)) {
-    echo "<h2>Registration Successful!</h2>";
-    echo "<p>Welcome, <strong>$firstname $lastname</strong>.</p>";
-    echo "<p>Your membership record has been saved.</p>";
-    echo "<a href='index.php'>Return to Home</a>";
-} else {
-    echo "<h2>Error:</h2> " . mysqli_error($conn);
-}
-
-// Step 6: Close connection
+    
+// Step 5: Close connection
 mysqli_stmt_close($stmt);
 mysqli_close($conn);
 ?>
