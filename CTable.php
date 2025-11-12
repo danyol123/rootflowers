@@ -39,5 +39,43 @@
         echo "Error creating Enquiry table: " . $conn->error;
     }
 
+    // Workshop registrations table
+    $sql_registrations = "CREATE TABLE IF NOT EXISTS registrations (
+        registration_id INT AUTO_INCREMENT PRIMARY KEY,
+        firstname VARCHAR(25) NOT NULL,
+        lastname VARCHAR(25) NOT NULL,
+        email VARCHAR(100) NOT NULL,
+        street VARCHAR(100),
+        city VARCHAR(50),
+        state VARCHAR(50),
+        postcode VARCHAR(10),
+        phone VARCHAR(15),
+        workshop_date DATE,
+        participants VARCHAR(10),
+        workshop_type VARCHAR(30),
+        addons TEXT,
+        comments TEXT,
+        reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    )";
+
+    if ($conn->query($sql_registrations) === FALSE) {
+        echo "Error creating Registrations table: " . $conn->error;
+    }
+
+    // Memberships table
+    $sql_members = "CREATE TABLE IF NOT EXISTS memberships (
+        member_id INT AUTO_INCREMENT PRIMARY KEY,
+        firstname VARCHAR(25) NOT NULL,
+        lastname VARCHAR(25) NOT NULL,
+        email VARCHAR(100) NOT NULL,
+        loginid VARCHAR(50) NOT NULL,
+        password_hash VARCHAR(255) NOT NULL,
+        reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    )";
+
+    if ($conn->query($sql_members) === FALSE) {
+        echo "Error creating Memberships table: " . $conn->error;
+    }
+
     $conn->close();
 ?>
