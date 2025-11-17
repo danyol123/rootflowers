@@ -34,10 +34,6 @@
             <label for="email">Email Address:</label>
             <input type="email" id="email" name="email" required>
 
-            <!-- Login ID -->
-            <label for="loginid">Login ID:</label>
-            <input type="text" id="loginid" name="loginid" maxlength="10" pattern="[A-Za-z]+" required>
-
             <!-- Password -->
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" maxlength="25" pattern="[A-Za-z]+" required>

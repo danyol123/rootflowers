@@ -1,61 +1,76 @@
-<?php
-    session_start();
-    require_once("CTable.php");
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Root Flower">
+    <meta name="keywords" content="Flowers, Shop, Kuching, Sarawak, Malaysia">
+    <meta name="author" content="Daniel, Josiah, Alvin, Kheldy">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="Pictures/Index/logo.png" type="image/png">
+    <title>Root Flower</title>
+    <link rel="stylesheet" href="styles/styles.css">
+</head>
+<body>
 
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "DB";
+<!-- Navbar -->
+  <?php include 'navigation.php'; ?>
+<!-- End of Navbar -->
 
-    $conn = mysqli_connect($servername, $username, $password, $dbname);
+<main>
+  <section class="form-section">
+    <div class="form-container">
+        <h1>Enquiry Confirmation</h1>
+        <?php
+        // Database connection
+        $servername = "localhost";
+        $username = "root";
+        $password = "";
+        $dbname = "DB";
 
-    if (!$conn) {
-        die("Connection failed: " . mysqli_connect_error());
-    }
+        $conn = mysqli_connect($servername, $username, $password, $dbname);
 
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // Data from submitted form
-        $firstname = trim($_POST['firstname']);
-        $lastname = trim($_POST['lastname']);
-        $email = trim($_POST['email']);
-        $phone = trim($_POST['phone']);
-        $enquiry_type = trim($_POST['enquiry-type']);
-        $comments = trim($_POST['comments']);
-        
-        $errors = array();
-        
-        if (empty($firstname)) $errors[] = "First name is required";
-        if (empty($lastname)) $errors[] = "Last name is required";
-        if (empty($email)) $errors[] = "Email is required";
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) $errors[] = "Invalid email format";
-        if (empty($phone)) $errors[] = "Phone number is required";
-        if (!preg_match("/^[0-9]{10}$/", $phone)) $errors[] = "Phone number must be 10 digits";
-        if (empty($enquiry_type)) $errors[] = "Enquiry type is required";
-        if (empty($comments)) $errors[] = "Comments are required";
-        
-        if (empty($errors)) {
-            // Prepare and execute the SQL query
-            $sql = "INSERT INTO enquiry (firstname, lastname, email, phone, enquiry_type, comments) VALUES (?, ?, ?, ?, ?, ?)";
-            $stmt = $conn->prepare($sql);
-            
-            if ($stmt->execute([$firstname, $lastname, $email, $phone, $enquiry_type, $comments])) {
-                $_SESSION['success_message'] = "Thank you! Your enquiry has been submitted successfully.";
-                header("Location: enquiry.php");
-                exit();
-            } else {
-                $_SESSION['error_message'] = "Sorry, there was an error submitting your enquiry. Please try again.";
-                header("Location: enquiry.php");
-                exit();
-            }
-        } else {
-            $_SESSION['error_message'] = implode("<br>", $errors);
-            $_SESSION['form_data'] = $_POST; // Save form data for refilling the form
-            header("Location: enquiry.php");
-            exit();
+        if (!$conn) {
+            die("Connection failed: " . mysqli_connect_error());
         }
-    } else {
-        // If someone tries to access this file directly
-        header("Location: enquiry.php");
-        exit();
-    }
-?>
+
+        // Get form data
+        $firstname = htmlspecialchars($_POST["firstname"]);
+        $lastname = htmlspecialchars($_POST["lastname"]);
+        $email = htmlspecialchars($_POST["email"]);
+        $phone = htmlspecialchars($_POST["phone"]);
+        $enquiry_type = htmlspecialchars($_POST["enquiry-type"]);
+        $comments = htmlspecialchars($_POST["comments"]);
+
+        // Display submitted information
+        echo "<p>Thank you for your enquiry, <strong>" . $firstname . " " . $lastname . "!</strong></p>";
+        echo "<p><strong>Email:</strong> " . $email . "</p>";
+        echo "<p><strong>Phone:</strong> " . $phone . "</p>";
+        echo "<p><strong>Enquiry Type:</strong> " . $enquiry_type . "</p>";
+        echo "<p><strong>Comments:</strong> " . nl2br($comments) . "</p>";
+
+        // Insert into database
+        $sql = "INSERT INTO enquiry (firstname, lastname, email, phone, enquiry_type, comments) VALUES (?, ?, ?, ?, ?, ?)";
+        $stmt = mysqli_prepare($conn, $sql);
+        mysqli_stmt_bind_param($stmt, "ssssss", $firstname, $lastname, $email, $phone, $enquiry_type, $comments);
+
+        if (mysqli_stmt_execute($stmt)) {
+            echo "<p>Your enquiry has been recorded successfully.</p>";
+        } else {
+            echo "<p>Error: " . mysqli_error($conn) . "</p>";
+        }
+
+        echo "<p><a href='enquiry.php'>Return to the Entry Page</a></p>";
+
+        // Close connection
+        mysqli_stmt_close($stmt);
+        mysqli_close($conn);
+        ?>
+    </div>
+  </section>
+</main>
+
+<!-- Footer -->
+  <?php include 'footer.php'; ?>
+
+</body>
+</html>
