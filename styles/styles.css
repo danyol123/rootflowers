@@ -2674,3 +2674,55 @@ display: block;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   filter: brightness(1.05);
   }
+
+/* Admin Panel Main Container */
+.admin-main {
+    display: flex;
+    flex-direction: row;
+    gap: 0;
+    margin: 0;
+    height: 100vh;
+}
+
+/* Admin Sidebar */
+.admin-sidebar {
+    width: 220px;
+    background: #463b2b;
+    color: #fff;
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    min-height: 100vh;
+}
+
+.admin-sidebar h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 22px;
+    color: #f4f1ed;
+}
+
+.admin-sidebar a {
+    padding: 15px 20px;
+    text-decoration: none;
+    color: #ccc;
+    font-size: 16px;
+    display: block;
+    border-left: 4px solid transparent;
+    transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+}
+
+.admin-sidebar a:hover {
+    background: #928473;
+    color: #fff;
+    border-left: 4px solid #f4f1ed;
+}
+
+/* Content area */
+.admin-content {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+}
+

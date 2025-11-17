@@ -6,11 +6,11 @@
     $conn = mysqli_connect($servername, $username, $password);
     
     if(!$conn){
-        die("Connection failed: ".mysqli_connect_error());
+        die("Connection failed: " . mysqli_connect_error());
     }
 
     $sql = "CREATE DATABASE IF NOT EXISTS DB";
-    if ($conn->query($sql) === FALSE) {
+    if (!$conn->query($sql)) {
         die("Error creating database: " . $conn->error);
     }
 
