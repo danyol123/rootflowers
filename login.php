@@ -15,7 +15,9 @@
 <body>
 
   <!-- Navbar -->
-  <?php include 'navigation.php'; ?>
+  <?php
+  include 'navigation.php';
+  ?>
   <!-- End of Navbar -->
 
   <!-- ====== LOGIN PAGE CONTENT ====== -->
@@ -24,16 +26,23 @@
     <div class="login-container">
       <h2 class="login-title">Welcome Back</h2>
       <p class="login-subtitle">Please log in to continue</p>
-      <form class="login-form" action="login_process.php">
+      <form class="login-form" action="login_process.php" method="post">
         <div class="form-group">
-          <label for="email">Email Address</label>
-          <input type="email" id="email" placeholder="Enter your email" required>
+          <label for="name">Name</label>
+          <input type="text" id="name" name="username" placeholder="Enter your name" required>
         </div>
 
         <div class="form-group">
           <label for="password">Password</label>
-          <input type="password" id="password" placeholder="Enter your password" required>
+          <input type="password" id="password" name="password" placeholder="Enter your password" required>
         </div>
+
+        <?php
+        if (isset($_SESSION['login_error'])) {
+            echo '<p style="color:#b00020">' . htmlspecialchars($_SESSION['login_error']) . '</p>';
+            unset($_SESSION['login_error']);
+        }
+        ?>
 
         <button type="submit" class="login-btn">Login</button>
 

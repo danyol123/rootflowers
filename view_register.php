@@ -2,8 +2,8 @@
 session_start();
 
 if (!isset($_SESSION['is_admin']) && (!isset($_SESSION['username']) || $_SESSION['username'] !== 'admin')) {
-		header('Location: login.php');
-		exit();
+	header('Location: login.php');
+	exit();
 }
 
 $servername = 'localhost';
@@ -13,7 +13,7 @@ $dbname = 'DB';
 
 $conn = mysqli_connect($servername, $dbuser, $dbpass, $dbname);
 if (!$conn) {
-		die('Database connection failed: ' . mysqli_connect_error());
+	die('Database connection failed: ' . mysqli_connect_error());
 }
 
 $sql = "SELECT * FROM registrations ORDER BY reg_date DESC";
@@ -24,13 +24,25 @@ $result = $conn->query($sql);
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>View Workshop Registrations</title>
+	<title>Admin — Workshop Registrations</title>
 	<link rel="stylesheet" href="styles/styles.css">
 </head>
 <body>
-	<?php include 'navigation.php'; ?>
 
-	<main class="admin-list">
+<main class="admin-main">
+	<!-- Sidebar (matches admin_panel.php) -->
+	<div class="admin-sidebar">
+		<h2>Admin Panel</h2>
+		<a href="view_register.php">Workshop Registrations</a>
+		<a href="view_enquiry.php">Enquiries</a>
+		<a href="view_membership.php">Memberships</a>
+		<a href="view_login.php">Logins</a>
+		<a href="recyclebin.php">Recycle Bin</a>
+		<a href="index.php">Go back to Home</a>
+	</div>
+
+	<!-- Content area: table lives here -->
+	<div class="admin-content">
 		<section class="list-container">
 			<h1>Workshop Registrations</h1>
 			<p>Total: <?php echo $result ? $result->num_rows : 0; ?></p>
@@ -74,9 +86,8 @@ $result = $conn->query($sql);
 				<p>No registrations found.</p>
 			<?php endif; ?>
 		</section>
-	</main>
-
-	<?php include 'footer.php'; ?>
+	</div>
+</main>
 
 </body>
 </html>
@@ -84,4 +95,5 @@ $result = $conn->query($sql);
 <?php
 $conn->close();
 ?>
+
 
