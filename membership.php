@@ -39,8 +39,10 @@
             <input type="email" id="email" name="email" required>
 
             <!-- Password -->
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" maxlength="25" pattern="[A-Za-z]+" required>
+            <input type="password" id="password" name="password"
+       pattern="^(?=.*[0-9])(?=.*[^A-Za-z0-9]).{8,}$"
+       required>
+
 
             <!-- Submit -->
             <div class="submit-buttons">

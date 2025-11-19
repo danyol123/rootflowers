@@ -38,8 +38,12 @@ if (empty($username) || !preg_match("/^[A-Za-z]+$/", $username)) {
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     $errors[] = "Invalid email address.";
 }
-if (empty($password) || strlen($password) < 6) {
-    $errors[] = "Password must be at least 6 characters.";
+if (empty($password) || 
+    strlen($password) < 8 || 
+    !preg_match('/[0-9]/', $password) ||      
+    !preg_match('/[^A-Za-z0-9]/', $password) 
+) {
+    $errors[] = "Password must be at least 8 characters long and include at least 1 number and 1 symbol.";
 }
 
 // Step 3: If errors exist, show them and stop
