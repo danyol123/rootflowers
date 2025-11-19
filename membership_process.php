@@ -80,3 +80,13 @@ $sql = "INSERT INTO membership (firstname, lastname, username, email, password)
 mysqli_stmt_close($stmt);
 mysqli_close($conn);
 ?>
+
+</div>
+  </section>
+</main>
+
+<!-- Footer -->
+  <?php include 'footer.php'; ?>
+
+</body>
+</html>
