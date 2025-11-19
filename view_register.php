@@ -16,7 +16,25 @@ if (!$conn) {
 	die('Database connection failed: ' . mysqli_connect_error());
 }
 
-$sql = "SELECT * FROM registrations ORDER BY reg_date DESC";
+$allowed_sorts = [
+	'id' => 'registration_id',
+	'name' => "CONCAT(firstname,' ',lastname)",
+	'email' => 'email',
+	'phone' => 'phone',
+	'workshop_date' => 'workshop_date',
+	'participants' => 'participants',
+	'type' => 'workshop_type',
+	'addons' => 'addons',
+	'reg_date' => 'reg_date'
+];
+
+$sort = isset($_GET['sort']) ? $_GET['sort'] : 'reg_date';
+$dir = (isset($_GET['dir']) && strtolower($_GET['dir']) === 'asc') ? 'asc' : 'desc';
+
+// resolve column safely
+$order_by = isset($allowed_sorts[$sort]) ? $allowed_sorts[$sort] : $allowed_sorts['reg_date'];
+
+$sql = "SELECT * FROM registrations ORDER BY $order_by " . ($dir === 'asc' ? 'ASC' : 'DESC');
 $result = $conn->query($sql);
 ?>
 <!DOCTYPE html>
@@ -41,19 +59,29 @@ $result = $conn->query($sql);
 
 			<?php if ($result && $result->num_rows > 0): ?>
 				<div class="table-responsive">
-				<table class="data-table">
+				<table class="data-table" id="registrations-table">
 					<thead>
 						<tr>
-							<th>#</th>
-							<th>Name</th>
-							<th>Email</th>
-							<th>Phone</th>
-							<th>Workshop Date</th>
-							<th>Participants</th>
-							<th>Type</th>
-							<th>Add-ons</th>
+							<?php
+							// helper to build header links that toggle sort direction
+							function header_link($key, $label) {
+								global $sort, $dir;
+								$next = ($sort === $key && $dir === 'asc') ? 'desc' : 'asc';
+								$indicator = ($sort === $key) ? ($dir === 'asc' ? '▲' : '▼') : '';
+								$href = '?sort=' . urlencode($key) . '&dir=' . $next;
+								return '<th class="sortable"><a href="' . htmlspecialchars($href) . '">' . htmlspecialchars($label) . ' <span class="sort-indicator">' . $indicator . '</span></a></th>';
+							}
+							echo header_link('id', '#');
+							echo header_link('name', 'Name');
+							echo header_link('email', 'Email');
+							echo header_link('phone', 'Phone');
+							echo header_link('workshop_date', 'Workshop Date');
+							echo header_link('participants', 'Participants');
+							echo header_link('type', 'Type');
+							echo header_link('addons', 'Add-ons');
+							?>
 							<th>Comments</th>
-							<th>Registered At</th>
+							<?php echo header_link('reg_date', 'Registered At'); ?>
 						</tr>
 					</thead>
 					<tbody>
