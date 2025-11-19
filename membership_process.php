@@ -16,6 +16,7 @@ if (!$conn) {
 // Step 2: Retrieve and validate form data
 $firstname = trim($_POST['firstname']);
 $lastname = trim($_POST['lastname']);
+$username = trim($_POST['username']);
 $email = trim($_POST['email']);
 $password = trim($_POST['password']);
 
@@ -28,6 +29,12 @@ if (empty($firstname) || !preg_match("/^[A-Za-z]+$/", $firstname)) {
 if (empty($lastname) || !preg_match("/^[A-Za-z]+$/", $lastname)) {
     $errors[] = "Invalid last name.";
 }
+
+$username = trim($_POST['username']);
+if (empty($username) || !preg_match("/^[A-Za-z]+$/", $username)) {
+    $errors[] = "Invalid username.";
+}
+
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     $errors[] = "Invalid email address.";
 }
@@ -48,7 +55,7 @@ if (count($errors) > 0) {
 }
 
 // Step 4: Insert into database
-$sql = "INSERT INTO membership (firstname, lastname, email, password)
+$sql = "INSERT INTO membership (firstname, lastname, username, email, password)
         VALUES (?, ?, ?, ?)";
     
 // Step 5: Close connection
