@@ -21,7 +21,7 @@
   <section class="form-section">
     <div class="form-container">
         <h1>Join Rootflower</h1>
-        <form action="memberships_process.php" method="post">
+        <form action="membership_process.php" method="post">
             <!-- First Name -->
             <label for="firstname">First Name:</label>
             <input type="text" id="firstname" name="firstname" maxlength="25" pattern="[A-Za-z]+" required>

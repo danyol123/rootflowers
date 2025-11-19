@@ -68,7 +68,7 @@ if (count($errors) > 0) {
         echo "<li>$error</li>";
     }
     echo "</ul>";
-    echo "<p><a href='memberships.php'>Go back to form</a></p>";
+    echo "<p><a href='membership.php'>Go back to form</a></p>";
     exit();
 }
 
