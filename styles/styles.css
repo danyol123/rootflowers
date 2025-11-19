@@ -2739,3 +2739,19 @@ display: block;
     padding: 10px;
     text-align: left;
 }
+
+.data-table th {
+    background-color: #463b2b;
+    color: #fff;
+}
+
+.data-table th a{
+    color: #fff;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+/* Make the table responsive on narrow screens */
+.table-responsive {
+  overflow-x: auto;
+}
