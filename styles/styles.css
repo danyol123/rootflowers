@@ -2726,3 +2726,16 @@ display: block;
     overflow-y: auto;
 }
 
+.data-table {
+    border-style: solid;
+    border-color: #463b2b;
+    border-width: 2px;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.data-table th, .data-table td {
+    border: 1px solid #463b2b;
+    padding: 10px;
+    text-align: left;
+}
