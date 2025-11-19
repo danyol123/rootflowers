@@ -11,8 +11,8 @@ $username = isset($_POST['username']) ? trim($_POST['username']) : '';
 $password = isset($_POST['password']) ? $_POST['password'] : '';
 
 // Simple hardcoded admin check: Name: Admin, Password: Admin
-if ($username === 'Admin' && $password === 'Admin') {
-    // Set admin session (use lowercase 'admin' to match existing checks)
+
+if (strtolower($username) == strtolower('Admin') && strtolower($password) == strtolower('Admin')){
     $_SESSION['is_admin'] = true;
     $_SESSION['username'] = 'admin';
 

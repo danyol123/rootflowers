@@ -30,13 +30,19 @@
             <label for="lastname">Last Name:</label>
             <input type="text" id="lastname" name="lastname" maxlength="25" pattern="[A-Za-z]+" required>
 
+            <!-- Username-->
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" maxlength="25" pattern="[A-Za-z]+" required>
+
             <!-- Email -->
             <label for="email">Email Address:</label>
             <input type="email" id="email" name="email" required>
 
             <!-- Password -->
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" maxlength="25" pattern="[A-Za-z]+" required>
+            <input type="password" id="password" name="password"
+       pattern="^(?=.*[0-9])(?=.*[^A-Za-z0-9]).{8,}$"
+       required>
+
 
             <!-- Submit -->
             <div class="submit-buttons">
