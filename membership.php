@@ -30,6 +30,10 @@
             <label for="lastname">Last Name:</label>
             <input type="text" id="lastname" name="lastname" maxlength="25" pattern="[A-Za-z]+" required>
 
+            <!-- Username-->
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" maxlength="25" pattern="[A-Za-z]+" required>
+
             <!-- Email -->
             <label for="email">Email Address:</label>
             <input type="email" id="email" name="email" required>
