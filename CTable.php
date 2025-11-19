@@ -67,6 +67,7 @@
         member_id INT AUTO_INCREMENT PRIMARY KEY,
         firstname VARCHAR(25) NOT NULL,
         lastname VARCHAR(25) NOT NULL,
+        username VARCHAR(25) NOT NULL,
         email VARCHAR(100) NOT NULL,
         password_hash VARCHAR(255) NOT NULL,
         reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
