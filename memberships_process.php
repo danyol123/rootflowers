@@ -68,12 +68,12 @@ if (count($errors) > 0) {
         echo "<li>$error</li>";
     }
     echo "</ul>";
-    echo "<p><a href='membership.php'>Go back to form</a></p>";
+    echo "<p><a href='memberships.php'>Go back to form</a></p>";
     exit();
 }
 
 // Step 4: Insert into database
-$sql = "INSERT INTO membership (firstname, lastname, username, email, password)
+$sql = "INSERT INTO memberships (firstname, lastname, username, email, password)
         VALUES (?, ?, ?, ?, ?)";
 
 $stmt = mysqli_prepare($conn, $sql);
