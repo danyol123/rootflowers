@@ -106,10 +106,11 @@ $deleted_result = $conn->query($deleted_sql);
     <meta name="author" content="Daniel, Josiah, Alvin, Kheldy">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="Pictures/Index/logo.png" type="image/png">
-    <title>Root Flower</title>
+    <title>Root Flower — Enquiries</title>
+    <!-- Use the namespaced stylesheet -->
     <link rel="stylesheet" href="styles/styles.css">
 </head>
-<body>
+<body class="rf-root">
 
 <main class="admin-main">
     <aside class="admin-sidebar">
@@ -118,21 +119,21 @@ $deleted_result = $conn->query($deleted_sql);
     </aside>
 
     <section class="admin-content">
-        <div class="list-container">
-            <div class="panel">
-                <div class="meta">
+        <div class="rf-list-container">
+            <div class="rf-panel">
+                <div class="rf-meta">
                     <div>
-                        <h1>All Enquiries</h1>
-                        <p class="muted">Showing active enquiries (not deleted)</p>
+                        <h1 class="rf-h1">All Enquiries</h1>
+                        <p class="rf-muted">Showing active enquiries (not deleted)</p>
                     </div>
-                    <div class="nowrap">
-                        <small class="muted">Total active: <?php echo $active_result ? $active_result->num_rows : 0; ?></small>
+                    <div class="rf-nowrap">
+                        <small class="rf-muted">Total active: <?php echo $active_result ? $active_result->num_rows : 0; ?></small>
                     </div>
                 </div>
 
                 <?php if ($active_result && $active_result->num_rows > 0): ?>
-                <div class="table-responsive">
-                    <table class="data-table">
+                <div class="rf-table-responsive">
+                    <table class="rf-data-table" role="table">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -141,26 +142,26 @@ $deleted_result = $conn->query($deleted_sql);
                                 <th>Type</th>
                                 <th>Comments</th>
                                 <th>Submitted At</th>
-                                <th class="nowrap">Actions</th>
+                                <th class="rf-nowrap">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                         <?php while ($row = $active_result->fetch_assoc()): ?>
                             <?php $completed = intval($row['completed']); ?>
-                            <tr class="<?php echo $completed ? 'completed' : ''; ?>">
+                            <tr class="<?php echo $completed ? 'rf-row-completed' : ''; ?>">
                                 <td><?php echo htmlspecialchars($row['enquiry_id']); ?></td>
-                                <td><?php echo htmlspecialchars($row['firstname'] . ' ' . $row['lastname']); ?><br><small class="muted"><?php echo htmlspecialchars($row['firstname']); ?> <?php echo htmlspecialchars($row['lastname']); ?></small></td>
-                                <td><a href="mailto:<?php echo htmlspecialchars($row['email']); ?>"><?php echo htmlspecialchars($row['email']); ?></a><br><small class="muted"><?php echo htmlspecialchars($row['phone']); ?></small></td>
+                                <td><?php echo htmlspecialchars($row['firstname'] . ' ' . $row['lastname']); ?><br><small class="rf-muted"><?php echo htmlspecialchars($row['firstname']); ?> <?php echo htmlspecialchars($row['lastname']); ?></small></td>
+                                <td><a href="mailto:<?php echo htmlspecialchars($row['email']); ?>"><?php echo htmlspecialchars($row['email']); ?></a><br><small class="rf-muted"><?php echo htmlspecialchars($row['phone']); ?></small></td>
                                 <td><?php echo htmlspecialchars($row['enquiry_type']); ?></td>
                                 <td><?php echo nl2br(htmlspecialchars($row['comments'])); ?></td>
-                                <td><small class="muted"><?php echo htmlspecialchars($row['submit_date']); ?></small></td>
-                                <td class="nowrap">
+                                <td><small class="rf-muted"><?php echo htmlspecialchars($row['submit_date']); ?></small></td>
+                                <td class="rf-nowrap">
                                     <!-- Complete toggle -->
                                     <form method="post" style="display:inline-block; margin-right:.35rem">
                                         <input type="hidden" name="csrf" value="<?php echo $csrf; ?>">
                                         <input type="hidden" name="id" value="<?php echo intval($row['enquiry_id']); ?>">
                                         <input type="hidden" name="action" value="toggle_complete">
-                                        <button class="btn btn-ghost" title="Toggle complete" type="submit"><?php echo $completed ? 'Mark Open' : 'Complete'; ?></button>
+                                        <button class="rf-btn rf-btn-ghost" title="Toggle complete" type="submit"><?php echo $completed ? 'Mark Open' : 'Complete'; ?></button>
                                     </form>
 
                                     <!-- Soft delete (move to deleted) -->
@@ -168,7 +169,7 @@ $deleted_result = $conn->query($deleted_sql);
                                         <input type="hidden" name="csrf" value="<?php echo $csrf; ?>">
                                         <input type="hidden" name="id" value="<?php echo intval($row['enquiry_id']); ?>">
                                         <input type="hidden" name="action" value="soft_delete">
-                                        <button class="btn btn-danger" type="submit">Delete</button>
+                                        <button class="rf-btn rf-btn-danger" type="submit">Delete</button>
                                     </form>
                                 </td>
                             </tr>
@@ -182,20 +183,20 @@ $deleted_result = $conn->query($deleted_sql);
             </div>
 
             <!-- Deleted / Recycle area -->
-            <div class="panel deleted-section">
-                <div class="meta">
+            <div class="rf-panel rf-deleted-section">
+                <div class="rf-meta">
                     <div>
-                        <h1>Deleted Enquiries (Recycle)</h1>
-                        <p class="muted">You can restore or permanently delete entries from here.</p>
+                        <h1 class="rf-h1">Deleted Enquiries (Recycle)</h1>
+                        <p class="rf-muted">You can restore or permanently delete entries from here.</p>
                     </div>
-                    <div class="nowrap">
-                        <small class="muted">Total deleted: <?php echo $deleted_result ? $deleted_result->num_rows : 0; ?></small>
+                    <div class="rf-nowrap">
+                        <small class="rf-muted">Total deleted: <?php echo $deleted_result ? $deleted_result->num_rows : 0; ?></small>
                     </div>
                 </div>
 
                 <?php if ($deleted_result && $deleted_result->num_rows > 0): ?>
-                <div class="table-responsive">
-                    <table class="data-table">
+                <div class="rf-table-responsive">
+                    <table class="rf-data-table" role="table">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -204,7 +205,7 @@ $deleted_result = $conn->query($deleted_sql);
                                 <th>Type</th>
                                 <th>Comments</th>
                                 <th>Deleted At</th>
-                                <th class="nowrap">Actions</th>
+                                <th class="rf-nowrap">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -212,17 +213,17 @@ $deleted_result = $conn->query($deleted_sql);
                             <tr>
                                 <td><?php echo htmlspecialchars($row['enquiry_id']); ?></td>
                                 <td><?php echo htmlspecialchars($row['firstname'] . ' ' . $row['lastname']); ?></td>
-                                <td><a href="mailto:<?php echo htmlspecialchars($row['email']); ?>"><?php echo htmlspecialchars($row['email']); ?></a><br><small class="muted"><?php echo htmlspecialchars($row['phone']); ?></small></td>
+                                <td><a href="mailto:<?php echo htmlspecialchars($row['email']); ?>"><?php echo htmlspecialchars($row['email']); ?></a><br><small class="rf-muted"><?php echo htmlspecialchars($row['phone']); ?></small></td>
                                 <td><?php echo htmlspecialchars($row['enquiry_type']); ?></td>
                                 <td><?php echo nl2br(htmlspecialchars($row['comments'])); ?></td>
-                                <td><small class="muted"><?php echo htmlspecialchars($row['deleted_at']); ?></small></td>
-                                <td class="nowrap">
+                                <td><small class="rf-muted"><?php echo htmlspecialchars($row['deleted_at']); ?></small></td>
+                                <td class="rf-nowrap">
                                     <!-- Restore -->
                                     <form method="post" style="display:inline-block; margin-right:.35rem">
                                         <input type="hidden" name="csrf" value="<?php echo $csrf; ?>">
                                         <input type="hidden" name="id" value="<?php echo intval($row['enquiry_id']); ?>">
                                         <input type="hidden" name="action" value="restore">
-                                        <button class="btn btn-restore" type="submit">Restore</button>
+                                        <button class="rf-btn rf-btn-restore" type="submit">Restore</button>
                                     </form>
 
                                     <!-- Permanent Delete -->
@@ -230,7 +231,7 @@ $deleted_result = $conn->query($deleted_sql);
                                         <input type="hidden" name="csrf" value="<?php echo $csrf; ?>">
                                         <input type="hidden" name="id" value="<?php echo intval($row['enquiry_id']); ?>">
                                         <input type="hidden" name="action" value="perma_delete">
-                                        <button class="btn btn-danger" type="submit">Delete Permanently</button>
+                                        <button class="rf-btn rf-btn-danger" type="submit">Delete Permanently</button>
                                     </form>
                                 </td>
                             </tr>
