@@ -74,19 +74,28 @@ if (count($errors) > 0) {
 
 // Step 4: Insert into database
 $sql = "INSERT INTO membership (firstname, lastname, username, email, password)
-        VALUES (?, ?, ?, ?)";
-    
+        VALUES (?, ?, ?, ?, ?)";
+
+$stmt = mysqli_prepare($conn, $sql);
+
+if (!$stmt) {
+    die("<h2>SQL Prepare Failed: " . mysqli_error($conn) . "</h2>");
+}
+
+mysqli_stmt_bind_param($stmt, "sssss", $firstname, $lastname, $username, $email, $password);
+
+if (mysqli_stmt_execute($stmt)) {
+    echo "<h2>Registration successful!</h2>";
+} else {
+    echo "<h2>Error inserting data: " . mysqli_error($conn) . "</h2>";
+}
+
 // Step 5: Close connection
 mysqli_stmt_close($stmt);
 mysqli_close($conn);
 ?>
 
-</div>
-  </section>
-</main>
-
 <!-- Footer -->
   <?php include 'footer.php'; ?>
-
 </body>
 </html>
