@@ -71,6 +71,10 @@ session_start();
             <label for="comments">Comments</label>
             <textarea id="comments" name="comments" rows="5" cols="30" placeholder="Write your enquiry here..." required></textarea>
 
+          <!-- Honeypot field (hidden from users, bots will fill it) -->
+            <label for="pot">Don't fill in this field</label>
+            <input type="text" name="website" id="pot" tabindex="-1" autocomplete="off">
+
           <!-- Buttons -->
           <div class="submit-buttons">
             <input type="submit" value="Submit Enquiry">
