@@ -1,10 +1,17 @@
 <?php
 session_start();
 
+// Basic admin check - adjust according to your login implementation
 if (!isset($_SESSION['is_admin']) && (!isset($_SESSION['username']) || $_SESSION['username'] !== 'admin')) {
-	header('Location: login.php');
-	exit();
+    header('Location: login.php');
+    exit();
 }
+
+// Simple CSRF token helper
+if (!isset($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(16));
+}
+$csrf = $_SESSION['csrf_token'];
 
 $servername = 'localhost';
 $dbuser = 'root';
@@ -13,100 +20,206 @@ $dbname = 'DB';
 
 $conn = mysqli_connect($servername, $dbuser, $dbpass, $dbname);
 if (!$conn) {
-	die('Database connection failed: ' . mysqli_connect_error());
+    die('Database connection failed: ' . mysqli_connect_error());
 }
 
-$allowed_sorts = [
-	'id' => 'registration_id',
-	'name' => "CONCAT(firstname,' ',lastname)",
-	'email' => 'email',
-	'phone' => 'phone',
-	'workshop_date' => 'workshop_date',
-	'participants' => 'participants',
-	'type' => 'workshop_type',
-	'addons' => 'addons',
-	'reg_date' => 'reg_date'
-];
+// Ensure the registrations table has soft-delete columns. If you prefer to run this once in your DB admin, comment it out.
+$alter_sql = "ALTER TABLE `registrations` 
+    ADD COLUMN `deleted` TINYINT(1) NOT NULL DEFAULT 0,
+    ADD COLUMN `deleted_at` DATETIME NULL DEFAULT NULL";
+// Run safely and ignore errors (older MySQL versions don't support conditional ADD COLUMN syntax)
+@mysqli_query($conn, $alter_sql);
 
-$sort = isset($_GET['sort']) ? $_GET['sort'] : 'reg_date';
-$dir = (isset($_GET['dir']) && strtolower($_GET['dir']) === 'asc') ? 'asc' : 'desc';
+// Handle POST actions: soft-delete, restore, permadelete
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (!isset($_POST['csrf']) || $_POST['csrf'] !== $csrf) {
+        die('Invalid CSRF token');
+    }
 
-// resolve column safely
-$order_by = isset($allowed_sorts[$sort]) ? $allowed_sorts[$sort] : $allowed_sorts['reg_date'];
+    if (isset($_POST['action']) && isset($_POST['id'])) {
+        $id = intval($_POST['id']);
+        switch ($_POST['action']) {
+            case 'soft_delete':
+                $stmt = $conn->prepare("UPDATE registrations SET deleted = 1, deleted_at = NOW() WHERE registration_id = ?");
+                $stmt->bind_param('i', $id);
+                $stmt->execute();
+                $stmt->close();
+                break;
+            case 'restore':
+                $stmt = $conn->prepare("UPDATE registrations SET deleted = 0, deleted_at = NULL WHERE registration_id = ?");
+                $stmt->bind_param('i', $id);
+                $stmt->execute();
+                $stmt->close();
+                break;
+            case 'perma_delete':
+                $stmt = $conn->prepare("DELETE FROM registrations WHERE registration_id = ?");
+                $stmt->bind_param('i', $id);
+                $stmt->execute();
+                $stmt->close();
+                break;
+        }
+    }
 
-$sql = "SELECT * FROM registrations ORDER BY $order_by " . ($dir === 'asc' ? 'ASC' : 'DESC');
-$result = $conn->query($sql);
+    // Redirect to avoid form re-submission
+    header('Location: ' . $_SERVER['PHP_SELF']);
+    exit();
+}
+
+// Fetch active registrations (deleted = 0)
+$active_sql = "SELECT * FROM registrations WHERE deleted = 0 ORDER BY reg_date DESC";
+$active_result = $conn->query($active_sql);
+
+// Fetch deleted registrations (deleted = 1)
+$deleted_sql = "SELECT * FROM registrations WHERE deleted = 1 ORDER BY deleted_at DESC";
+$deleted_result = $conn->query($deleted_sql);
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Admin — Workshop Registrations</title>
-	<link rel="stylesheet" href="styles/styles.css">
+    <meta charset="UTF-8">
+    <meta name="description" content="Root Flower">
+    <meta name="keywords" content="Flowers, Shop, Kuching, Sarawak, Malaysia">
+    <meta name="author" content="Daniel, Josiah, Alvin, Kheldy">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="Pictures/Index/logo.png" type="image/png">
+    <title>Root Flower — Registrations</title>
+    <!-- Use the namespaced stylesheet -->
+    <link rel="stylesheet" href="styles/styles.css">
 </head>
-<body>
+<body class="rf-root">
 
 <main class="admin-main">
-	<!-- Sidebar -->
-    <?php include 'admin_sidebar.php'; ?>
+    <aside class="admin-sidebar">
+        <!-- Sidebar -->
+    	<?php include 'admin_sidebar.php'; ?>
+    </aside>
 
-	<!-- Content area: table lives here -->
-	<div class="admin-content">
-		<section class="list-container">
-			<h1>Workshop Registrations</h1>
-			<p>Total: <?php echo $result ? $result->num_rows : 0; ?></p>
+    <section class="admin-content">
+        <div class="rf-list-container">
+            <div class="rf-panel">
+                <div class="rf-meta">
+                    <div>
+                        <h1 class="rf-h1">All Registrations</h1>
+                        <p class="rf-muted">Showing active registrations (not deleted)</p>
+                    </div>
+                    <div class="rf-nowrap">
+                        <small class="rf-muted">Total active: <?php echo $active_result ? $active_result->num_rows : 0; ?></small>
+                    </div>
+                </div>
 
-			<?php if ($result && $result->num_rows > 0): ?>
-				<div class="table-responsive">
-				<table class="data-table" id="registrations-table">
-					<thead>
-						<tr>
-							<?php
-							// helper to build header links that toggle sort direction
-							function header_link($key, $label) {
-								global $sort, $dir;
-								$next = ($sort === $key && $dir === 'asc') ? 'desc' : 'asc';
-								$indicator = ($sort === $key) ? ($dir === 'asc' ? '▲' : '▼') : '';
-								$href = '?sort=' . urlencode($key) . '&dir=' . $next;
-								return '<th class="sortable"><a href="' . htmlspecialchars($href) . '">' . htmlspecialchars($label) . ' <span class="sort-indicator">' . $indicator . '</span></a></th>';
-							}
-							echo header_link('id', '#');
-							echo header_link('name', 'Name');
-							echo header_link('email', 'Email');
-							echo header_link('phone', 'Phone');
-							echo header_link('workshop_date', 'Workshop Date');
-							echo header_link('participants', 'Participants');
-							echo header_link('type', 'Type');
-							echo header_link('addons', 'Add-ons');
-							?>
-							<th>Comments</th>
-							<?php echo header_link('reg_date', 'Registered At'); ?>
-						</tr>
-					</thead>
-					<tbody>
-					<?php while ($row = $result->fetch_assoc()): ?>
-						<tr>
-							<td><?php echo htmlspecialchars($row['registration_id']); ?></td>
-							<td><?php echo htmlspecialchars($row['firstname'] . ' ' . $row['lastname']); ?></td>
-							<td><a href="mailto:<?php echo htmlspecialchars($row['email']); ?>"><?php echo htmlspecialchars($row['email']); ?></a></td>
-							<td><?php echo htmlspecialchars($row['phone']); ?></td>
-							<td><?php echo htmlspecialchars($row['workshop_date']); ?></td>
-							<td><?php echo htmlspecialchars($row['participants']); ?></td>
-							<td><?php echo htmlspecialchars($row['workshop_type']); ?></td>
-							<td><?php echo nl2br(htmlspecialchars($row['addons'])); ?></td>
-							<td><?php echo nl2br(htmlspecialchars($row['comments'])); ?></td>
-							<td><?php echo htmlspecialchars($row['reg_date']); ?></td>
-						</tr>
-					<?php endwhile; ?>
-					</tbody>
-				</table>
-				</div>
-			<?php else: ?>
-				<p>No registrations found.</p>
-			<?php endif; ?>
-		</section>
-	</div>
+                <?php if ($active_result && $active_result->num_rows > 0): ?>
+                <div class="rf-table-responsive">
+                    <table class="rf-data-table" role="table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Email / Phone</th>
+                                <th>Workshop Date</th>
+                                <th>Participants</th>
+                                <th>Type</th>
+                                <th>Add-ons</th>
+                                <th>Comments</th>
+                                <th>Registered At</th>
+                                <th class="rf-nowrap">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <?php while ($row = $active_result->fetch_assoc()): ?>
+                            <tr>
+                                <td><?php echo htmlspecialchars($row['registration_id']); ?></td>
+                                <td><?php echo htmlspecialchars($row['firstname'] . ' ' . $row['lastname']); ?><br><small class="rf-muted"><?php echo htmlspecialchars($row['street'] . ', ' . $row['city']); ?></small></td>
+                                <td><a href="mailto:<?php echo htmlspecialchars($row['email']); ?>"><?php echo htmlspecialchars($row['email']); ?></a><br><small class="rf-muted"><?php echo htmlspecialchars($row['phone']); ?></small></td>
+                                <td><?php echo htmlspecialchars($row['workshop_date']); ?></td>
+                                <td><?php echo htmlspecialchars($row['participants']); ?></td>
+                                <td><?php echo htmlspecialchars($row['workshop_type']); ?></td>
+                                <td><?php echo nl2br(htmlspecialchars($row['addons'])); ?></td>
+                                <td><?php echo nl2br(htmlspecialchars($row['comments'])); ?></td>
+                                <td><small class="rf-muted"><?php echo htmlspecialchars($row['reg_date']); ?></small></td>
+                                <td class="rf-nowrap">
+                                    <!-- Soft delete (move to deleted) -->
+                                    <form method="post" onsubmit="return confirm('Move this registration to Deleted?');" style="display:inline-block">
+                                        <input type="hidden" name="csrf" value="<?php echo $csrf; ?>">
+                                        <input type="hidden" name="id" value="<?php echo intval($row['registration_id']); ?>">
+                                        <input type="hidden" name="action" value="soft_delete">
+                                        <button class="rf-btn rf-btn-danger" type="submit">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        <?php endwhile; ?>
+                        </tbody>
+                    </table>
+                </div>
+                <?php else: ?>
+                    <p>No registrations found.</p>
+                <?php endif; ?>
+            </div>
+
+            <!-- Deleted / Recycle area -->
+            <div class="rf-panel rf-deleted-section">
+                <div class="rf-meta">
+                    <div>
+                        <h1 class="rf-h1">Deleted Registrations (Recycle)</h1>
+                        <p class="rf-muted">You can restore or permanently delete entries from here.</p>
+                    </div>
+                    <div class="rf-nowrap">
+                        <small class="rf-muted">Total deleted: <?php echo $deleted_result ? $deleted_result->num_rows : 0; ?></small>
+                    </div>
+                </div>
+
+                <?php if ($deleted_result && $deleted_result->num_rows > 0): ?>
+                <div class="rf-table-responsive">
+                    <table class="rf-data-table" role="table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Email / Phone</th>
+                                <th>Type</th>
+                                <th>Comments</th>
+                                <th>Deleted At</th>
+                                <th class="rf-nowrap">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <?php while ($row = $deleted_result->fetch_assoc()): ?>
+                            <tr>
+                                <td><?php echo htmlspecialchars($row['registration_id']); ?></td>
+                                <td><?php echo htmlspecialchars($row['firstname'] . ' ' . $row['lastname']); ?></td>
+                                <td><a href="mailto:<?php echo htmlspecialchars($row['email']); ?>"><?php echo htmlspecialchars($row['email']); ?></a><br><small class="rf-muted"><?php echo htmlspecialchars($row['phone']); ?></small></td>
+                                <td><?php echo htmlspecialchars($row['workshop_type']); ?></td>
+                                <td><?php echo nl2br(htmlspecialchars($row['comments'])); ?></td>
+                                <td><small class="rf-muted"><?php echo htmlspecialchars($row['deleted_at']); ?></small></td>
+                                <td class="rf-nowrap">
+                                    <!-- Restore -->
+                                    <form method="post" style="display:inline-block; margin-right:.35rem">
+                                        <input type="hidden" name="csrf" value="<?php echo $csrf; ?>">
+                                        <input type="hidden" name="id" value="<?php echo intval($row['registration_id']); ?>">
+                                        <input type="hidden" name="action" value="restore">
+                                        <button class="rf-btn rf-btn-restore" type="submit">Restore</button>
+                                    </form>
+
+                                    <!-- Permanent Delete -->
+                                    <form method="post" onsubmit="return confirm('Permanently delete this registration? This cannot be undone.');" style="display:inline-block">
+                                        <input type="hidden" name="csrf" value="<?php echo $csrf; ?>">
+                                        <input type="hidden" name="id" value="<?php echo intval($row['registration_id']); ?>">
+                                        <input type="hidden" name="action" value="perma_delete">
+                                        <button class="rf-btn rf-btn-danger" type="submit">Delete Permanently</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        <?php endwhile; ?>
+                        </tbody>
+                    </table>
+                </div>
+                <?php else: ?>
+                    <p>No deleted registrations. The recycle bin is empty.</p>
+                <?php endif; ?>
+            </div>
+
+        </div>
+    </section>
 </main>
 
 </body>
@@ -115,5 +228,3 @@ $result = $conn->query($sql);
 <?php
 $conn->close();
 ?>
-
-
