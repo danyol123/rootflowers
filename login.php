@@ -28,8 +28,8 @@
       <p class="login-subtitle">Please log in to continue</p>
       <form class="login-form" action="login_process.php" method="post">
         <div class="form-group">
-          <label for="name">Name</label>
-          <input type="text" id="name" name="username" placeholder="Enter your name" required>
+          <label for="name">Username</label>
+          <input type="text" id="name" name="username" placeholder="Enter your username" required>
         </div>
 
         <div class="form-group">
