@@ -23,16 +23,15 @@ if (!$conn) {
     die('Database connection failed: ' . mysqli_connect_error());
 }
 
-// Ensure the enquiry table has the necessary columns. If you prefer to run this once in your DB admin, comment it out.
+// Ensure necessary columns exist (for quick setup; use migrations in production)
 $alter_sql = "ALTER TABLE `enquiry` 
     ADD COLUMN IF NOT EXISTS `deleted` TINYINT(1) NOT NULL DEFAULT 0,
     ADD COLUMN IF NOT EXISTS `deleted_at` DATETIME NULL DEFAULT NULL,
     ADD COLUMN IF NOT EXISTS `completed` TINYINT(1) NOT NULL DEFAULT 0,
     ADD COLUMN IF NOT EXISTS `completed_at` DATETIME NULL DEFAULT NULL";
-// MySQL doesn't support IF NOT EXISTS for ADD COLUMN on older versions; run safely and ignore errors.
 @mysqli_query($conn, $alter_sql);
 
-// Handle POST actions: soft-delete, restore, permadelete, toggle complete
+// Handle POST actions for this page: mark_complete, mark_open
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!isset($_POST['csrf']) || $_POST['csrf'] !== $csrf) {
         die('Invalid CSRF token');
@@ -41,26 +40,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['action']) && isset($_POST['id'])) {
         $id = intval($_POST['id']);
         switch ($_POST['action']) {
-            case 'soft_delete':
-                $stmt = $conn->prepare("UPDATE enquiry SET deleted = 1, deleted_at = NOW() WHERE enquiry_id = ?");
+            case 'mark_complete':
+                // Move to Completed list (not to recycle) — set completed flag
+                $stmt = $conn->prepare("UPDATE enquiry SET completed = 1, completed_at = NOW() WHERE enquiry_id = ?");
                 $stmt->bind_param('i', $id);
                 $stmt->execute();
                 $stmt->close();
                 break;
-            case 'restore':
-                $stmt = $conn->prepare("UPDATE enquiry SET deleted = 0, deleted_at = NULL WHERE enquiry_id = ?");
+
+            case 'mark_open':
+                // Undo completed (move back to active)
+                $stmt = $conn->prepare("UPDATE enquiry SET completed = 0, completed_at = NULL WHERE enquiry_id = ?");
                 $stmt->bind_param('i', $id);
                 $stmt->execute();
                 $stmt->close();
                 break;
-            case 'perma_delete':
-                $stmt = $conn->prepare("DELETE FROM enquiry WHERE enquiry_id = ?");
-                $stmt->bind_param('i', $id);
-                $stmt->execute();
-                $stmt->close();
-                break;
+
+            // keep toggle_complete only if you still want it (optional)
             case 'toggle_complete':
-                // Toggle complete state
                 $stmt = $conn->prepare("SELECT completed FROM enquiry WHERE enquiry_id = ? LIMIT 1");
                 $stmt->bind_param('i', $id);
                 $stmt->execute();
@@ -88,13 +85,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit();
 }
 
-// Fetch active enquiries (deleted = 0)
-$active_sql = "SELECT * FROM enquiry WHERE deleted = 0 ORDER BY submit_date DESC";
+// Fetch active enquiries: not deleted and not completed
+$active_sql = "SELECT * FROM enquiry WHERE deleted = 0 AND completed = 0 ORDER BY submit_date DESC";
 $active_result = $conn->query($active_sql);
 
-// Fetch deleted enquiries (deleted = 1)
-$deleted_sql = "SELECT * FROM enquiry WHERE deleted = 1 ORDER BY deleted_at DESC";
-$deleted_result = $conn->query($deleted_sql);
+// Fetch completed enquiries: not deleted and completed
+$completed_sql = "SELECT * FROM enquiry WHERE deleted = 0 AND completed = 1 ORDER BY completed_at DESC";
+$completed_result = $conn->query($completed_sql);
 ?>
 
 <!DOCTYPE html>
@@ -102,12 +99,9 @@ $deleted_result = $conn->query($deleted_sql);
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="Root Flower">
-    <meta name="keywords" content="Flowers, Shop, Kuching, Sarawak, Malaysia">
-    <meta name="author" content="Daniel, Josiah, Alvin, Kheldy">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="Pictures/Index/logo.png" type="image/png">
     <title>Root Flower — Enquiries</title>
-    <!-- Use the namespaced stylesheet -->
     <link rel="stylesheet" href="styles/styles.css">
 </head>
 <body class="rf-root">
@@ -120,11 +114,13 @@ $deleted_result = $conn->query($deleted_sql);
 
     <section class="admin-content">
         <div class="rf-list-container">
+
+            <!-- Active enquiries -->
             <div class="rf-panel">
                 <div class="rf-meta">
                     <div>
                         <h1 class="rf-h1">All Enquiries</h1>
-                        <p class="rf-muted">Showing active enquiries (not deleted)</p>
+                        <p class="rf-muted">Active enquiries (not deleted and not completed)</p>
                     </div>
                     <div class="rf-nowrap">
                         <small class="rf-muted">Total active: <?php echo $active_result ? $active_result->num_rows : 0; ?></small>
@@ -147,8 +143,7 @@ $deleted_result = $conn->query($deleted_sql);
                         </thead>
                         <tbody>
                         <?php while ($row = $active_result->fetch_assoc()): ?>
-                            <?php $completed = intval($row['completed']); ?>
-                            <tr class="<?php echo $completed ? 'rf-row-completed' : ''; ?>">
+                            <tr>
                                 <td><?php echo htmlspecialchars($row['enquiry_id']); ?></td>
                                 <td><?php echo htmlspecialchars($row['firstname'] . ' ' . $row['lastname']); ?><br><small class="rf-muted"><?php echo htmlspecialchars($row['firstname']); ?> <?php echo htmlspecialchars($row['lastname']); ?></small></td>
                                 <td><a href="mailto:<?php echo htmlspecialchars($row['email']); ?>"><?php echo htmlspecialchars($row['email']); ?></a><br><small class="rf-muted"><?php echo htmlspecialchars($row['phone']); ?></small></td>
@@ -156,21 +151,24 @@ $deleted_result = $conn->query($deleted_sql);
                                 <td><?php echo nl2br(htmlspecialchars($row['comments'])); ?></td>
                                 <td><small class="rf-muted"><?php echo htmlspecialchars($row['submit_date']); ?></small></td>
                                 <td class="rf-nowrap">
-                                    <!-- Complete toggle -->
-                                    <form method="post" style="display:inline-block; margin-right:.35rem">
-                                        <input type="hidden" name="csrf" value="<?php echo $csrf; ?>">
-                                        <input type="hidden" name="id" value="<?php echo intval($row['enquiry_id']); ?>">
-                                        <input type="hidden" name="action" value="toggle_complete">
-                                        <button class="rf-btn rf-btn-ghost" title="Toggle complete" type="submit"><?php echo $completed ? 'Mark Open' : 'Complete'; ?></button>
-                                    </form>
+                                    <div class="rf-actions">
+                                        <!-- Mark Complete: moves enquiry to Completed section -->
+                                        <form method="post" class="rf-inline">
+                                            <input type="hidden" name="csrf" value="<?php echo $csrf; ?>">
+                                            <input type="hidden" name="id" value="<?php echo intval($row['enquiry_id']); ?>">
+                                            <input type="hidden" name="action" value="mark_complete">
+                                            <button class="rf-btn rf-btn-complete" type="submit" title="Mark as completed">Complete</button>
+                                        </form>
 
-                                    <!-- Soft delete (move to deleted) -->
-                                    <form method="post" onsubmit="return confirm('Move this enquiry to Deleted?');" style="display:inline-block">
-                                        <input type="hidden" name="csrf" value="<?php echo $csrf; ?>">
-                                        <input type="hidden" name="id" value="<?php echo intval($row['enquiry_id']); ?>">
-                                        <input type="hidden" name="action" value="soft_delete">
-                                        <button class="rf-btn rf-btn-danger" type="submit">Delete</button>
-                                    </form>
+                                        <!-- Delete button — sends to recycle.php (soft-delete) -->
+                                        <form method="post" action="recycle.php" class="rf-inline" onsubmit="return confirm('Are you sure you want to delete this enquiry? It will move to Recycle Bin.')">
+                                            <input type="hidden" name="csrf" value="<?php echo $csrf; ?>">
+                                            <input type="hidden" name="table" value="enquiry">
+                                            <input type="hidden" name="id" value="<?php echo intval($row['enquiry_id']); ?>">
+                                            <input type="hidden" name="action" value="soft_delete">
+                                            <button class="rf-btn rf-btn-danger" type="submit">Delete</button>
+                                        </form>
+                                    </div>
                                 </td>
                             </tr>
                         <?php endwhile; ?>
@@ -178,23 +176,23 @@ $deleted_result = $conn->query($deleted_sql);
                     </table>
                 </div>
                 <?php else: ?>
-                    <p>No enquiries found.</p>
+                    <p>No active enquiries found.</p>
                 <?php endif; ?>
             </div>
 
-            <!-- Deleted / Recycle area -->
-            <div class="rf-panel rf-deleted-section">
+            <!-- Completed enquiries -->
+            <div class="rf-panel">
                 <div class="rf-meta">
                     <div>
-                        <h1 class="rf-h1">Deleted Enquiries (Recycle)</h1>
-                        <p class="rf-muted">You can restore or permanently delete entries from here.</p>
+                        <h1 class="rf-h1">Completed Enquiries</h1>
+                        <p class="rf-muted">Enquiries marked completed. From here you can reopen them or move them to the Recycle Bin.</p>
                     </div>
                     <div class="rf-nowrap">
-                        <small class="rf-muted">Total deleted: <?php echo $deleted_result ? $deleted_result->num_rows : 0; ?></small>
+                        <small class="rf-muted">Total completed: <?php echo $completed_result ? $completed_result->num_rows : 0; ?></small>
                     </div>
                 </div>
 
-                <?php if ($deleted_result && $deleted_result->num_rows > 0): ?>
+                <?php if ($completed_result && $completed_result->num_rows > 0): ?>
                 <div class="rf-table-responsive">
                     <table class="rf-data-table" role="table">
                         <thead>
@@ -204,35 +202,38 @@ $deleted_result = $conn->query($deleted_sql);
                                 <th>Email / Phone</th>
                                 <th>Type</th>
                                 <th>Comments</th>
-                                <th>Deleted At</th>
+                                <th>Completed At</th>
                                 <th class="rf-nowrap">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                        <?php while ($row = $deleted_result->fetch_assoc()): ?>
-                            <tr>
+                        <?php while ($row = $completed_result->fetch_assoc()): ?>
+                            <tr class="rf-row-completed">
                                 <td><?php echo htmlspecialchars($row['enquiry_id']); ?></td>
                                 <td><?php echo htmlspecialchars($row['firstname'] . ' ' . $row['lastname']); ?></td>
                                 <td><a href="mailto:<?php echo htmlspecialchars($row['email']); ?>"><?php echo htmlspecialchars($row['email']); ?></a><br><small class="rf-muted"><?php echo htmlspecialchars($row['phone']); ?></small></td>
                                 <td><?php echo htmlspecialchars($row['enquiry_type']); ?></td>
                                 <td><?php echo nl2br(htmlspecialchars($row['comments'])); ?></td>
-                                <td><small class="rf-muted"><?php echo htmlspecialchars($row['deleted_at']); ?></small></td>
+                                <td><small class="rf-muted"><?php echo htmlspecialchars($row['completed_at']); ?></small></td>
                                 <td class="rf-nowrap">
-                                    <!-- Restore -->
-                                    <form method="post" style="display:inline-block; margin-right:.35rem">
-                                        <input type="hidden" name="csrf" value="<?php echo $csrf; ?>">
-                                        <input type="hidden" name="id" value="<?php echo intval($row['enquiry_id']); ?>">
-                                        <input type="hidden" name="action" value="restore">
-                                        <button class="rf-btn rf-btn-restore" type="submit">Restore</button>
-                                    </form>
+                                    <div class="rf-actions">
+                                        <!-- Mark Open (undo completed) -->
+                                        <form method="post" class="rf-inline">
+                                            <input type="hidden" name="csrf" value="<?php echo $csrf; ?>">
+                                            <input type="hidden" name="id" value="<?php echo intval($row['enquiry_id']); ?>">
+                                            <input type="hidden" name="action" value="mark_open">
+                                            <button class="rf-btn rf-btn-ghost" type="submit">Mark Open</button>
+                                        </form>
 
-                                    <!-- Permanent Delete -->
-                                    <form method="post" onsubmit="return confirm('Permanently delete this enquiry? This cannot be undone.');" style="display:inline-block">
-                                        <input type="hidden" name="csrf" value="<?php echo $csrf; ?>">
-                                        <input type="hidden" name="id" value="<?php echo intval($row['enquiry_id']); ?>">
-                                        <input type="hidden" name="action" value="perma_delete">
-                                        <button class="rf-btn rf-btn-danger" type="submit">Delete Permanently</button>
-                                    </form>
+                                        <!-- Move to Recycle (soft-delete) posts to recycle.php -->
+                                        <form method="post" action="recycle.php" class="rf-inline" onsubmit="return confirm('Move this completed enquiry to the Recycle Bin?');">
+                                            <input type="hidden" name="csrf" value="<?php echo $csrf; ?>">
+                                            <input type="hidden" name="id" value="<?php echo intval($row['enquiry_id']); ?>">
+                                            <input type="hidden" name="action" value="soft_delete">
+                                            <input type="hidden" name="table" value="enquiry">
+                                            <button class="rf-btn rf-btn-danger" type="submit">Move to Recycle</button>
+                                        </form>
+                                    </div>
                                 </td>
                             </tr>
                         <?php endwhile; ?>
@@ -240,7 +241,7 @@ $deleted_result = $conn->query($deleted_sql);
                     </table>
                 </div>
                 <?php else: ?>
-                    <p>No deleted enquiries. The recycle bin is empty.</p>
+                    <p>No completed enquiries.</p>
                 <?php endif; ?>
             </div>
 

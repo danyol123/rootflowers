@@ -33,6 +33,14 @@
             die("Connection failed: " . mysqli_connect_error());
         }
 
+        // Honeypot check - if filled, it's likely a bot
+        if (!empty($_POST['website'])) {
+            echo "<p>Error: Invalid submission detected.</p>";
+            echo "<p><a href='enquiry.php'>Return to the Entry Page</a></p>";
+            mysqli_close($conn);
+            exit();
+        }
+
         // Get form data
         $firstname = htmlspecialchars($_POST["firstname"]);
         $lastname = htmlspecialchars($_POST["lastname"]);
