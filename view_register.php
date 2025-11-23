@@ -23,14 +23,15 @@ if (!$conn) {
     die('Database connection failed: ' . mysqli_connect_error());
 }
 
-// Ensure the registrations table has soft-delete columns. If you prefer to run this once in your DB admin, comment it out.
+// Ensure necessary columns exist (for quick setup; use migrations in production)
 $alter_sql = "ALTER TABLE `registrations` 
-    ADD COLUMN `deleted` TINYINT(1) NOT NULL DEFAULT 0,
-    ADD COLUMN `deleted_at` DATETIME NULL DEFAULT NULL";
-// Run safely and ignore errors (older MySQL versions don't support conditional ADD COLUMN syntax)
+    ADD COLUMN IF NOT EXISTS `deleted` TINYINT(1) NOT NULL DEFAULT 0,
+    ADD COLUMN IF NOT EXISTS `deleted_at` DATETIME NULL DEFAULT NULL,
+    ADD COLUMN IF NOT EXISTS `processed` TINYINT(1) NOT NULL DEFAULT 0,
+    ADD COLUMN IF NOT EXISTS `processed_at` DATETIME NULL DEFAULT NULL";
 @mysqli_query($conn, $alter_sql);
 
-// Handle POST actions: soft-delete, restore, permadelete
+// Handle POST actions for processing registrations: mark_processed, mark_open
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!isset($_POST['csrf']) || $_POST['csrf'] !== $csrf) {
         die('Invalid CSRF token');
@@ -39,23 +40,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['action']) && isset($_POST['id'])) {
         $id = intval($_POST['id']);
         switch ($_POST['action']) {
-            case 'soft_delete':
-                $stmt = $conn->prepare("UPDATE registrations SET deleted = 1, deleted_at = NOW() WHERE registration_id = ?");
+            case 'mark_processed':
+                $stmt = $conn->prepare("UPDATE registrations SET processed = 1, processed_at = NOW() WHERE registration_id = ?");
                 $stmt->bind_param('i', $id);
                 $stmt->execute();
                 $stmt->close();
                 break;
-            case 'restore':
-                $stmt = $conn->prepare("UPDATE registrations SET deleted = 0, deleted_at = NULL WHERE registration_id = ?");
+            case 'mark_open':
+                $stmt = $conn->prepare("UPDATE registrations SET processed = 0, processed_at = NULL WHERE registration_id = ?");
                 $stmt->bind_param('i', $id);
                 $stmt->execute();
                 $stmt->close();
                 break;
-            case 'perma_delete':
-                $stmt = $conn->prepare("DELETE FROM registrations WHERE registration_id = ?");
+            case 'toggle_processed':
+                $stmt = $conn->prepare("SELECT processed FROM registrations WHERE registration_id = ? LIMIT 1");
                 $stmt->bind_param('i', $id);
                 $stmt->execute();
-                $stmt->close();
+                $stmt->bind_result($cur);
+                if ($stmt->fetch()) {
+                    $stmt->close();
+                    $new = $cur ? 0 : 1;
+                    if ($new) {
+                        $stmt2 = $conn->prepare("UPDATE registrations SET processed = 1, processed_at = NOW() WHERE registration_id = ?");
+                    } else {
+                        $stmt2 = $conn->prepare("UPDATE registrations SET processed = 0, processed_at = NULL WHERE registration_id = ?");
+                    }
+                    $stmt2->bind_param('i', $id);
+                    $stmt2->execute();
+                    $stmt2->close();
+                } else {
+                    $stmt->close();
+                }
                 break;
         }
     }
@@ -65,13 +80,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit();
 }
 
-// Fetch active registrations (deleted = 0)
-$active_sql = "SELECT * FROM registrations WHERE deleted = 0 ORDER BY reg_date DESC";
+// Fetch active registrations: not deleted and not processed
+$active_sql = "SELECT * FROM registrations WHERE deleted = 0 AND processed = 0 ORDER BY reg_date DESC";
 $active_result = $conn->query($active_sql);
 
-// Fetch deleted registrations (deleted = 1)
-$deleted_sql = "SELECT * FROM registrations WHERE deleted = 1 ORDER BY deleted_at DESC";
-$deleted_result = $conn->query($deleted_sql);
+// Fetch processed registrations: not deleted and processed
+$completed_sql = "SELECT * FROM registrations WHERE deleted = 0 AND processed = 1 ORDER BY processed_at DESC";
+$completed_result = $conn->query($completed_sql);
 ?>
 
 <!DOCTYPE html>
@@ -138,13 +153,24 @@ $deleted_result = $conn->query($deleted_sql);
                                 <td><?php echo nl2br(htmlspecialchars($row['comments'])); ?></td>
                                 <td><small class="rf-muted"><?php echo htmlspecialchars($row['reg_date']); ?></small></td>
                                 <td class="rf-nowrap">
-                                    <!-- Soft delete (move to deleted) -->
-                                    <form method="post" onsubmit="return confirm('Move this registration to Deleted?');" style="display:inline-block">
-                                        <input type="hidden" name="csrf" value="<?php echo $csrf; ?>">
-                                        <input type="hidden" name="id" value="<?php echo intval($row['registration_id']); ?>">
-                                        <input type="hidden" name="action" value="soft_delete">
-                                        <button class="rf-btn rf-btn-danger" type="submit">Delete</button>
-                                    </form>
+                                    <div class="rf-actions">
+                                        <!-- Mark Processed (moves to Completed section) -->
+                                        <form method="post" class="rf-inline" style="display:inline-block; margin-right:.35rem">
+                                            <input type="hidden" name="csrf" value="<?php echo $csrf; ?>">
+                                            <input type="hidden" name="id" value="<?php echo intval($row['registration_id']); ?>">
+                                            <input type="hidden" name="action" value="mark_processed">
+                                            <button class="rf-btn rf-btn-complete" type="submit">Complete</button>
+                                        </form>
+
+                                        <!-- Delete button — sends to recycle.php (soft-delete) -->
+                                        <form method="post" action="recycle.php" class="rf-inline" onsubmit="return confirm('Are you sure you want to delete this registration? It will move to Recycle Bin.')" style="display:inline-block">
+                                            <input type="hidden" name="csrf" value="<?php echo $csrf; ?>">
+                                            <input type="hidden" name="table" value="registrations">
+                                            <input type="hidden" name="id" value="<?php echo intval($row['registration_id']); ?>">
+                                            <input type="hidden" name="action" value="soft_delete">
+                                            <button class="rf-btn rf-btn-danger" type="submit">Delete</button>
+                                        </form>
+                                    </div>
                                 </td>
                             </tr>
                         <?php endwhile; ?>
@@ -156,19 +182,19 @@ $deleted_result = $conn->query($deleted_sql);
                 <?php endif; ?>
             </div>
 
-            <!-- Deleted / Recycle area -->
-            <div class="rf-panel rf-deleted-section">
+            <!-- Completed / Processed registrations (matches enquiry layout) -->
+            <div class="rf-panel">
                 <div class="rf-meta">
                     <div>
-                        <h1 class="rf-h1">Deleted Registrations (Recycle)</h1>
-                        <p class="rf-muted">You can restore or permanently delete entries from here.</p>
+                        <h1 class="rf-h1">Completed Registrations</h1>
+                        <p class="rf-muted">Registrations marked completed/processed. From here you can reopen them or move them to the Recycle Bin.</p>
                     </div>
                     <div class="rf-nowrap">
-                        <small class="rf-muted">Total deleted: <?php echo $deleted_result ? $deleted_result->num_rows : 0; ?></small>
+                        <small class="rf-muted">Total completed: <?php echo $completed_result ? $completed_result->num_rows : 0; ?></small>
                     </div>
                 </div>
 
-                <?php if ($deleted_result && $deleted_result->num_rows > 0): ?>
+                <?php if ($completed_result && $completed_result->num_rows > 0): ?>
                 <div class="rf-table-responsive">
                     <table class="rf-data-table" role="table">
                         <thead>
@@ -178,35 +204,38 @@ $deleted_result = $conn->query($deleted_sql);
                                 <th>Email / Phone</th>
                                 <th>Type</th>
                                 <th>Comments</th>
-                                <th>Deleted At</th>
+                                <th>Completed At</th>
                                 <th class="rf-nowrap">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                        <?php while ($row = $deleted_result->fetch_assoc()): ?>
-                            <tr>
+                        <?php while ($row = $completed_result->fetch_assoc()): ?>
+                            <tr class="rf-row-completed">
                                 <td><?php echo htmlspecialchars($row['registration_id']); ?></td>
                                 <td><?php echo htmlspecialchars($row['firstname'] . ' ' . $row['lastname']); ?></td>
                                 <td><a href="mailto:<?php echo htmlspecialchars($row['email']); ?>"><?php echo htmlspecialchars($row['email']); ?></a><br><small class="rf-muted"><?php echo htmlspecialchars($row['phone']); ?></small></td>
                                 <td><?php echo htmlspecialchars($row['workshop_type']); ?></td>
                                 <td><?php echo nl2br(htmlspecialchars($row['comments'])); ?></td>
-                                <td><small class="rf-muted"><?php echo htmlspecialchars($row['deleted_at']); ?></small></td>
+                                <td><small class="rf-muted"><?php echo htmlspecialchars($row['processed_at']); ?></small></td>
                                 <td class="rf-nowrap">
-                                    <!-- Restore -->
-                                    <form method="post" style="display:inline-block; margin-right:.35rem">
-                                        <input type="hidden" name="csrf" value="<?php echo $csrf; ?>">
-                                        <input type="hidden" name="id" value="<?php echo intval($row['registration_id']); ?>">
-                                        <input type="hidden" name="action" value="restore">
-                                        <button class="rf-btn rf-btn-restore" type="submit">Restore</button>
-                                    </form>
+                                    <div class="rf-actions">
+                                        <!-- Mark Open (undo completed) -->
+                                        <form method="post" class="rf-inline" style="display:inline-block; margin-right:.35rem">
+                                            <input type="hidden" name="csrf" value="<?php echo $csrf; ?>">
+                                            <input type="hidden" name="id" value="<?php echo intval($row['registration_id']); ?>">
+                                            <input type="hidden" name="action" value="mark_open">
+                                            <button class="rf-btn rf-btn-ghost" type="submit">Mark Open</button>
+                                        </form>
 
-                                    <!-- Permanent Delete -->
-                                    <form method="post" onsubmit="return confirm('Permanently delete this registration? This cannot be undone.');" style="display:inline-block">
-                                        <input type="hidden" name="csrf" value="<?php echo $csrf; ?>">
-                                        <input type="hidden" name="id" value="<?php echo intval($row['registration_id']); ?>">
-                                        <input type="hidden" name="action" value="perma_delete">
-                                        <button class="rf-btn rf-btn-danger" type="submit">Delete Permanently</button>
-                                    </form>
+                                        <!-- Move to Recycle (soft-delete) posts to recycle.php -->
+                                        <form method="post" action="recycle.php" class="rf-inline" onsubmit="return confirm('Move this completed registration to the Recycle Bin?');" style="display:inline-block">
+                                            <input type="hidden" name="csrf" value="<?php echo $csrf; ?>">
+                                            <input type="hidden" name="id" value="<?php echo intval($row['registration_id']); ?>">
+                                            <input type="hidden" name="action" value="soft_delete">
+                                            <input type="hidden" name="table" value="registrations">
+                                            <button class="rf-btn rf-btn-danger" type="submit">Move to Recycle</button>
+                                        </form>
+                                    </div>
                                 </td>
                             </tr>
                         <?php endwhile; ?>
@@ -214,7 +243,7 @@ $deleted_result = $conn->query($deleted_sql);
                     </table>
                 </div>
                 <?php else: ?>
-                    <p>No deleted registrations. The recycle bin is empty.</p>
+                    <p>No completed registrations.</p>
                 <?php endif; ?>
             </div>
 

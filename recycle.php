@@ -88,10 +88,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && in_array($action, ['soft_delete','p
     <body class="rf-root">
     <main class="admin-main">
         <aside class="admin-sidebar">
-            <h2>Admin Panel</h2>
-            <a href="view_enquiry.php">Enquiries</a>
-            <a href="recycle.php" class="rf-active">Recycle Bin</a>
-            <a href="index.php">Go back to Home</a>
+            <!-- Sidebar -->
+            <?php include 'admin_sidebar.php'; ?>
         </aside>
 
         <section class="admin-content">
