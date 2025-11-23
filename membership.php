@@ -39,9 +39,8 @@
             <input type="email" id="email" name="email" required>
 
             <!-- Password -->
-            <input type="password" id="password" name="password"
-       pattern="^(?=.*[0-9])(?=.*[^A-Za-z0-9]).{8,}$"
-       required>
+            <label for="password_hash">Password:</label>
+            <input type="password_hash" id="password_hash" name="password_hash"pattern="^(?=.*[0-9])(?=.*[^A-Za-z0-9]).{8,}$"required>
 
 
             <!-- Submit -->

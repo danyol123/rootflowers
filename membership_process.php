@@ -16,11 +16,11 @@
 
 // Step 1: Connect to the database
 $servername = "localhost";
-$username = "root";      
-$password = "";           
+$db_user = "root";
+$db_pass = "";           
 $dbname = "DB";   
 
-$conn = mysqli_connect($servername, $username, $password, $dbname);
+$conn = mysqli_connect($servername, $db_user, $db_pass, $dbname);
 
 // Check connection
 if (!$conn) {
@@ -32,7 +32,14 @@ $firstname = trim($_POST['firstname']);
 $lastname = trim($_POST['lastname']);
 $username = trim($_POST['username']);
 $email = trim($_POST['email']);
-$password = trim($_POST['password']);
+
+// accept either 'password' or 'password_hash' form field if needed
+$password = "";
+if (isset($_POST['password'])) {
+    $password = trim($_POST['password']);
+} elseif (isset($_POST['password_hash'])) {
+    $password = trim($_POST['password_hash']);
+}
 
 $errors = [];
 
@@ -44,7 +51,6 @@ if (empty($lastname) || !preg_match("/^[A-Za-z]+$/", $lastname)) {
     $errors[] = "Invalid last name.";
 }
 
-$username = trim($_POST['username']);
 if (empty($username) || !preg_match("/^[A-Za-z]+$/", $username)) {
     $errors[] = "Invalid username.";
 }
@@ -55,7 +61,7 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 if (empty($password) || 
     strlen($password) < 8 || 
     !preg_match('/[0-9]/', $password) ||      
-    !preg_match('/[^A-Za-z0-9]/', $password) 
+    !preg_match('/[^A-Za-z0-9]/', $password)
 ) {
     $errors[] = "Password must be at least 8 characters long and include at least 1 number and 1 symbol.";
 }
@@ -72,8 +78,11 @@ if (count($errors) > 0) {
     exit();
 }
 
-// Step 4: Insert into database
-$sql = "INSERT INTO memberships (firstname, lastname, username, email, password)
+// Step 4: Hash password before storing
+$password_hash = password_hash($password, PASSWORD_DEFAULT);
+
+// Step 5: Insert into database
+$sql = "INSERT INTO memberships (firstname, lastname, username, email, password_hash)
         VALUES (?, ?, ?, ?, ?)";
 
 $stmt = mysqli_prepare($conn, $sql);
@@ -82,7 +91,7 @@ if (!$stmt) {
     die("<h2>SQL Prepare Failed: " . mysqli_error($conn) . "</h2>");
 }
 
-mysqli_stmt_bind_param($stmt, "sssss", $firstname, $lastname, $username, $email, $password);
+mysqli_stmt_bind_param($stmt, "sssss", $firstname, $lastname, $username, $email, $password_hash);
 
 if (mysqli_stmt_execute($stmt)) {
     echo "<h2>Registration successful!</h2>";
@@ -90,7 +99,7 @@ if (mysqli_stmt_execute($stmt)) {
     echo "<h2>Error inserting data: " . mysqli_error($conn) . "</h2>";
 }
 
-// Step 5: Close connection
+// Step 6: Close connection
 mysqli_stmt_close($stmt);
 mysqli_close($conn);
 ?>
