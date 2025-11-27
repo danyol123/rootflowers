@@ -33,6 +33,8 @@ $allowed_sorts = [
     'participants' => 'participants',
     'type' => 'workshop_type',
     'processed_at' => 'processed_at',
+    'addons' => 'addons',
+    'comments' => 'comments',
     'reg_date' => 'reg_date'
 ];
 $sort = isset($_GET['sort']) && array_key_exists($_GET['sort'], $allowed_sorts) ? $_GET['sort'] : 'reg_date';
@@ -316,14 +318,14 @@ if (isset($_SESSION['flash'])) {
                                         }
                                         echo header_link('id', '#');
                                         echo header_link('name', 'Name');
-                                        echo header_link('email', 'Email');
-                                        echo header_link('phone', 'Phone');
+                                        echo header_link('email', 'Email / Phone');
                                         echo header_link('workshop_date', 'Workshop Date');
                                         echo header_link('participants', 'Participants');
                                         echo header_link('type', 'Type');
-                                        echo header_link('reg_date', 'Comments');
+                                        echo header_link('addons', 'Add-ons');
+                                        echo header_link('comments', 'Comments');
+                                        echo header_link('reg_date', 'Registered At');
                                         ?>
-                                        <th>Registered at</th>
                                         <th class="rf-nowrap">Actions</th>
                                     </tr>
                         </thead>
@@ -394,12 +396,14 @@ if (isset($_SESSION['flash'])) {
                                 <?php
                                 echo header_link('id', '#');
                                 echo header_link('name', 'Name');
-                                echo header_link('email', 'Email');
-                                echo header_link('phone', 'Phone');
+                                echo header_link('email', 'Email / Phone');
+                                echo header_link('workshop_date', 'Workshop Date');
+                                echo header_link('participants', 'Participants');
                                 echo header_link('type', 'Type');
+                                echo header_link('addons', 'Add-ons');
+                                echo header_link('comments', 'Comments');
+                                echo header_link('processed_at', 'Completed At');
                                 ?>
-                                <th>Comments</th>
-                                <?php echo header_link('reg_date', 'Completed At'); ?>
                                 <th class="rf-nowrap">Actions</th>
                             </tr>
                         </thead>
@@ -407,19 +411,25 @@ if (isset($_SESSION['flash'])) {
                         <?php while ($row = $completed_result->fetch_assoc()): ?>
                             <tr class="rf-row-completed">
                                 <td><?php echo htmlspecialchars($row['registration_id']); ?></td>
-                                <td><?php echo htmlspecialchars($row['firstname'] . ' ' . $row['lastname']); ?></td>
+                                <td><?php echo htmlspecialchars($row['firstname'] . ' ' . $row['lastname']); ?><br><small class="rf-muted"><?php echo htmlspecialchars($row['street'] . ', ' . $row['city']); ?></small></td>
                                 <td><a href="mailto:<?php echo htmlspecialchars($row['email']); ?>"><?php echo htmlspecialchars($row['email']); ?></a><br><small class="rf-muted"><?php echo htmlspecialchars($row['phone']); ?></small></td>
+                                <td><?php echo htmlspecialchars($row['workshop_date']); ?></td>
+                                <td><?php echo htmlspecialchars($row['participants']); ?></td>
                                 <td><?php echo htmlspecialchars($row['workshop_type']); ?></td>
+                                <td><?php echo nl2br(htmlspecialchars($row['addons'])); ?></td>
                                 <td><?php echo nl2br(htmlspecialchars($row['comments'])); ?></td>
                                 <td><small class="rf-muted"><?php echo htmlspecialchars($row['processed_at']); ?></small></td>
                                 <td class="rf-nowrap">
                                     <div class="rf-actions">
+                                        
+                                        <a class="rf-btn rf-btn-ghost rf-btn-view" href="?view=<?php echo intval($row['registration_id']); ?>">View</a>
+                                        <a class="rf-btn rf-btn-ghost rf-btn-edit" href="?edit=<?php echo intval($row['registration_id']); ?>">Edit</a>
                                         <!-- Mark Open (undo completed) -->
                                         <form method="post" class="rf-inline" style="display:inline-block; margin-right:.35rem">
                                             <input type="hidden" name="csrf" value="<?php echo $csrf; ?>">
                                             <input type="hidden" name="id" value="<?php echo intval($row['registration_id']); ?>">
                                             <input type="hidden" name="action" value="mark_open">
-                                            <button class="rf-btn rf-btn-ghost" type="submit">Mark Open</button>
+                                            <button class="rf-btn rf-btn-ghost rf-btn-complete" type="submit">Mark Open</button>
                                         </form>
 
                                         <!-- Move to Recycle (soft-delete) posts to recycle.php -->
