@@ -77,6 +77,7 @@ $result = $conn->query($sql);
                     <p><strong>User Agent:</strong><br><div class="rf-agent"><?php echo htmlspecialchars($modal_row['user_agent']); ?></div></p>
                     <p><strong>Logged At:</strong> <?php echo htmlspecialchars($modal_row['login_at']); ?></p>
                     <p><a class="rf-btn rf-btn-ghost" href="view_login.php">Close</a></p>
+                    <hr>
                 </div>
                 <?php endif; ?>
 
