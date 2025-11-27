@@ -32,13 +32,16 @@ $alter_sql = "ALTER TABLE `registrations`
 @mysqli_query($conn, $alter_sql);
 
 // Handle POST actions for processing registrations: mark_processed, mark_open
+// initialize create errors container
+$create_errors = [];
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!isset($_POST['csrf']) || $_POST['csrf'] !== $csrf) {
         die('Invalid CSRF token');
     }
 
+    $shouldRedirect = true;
     if (isset($_POST['action']) && (isset($_POST['id']) || $_POST['action'] === 'create')) {
-        $id = intval($_POST['id']);
+        $id = isset($_POST['id']) ? intval($_POST['id']) : 0;
         switch ($_POST['action']) {
             case 'mark_processed':
                 $stmt = $conn->prepare("UPDATE registrations SET processed = 1, processed_at = NOW() WHERE registration_id = ?");
@@ -116,10 +119,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $stmt->bind_param('sssssssssssss', $firstname, $lastname, $email, $street, $city, $state, $postcode, $phone, $workshop_date, $participants, $workshop_type, $addons, $comments);
                     $stmt->execute();
                     $stmt->close();
-                    // Redirect to avoid form re-submission
-                    header('Location: ' . $_SERVER['PHP_SELF']);
-                    exit();
+                    $_SESSION['flash'] = 'Registration created successfully.';
+                    // redirect on success
+                    $shouldRedirect = true;
                 } else {
+                    $shouldRedirect = false; // do not redirect if there were validation errors
                     // show create UI again with values
                     $modal_row = [
                         'firstname'=>$firstname,'lastname'=>$lastname,'email'=>$email,'phone'=>$phone,'street'=>$street,'city'=>$city,'state'=>$state,'postcode'=>$postcode,'workshop_date'=>$workshop_date,'participants'=>$participants,'workshop_type'=>$workshop_type,'addons'=>$addons,'comments'=>$comments
@@ -130,9 +134,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    // Redirect to avoid form re-submission
-    header('Location: ' . $_SERVER['PHP_SELF']);
-    exit();
+    // Redirect to avoid form re-submission (unless $shouldRedirect was set false)
+    if ($shouldRedirect) {
+        header('Location: ' . $_SERVER['PHP_SELF']);
+        exit();
+    }
 }
 
 // Fetch active registrations: not deleted and not processed
@@ -146,15 +152,25 @@ $completed_result = $conn->query($completed_sql);
 // GET-based view/edit identifiers, no-JS modal
 $view_id = isset($_GET['view']) ? intval($_GET['view']) : 0;
 $edit_id = isset($_GET['edit']) ? intval($_GET['edit']) : 0;
+$create_mode = isset($_GET['create']) ? true : false;
 $modal_row = null;
 if ($view_id || $edit_id) {
     $rid = $view_id ?: $edit_id;
-    $stmt = $conn->prepare("SELECT * FROM registrations WHERE registration_id = ? LIMIT 1");
-    $stmt->bind_param('i', $rid);
-    $stmt->execute();
-    $res = $stmt->get_result();
-    if ($res && $res->num_rows > 0) $modal_row = $res->fetch_assoc();
-    $stmt->close();
+    if ($rid > 0) {
+        $stmt = $conn->prepare("SELECT * FROM registrations WHERE registration_id = ? LIMIT 1");
+        $stmt->bind_param('i', $rid);
+        $stmt->execute();
+        $res = $stmt->get_result();
+        if ($res && $res->num_rows > 0) $modal_row = $res->fetch_assoc();
+        $stmt->close();
+    }
+}
+
+// Flash message (from prior actions, e.g., create)
+$flash = null;
+if (isset($_SESSION['flash'])) {
+    $flash = $_SESSION['flash'];
+    unset($_SESSION['flash']);
 }
 ?>
 
@@ -182,7 +198,7 @@ if ($view_id || $edit_id) {
     <section class="admin-content">
         <div class="rf-list-container">
             <div class="rf-panel">
-                <?php if ($modal_row): ?>
+                <?php if ($modal_row || $create_mode): ?>
                 <div class="rf-modal-inline">
                     <?php if ($view_id): ?>
                         <h2>View Registration #<?php echo htmlspecialchars($modal_row['registration_id']); ?></h2>
@@ -221,6 +237,39 @@ if ($view_id || $edit_id) {
                             </div>
                         </form>
                         <hr>
+                    <?php elseif ($create_mode): ?>
+                        <h2>Create Registration</h2>
+                        <?php if (!empty($create_errors)): ?>
+                            <div class="rf-alert rf-alert-danger">
+                                <ul>
+                                    <?php foreach ($create_errors as $err): ?>
+                                        <li><?php echo htmlspecialchars($err); ?></li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            </div>
+                        <?php endif; ?>
+                        <form method="post">
+                            <input type="hidden" name="csrf" value="<?php echo $csrf; ?>">
+                            <input type="hidden" name="action" value="create">
+                            <label>First name<input type="text" name="firstname" value="<?php echo htmlspecialchars($modal_row['firstname'] ?? ''); ?>"></label>
+                            <label>Last name<input type="text" name="lastname" value="<?php echo htmlspecialchars($modal_row['lastname'] ?? ''); ?>"></label>
+                            <label>Email<input type="email" name="email" value="<?php echo htmlspecialchars($modal_row['email'] ?? ''); ?>"></label>
+                            <label>Phone<input type="tel" name="phone" value="<?php echo htmlspecialchars($modal_row['phone'] ?? ''); ?>"></label>
+                            <label>Street<input type="text" name="street" value="<?php echo htmlspecialchars($modal_row['street'] ?? ''); ?>"></label>
+                            <label>City<input type="text" name="city" value="<?php echo htmlspecialchars($modal_row['city'] ?? ''); ?>"></label>
+                            <label>State<input type="text" name="state" value="<?php echo htmlspecialchars($modal_row['state'] ?? ''); ?>"></label>
+                            <label>Postcode<input type="text" name="postcode" value="<?php echo htmlspecialchars($modal_row['postcode'] ?? ''); ?>"></label>
+                            <label>Workshop Date<input type="date" name="workshop_date" value="<?php echo htmlspecialchars($modal_row['workshop_date'] ?? ''); ?>"></label>
+                            <label>Participants<input type="text" name="participants" value="<?php echo htmlspecialchars($modal_row['participants'] ?? ''); ?>"></label>
+                            <label>Workshop Type<input type="text" name="workshop_type" value="<?php echo htmlspecialchars($modal_row['workshop_type'] ?? ''); ?>"></label>
+                            <label>Add-ons<textarea name="addons"><?php echo htmlspecialchars($modal_row['addons'] ?? ''); ?></textarea></label>
+                            <label>Comments<textarea name="comments"><?php echo htmlspecialchars($modal_row['comments'] ?? ''); ?></textarea></label>
+                            <div class="rf-inline">
+                                <button class="rf-btn rf-btn-complete" type="submit">Create</button>
+                                <a class="rf-btn rf-btn-ghost" href="view_register.php">Cancel</a>
+                            </div>
+                            <hr>
+                        </form>
                     <?php endif; ?>
                 </div>
                 <?php endif; ?>
@@ -231,8 +280,14 @@ if ($view_id || $edit_id) {
                     </div>
                     <div class="rf-nowrap">
                         <small class="rf-muted">Total active: <?php echo $active_result ? $active_result->num_rows : 0; ?></small>
+                        <a class="rf-btn rf-btn-ghost" href="?create=1" style="margin-left: .5rem">Create</a>
                     </div>
                 </div>
+                <?php if (!empty($flash)): ?>
+                    <div class="rf-alert rf-alert-success" style="margin: 8px 0; padding: 8px 12px; border-radius: 6px; background: #eaf7ee; border:1px solid #c6efd0; color:#016c2e;">
+                        <?php echo htmlspecialchars($flash); ?>
+                    </div>
+                <?php endif; ?>
 
                 <?php if ($active_result && $active_result->num_rows > 0): ?>
                 <div class="rf-table-responsive">
@@ -265,7 +320,8 @@ if ($view_id || $edit_id) {
                                 <td><small class="rf-muted"><?php echo htmlspecialchars($row['reg_date']); ?></small></td>
                                 <td class="rf-nowrap">
                                     <div class="rf-actions">
-                                        <!-- View / Edit (server-side, no JS) -->
+                                        <!-- View / Edit -->
+                                         
                                         <a class="rf-btn rf-btn-ghost rf-btn-view" href="?view=<?php echo intval($row['registration_id']); ?>">View</a>
                                         <a class="rf-btn rf-btn-ghost rf-btn-edit" href="?edit=<?php echo intval($row['registration_id']); ?>">Edit</a>
 
