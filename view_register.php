@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         die('Invalid CSRF token');
     }
 
-    if (isset($_POST['action']) && isset($_POST['id'])) {
+    if (isset($_POST['action']) && (isset($_POST['id']) || $_POST['action'] === 'create')) {
         $id = intval($_POST['id']);
         switch ($_POST['action']) {
             case 'mark_processed':
@@ -72,6 +72,61 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $stmt->close();
                 }
                 break;
+            case 'update':
+                // Update registration — allow editing of specific fields
+                $firstname = isset($_POST['firstname']) ? trim($_POST['firstname']) : '';
+                $lastname = isset($_POST['lastname']) ? trim($_POST['lastname']) : '';
+                $email = isset($_POST['email']) ? trim($_POST['email']) : '';
+                $phone = isset($_POST['phone']) ? trim($_POST['phone']) : '';
+                $street = isset($_POST['street']) ? trim($_POST['street']) : '';
+                $city = isset($_POST['city']) ? trim($_POST['city']) : '';
+                $state = isset($_POST['state']) ? trim($_POST['state']) : '';
+                $postcode = isset($_POST['postcode']) ? trim($_POST['postcode']) : '';
+                $workshop_date = isset($_POST['workshop_date']) ? trim($_POST['workshop_date']) : null;
+                $participants = isset($_POST['participants']) ? trim($_POST['participants']) : '';
+                $workshop_type = isset($_POST['workshop_type']) ? trim($_POST['workshop_type']) : '';
+                $addons = isset($_POST['addons']) ? trim($_POST['addons']) : '';
+                $comments = isset($_POST['comments']) ? trim($_POST['comments']) : '';
+                $stmt = $conn->prepare("UPDATE registrations SET firstname=?, lastname=?, email=?, phone=?, street=?, city=?, state=?, postcode=?, workshop_date=?, participants=?, workshop_type=?, addons=?, comments=? WHERE registration_id=?");
+                $stmt->bind_param('sssssssssssssi', $firstname, $lastname, $email, $phone, $street, $city, $state, $postcode, $workshop_date, $participants, $workshop_type, $addons, $comments, $id);
+                $stmt->execute();
+                $stmt->close();
+                break;
+            case 'create':
+                // Create new registration; do simple validation
+                $firstname = isset($_POST['firstname']) ? trim($_POST['firstname']) : '';
+                $lastname = isset($_POST['lastname']) ? trim($_POST['lastname']) : '';
+                $email = isset($_POST['email']) ? trim($_POST['email']) : '';
+                $phone = isset($_POST['phone']) ? trim($_POST['phone']) : '';
+                $street = isset($_POST['street']) ? trim($_POST['street']) : '';
+                $city = isset($_POST['city']) ? trim($_POST['city']) : '';
+                $state = isset($_POST['state']) ? trim($_POST['state']) : '';
+                $postcode = isset($_POST['postcode']) ? trim($_POST['postcode']) : '';
+                $workshop_date = isset($_POST['workshop_date']) ? trim($_POST['workshop_date']) : null;
+                $participants = isset($_POST['participants']) ? trim($_POST['participants']) : '';
+                $workshop_type = isset($_POST['workshop_type']) ? trim($_POST['workshop_type']) : '';
+                $addons = isset($_POST['addons']) ? trim($_POST['addons']) : '';
+                $comments = isset($_POST['comments']) ? trim($_POST['comments']) : '';
+                $create_errors = [];
+                if ($firstname === '') $create_errors[] = 'First name is required.';
+                if ($lastname === '') $create_errors[] = 'Last name is required.';
+                if ($email === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) $create_errors[] = 'Valid email is required.';
+                if (empty($create_errors)) {
+                    $stmt = $conn->prepare("INSERT INTO registrations (firstname, lastname, email, street, city, state, postcode, phone, workshop_date, participants, workshop_type, addons, comments) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)");
+                    $stmt->bind_param('sssssssssssss', $firstname, $lastname, $email, $street, $city, $state, $postcode, $phone, $workshop_date, $participants, $workshop_type, $addons, $comments);
+                    $stmt->execute();
+                    $stmt->close();
+                    // Redirect to avoid form re-submission
+                    header('Location: ' . $_SERVER['PHP_SELF']);
+                    exit();
+                } else {
+                    // show create UI again with values
+                    $modal_row = [
+                        'firstname'=>$firstname,'lastname'=>$lastname,'email'=>$email,'phone'=>$phone,'street'=>$street,'city'=>$city,'state'=>$state,'postcode'=>$postcode,'workshop_date'=>$workshop_date,'participants'=>$participants,'workshop_type'=>$workshop_type,'addons'=>$addons,'comments'=>$comments
+                    ];
+                    $create_mode = true;
+                }
+                break;
         }
     }
 
@@ -87,6 +142,20 @@ $active_result = $conn->query($active_sql);
 // Fetch processed registrations: not deleted and processed
 $completed_sql = "SELECT * FROM registrations WHERE deleted = 0 AND processed = 1 ORDER BY processed_at DESC";
 $completed_result = $conn->query($completed_sql);
+
+// GET-based view/edit identifiers, no-JS modal
+$view_id = isset($_GET['view']) ? intval($_GET['view']) : 0;
+$edit_id = isset($_GET['edit']) ? intval($_GET['edit']) : 0;
+$modal_row = null;
+if ($view_id || $edit_id) {
+    $rid = $view_id ?: $edit_id;
+    $stmt = $conn->prepare("SELECT * FROM registrations WHERE registration_id = ? LIMIT 1");
+    $stmt->bind_param('i', $rid);
+    $stmt->execute();
+    $res = $stmt->get_result();
+    if ($res && $res->num_rows > 0) $modal_row = $res->fetch_assoc();
+    $stmt->close();
+}
 ?>
 
 <!DOCTYPE html>
@@ -113,6 +182,48 @@ $completed_result = $conn->query($completed_sql);
     <section class="admin-content">
         <div class="rf-list-container">
             <div class="rf-panel">
+                <?php if ($modal_row): ?>
+                <div class="rf-modal-inline">
+                    <?php if ($view_id): ?>
+                        <h2>View Registration #<?php echo htmlspecialchars($modal_row['registration_id']); ?></h2>
+                        <p><strong>Name:</strong> <?php echo htmlspecialchars($modal_row['firstname'] . ' ' . $modal_row['lastname']); ?></p>
+                        <p><strong>Email:</strong> <a href="mailto:<?php echo htmlspecialchars($modal_row['email']); ?>"><?php echo htmlspecialchars($modal_row['email']); ?></a></p>
+                        <p><strong>Phone:</strong> <?php echo htmlspecialchars($modal_row['phone']); ?></p>
+                        <p><strong>Workshop Date:</strong> <?php echo htmlspecialchars($modal_row['workshop_date']); ?></p>
+                        <p><strong>Participants:</strong> <?php echo htmlspecialchars($modal_row['participants']); ?></p>
+                        <p><strong>Type:</strong> <?php echo htmlspecialchars($modal_row['workshop_type']); ?></p>
+                        <p><strong>Add-ons:</strong><br><?php echo nl2br(htmlspecialchars($modal_row['addons'])); ?></p>
+                        <p><strong>Comments:</strong><br><?php echo nl2br(htmlspecialchars($modal_row['comments'])); ?></p>
+                        <p><a class="rf-btn rf-btn-ghost rf-btn-edit" href="?edit=<?php echo intval($modal_row['registration_id']); ?>">Edit</a> <a class="rf-btn rf-btn-ghost" href="view_register.php">Close</a></p>
+                        <hr>
+                    <?php elseif ($edit_id): ?>
+                        <h2>Edit Registration #<?php echo htmlspecialchars($modal_row['registration_id']); ?></h2>
+                        <form method="post">
+                            <input type="hidden" name="csrf" value="<?php echo $csrf; ?>">
+                            <input type="hidden" name="id" value="<?php echo intval($modal_row['registration_id']); ?>">
+                            <input type="hidden" name="action" value="update">
+                            <label>First name<input type="text" name="firstname" value="<?php echo htmlspecialchars($modal_row['firstname']); ?>"></label>
+                            <label>Last name<input type="text" name="lastname" value="<?php echo htmlspecialchars($modal_row['lastname']); ?>"></label>
+                            <label>Email<input type="email" name="email" value="<?php echo htmlspecialchars($modal_row['email']); ?>"></label>
+                            <label>Phone<input type="tel" name="phone" value="<?php echo htmlspecialchars($modal_row['phone']); ?>"></label>
+                            <label>Street<input type="text" name="street" value="<?php echo htmlspecialchars($modal_row['street']); ?>"></label>
+                            <label>City<input type="text" name="city" value="<?php echo htmlspecialchars($modal_row['city']); ?>"></label>
+                            <label>State<input type="text" name="state" value="<?php echo htmlspecialchars($modal_row['state']); ?>"></label>
+                            <label>Postcode<input type="text" name="postcode" value="<?php echo htmlspecialchars($modal_row['postcode']); ?>"></label>
+                            <label>Workshop Date<input type="date" name="workshop_date" value="<?php echo htmlspecialchars($modal_row['workshop_date']); ?>"></label>
+                            <label>Participants<input type="text" name="participants" value="<?php echo htmlspecialchars($modal_row['participants']); ?>"></label>
+                            <label>Workshop Type<input type="text" name="workshop_type" value="<?php echo htmlspecialchars($modal_row['workshop_type']); ?>"></label>
+                            <label>Add-ons<textarea name="addons"><?php echo htmlspecialchars($modal_row['addons']); ?></textarea></label>
+                            <label>Comments<textarea name="comments"><?php echo htmlspecialchars($modal_row['comments']); ?></textarea></label>
+                            <div class="rf-inline">
+                                <button class="rf-btn rf-btn-complete" type="submit">Save</button>
+                                <a class="rf-btn rf-btn-ghost" href="view_register.php">Cancel</a>
+                            </div>
+                        </form>
+                        <hr>
+                    <?php endif; ?>
+                </div>
+                <?php endif; ?>
                 <div class="rf-meta">
                     <div>
                         <h1 class="rf-h1">All Registrations</h1>
@@ -154,6 +265,10 @@ $completed_result = $conn->query($completed_sql);
                                 <td><small class="rf-muted"><?php echo htmlspecialchars($row['reg_date']); ?></small></td>
                                 <td class="rf-nowrap">
                                     <div class="rf-actions">
+                                        <!-- View / Edit (server-side, no JS) -->
+                                        <a class="rf-btn rf-btn-ghost rf-btn-view" href="?view=<?php echo intval($row['registration_id']); ?>">View</a>
+                                        <a class="rf-btn rf-btn-ghost rf-btn-edit" href="?edit=<?php echo intval($row['registration_id']); ?>">Edit</a>
+
                                         <!-- Mark Processed (moves to Completed section) -->
                                         <form method="post" class="rf-inline" style="display:inline-block; margin-right:.35rem">
                                             <input type="hidden" name="csrf" value="<?php echo $csrf; ?>">
