@@ -14,7 +14,6 @@
 
 <!-- Navbar -->
   <?php include 'navigation.php'; ?>
-<!-- End of Navbar -->
 
 <!-- Main Content -->
 <main>
