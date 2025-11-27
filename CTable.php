@@ -76,5 +76,18 @@
         echo "Error creating Memberships table: " . $conn->error;
     }
 
+    // Login history table
+    $sql_logins = "CREATE TABLE IF NOT EXISTS login_history (
+        history_id INT AUTO_INCREMENT PRIMARY KEY,
+        username VARCHAR(100) NULL,
+        ip VARCHAR(45) NULL,
+        user_agent TEXT NULL,
+        login_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    )";
+
+    if ($conn->query($sql_logins) === FALSE) {
+        echo "Error creating Logins table: " . $conn->error;
+    }
+
     $conn->close();
 ?>
