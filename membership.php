@@ -40,6 +40,7 @@
 
             <!-- Password -->
             <label for="password_hash">Password:</label>
+            <p>(Password must be at least 8 characters and include at least 1 number and 1 symbol.)</p>
             <input type="password_hash" id="password_hash" name="password_hash"pattern="^(?=.*[0-9])(?=.*[^A-Za-z0-9]).{8,}$"required>
 
 
