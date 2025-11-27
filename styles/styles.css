@@ -3008,7 +3008,7 @@ table.rf-data-table td small {
 .rf-btn-ghost {
   background: transparent;
   border: 1px solid rgba(0, 0, 0, 0.06);
-  color: #333
+  color: #333;
 }
 
 .rf-btn-restore {
@@ -3025,6 +3025,12 @@ table.rf-data-table td small {
 .rf-row-completed td {
   opacity: .9;
   position: relative
+}
+
+.rf-btn-edit {
+  background:#108fd3; 
+  color:#fff; 
+  text-decoration: none;
 }
 
 .rf-row-completed td::after {

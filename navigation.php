@@ -32,8 +32,8 @@ echo
             <li><a href="login.php">Login</a></li>
           </ul>
         </li>
-        <li><a href="top_up.php" class="topup-btn">Top Up Wallet</a></li>
-          <li><a href="product_search.php">Product Search</a></li>
+        <li class="dropdown"><a href="top_up.php" class="topup-btn">Top Up Wallet</a></li>
+        <li class="dropdown"><a href="product_search.php">Product Search</a></li>
         <li class="dropdown"><a href="about_us.php">About Us</a></li>
       </ul>
     </div>

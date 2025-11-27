@@ -11,11 +11,10 @@
     }
 
     // Example table (Copy paste)
-    $sql_users = "CREATE TABLE IF NOT EXISTS Users (
+    $sql_users = "CREATE TABLE IF NOT EXISTS Logins (
         id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-        firstname VARCHAR(30) NOT NULL,
-        lastname VARCHAR(30) NOT NULL,
-        email VARCHAR(50),
+        username VARCHAR(25) NOT NULL,
+        password_hash VARCHAR(255) NOT NULL,
         reg_date TIMESTAMP
     )";
 
