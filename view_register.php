@@ -23,6 +23,22 @@ if (!$conn) {
     die('Database connection failed: ' . mysqli_connect_error());
 }
 
+/* Server-side sorting: allow list to prevent SQL injection */
+$allowed_sorts = [
+    'id' => 'registration_id',
+    'name' => "CONCAT(firstname, ' ', lastname)",
+    'email' => 'email',
+    'phone' => 'phone',
+    'workshop_date' => 'workshop_date',
+    'participants' => 'participants',
+    'type' => 'workshop_type',
+    'processed_at' => 'processed_at',
+    'reg_date' => 'reg_date'
+];
+$sort = isset($_GET['sort']) && array_key_exists($_GET['sort'], $allowed_sorts) ? $_GET['sort'] : 'reg_date';
+$dir = (isset($_GET['dir']) && strtolower($_GET['dir']) === 'asc') ? 'asc' : 'desc';
+$order_by = $allowed_sorts[$sort];
+
 // Ensure necessary columns exist (for quick setup; use migrations in production)
 $alter_sql = "ALTER TABLE `registrations` 
     ADD COLUMN IF NOT EXISTS `deleted` TINYINT(1) NOT NULL DEFAULT 0,
@@ -141,12 +157,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
+$order_clause = "ORDER BY $order_by " . ($dir === 'asc' ? 'ASC' : 'DESC');
 // Fetch active registrations: not deleted and not processed
-$active_sql = "SELECT * FROM registrations WHERE deleted = 0 AND processed = 0 ORDER BY reg_date DESC";
+$active_sql = "SELECT * FROM registrations WHERE deleted = 0 AND processed = 0 " . $order_clause;
 $active_result = $conn->query($active_sql);
 
-// Fetch processed registrations: not deleted and processed
-$completed_sql = "SELECT * FROM registrations WHERE deleted = 0 AND processed = 1 ORDER BY processed_at DESC";
+$completed_sql = "SELECT * FROM registrations WHERE deleted = 0 AND processed = 1 " . $order_clause;
 $completed_result = $conn->query($completed_sql);
 
 // GET-based view/edit identifiers, no-JS modal
@@ -173,14 +189,10 @@ if (isset($_SESSION['flash'])) {
     unset($_SESSION['flash']);
 }
 ?>
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="description" content="Root Flower">
-    <meta name="keywords" content="Flowers, Shop, Kuching, Sarawak, Malaysia">
-    <meta name="author" content="Daniel, Josiah, Alvin, Kheldy">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="Pictures/Index/logo.png" type="image/png">
     <title>Root Flower — Registrations</title>
@@ -293,18 +305,27 @@ if (isset($_SESSION['flash'])) {
                 <div class="rf-table-responsive">
                     <table class="rf-data-table" role="table">
                         <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Name</th>
-                                <th>Email / Phone</th>
-                                <th>Workshop Date</th>
-                                <th>Participants</th>
-                                <th>Type</th>
-                                <th>Add-ons</th>
-                                <th>Comments</th>
-                                <th>Registered At</th>
-                                <th class="rf-nowrap">Actions</th>
-                            </tr>
+                                    <tr>
+                                        <?php
+                                        function header_link($key, $label) {
+                                            global $sort, $dir;
+                                            $next = ($sort === $key && $dir === 'asc') ? 'desc' : 'asc';
+                                            $indicator = ($sort === $key) ? ($dir === 'asc' ? ' ▲' : ' ▼') : '';
+                                            $href = '?sort=' . urlencode($key) . '&dir=' . $next;
+                                            return '<th><a href="' . htmlspecialchars($href) . '">' . htmlspecialchars($label) . htmlspecialchars($indicator) . '</a></th>';
+                                        }
+                                        echo header_link('id', '#');
+                                        echo header_link('name', 'Name');
+                                        echo header_link('email', 'Email');
+                                        echo header_link('phone', 'Phone');
+                                        echo header_link('workshop_date', 'Workshop Date');
+                                        echo header_link('participants', 'Participants');
+                                        echo header_link('type', 'Type');
+                                        echo header_link('reg_date', 'Comments');
+                                        ?>
+                                        <th>Registered at</th>
+                                        <th class="rf-nowrap">Actions</th>
+                                    </tr>
                         </thead>
                         <tbody>
                         <?php while ($row = $active_result->fetch_assoc()): ?>
@@ -370,12 +391,15 @@ if (isset($_SESSION['flash'])) {
                     <table class="rf-data-table" role="table">
                         <thead>
                             <tr>
-                                <th>#</th>
-                                <th>Name</th>
-                                <th>Email / Phone</th>
-                                <th>Type</th>
+                                <?php
+                                echo header_link('id', '#');
+                                echo header_link('name', 'Name');
+                                echo header_link('email', 'Email');
+                                echo header_link('phone', 'Phone');
+                                echo header_link('type', 'Type');
+                                ?>
                                 <th>Comments</th>
-                                <th>Completed At</th>
+                                <?php echo header_link('reg_date', 'Completed At'); ?>
                                 <th class="rf-nowrap">Actions</th>
                             </tr>
                         </thead>

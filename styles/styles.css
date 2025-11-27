@@ -3081,6 +3081,16 @@ table.rf-data-table td small {
   font-size: .95rem;
 }
 
+.rf-data-table th a {
+  color: #fff;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.rf-data-table th a:hover {
+  text-decoration: underline;
+}
+
 .rf-row-completed td {
   opacity: .9;
   position: relative;
