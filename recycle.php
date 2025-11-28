@@ -97,7 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && in_array($action, ['soft_delete','p
                 <h2>Confirm <?php echo htmlspecialchars($action === 'soft_delete' ? 'Move to Recycle' : 'Permanent Delete'); ?></h2>
                 <div class="rf-meta">You are about to <?php echo $action === 'soft_delete' ? 'move this item to the Recycle Bin' : 'permanently delete this item'; ?>. This action <?php echo $action === 'perma_delete' ? 'cannot be undone.' : 'can be restored from the Recycle Bin.'; ?></div>
 
-                <?php if ($preview): ?>
+                            <?php if ($preview): ?>
                     <div class="rf-preview">
                         <?php
                         // show a few helpful fields depending on table
@@ -105,10 +105,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && in_array($action, ['soft_delete','p
                             echo '<strong>Enquiry ID:</strong> ' . htmlspecialchars($preview['enquiry_id']) . '<br>';
                             echo '<strong>Name:</strong> ' . htmlspecialchars($preview['firstname'] . ' ' . $preview['lastname']) . '<br>';
                             echo '<strong>Email:</strong> ' . htmlspecialchars($preview['email']) . '<br>';
-                            echo '<strong>Comments:</strong> <div style="white-space:pre-wrap;">' . htmlspecialchars($preview['comments']) . '</div>';
+                            echo '<strong>Comments:</strong> <div class="rf-preserve">' . htmlspecialchars($preview['comments']) . '</div>';
                         } else {
                             // generic preview for other tables
-                            echo '<pre style="white-space:pre-wrap; margin:0;">' . htmlspecialchars(print_r($preview, true)) . '</pre>';
+                            echo '<pre class="rf-preserve rf-pre-zero">' . htmlspecialchars(print_r($preview, true)) . '</pre>';
                         }
                         ?>
                     </div>
@@ -230,11 +230,12 @@ $deleted_logins = $conn->query("SELECT * FROM login_history WHERE deleted = 1 OR
                     <div class="rf-meta">
                         <div><h2 style="margin:0">Deleted Enquiries</h2></div>
                         <div class="rf-nowrap">
-                            <form method="get" style="display:inline-block; margin:0">
-                                <label style="font-size:0.9rem; color:#666; display:inline-flex; align-items:center; gap:.5rem;">
-                                    <input type="checkbox" name="show_completed" value="1" <?php echo ($show_completed === 1) ? 'checked' : ''; ?> onchange="this.form.submit()">
+                            <form method="get" class="rf-inline">
+                                <label class="rf-filter-label">
+                                    <input type="checkbox" name="show_completed" value="1" <?php echo ($show_completed === 1) ? 'checked' : ''; ?>>
                                     Show only completed
                                 </label>
+                                <button type="submit" class="rf-btn rf-btn-ghost rf-btn-ml">Apply</button>
                             </form>
                         </div>
                     </div>
@@ -264,7 +265,7 @@ $deleted_logins = $conn->query("SELECT * FROM login_history WHERE deleted = 1 OR
                                         <td><?php echo htmlspecialchars($row['enquiry_type']); ?></td>
                                         <td><?php echo nl2br(htmlspecialchars($row['comments'])); ?></td>
                                         <td><small class="rf-muted"><?php echo htmlspecialchars($row['deleted_at']); ?></small></td>
-                                        <td><?php echo $completed ? '<small style="color:var(--rf-success); font-weight:700">Completed</small>' : '<small class="rf-muted">Open</small>'; ?></td>
+                                        <td><?php echo $completed ? '<small class="rf-status-completed">Completed</small>' : '<small class="rf-muted">Open</small>'; ?></td>
                                         <td class="rf-nowrap">
                                             <form method="post" class="rf-inline">
                                                 <input type="hidden" name="csrf" value="<?php echo $csrf; ?>">

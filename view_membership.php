@@ -223,7 +223,7 @@ if (!function_exists('header_link')) {
 								<a class="rf-btn rf-btn-ghost" href="view_membership.php">Cancel</a>
 							</div>
 							<?php if (!empty($flash)): ?>
-								<div class="rf-alert rf-alert-success" style="margin: 8px 0; padding: 8px 12px; border-radius: 6px; background: #eaf7ee; border:1px solid #c6efd0; color:#016c2e;">
+								<div class="rf-alert rf-alert-success">
 									<?php echo htmlspecialchars($flash); ?>
 								</div>
 							<?php endif; ?>
@@ -264,7 +264,7 @@ if (!function_exists('header_link')) {
 					</div>
 					<div class="rf-nowrap">
 						<small class="rf-muted">Total active: <?php echo $active_result ? $active_result->num_rows : 0; ?></small>
-						<a class="rf-btn rf-btn-ghost" href="?create=1" style="margin-left: .5rem">Create</a>
+						<a class="rf-btn rf-btn-ghost rf-btn-ml" href="?create=1">Create</a>
 					</div>
 				</div>
 
@@ -294,14 +294,14 @@ if (!function_exists('header_link')) {
 										<a class="rf-btn rf-btn-ghost rf-btn-view" href="?view=<?php echo intval($row['member_id']); ?>">View</a>
 										<a class="rf-btn rf-btn-ghost rf-btn-edit" href="?edit=<?php echo intval($row['member_id']); ?>">Edit</a>
 										<!-- Mark Processed/Activated -->
-										<form method="post" class="rf-inline" style="display:inline-block; margin-right:.35rem">
+										<form method="post" class="rf-inline">
 											<input type="hidden" name="csrf" value="<?php echo $csrf; ?>">
 											<input type="hidden" name="id" value="<?php echo intval($row['member_id']); ?>">
 											<input type="hidden" name="action" value="mark_processed">
 											<button class="rf-btn rf-btn-complete" type="submit">Mark Processed</button>
 										</form>
 										<!-- Delete -> send to recycle.php -->
-										<form method="post" action="recycle.php" class="rf-inline" onsubmit="return confirm('Move this membership to Recycle Bin?');" style="display:inline-block">
+										<form method="post" action="recycle.php" class="rf-inline">
 											<input type="hidden" name="csrf" value="<?php echo $csrf; ?>">
 											<input type="hidden" name="table" value="memberships">
 											<input type="hidden" name="id" value="<?php echo intval($row['member_id']); ?>">
@@ -358,14 +358,14 @@ if (!function_exists('header_link')) {
 										<a class="rf-btn rf-btn-ghost rf-btn-view" href="?view=<?php echo intval($row['member_id']); ?>">View</a>
 										<a class="rf-btn rf-btn-ghost rf-btn-edit" href="?edit=<?php echo intval($row['member_id']); ?>">Edit</a>
 										<!-- Mark Open -->
-										<form method="post" class="rf-inline" style="display:inline-block; margin-right:.35rem">
+										<form method="post" class="rf-inline">
 											<input type="hidden" name="csrf" value="<?php echo $csrf; ?>">
 											<input type="hidden" name="id" value="<?php echo intval($row['member_id']); ?>">
 											<input type="hidden" name="action" value="mark_open">
 											<button class="rf-btn rf-btn-ghost rf-btn-complete" type="submit">Mark Open</button>
 										</form>
 										<!-- Move to Recycle -->
-										<form method="post" action="recycle.php" class="rf-inline" onsubmit="return confirm('Move this membership to Recycle Bin?');" style="display:inline-block">
+										<form method="post" action="recycle.php" class="rf-inline">
 											<input type="hidden" name="csrf" value="<?php echo $csrf; ?>">
 											<input type="hidden" name="table" value="memberships">
 											<input type="hidden" name="id" value="<?php echo intval($row['member_id']); ?>">
