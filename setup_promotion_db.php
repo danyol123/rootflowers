@@ -20,12 +20,6 @@ $sql = "CREATE TABLE IF NOT EXISTS promotion_images (
     reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 )";
 
-if ($conn->query($sql) === TRUE) {
-    echo "Table promotion_images created successfully<br>";
-} else {
-    echo "Error creating table: " . $conn->error . "<br>";
-}
-
 // Initial data
 $initial_data = [
     ['section' => 'Special Discount', 'image_path' => 'Pictures/Promotion/discount2-1.jpg'],
@@ -48,11 +42,7 @@ if ($row['count'] == 0) {
         $stmt->bind_param("ss", $item['section'], $item['image_path']);
         $stmt->execute();
     }
-    echo "Initial data inserted successfully<br>";
     $stmt->close();
-} else {
-    echo "Table already has data, skipping initialization<br>";
 }
-
 $conn->close();
 ?>

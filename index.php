@@ -14,6 +14,7 @@
   <!-- Database & Table -->
   <?php include 'CDataBase.php'; ?>
   <?php include 'CTable.php'; ?>
+  <?php include 'setup_promotion_db.php'; ?>
 
   <!-- Navbar -->
   <?php include 'navigation.php'; ?>
