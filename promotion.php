@@ -1,3 +1,35 @@
+<?php
+// DB Connection
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "DB";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Helper function to get images for a section
+function getImages($conn, $section) {
+    $stmt = $conn->prepare("SELECT image_path FROM promotion_images WHERE section = ?");
+    $stmt->bind_param("s", $section);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $images = [];
+    while ($row = $result->fetch_assoc()) {
+        $images[] = $row['image_path'];
+    }
+    $stmt->close();
+    return $images;
+}
+
+$special_discount_images = getImages($conn, 'Special Discount');
+$early_bird_images = getImages($conn, 'Early Bird');
+$give_away_images = getImages($conn, 'Give Away');
+
+$conn->close();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -54,15 +86,15 @@
 </section>
 <!-- Promotion Section -->
 <main id="promotion-main">
-  <section>
+  <section style="flex: 1; padding-left: 10%;">
     <div class="promotion-title">
       <h1 id="special-discount">
         Special Discount
       </h1>
       <div class="discount">
-        <figure><img src="Pictures/Promotion/discount2-1.jpg" alt="discount2-1"></figure>
-        <figure><img src="Pictures/Promotion/discount2.jpg" alt="discount2"></figure>
-        <figure><img src="Pictures/Promotion/discount2-2.jpg" alt="discount2-2"></figure>
+        <?php foreach ($special_discount_images as $img): ?>
+            <figure><img src="<?php echo $img; ?>" alt="Special Discount"></figure>
+        <?php endforeach; ?>
       </div>
     </div>
     <div class="promotion-title">
@@ -70,9 +102,9 @@
         Early Bird
       </h1>
       <div class="earlybird">
-        <figure><img src="Pictures/Promotion/earlybird1.jpg" alt="earlybird1"></figure>
-        <figure><img src="Pictures/Promotion/earlybird2.jpg" alt="earlybird2"></figure>
-        <figure><img src="Pictures/Promotion/earlybird3.jpg" alt="earlybird3"></figure>
+        <?php foreach ($early_bird_images as $img): ?>
+            <figure><img src="<?php echo $img; ?>" alt="Early Bird"></figure>
+        <?php endforeach; ?>
       </div>
     </div>
     <div class="promotion-title">
@@ -80,8 +112,9 @@
       Give Away
       </h1>
       <div class="giveaway">
-        <figure><img src="Pictures/Promotion/giveaway1.jpg" alt="giveaway1"></figure>
-        <figure><img src="Pictures/Promotion/giveaway2.jpg" alt="giveaway2"></figure>
+        <?php foreach ($give_away_images as $img): ?>
+            <figure><img src="<?php echo $img; ?>" alt="Give Away"></figure>
+        <?php endforeach; ?>
       </div>
     </div>
   </section>

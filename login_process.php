@@ -46,7 +46,7 @@ if (strtolower($username) == strtolower('Admin') && strtolower($password) == str
     $dbname = 'DB';
     $conn = mysqli_connect($servername, $dbuser, $dbpass, $dbname);
     if ($conn) {
-        $stmt = $conn->prepare('SELECT member_id, username, password_hash FROM memberships WHERE username = ? LIMIT 1');
+                $stmt = $conn->prepare('SELECT member_id, username, email, password_hash FROM memberships WHERE username = ? LIMIT 1');
         if ($stmt) {
             $stmt->bind_param('s', $username);
             $stmt->execute();
@@ -56,6 +56,7 @@ if (strtolower($username) == strtolower('Admin') && strtolower($password) == str
                 $stmt->close();
                 if (password_verify($password, $user['password_hash'])) {
                     $_SESSION['username'] = $user['username'];
+                    $_SESSION['email'] = $user['email'];
                     $_SESSION['member_id'] = $user['member_id'];
                     // record login for membership user
                     $ip = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : null;

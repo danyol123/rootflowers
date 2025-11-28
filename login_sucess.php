@@ -17,11 +17,17 @@ if (!isset($_SESSION['username'])) {
 </head>
 <body>
     <?php include 'navigation.php'; ?>
-    <main class="form-section">
-        <div class="form-container">
-            <h1>Successful login</h1>
-            <p>Thank you for logging in, <?php echo htmlspecialchars($_SESSION['username']); ?>!</p>
-        </div>
+    <main>
+        <section class="form-section">
+            <div class="form-container">
+                <h1>Login Successful</h1>
+                <p>Thank you for logging in, <strong><?php echo htmlspecialchars($_SESSION['username']); ?>!</strong></p>
+                <p><strong>Username:</strong> <?php echo htmlspecialchars($_SESSION['username']); ?></p>
+                <p><strong>Email:</strong> <?php echo isset($_SESSION['email']) ? htmlspecialchars($_SESSION['email']) : 'N/A'; ?></p>
+                <p>You have successfully logged in.</p>
+                <p><a href="index.php">Return to the Entry Page</a></p>
+            </div>
+        </section>
     </main>
 
     <?php include 'footer.php'; ?>
