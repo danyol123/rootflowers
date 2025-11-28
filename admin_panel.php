@@ -17,9 +17,27 @@
     <?php include 'admin_sidebar.php'; ?>
 
     <!-- Right Content -->
-    <div class="admin-content">
-        <p>Welcome to Admin Panel. Select an option from the sidebar to view data.</p>
-    </div>
+    <section class="admin-content">
+      <div class="rf-list-container">
+        <div class="rf-panel">
+          <div class="rf-meta">
+            <div>
+              <h1 class="rf-h1">Admin Dashboard</h1>
+              <p class="rf-muted">Quick links to manage site content and view records.</p>
+            </div>
+          </div>
+
+          <div>
+            <a class="rf-btn rf-btn-ghost" href="view_register.php">Workshop Registrations</a>
+            <a class="rf-btn rf-btn-ghost" href="view_enquiry.php">Enquiries</a>
+            <a class="rf-btn rf-btn-ghost" href="view_membership.php">Memberships</a>
+            <a class="rf-btn rf-btn-ghost" href="view_login.php">Logins</a>
+            <a class="rf-btn rf-btn-ghost" href="recycle.php">Recycle Bin</a>
+            <a class="rf-btn rf-btn-ghost" href="view_promotion.php">Promotion Module</a>
+          </div>
+        </div>
+      </div>
+    </section>
 </main>
 </body>
 </html>
