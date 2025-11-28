@@ -27,7 +27,7 @@ if (!$conn) {
  * Setup: ensure the four tables have deleted/deleted_at columns.
  * Replace with proper migrations for production.
  */
-$tables_to_alter = ['users','registrations','enquiry','memberships','login_history'];
+$tables_to_alter = ['registrations','enquiry','memberships','login_history'];
 foreach ($tables_to_alter as $t) {
     $sql = "ALTER TABLE `{$t}` 
         ADD COLUMN IF NOT EXISTS `deleted` TINYINT(1) NOT NULL DEFAULT 0,
@@ -42,7 +42,6 @@ foreach ($tables_to_alter as $t) {
  * We accept only safe table names (whitelist) and known PK columns.
  */
 $whitelist = [
-    'users' => 'user_id',
     'registrations' => 'registration_id',
     'enquiry' => 'enquiry_id',
     'memberships' => 'membership_id',
@@ -190,7 +189,7 @@ $enquiry_query .= " ORDER BY deleted_at DESC";
 $deleted_enquiries = $conn->query($enquiry_query);
 
 // Deleted users, registrations, memberships
-$deleted_users = $conn->query("SELECT * FROM users WHERE deleted = 1 ORDER BY deleted_at DESC");
+// users table no longer used
 $deleted_regs  = $conn->query("SELECT * FROM registrations WHERE deleted = 1 ORDER BY deleted_at DESC");
 $deleted_members = $conn->query("SELECT * FROM memberships WHERE deleted = 1 ORDER BY deleted_at DESC");
 // Deleted logins
@@ -339,51 +338,7 @@ $deleted_logins = $conn->query("SELECT * FROM login_history WHERE deleted = 1 OR
                     <?php endif; ?>
                 </div>
 
-                <!-- Users -->
-                <div class="rf-panel">
-                    <h3 style="margin-top:0">Deleted Users</h3>
-                    <?php if ($deleted_users && $deleted_users->num_rows > 0): ?>
-                        <div class="rf-table-responsive">
-                            <table class="rf-data-table">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Username / Email</th>
-                                        <th>Deleted At</th>
-                                        <th class="rf-nowrap">Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                <?php while ($u = $deleted_users->fetch_assoc()): ?>
-                                    <tr>
-                                        <td><?php echo htmlspecialchars($u['user_id']); ?></td>
-                                        <td><?php echo htmlspecialchars($u['username'] ?? '') . ' / ' . htmlspecialchars($u['email'] ?? ''); ?></td>
-                                        <td><small class="rf-muted"><?php echo htmlspecialchars($u['deleted_at']); ?></small></td>
-                                        <td class="rf-nowrap">
-                                            <form method="post" class="rf-inline">
-                                                <input type="hidden" name="csrf" value="<?php echo $csrf; ?>">
-                                                <input type="hidden" name="table" value="users">
-                                                <input type="hidden" name="id" value="<?php echo intval($u['user_id']); ?>">
-                                                <input type="hidden" name="action" value="restore">
-                                                <button class="rf-btn rf-btn-restore" type="submit">Restore</button>
-                                            </form>
-                                            <form method="post" class="rf-inline">
-                                                <input type="hidden" name="csrf" value="<?php echo $csrf; ?>">
-                                                <input type="hidden" name="table" value="users">
-                                                <input type="hidden" name="id" value="<?php echo intval($u['user_id']); ?>">
-                                                <input type="hidden" name="action" value="perma_delete">
-                                                <button class="rf-btn rf-btn-danger" type="submit">Delete Permanently</button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                <?php endwhile; ?>
-                                </tbody>
-                            </table>
-                        </div>
-                    <?php else: ?>
-                        <p>No deleted users found.</p>
-                    <?php endif; ?>
-                </div>
+                <!-- Users section removed, not used anymore -->
 
                 <!-- Memberships -->
                 <div class="rf-panel">
