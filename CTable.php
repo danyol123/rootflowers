@@ -18,9 +18,7 @@ $sql_users = "CREATE TABLE IF NOT EXISTS Logins (
         reg_date TIMESTAMP
     )";
 
-if ($conn->query($sql_users) === FALSE) {
-    echo "Error creating Users table: " . $conn->error;
-}
+$conn->query($sql_users);
 
 // Enquiry table
 $sql_enquiry = "CREATE TABLE IF NOT EXISTS enquiry (
@@ -34,9 +32,7 @@ $sql_enquiry = "CREATE TABLE IF NOT EXISTS enquiry (
         submit_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )";
 
-if ($conn->query($sql_enquiry) === FALSE) {
-    echo "Error creating Enquiry table: " . $conn->error;
-}
+$conn->query($sql_enquiry);
 
 // Workshop registrations table
 $sql_registrations = "CREATE TABLE IF NOT EXISTS registrations (
@@ -57,9 +53,7 @@ $sql_registrations = "CREATE TABLE IF NOT EXISTS registrations (
         reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )";
 
-if ($conn->query($sql_registrations) === FALSE) {
-    echo "Error creating Registrations table: " . $conn->error;
-}
+$conn->query($sql_registrations);
 
 // Memberships table
 $sql_members = "CREATE TABLE IF NOT EXISTS memberships (
@@ -72,9 +66,7 @@ $sql_members = "CREATE TABLE IF NOT EXISTS memberships (
         reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )";
 
-if ($conn->query($sql_members) === FALSE) {
-    echo "Error creating Memberships table: " . $conn->error;
-}
+$conn->query($sql_members);
 
 // Login history table
 $sql_logins = "CREATE TABLE IF NOT EXISTS login_history (
@@ -85,9 +77,7 @@ $sql_logins = "CREATE TABLE IF NOT EXISTS login_history (
         login_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )";
 
-if ($conn->query($sql_logins) === FALSE) {
-    echo "Error creating Logins table: " . $conn->error;
-}
+$conn->query($sql_logins);
 
 // Promotion Images table
 $sql_promo = "CREATE TABLE IF NOT EXISTS promotion_images (
@@ -97,9 +87,7 @@ $sql_promo = "CREATE TABLE IF NOT EXISTS promotion_images (
         reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
     )";
 
-if ($conn->query($sql_promo) === FALSE) {
-    echo "Error creating Promotion Images table: " . $conn->error;
-}
+$conn->query($sql_promo);
 
 // Initial data for Promotion Images
 $initial_data = [
@@ -132,11 +120,7 @@ $sql_check_bal = "SHOW COLUMNS FROM memberships LIKE 'balance'";
 $result_bal = $conn->query($sql_check_bal);
 if ($result_bal->num_rows == 0) {
     $sql_add_bal = "ALTER TABLE memberships ADD COLUMN balance DECIMAL(10,2) DEFAULT 0.00 AFTER password_hash";
-    if ($conn->query($sql_add_bal) === TRUE) {
-        echo "Column 'balance' added to 'memberships' table successfully.<br>";
-    } else {
-        echo "Error adding column 'balance': " . $conn->error . "<br>";
-    }
+    $conn->query($sql_add_bal);
 }
 
 // Create 'topup_history' table
@@ -151,9 +135,7 @@ $sql_topup = "CREATE TABLE IF NOT EXISTS topup_history (
         status VARCHAR(20) DEFAULT 'success'
     )";
 
-if ($conn->query($sql_topup) === FALSE) {
-    echo "Error creating topup_history table: " . $conn->error;
-}
+$conn->query($sql_topup);
 
 $conn->close();
 ?>
