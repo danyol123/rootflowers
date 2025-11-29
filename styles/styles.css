@@ -775,12 +775,6 @@ ul.slides {
   max-width: 650px;
 }
 
-.form-container h1 {
-  text-align: center;
-  color: #463b2b;
-  margin-bottom: 1.5rem;
-}
-
 label {
   display: block;
   margin-bottom: 0.4rem;
@@ -792,6 +786,7 @@ input[type="email"],
 input[type="password_hash"],
 input[type="tel"],
 input[type="date"],
+input[type="number"],
 select,
 textarea {
   width: 100%;
@@ -811,6 +806,7 @@ input[type="email"]:focus,
 input[type="password"]:focus,
 input[type="tel"]:focus,
 input[type="date"]:focus,
+input[type="number"]:focus,
 select:focus,
 textarea:focus {
   border-color: #928473;
@@ -3125,14 +3121,38 @@ table.rf-data-table td small {
   margin: 8px 0;
   border: 1px solid transparent;
 }
-.rf-alert-success { background: #eaf7ee; border-color: #c6efd0; color: #016c2e; }
-.rf-alert-danger { background: #fff0f0; border-color: #f1c0c0; color: #b00020; }
-.rf-alert-info { background: #e0f2fe; border-color: #bfe8ff; color: #0369a1; }
+
+.rf-alert-success {
+  background: #eaf7ee;
+  border-color: #c6efd0;
+  color: #016c2e;
+}
+
+.rf-alert-danger {
+  background: #fff0f0;
+  border-color: #f1c0c0;
+  color: #b00020;
+}
+
+.rf-alert-info {
+  background: #e0f2fe;
+  border-color: #bfe8ff;
+  color: #0369a1;
+}
 
 /* Small utility */
-.rf-btn-ml { margin-left: .5rem; }
-.rf-preserve { white-space: pre-wrap; }
-.rf-pre-zero { margin: 0; }
+.rf-btn-ml {
+  margin-left: .5rem;
+}
+
+.rf-preserve {
+  white-space: pre-wrap;
+}
+
+.rf-pre-zero {
+  margin: 0;
+}
+
 .rf-filter-label {
   font-size: 0.9rem;
   color: #666;
@@ -3140,10 +3160,17 @@ table.rf-data-table td small {
   align-items: center;
   gap: .5rem;
 }
-.rf-status-completed { color: var(--rf-success); font-weight: 700; }
+
+.rf-status-completed {
+  color: var(--rf-success);
+  font-weight: 700;
+}
 
 /* Promotion layout helper (left section) */
-.promotion-section-leftpad { flex: 1; padding-left: 10%; }
+.promotion-section-leftpad {
+  flex: 1;
+  padding-left: 10%;
+}
 
 /* Empty image grid placeholder */
 .rf-empty {
@@ -3153,14 +3180,32 @@ table.rf-data-table td small {
 }
 
 /* Upload heading small */
-.rf-upload-heading { margin-top: 0; margin-bottom: 1rem; font-size: 1rem; color: #4b5563; }
+.rf-upload-heading {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  color: #4b5563;
+}
 
 /* Activity sidebar no padding override */
-.activity-no-pad { padding: 0; }
+.activity-no-pad {
+  padding: 0;
+}
 
-.rf-error { color: #b00020; }
-.rf-heading-zero { margin-top: 0; }
-.rf-agent { max-width: 600px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.rf-error {
+  color: #b00020;
+}
+
+.rf-heading-zero {
+  margin-top: 0;
+}
+
+.rf-agent {
+  max-width: 600px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
 @media(max-width:900px) {
   .rf-admin-main {
@@ -3339,12 +3384,826 @@ table.rf-data-table td small {
   font-size: 1.5rem;
 }
 
+.rf-meta-header {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.rf-alert-info {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: #e0f2fe;
+  color: #0369a1;
+  border-radius: 6px;
+}
+
+.no-images-message {
+  grid-column: 1/-1;
+  text-align: center;
+  padding: 2rem;
+}
+
+.upload-area-title {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  color: #4b5563;
+}
+
+.promotion-sidebar-admin {
+  padding: 0;
+}
+
+.promotion-content-section {
+  flex: 1;
+  padding-left: 10%;
+}
+
 /* End of Promotion Module Styling */
 
 /* Recycle */
 /* small namespaced helpers just for the confirmation UI (no inline attributes) */
-.rf-confirm { max-width:760px; margin:40px auto; padding:24px; background:#fff; border-radius:12px; box-shadow:0 8px 30px rgba(0,0,0,0.06); }
-.rf-confirm h2 { margin:0 0 12px; color:#3b2a74; }
-.rf-confirm .rf-meta { margin-bottom:16px; color: #444; }
-.rf-confirm .rf-preview { background:#faf7ff; padding:12px; border-radius:8px; margin-bottom:16px; }
-.rf-confirm .rf-actions { display:flex; gap:10px; }
+.rf-confirm {
+  max-width: 760px;
+  margin: 40px auto;
+  padding: 24px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+}
+
+.rf-confirm h2 {
+  margin: 0 0 12px;
+  color: #3b2a74;
+}
+
+.rf-confirm .rf-meta {
+  margin-bottom: 16px;
+  color: #444;
+}
+
+.rf-confirm .rf-preview {
+  background: #faf7ff;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.rf-confirm .rf-actions {
+  display: flex;
+  gap: 10px;
+}
+
+/* Top Up Preset Buttons */
+.preset-buttons {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-bottom: 1.2rem;
+}
+
+.preset-btn {
+  background-color: #f4f1ed;
+  border: 1px solid #C4B6A4;
+  color: #463b2b;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.preset-btn:hover {
+  background-color: #C4B6A4;
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+/* Top Up Module */
+.topup-result-container {
+  text-align: center;
+}
+
+.topup-success-title {
+  color: #2bb673;
+}
+
+.topup-failure-title {
+  color: #b00020;
+}
+
+.topup-details {
+  margin: 20px 0;
+  text-align: left;
+  display: inline-block;
+}
+
+.topup-return-link-container {
+  margin-top: 30px;
+}
+
+.topup-return-link {
+  color: #928473;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* Product Search Styles */
+.search-section {
+  padding: 3rem 1rem;
+  background-color: #f9f5f0;
+  font-family: 'Lato', sans-serif;
+}
+
+.search-container {
+  background-color: #ffffff;
+  border: 1px solid #C4B6A4;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(70, 59, 43, 0.1);
+  padding: 2rem;
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto 3rem auto;
+  display: flex;
+  justify-content: center;
+}
+
+.search-container form {
+  height: 150px;
+  width: 100%;
+  object-fit: cover;
+  background-color: #f9fafb;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.image-actions {
+  padding: 1rem;
+  text-align: center;
+  background: #f9fafb;
+  margin-top: auto;
+}
+
+/* Upload Form Styling */
+.upload-area {
+  background: #f9fafb;
+  border: 2px dashed #d1d5db;
+  border-radius: 8px;
+  padding: 2rem;
+  text-align: center;
+  transition: border-color 0.2s;
+}
+
+.upload-area:hover {
+  border-color: #9ca3af;
+}
+
+.upload-area input[type="file"] {
+  margin-bottom: 1rem;
+}
+
+/* Section Header */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.section-header h2 {
+  margin: 0;
+  color: #374151;
+  font-size: 1.5rem;
+}
+
+.rf-meta-header {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.rf-alert-info {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: #e0f2fe;
+  color: #0369a1;
+  border-radius: 6px;
+}
+
+.no-images-message {
+  grid-column: 1/-1;
+  text-align: center;
+  padding: 2rem;
+}
+
+.upload-area-title {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  color: #4b5563;
+}
+
+.promotion-sidebar-admin {
+  padding: 0;
+}
+
+.promotion-content-section {
+  flex: 1;
+  padding-left: 10%;
+}
+
+/* End of Promotion Module Styling */
+
+/* Recycle */
+/* small namespaced helpers just for the confirmation UI (no inline attributes) */
+.rf-confirm {
+  max-width: 760px;
+  margin: 40px auto;
+  padding: 24px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+}
+
+.rf-confirm h2 {
+  margin: 0 0 12px;
+  color: #3b2a74;
+}
+
+.rf-confirm .rf-meta {
+  margin-bottom: 16px;
+  color: #444;
+}
+
+.rf-confirm .rf-preview {
+  background: #faf7ff;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.rf-confirm .rf-actions {
+  display: flex;
+  gap: 10px;
+}
+
+/* Top Up Preset Buttons */
+.preset-buttons {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-bottom: 1.2rem;
+}
+
+.preset-btn {
+  background-color: #f4f1ed;
+  border: 1px solid #C4B6A4;
+  color: #463b2b;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.preset-btn:hover {
+  background-color: #C4B6A4;
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+/* Top Up Module */
+.topup-result-container {
+  text-align: center;
+}
+
+.topup-success-title {
+  color: #2bb673;
+}
+
+.topup-failure-title {
+  color: #b00020;
+}
+
+.topup-details {
+  margin: 20px 0;
+  text-align: left;
+  display: inline-block;
+}
+
+.topup-return-link-container {
+  margin-top: 30px;
+}
+
+.topup-return-link {
+  color: #928473;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* Product Search Styles */
+.search-section {
+  padding: 3rem 1rem;
+  background-color: #f9f5f0;
+  font-family: 'Lato', sans-serif;
+}
+
+.search-container {
+  background-color: #ffffff;
+  border: 1px solid #C4B6A4;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(70, 59, 43, 0.1);
+  padding: 2rem;
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto 3rem auto;
+  display: flex;
+  justify-content: center;
+}
+
+.search-container form {
+  height: 150px;
+  width: 100%;
+  object-fit: cover;
+  background-color: #f9fafb;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.image-actions {
+  padding: 1rem;
+  text-align: center;
+  background: #f9fafb;
+  margin-top: auto;
+}
+
+/* Upload Form Styling */
+.upload-area {
+  background: #f9fafb;
+  border: 2px dashed #d1d5db;
+  border-radius: 8px;
+  padding: 2rem;
+  text-align: center;
+  transition: border-color 0.2s;
+}
+
+.upload-area:hover {
+  border-color: #9ca3af;
+}
+
+.upload-area input[type="file"] {
+  margin-bottom: 1rem;
+}
+
+/* Section Header */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.section-header h2 {
+  margin: 0;
+  color: #374151;
+  font-size: 1.5rem;
+}
+
+.rf-meta-header {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.rf-alert-info {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: #e0f2fe;
+  color: #0369a1;
+  border-radius: 6px;
+}
+
+.no-images-message {
+  grid-column: 1/-1;
+  text-align: center;
+  padding: 2rem;
+}
+
+.upload-area-title {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  color: #4b5563;
+}
+
+.promotion-sidebar-admin {
+  padding: 0;
+}
+
+.promotion-content-section {
+  flex: 1;
+  padding-left: 10%;
+}
+
+/* End of Promotion Module Styling */
+
+/* Recycle */
+/* small namespaced helpers just for the confirmation UI (no inline attributes) */
+.rf-confirm {
+  max-width: 760px;
+  margin: 40px auto;
+  padding: 24px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+}
+
+.rf-confirm h2 {
+  margin: 0 0 12px;
+  color: #3b2a74;
+}
+
+.rf-confirm .rf-meta {
+  margin-bottom: 16px;
+  color: #444;
+}
+
+.rf-confirm .rf-preview {
+  background: #faf7ff;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.rf-confirm .rf-actions {
+  display: flex;
+  gap: 10px;
+}
+
+/* Top Up Preset Buttons */
+.preset-buttons {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-bottom: 1.2rem;
+}
+
+.preset-btn {
+  background-color: #f4f1ed;
+  border: 1px solid #C4B6A4;
+  color: #463b2b;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.preset-btn:hover {
+  background-color: #C4B6A4;
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+/* Top Up Module */
+.topup-result-container {
+  text-align: center;
+}
+
+.topup-success-title {
+  color: #2bb673;
+}
+
+.topup-failure-title {
+  color: #b00020;
+}
+
+.topup-details {
+  margin: 20px 0;
+  text-align: left;
+  display: inline-block;
+}
+
+.topup-return-link-container {
+  margin-top: 30px;
+}
+
+.topup-return-link {
+  color: #928473;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* Product Search Styles */
+.search-section {
+  padding: 3rem 1rem;
+  background-color: #f9f5f0;
+  font-family: 'Lato', sans-serif;
+}
+
+.search-container {
+  background-color: #ffffff;
+  border: 1px solid #C4B6A4;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(70, 59, 43, 0.1);
+  padding: 2rem;
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto 3rem auto;
+  display: flex;
+  justify-content: center;
+}
+
+.search-container form {
+  height: 150px;
+  width: 100%;
+  object-fit: cover;
+  background-color: #f9fafb;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.image-actions {
+  padding: 1rem;
+  text-align: center;
+  background: #f9fafb;
+  margin-top: auto;
+}
+
+/* Upload Form Styling */
+.upload-area {
+  background: #f9fafb;
+  border: 2px dashed #d1d5db;
+  border-radius: 8px;
+  padding: 2rem;
+  text-align: center;
+  transition: border-color 0.2s;
+}
+
+.upload-area:hover {
+  border-color: #9ca3af;
+}
+
+.upload-area input[type="file"] {
+  margin-bottom: 1rem;
+}
+
+/* Section Header */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.section-header h2 {
+  margin: 0;
+  color: #374151;
+  font-size: 1.5rem;
+}
+
+.rf-meta-header {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.rf-alert-info {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: #e0f2fe;
+  color: #0369a1;
+  border-radius: 6px;
+}
+
+.no-images-message {
+  grid-column: 1/-1;
+  text-align: center;
+  padding: 2rem;
+}
+
+.upload-area-title {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  color: #4b5563;
+}
+
+.promotion-sidebar-admin {
+  padding: 0;
+}
+
+.promotion-content-section {
+  flex: 1;
+  padding-left: 10%;
+}
+
+/* End of Promotion Module Styling */
+
+/* Recycle */
+/* small namespaced helpers just for the confirmation UI (no inline attributes) */
+.rf-confirm {
+  max-width: 760px;
+  margin: 40px auto;
+  padding: 24px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+}
+
+.rf-confirm h2 {
+  margin: 0 0 12px;
+  color: #3b2a74;
+}
+
+.rf-confirm .rf-meta {
+  margin-bottom: 16px;
+  color: #444;
+}
+
+.rf-confirm .rf-preview {
+  background: #faf7ff;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.rf-confirm .rf-actions {
+  display: flex;
+  gap: 10px;
+}
+
+/* Top Up Preset Buttons */
+.preset-buttons {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-bottom: 1.2rem;
+}
+
+.preset-btn {
+  background-color: #f4f1ed;
+  border: 1px solid #C4B6A4;
+  color: #463b2b;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.preset-btn:hover {
+  background-color: #C4B6A4;
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+/* Top Up Module */
+.topup-result-container {
+  text-align: center;
+}
+
+.topup-success-title {
+  color: #2bb673;
+}
+
+.topup-failure-title {
+  color: #b00020;
+}
+
+.topup-details {
+  margin: 20px 0;
+  text-align: left;
+  display: inline-block;
+}
+
+.topup-return-link-container {
+  margin-top: 30px;
+}
+
+.topup-return-link {
+  color: #928473;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* Product Search Styles */
+.search-section {
+  padding: 2rem 1rem;
+
+  background-color: #f9f5f0;
+  font-family: 'Lato', sans-serif;
+}
+
+.search-container {
+    background-color: #ffffff;
+    border: 1px solid #C4B6A4;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(70, 59, 43, 0.1);
+    padding: 1.5rem;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto 2rem auto;
+    display: flex;
+    justify-content: center;
+}
+
+.search-container form {
+    width: 100%;
+    display: flex;
+    gap: 0.8rem;
+}
+
+.search-container input[type='text'] {
+    flex: 1;
+    padding: 0.35rem 0.8rem;
+    border: 1px solid #C4B6A4;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    outline: none;
+    background: #f4f1ed;
+    color: #0b0824;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.search-container input[type='text']:focus {
+    border-color: #928473;
+    box-shadow: 0 0 5px rgba(146, 132, 115, 0.5);
+}
+
+.search-container button {
+    background-color: #463b2b;
+    color: #f4f1ed;
+    padding: 0.35rem 1.2rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.search-container button:hover {
+    background-color: #928473;
+    transform: translateY(-2px);
+}
+
+.search-results {
+    max-width: 900px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.product-list li {
+    list-style: none;
+    background-color: #fff;
+    padding: 1.5rem;
+    border: none;
+    border-radius: 16px;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.product-list li:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.product-list li a {
+    text-decoration: none;
+    color: #5a5a5a;
+    font-weight: bold;
+    font-size: 1.2rem;
+    display: block;
+}
+
+.banner-search {
+    background-image: url('../Pictures/product_search.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    text-align: center;
+    height: 60vh;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 3rem;
+    position: relative;
+    color: #fff;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+}
+
