@@ -1,3 +1,39 @@
+<?php
+session_start();
+
+// Ensure user is logged in
+if (!isset($_SESSION['member_id'])) {
+    header('Location: login.php');
+    exit();
+}
+
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "DB";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Fetch current balance
+$member_id = $_SESSION['member_id'];
+$current_balance = 0.00;
+
+$stmt = $conn->prepare("SELECT balance FROM memberships WHERE member_id = ?");
+$stmt->bind_param("i", $member_id);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($row = $result->fetch_assoc()) {
+    $current_balance = $row['balance'];
+}
+$stmt->close();
+$conn->close();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,13 +45,10 @@
     <link rel="icon" href="Pictures/Index/logo.png" type="image/png">
     <title>Top Up - Rootflower</title>
     <link rel="stylesheet" href="styles/styles.css">
-    
 </head>
 <body>
 
 <?php include 'navigation.php'; ?>
-
-
 
 <main>
   <section class="form-section">
@@ -23,11 +56,6 @@
         <h1>Top Up Wallet</h1>
 
         <!-- Display Current Balance -->
-        <?php
-        if(!isset($current_balance)) {
-            $current_balance = 0.00; // default value if not set
-        }
-        ?>
         <h3>Your Current Balance: RM <?php echo number_format($current_balance, 2); ?></h3>
 
         <form action="topup_process.php" method="post">
@@ -36,15 +64,13 @@
             <label for="amount">Top Up Amount (RM):</label>
             <input type="number" id="amount" name="amount" min="5" max="500" required>
 
-          <!-- Preset Amount Buttons -->
-<div class="preset-buttons">
-    <!-- Server-driven preset buttons: submit the form with an amount value -->
-    <button type="submit" class="preset-btn" name="amount" value="50">RM50</button>
-    <button type="submit" class="preset-btn" name="amount" value="100">RM100</button>
-    <button type="submit" class="preset-btn" name="amount" value="150">RM150</button>
-    <button type="submit" class="preset-btn" name="amount" value="200">RM200</button>
-</div>
-
+            <!-- Preset Amount Buttons -->
+            <div class="preset-buttons">
+                <button type="button" class="preset-btn" onclick="setAmount(50)">RM50</button>
+                <button type="button" class="preset-btn" onclick="setAmount(100)">RM100</button>
+                <button type="button" class="preset-btn" onclick="setAmount(150)">RM150</button>
+                <button type="button" class="preset-btn" onclick="setAmount(200)">RM200</button>
+            </div>
 
             <!-- Payment Method Selection -->
             <label for="payment_method">Select Payment Method:</label>
@@ -83,11 +109,13 @@
     </div>
   </section>
 
-
-
 </main>
 
-<!-- No JavaScript — preset options submit the selected amount server-side. -->
+<script>
+    function setAmount(value) {
+        document.getElementById('amount').value = value;
+    }
+</script>
 
 <?php include 'footer.php'; ?>
 

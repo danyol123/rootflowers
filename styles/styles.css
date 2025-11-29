@@ -775,12 +775,6 @@ ul.slides {
   max-width: 650px;
 }
 
-.form-container h1 {
-  text-align: center;
-  color: #463b2b;
-  margin-bottom: 1.5rem;
-}
-
 label {
   display: block;
   margin-bottom: 0.4rem;
@@ -792,6 +786,7 @@ input[type="email"],
 input[type="password_hash"],
 input[type="tel"],
 input[type="date"],
+input[type="number"],
 select,
 textarea {
   width: 100%;
@@ -811,6 +806,7 @@ input[type="email"]:focus,
 input[type="password"]:focus,
 input[type="tel"]:focus,
 input[type="date"]:focus,
+input[type="number"]:focus,
 select:focus,
 textarea:focus {
   border-color: #928473;
@@ -3459,3 +3455,57 @@ table.rf-data-table td small {
   display: flex;
   gap: 10px;
 }
+
+/* Top Up Preset Buttons */
+.preset-buttons {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-bottom: 1.2rem;
+}
+
+.preset-btn {
+  background-color: #f4f1ed;
+  border: 1px solid #C4B6A4;
+  color: #463b2b;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.preset-btn:hover {
+  background-color: #C4B6A4;
+  color: #fff;
+  transform: translateY(-2px);
+}
+/* Top Up Module */
+.topup-result-container {
+    text-align: center;
+}
+
+.topup-success-title {
+    color: #2bb673;
+}
+
+.topup-failure-title {
+    color: #b00020;
+}
+
+.topup-details {
+    margin: 20px 0;
+    text-align: left;
+    display: inline-block;
+}
+
+.topup-return-link-container {
+    margin-top: 30px;
+}
+
+.topup-return-link {
+    color: #928473;
+    text-decoration: none;
+    font-weight: bold;
+}
+
