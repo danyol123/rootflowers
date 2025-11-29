@@ -1,6 +1,12 @@
 <?php
+/*
+ * File: admin_sidebar.php
+ * Description: Sidebar for the admin interface with quick links.
+ * Author: Root Flower Team
+ * Created: 2025-11-29
+ */
     echo
-	'<div class="admin-sidebar">
+    '<div class="admin-sidebar">
         <h2>Admin Panel</h2>
         <a href="index.php">Home</a>
         <a href="view_register.php">Workshop Registrations</a>

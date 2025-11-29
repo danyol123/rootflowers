@@ -1,8 +1,21 @@
 <?php
+/*
+ * File: login_process.php
+ * Description: Authenticates users (admin and membership), logs successful login events to login_history table.
+ * Author: Root Flower Team
+ * Created: 2025-11-29
+ */
 session_start();
 
 // Only accept POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    header('Location: login.php');
+    exit();
+}
+
+// Verify CSRF token
+if (!isset($_POST['csrf']) || !isset($_SESSION['csrf_token']) || $_POST['csrf'] !== $_SESSION['csrf_token']) {
+    $_SESSION['login_error'] = 'Invalid CSRF token.';
     header('Location: login.php');
     exit();
 }

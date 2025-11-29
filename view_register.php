@@ -1,4 +1,10 @@
 <?php
+/*
+ * File: view_register.php
+ * Description: Admin page for viewing and managing registrations (server-side CRUD, sorting).
+ * Author: Root Flower Team
+ * Created: 2025-11-29
+ */
 session_start();
 
 // Basic admin check - adjust according to your login implementation

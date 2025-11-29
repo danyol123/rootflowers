@@ -1,3 +1,12 @@
+<?php
+session_start();
+/*
+ * File: register_process.php
+ * Description: Process workshop registration submissions and shows confirmation.
+ * Author: Root Flower Team
+ * Created: 2025-11-29
+ */
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,42 +41,48 @@
             die("Connection failed: " . mysqli_connect_error());
         }
 
-        echo "<p>Thank you for registering, <strong>" . htmlspecialchars($_GET["firstName"]) . " " . htmlspecialchars($_GET["lastName"]) . "!</strong></p>";
-        echo "<p><strong>Email:</strong> " . htmlspecialchars($_GET["email"]) . "</p>";
-        echo "<p><strong>Address:</strong> " . htmlspecialchars($_GET["street"]) . ", " . htmlspecialchars($_GET["city"]) . ", " . htmlspecialchars($_GET["state"]) . ", " . htmlspecialchars($_GET["postcode"]) . "</p>";
-        echo "<p><strong>Phone:</strong> " . htmlspecialchars($_GET["phone"]) . "</p>";
-        echo "<p><strong>Date:</strong> " . htmlspecialchars($_GET["workshopDate"]) . "</p>";
-        echo "<p><strong>Number of Participants:</strong> " . htmlspecialchars($_GET["participants"]) . "</p>";
-        echo "<p><strong>Workshop Type:</strong> " . htmlspecialchars($_GET["workshopType"]) . "</p>";
+        // Verify CSRF token
+        if (!isset($_POST['csrf']) || !isset($_SESSION['csrf_token']) || $_POST['csrf'] !== $_SESSION['csrf_token']) {
+            echo "<p>Invalid CSRF token. Please try again.</p>";
+            echo "<p><a href='register.php'>Return to the Entry Page</a></p>";
+            exit();
+        }
+        echo "<p>Thank you for registering, <strong>" . htmlspecialchars($_POST["firstName"]) . " " . htmlspecialchars($_POST["lastName"]) . "!</strong></p>";
+        echo "<p><strong>Email:</strong> " . htmlspecialchars($_POST["email"]) . "</p>";
+        echo "<p><strong>Address:</strong> " . htmlspecialchars($_POST["street"]) . ", " . htmlspecialchars($_POST["city"]) . ", " . htmlspecialchars($_POST["state"]) . ", " . htmlspecialchars($_POST["postcode"]) . "</p>";
+        echo "<p><strong>Phone:</strong> " . htmlspecialchars($_POST["phone"]) . "</p>";
+        echo "<p><strong>Date:</strong> " . htmlspecialchars($_POST["workshopDate"]) . "</p>";
+        echo "<p><strong>Number of Participants:</strong> " . htmlspecialchars($_POST["participants"]) . "</p>";
+        echo "<p><strong>Workshop Type:</strong> " . htmlspecialchars($_POST["workshopType"]) . "</p>";
         echo "<p><strong>Add-ons:</strong> </p>";
-        if (!empty($_GET["addons"])) {
+        if (!empty($_POST["addons"])) {
             echo "<ul>";
-            foreach ($_GET["addons"] as $addon) {
+            foreach ($_POST["addons"] as $addon) {
                 echo "<li>" . htmlspecialchars($addon) . "</li>";
             }
             echo "</ul>";
         } else {
             echo "<p>No add-ons selected.</p>";
         }
-        echo "<p><strong>Comments:</strong> " . nl2br(htmlspecialchars($_GET["comments"])) . "</p>";
+        echo "<p><strong>Comments:</strong> " . nl2br(htmlspecialchars($_POST["comments"])) . "</p>";
 
-        $firstname = htmlspecialchars($_GET["firstName"]);
-        $lastname = htmlspecialchars($_GET["lastName"]);
-        $email = htmlspecialchars($_GET["email"]);
-        $street = htmlspecialchars($_GET["street"]);
-        $city = htmlspecialchars($_GET["city"]);
-        $state = htmlspecialchars($_GET["state"]);
-        $postcode = htmlspecialchars($_GET["postcode"]);
-        $phone = htmlspecialchars($_GET["phone"]);
-        $workshop_date = htmlspecialchars($_GET["workshopDate"]);
-        $participants = htmlspecialchars($_GET["participants"]);
-        $workshop_type = htmlspecialchars($_GET["workshopType"]);
+        $firstname = htmlspecialchars($_POST["firstName"]);
+        $lastname = htmlspecialchars($_POST["lastName"]);
+        $email = htmlspecialchars($_POST["email"]);
+        $street = htmlspecialchars($_POST["street"]);
+        $city = htmlspecialchars($_POST["city"]);
+        $state = htmlspecialchars($_POST["state"]);
+        $postcode = htmlspecialchars($_POST["postcode"]);
+        $phone = htmlspecialchars($_POST["phone"]);
+        $workshop_date = htmlspecialchars($_POST["workshopDate"]);
+        $participants = htmlspecialchars($_POST["participants"]);
+        $workshop_type = htmlspecialchars($_POST["workshopType"]);
         
         $addons = "";
-        if (!empty($_GET["addons"])) {
-            $addons = implode(", ", $_GET["addons"]);
+        if (!empty($_POST["addons"])) {
+            $addons = implode(", ", $_POST["addons"]);
         }
-        $comments = htmlspecialchars($_GET["comments"]);
+        $comments = htmlspecialchars($_POST["comments"]);
 
         $sql = "INSERT INTO registrations (firstname, lastname, email, street, city, state, postcode, phone, workshop_date, participants, workshop_type, addons, comments) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = mysqli_prepare($conn, $sql);

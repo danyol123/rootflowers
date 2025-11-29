@@ -1,4 +1,10 @@
 <?php
+/*
+ * File: login_sucess.php
+ * Description: Post-login confirmation for membership users.
+ * Author: Root Flower Team
+ * Created: 2025-11-29
+ */
 session_start();
 
 // If the user is not logged in, redirect to the login page.

@@ -1,3 +1,11 @@
+<?php
+/*
+ * File: membership.php
+ * Description: Public membership registration page (with client-side hints and CSRF token).
+ * Author: Root Flower Team
+ * Created: 2025-11-29
+ */
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,7 +28,15 @@
   <section class="form-section">
     <div class="form-container">
         <h1>Join Rootflower</h1>
+        <?php
+        if (!isset($_SESSION)) session_start();
+        if (!isset($_SESSION['csrf_token'])) {
+          $_SESSION['csrf_token'] = bin2hex(random_bytes(16));
+        }
+        $csrf = $_SESSION['csrf_token'];
+        ?>
         <form action="membership_process.php" method="post">
+          <input type="hidden" name="csrf" value="<?php echo $csrf; ?>">
             <!-- First Name -->
             <label for="firstname">First Name:</label>
             <input type="text" id="firstname" name="firstname" maxlength="25" pattern="[A-Za-z]+" required>
@@ -38,9 +54,9 @@
             <input type="email" id="email" name="email" required>
 
             <!-- Password -->
-            <label for="password_hash">Password:</label>
-            <p>(Password must be at least 8 characters and include at least 1 number and 1 symbol.)</p>
-            <input type="password_hash" id="password_hash" name="password_hash"pattern="^(?=.*[0-9])(?=.*[^A-Za-z0-9]).{8,}$"required>
+            <label for="password">Password:</label>
+            <p>(Password must be at least 8 characters and include at least 1 letter and 1 number.)</p>
+            <input type="password" id="password" name="password" pattern="^(?=.*[A-Za-z])(?=.*[0-9]).{8,}$" required>
 
 
             <!-- Submit -->

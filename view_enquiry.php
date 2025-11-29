@@ -1,4 +1,10 @@
 <?php
+/*
+ * File: view_enquiry.php
+ * Description: Admin page for viewing and managing enquiries (server-side CRUD, sorting).
+ * Author: Root Flower Team
+ * Created: 2025-11-29
+ */
 session_start();
 
 // Basic admin check - adjust according to your login implementation

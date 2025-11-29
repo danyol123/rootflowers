@@ -1,4 +1,10 @@
 <?php
+/*
+ * File: top_up.php
+ * Description: Public top-up page to allow members to add credit to wallet.
+ * Author: Root Flower Team
+ * Created: 2025-11-29
+ */
 session_start();
 
 // Ensure user is logged in
@@ -63,18 +69,26 @@ $conn->close();
                 <!-- Display Current Balance -->
                 <h3>Your Current Balance: RM <?php echo number_format($current_balance, 2); ?></h3>
 
+                <?php
+                // CSRF token generation for top up
+                if (!isset($_SESSION['csrf_token'])) {
+                    $_SESSION['csrf_token'] = bin2hex(random_bytes(16));
+                }
+                $csrf = $_SESSION['csrf_token'];
+                ?>
                 <form action="topup_process.php" method="post">
+                    <input type="hidden" name="csrf" value="<?php echo $csrf; ?>">
 
                     <!-- Enter Amount -->
                     <label for="amount">Top Up Amount (RM):</label>
                     <input type="number" id="amount" name="amount" min="5" max="500" required>
 
-                    <!-- Preset Amount Buttons -->
+                    <!-- Preset Amount Buttons as server-submitted values -->
                     <div class="preset-buttons">
-                        <button type="button" class="preset-btn" onclick="setAmount(50)">RM50</button>
-                        <button type="button" class="preset-btn" onclick="setAmount(100)">RM100</button>
-                        <button type="button" class="preset-btn" onclick="setAmount(150)">RM150</button>
-                        <button type="button" class="preset-btn" onclick="setAmount(200)">RM200</button>
+                        <button type="submit" class="preset-btn" name="preset_amount" value="50">RM50</button>
+                        <button type="submit" class="preset-btn" name="preset_amount" value="100">RM100</button>
+                        <button type="submit" class="preset-btn" name="preset_amount" value="150">RM150</button>
+                        <button type="submit" class="preset-btn" name="preset_amount" value="200">RM200</button>
                     </div>
 
                     <!-- Payment Method Selection -->
@@ -116,11 +130,7 @@ $conn->close();
 
     </main>
 
-    <script>
-        function setAmount(value) {
-            document.getElementById('amount').value = value;
-        }
-    </script>
+    <!-- No client-side JS preset functions; server handles preset buttons -->
 
     <?php include 'footer.php'; ?>
 

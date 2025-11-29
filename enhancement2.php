@@ -1,3 +1,11 @@
+<?php
+/*
+ * File: enhancement2.php
+ * Description: Enhancement showcase (Module 2) listing server-side admin features and improvements.
+ * Author: Root Flower Team
+ * Created: 2025-11-29
+ */
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

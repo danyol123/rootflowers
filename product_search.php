@@ -1,3 +1,11 @@
+<?php
+/*
+ * File: product_search.php
+ * Description: Product Search page for listing product results.
+ * Author: Root Flower Team
+ * Created: 2025-11-29
+ */
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

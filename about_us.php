@@ -1,3 +1,11 @@
+<?php
+/*
+ * File: about_us.php
+ * Description: About Us page with team details and member profile links.
+ * Author: Root Flower Team
+ * Created: 2025-11-29
+ */
+?>
 <!DOCTYPE html>
 <html lang="en">
 

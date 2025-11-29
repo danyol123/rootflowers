@@ -783,6 +783,7 @@ label {
 
 input[type="text"],
 input[type="email"],
+input[type="password"],
 input[type="password_hash"],
 input[type="tel"],
 input[type="date"],
