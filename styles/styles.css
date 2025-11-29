@@ -3295,4 +3295,41 @@ table.rf-data-table td small {
   font-size: 1.5rem;
 }
 
+.rf-meta-header {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.rf-alert-info {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: #e0f2fe;
+  color: #0369a1;
+  border-radius: 6px;
+}
+
+.no-images-message {
+  grid-column: 1/-1;
+  text-align: center;
+  padding: 2rem;
+}
+
+.upload-area-title {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  color: #4b5563;
+}
+
+.promotion-sidebar-admin {
+  padding: 0;
+}
+
+.promotion-content-section {
+  flex: 1;
+  padding-left: 10%;
+}
+
 /* End of Promotion Module Styling */
