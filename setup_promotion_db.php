@@ -20,6 +20,10 @@ $sql = "CREATE TABLE IF NOT EXISTS promotion_images (
     reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 )";
 
+if ($conn->query($sql) === FALSE) {
+    die("Error creating table: " . $conn->error);
+}
+
 // Initial data
 $initial_data = [
     ['section' => 'Special Discount', 'image_path' => 'Pictures/Promotion/discount2-1.jpg'],
