@@ -187,7 +187,7 @@ if (!function_exists('header_link')) {
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Memberships — Admin</title>
+	<title>Root Flower — Memberships</title>
 	<link rel="stylesheet" href="styles/styles.css">
 </head>
 <body class="rf-root">

@@ -198,7 +198,6 @@ if (isset($_SESSION['flash'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="Pictures/Index/logo.png" type="image/png">
     <title>Root Flower — Registrations</title>
-    <!-- Use the namespaced stylesheet -->
     <link rel="stylesheet" href="styles/styles.css">
 </head>
 <body class="rf-root">

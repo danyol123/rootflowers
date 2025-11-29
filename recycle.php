@@ -44,7 +44,8 @@ foreach ($tables_to_alter as $t) {
 $whitelist = [
     'registrations' => 'registration_id',
     'enquiry' => 'enquiry_id',
-    'memberships' => 'membership_id',
+    // membership table uses member_id as PK (not membership_id)
+    'memberships' => 'member_id',
     'login_history' => 'history_id'
 ];
 
@@ -73,17 +74,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && in_array($action, ['soft_delete','p
     <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>Confirm Action — Recycle</title>
+        <title>Root Flower — Recycle</title>
         <meta name="viewport" content="width=device-width,initial-scale=1">
         <link rel="stylesheet" href="styles/styles.css">
-        <style>
-            /* small namespaced helpers just for the confirmation UI (no inline attributes) */
-            .rf-confirm { max-width:760px; margin:40px auto; padding:24px; background:#fff; border-radius:12px; box-shadow:0 8px 30px rgba(0,0,0,0.06); }
-            .rf-confirm h2 { margin:0 0 12px; color:#3b2a74; }
-            .rf-confirm .rf-meta { margin-bottom:16px; color: #444; }
-            .rf-confirm .rf-preview { background:#faf7ff; padding:12px; border-radius:8px; margin-bottom:16px; }
-            .rf-confirm .rf-actions { display:flex; gap:10px; }
-        </style>
     </head>
     <body class="rf-root">
     <main class="admin-main">
@@ -97,7 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && in_array($action, ['soft_delete','p
                 <h2>Confirm <?php echo htmlspecialchars($action === 'soft_delete' ? 'Move to Recycle' : 'Permanent Delete'); ?></h2>
                 <div class="rf-meta">You are about to <?php echo $action === 'soft_delete' ? 'move this item to the Recycle Bin' : 'permanently delete this item'; ?>. This action <?php echo $action === 'perma_delete' ? 'cannot be undone.' : 'can be restored from the Recycle Bin.'; ?></div>
 
-                            <?php if ($preview): ?>
+                <?php if ($preview): ?>
                     <div class="rf-preview">
                         <?php
                         // show a few helpful fields depending on table
@@ -179,12 +172,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'restore' && array_key_
  * If not a confirmation flow, show the recycle listing (deleted items grouped by table).
  */
 
-// Enquiry filter: optionally show only completed deleted enquiries (via GET)
-$show_completed = isset($_GET['show_completed']) && $_GET['show_completed'] == '1' ? 1 : null;
 $enquiry_query = "SELECT * FROM enquiry WHERE deleted = 1";
-if ($show_completed !== null) {
-    $enquiry_query .= " AND completed = " . intval($show_completed);
-}
 $enquiry_query .= " ORDER BY deleted_at DESC";
 $deleted_enquiries = $conn->query($enquiry_query);
 
@@ -225,19 +213,56 @@ $deleted_logins = $conn->query("SELECT * FROM login_history WHERE deleted = 1 OR
                     </div>
                 </div>
 
+                <!-- Registrations -->
+                <div class="rf-panel">
+                    <h3>Deleted Registrations</h3>
+                    <?php if ($deleted_regs && $deleted_regs->num_rows > 0): ?>
+                        <div class="rf-table-responsive">
+                            <table class="rf-data-table">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Name / Email</th>
+                                        <th>Deleted At</th>
+                                        <th class="rf-nowrap">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <?php while ($r = $deleted_regs->fetch_assoc()): ?>
+                                    <tr>
+                                        <td><?php echo htmlspecialchars($r['registration_id']); ?></td>
+                                        <td><?php echo htmlspecialchars($r['name'] ?? ($r['firstname'].' '.$r['lastname'] ?? '')) . ' / ' . htmlspecialchars($r['email'] ?? ''); ?></td>
+                                        <td><small class="rf-muted"><?php echo htmlspecialchars($r['deleted_at']); ?></small></td>
+                                        <td class="rf-nowrap">
+                                            <form method="post" class="rf-inline">
+                                                <input type="hidden" name="csrf" value="<?php echo $csrf; ?>">
+                                                <input type="hidden" name="table" value="registrations">
+                                                <input type="hidden" name="id" value="<?php echo intval($r['registration_id']); ?>">
+                                                <input type="hidden" name="action" value="restore">
+                                                <button class="rf-btn rf-btn-restore" type="submit">Restore</button>
+                                            </form>
+                                            <form method="post" class="rf-inline">
+                                                <input type="hidden" name="csrf" value="<?php echo $csrf; ?>">
+                                                <input type="hidden" name="table" value="registrations">
+                                                <input type="hidden" name="id" value="<?php echo intval($r['registration_id']); ?>">
+                                                <input type="hidden" name="action" value="perma_delete">
+                                                <button class="rf-btn rf-btn-danger" type="submit">Delete Permanently</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                <?php endwhile; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    <?php else: ?>
+                        <p>No deleted registrations found.</p>
+                    <?php endif; ?>
+                </div>
+
                 <!-- Enquiries (deleted) -->
                 <div class="rf-panel">
                     <div class="rf-meta">
-                        <div><h2 style="margin:0">Deleted Enquiries</h2></div>
-                        <div class="rf-nowrap">
-                            <form method="get" class="rf-inline">
-                                <label class="rf-filter-label">
-                                    <input type="checkbox" name="show_completed" value="1" <?php echo ($show_completed === 1) ? 'checked' : ''; ?>>
-                                    Show only completed
-                                </label>
-                                <button type="submit" class="rf-btn rf-btn-ghost rf-btn-ml">Apply</button>
-                            </form>
-                        </div>
+                        <div><h3>Deleted Enquiries</h3></div>
                     </div>
 
                     <?php if ($deleted_enquiries && $deleted_enquiries->num_rows > 0): ?>
@@ -293,57 +318,9 @@ $deleted_logins = $conn->query("SELECT * FROM login_history WHERE deleted = 1 OR
                     <?php endif; ?>
                 </div>
 
-                <!-- Registrations -->
-                <div class="rf-panel">
-                    <h3 style="margin-top:0">Deleted Registrations</h3>
-                    <?php if ($deleted_regs && $deleted_regs->num_rows > 0): ?>
-                        <div class="rf-table-responsive">
-                            <table class="rf-data-table">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Name / Email</th>
-                                        <th>Deleted At</th>
-                                        <th class="rf-nowrap">Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                <?php while ($r = $deleted_regs->fetch_assoc()): ?>
-                                    <tr>
-                                        <td><?php echo htmlspecialchars($r['registration_id']); ?></td>
-                                        <td><?php echo htmlspecialchars($r['name'] ?? ($r['firstname'].' '.$r['lastname'] ?? '')) . ' / ' . htmlspecialchars($r['email'] ?? ''); ?></td>
-                                        <td><small class="rf-muted"><?php echo htmlspecialchars($r['deleted_at']); ?></small></td>
-                                        <td class="rf-nowrap">
-                                            <form method="post" class="rf-inline">
-                                                <input type="hidden" name="csrf" value="<?php echo $csrf; ?>">
-                                                <input type="hidden" name="table" value="registrations">
-                                                <input type="hidden" name="id" value="<?php echo intval($r['registration_id']); ?>">
-                                                <input type="hidden" name="action" value="restore">
-                                                <button class="rf-btn rf-btn-restore" type="submit">Restore</button>
-                                            </form>
-                                            <form method="post" class="rf-inline">
-                                                <input type="hidden" name="csrf" value="<?php echo $csrf; ?>">
-                                                <input type="hidden" name="table" value="registrations">
-                                                <input type="hidden" name="id" value="<?php echo intval($r['registration_id']); ?>">
-                                                <input type="hidden" name="action" value="perma_delete">
-                                                <button class="rf-btn rf-btn-danger" type="submit">Delete Permanently</button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                <?php endwhile; ?>
-                                </tbody>
-                            </table>
-                        </div>
-                    <?php else: ?>
-                        <p>No deleted registrations found.</p>
-                    <?php endif; ?>
-                </div>
-
-                <!-- Users section removed, not used anymore -->
-
                 <!-- Memberships -->
                 <div class="rf-panel">
-                    <h3 style="margin-top:0">Deleted Memberships</h3>
+                    <h3>Deleted Memberships</h3>
                     <?php if ($deleted_members && $deleted_members->num_rows > 0): ?>
                         <div class="rf-table-responsive">
                             <table class="rf-data-table">
@@ -358,21 +335,21 @@ $deleted_logins = $conn->query("SELECT * FROM login_history WHERE deleted = 1 OR
                                 <tbody>
                                 <?php while ($m = $deleted_members->fetch_assoc()): ?>
                                     <tr>
-                                        <td><?php echo htmlspecialchars($m['membership_id']); ?></td>
+                                        <td><?php echo htmlspecialchars($m['member_id']); ?></td>
                                         <td><?php echo htmlspecialchars($m['name'] ?? ($m['firstname'].' '.$m['lastname'] ?? '')) . ' / ' . htmlspecialchars($m['email'] ?? ''); ?></td>
                                         <td><small class="rf-muted"><?php echo htmlspecialchars($m['deleted_at']); ?></small></td>
                                         <td class="rf-nowrap">
                                             <form method="post" class="rf-inline">
                                                 <input type="hidden" name="csrf" value="<?php echo $csrf; ?>">
                                                 <input type="hidden" name="table" value="memberships">
-                                                <input type="hidden" name="id" value="<?php echo intval($m['membership_id']); ?>">
+                                                <input type="hidden" name="id" value="<?php echo intval($m['member_id']); ?>">
                                                 <input type="hidden" name="action" value="restore">
                                                 <button class="rf-btn rf-btn-restore" type="submit">Restore</button>
                                             </form>
                                             <form method="post" class="rf-inline">
                                                 <input type="hidden" name="csrf" value="<?php echo $csrf; ?>">
                                                 <input type="hidden" name="table" value="memberships">
-                                                <input type="hidden" name="id" value="<?php echo intval($m['membership_id']); ?>">
+                                                <input type="hidden" name="id" value="<?php echo intval($m['member_id']); ?>">
                                                 <input type="hidden" name="action" value="perma_delete">
                                                 <button class="rf-btn rf-btn-danger" type="submit">Delete Permanently</button>
                                             </form>
@@ -389,7 +366,7 @@ $deleted_logins = $conn->query("SELECT * FROM login_history WHERE deleted = 1 OR
 
                 <!-- Logins -->
                 <div class="rf-panel">
-                    <h3 style="margin-top:0">Deleted Logins</h3>
+                    <h3>Deleted Logins</h3>
                     <?php if ($deleted_logins && $deleted_logins->num_rows > 0): ?>
                         <div class="rf-table-responsive">
                             <table class="rf-data-table">

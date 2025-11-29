@@ -42,7 +42,7 @@ session_start();
 
         <?php
         if (isset($_SESSION['login_error'])) {
-            echo '<p style="color:#b00020">' . htmlspecialchars($_SESSION['login_error']) . '</p>';
+            echo '<p>' . htmlspecialchars($_SESSION['login_error']) . '</p>';
             unset($_SESSION['login_error']);
         }
         ?>

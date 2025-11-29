@@ -3141,6 +3141,24 @@ table.rf-data-table td small {
   gap: .5rem;
 }
 .rf-status-completed { color: var(--rf-success); font-weight: 700; }
+
+/* Promotion layout helper (left section) */
+.promotion-section-leftpad { flex: 1; padding-left: 10%; }
+
+/* Empty image grid placeholder */
+.rf-empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 2rem;
+}
+
+/* Upload heading small */
+.rf-upload-heading { margin-top: 0; margin-bottom: 1rem; font-size: 1rem; color: #4b5563; }
+
+/* Activity sidebar no padding override */
+.activity-no-pad { padding: 0; }
+
+.rf-error { color: #b00020; }
 .rf-heading-zero { margin-top: 0; }
 .rf-agent { max-width: 600px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
@@ -3322,3 +3340,11 @@ table.rf-data-table td small {
 }
 
 /* End of Promotion Module Styling */
+
+/* Recycle */
+/* small namespaced helpers just for the confirmation UI (no inline attributes) */
+.rf-confirm { max-width:760px; margin:40px auto; padding:24px; background:#fff; border-radius:12px; box-shadow:0 8px 30px rgba(0,0,0,0.06); }
+.rf-confirm h2 { margin:0 0 12px; color:#3b2a74; }
+.rf-confirm .rf-meta { margin-bottom:16px; color: #444; }
+.rf-confirm .rf-preview { background:#faf7ff; padding:12px; border-radius:8px; margin-bottom:16px; }
+.rf-confirm .rf-actions { display:flex; gap:10px; }

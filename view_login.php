@@ -57,7 +57,7 @@ $result = $conn->query($sql);
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Root Flower — Logins</title>
+    <title>Root Flower — Login History</title>
     <link rel="stylesheet" href="styles/styles.css">
     
 </head>
@@ -83,7 +83,7 @@ $result = $conn->query($sql);
 
                 <div class="rf-meta">
                     <div>
-                        <h1 class="rf-h1">User Logins</h1>
+                        <h1 class="rf-h1">Login History</h1>
                         <p class="rf-muted">All successful login events</p>
                     </div>
                     <div class="rf-nowrap">

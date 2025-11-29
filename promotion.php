@@ -86,7 +86,7 @@ $conn->close();
 </section>
 <!-- Promotion Section -->
 <main id="promotion-main">
-  <section style="flex: 1; padding-left: 10%;">
+  <section class="promotion-section-leftpad">
     <div class="promotion-title">
       <h1 id="special-discount">
         Special Discount

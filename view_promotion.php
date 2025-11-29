@@ -133,7 +133,7 @@ $conn->close();
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin - Promotion Module</title>
+  <title>Root Flower - Promotion Module</title>
   <link rel="stylesheet" href="styles/styles.css">
 </head>
 <body class="rf-root">
@@ -147,7 +147,7 @@ $conn->close();
     <section class="admin-content">
         <div class="rf-list-container">
             
-            <div class="rf-meta rf-meta-header" style="background: white; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+            <div class="rf-meta rf-meta-header">
                 <div>
                     <h1 class="rf-h1">Promotion Module Management</h1>
                     <p class="rf-muted">Manage the images displayed on the public promotion page.</p>
@@ -155,7 +155,7 @@ $conn->close();
             </div>
 
             <?php if (!empty($message)): ?>
-                <div class="rf-alert rf-alert-info" style="margin-bottom: 1.5rem; padding: 1rem; background: #e0f2fe; color: #0369a1; border-radius: 6px;">
+                <div class="rf-alert rf-alert-info">
                     <?php echo $message; ?>
                 </div>
             <?php endif; ?>
@@ -181,12 +181,12 @@ $conn->close();
                                         </div>
                                     <?php endforeach; ?>
                                 <?php else: ?>
-                                    <p class="rf-muted" style="grid-column: 1/-1; text-align: center; padding: 2rem;">No images in this section.</p>
+                                    <p class="rf-muted rf-empty">No images in this section.</p>
                                 <?php endif; ?>
                             </div>
 
                             <div class="upload-area">
-                                <h3 style="margin-top: 0; margin-bottom: 1rem; font-size: 1rem; color: #4b5563;">Add New Image</h3>
+                                <h3 class="rf-upload-heading">Add New Image</h3>
                                 <form action="" method="post" enctype="multipart/form-data">
                                     <input type="hidden" name="section" value="<?php echo $sec; ?>">
                                     <input type="file" name="fileToUpload" required class="rf-btn rf-btn-ghost">
@@ -199,7 +199,7 @@ $conn->close();
 
                 <!-- Inner Sidebar Area -->
                 <div class="promotion-sidebar-area">
-                    <aside class="activity-sidebar-container" id="promotion-sidebar" style="padding: 0;">
+                    <aside class="activity-sidebar-container activity-no-pad" id="promotion-sidebar">
                         <div class="activity-sidebar">
                             <h2>Promotion</h2>
                             <ul class="category-list">
