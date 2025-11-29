@@ -3513,7 +3513,6 @@ table.rf-data-table td small {
 
 /* Product Search Styles */
 .search-section {
-  padding: 3rem 1rem;
   background-color: #f9f5f0;
   font-family: 'Lato', sans-serif;
 }
@@ -3523,7 +3522,6 @@ table.rf-data-table td small {
   border: 1px solid #C4B6A4;
   border-radius: 16px;
   box-shadow: 0 4px 12px rgba(70, 59, 43, 0.1);
-  padding: 2rem;
   width: 100%;
   max-width: 700px;
   margin: 0 auto 3rem auto;
@@ -3532,7 +3530,7 @@ table.rf-data-table td small {
 }
 
 .search-container form {
-  height: 150px;
+  height: 10px;
   width: 100%;
   object-fit: cover;
   background-color: #f9fafb;
@@ -3708,7 +3706,7 @@ table.rf-data-table td small {
 
 /* Product Search Styles */
 .search-section {
-  padding: 3rem 1rem;
+  padding: 1rem;
   background-color: #f9f5f0;
   font-family: 'Lato', sans-serif;
 }
@@ -3718,20 +3716,11 @@ table.rf-data-table td small {
   border: 1px solid #C4B6A4;
   border-radius: 16px;
   box-shadow: 0 4px 12px rgba(70, 59, 43, 0.1);
-  padding: 2rem;
   width: 100%;
   max-width: 700px;
-  margin: 0 auto 3rem auto;
+  margin: 0 auto auto auto;
   display: flex;
   justify-content: center;
-}
-
-.search-container form {
-  height: 150px;
-  width: 100%;
-  object-fit: cover;
-  background-color: #f9fafb;
-  border-bottom: 1px solid #e5e7eb;
 }
 
 .image-actions {
@@ -3903,7 +3892,7 @@ table.rf-data-table td small {
 
 /* Product Search Styles */
 .search-section {
-  padding: 3rem 1rem;
+  padding: 1rem;
   background-color: #f9f5f0;
   font-family: 'Lato', sans-serif;
 }
@@ -3913,20 +3902,11 @@ table.rf-data-table td small {
   border: 1px solid #C4B6A4;
   border-radius: 16px;
   box-shadow: 0 4px 12px rgba(70, 59, 43, 0.1);
-  padding: 2rem;
   width: 100%;
   max-width: 700px;
-  margin: 0 auto 3rem auto;
+  margin: 0 auto auto auto;
   display: flex;
   justify-content: center;
-}
-
-.search-container form {
-  height: 150px;
-  width: 100%;
-  object-fit: cover;
-  background-color: #f9fafb;
-  border-bottom: 1px solid #e5e7eb;
 }
 
 .image-actions {
@@ -4098,113 +4078,113 @@ table.rf-data-table td small {
 
 /* Product Search Styles */
 .search-section {
-  padding: 2rem 1rem;
-
   background-color: #f9f5f0;
   font-family: 'Lato', sans-serif;
 }
 
 .search-container {
-    background-color: #ffffff;
-    border: 1px solid #C4B6A4;
-    border-radius: 16px;
-    box-shadow: 0 4px 12px rgba(70, 59, 43, 0.1);
-    padding: 1.5rem;
-    width: 100%;
-    max-width: 400px;
-    margin: 0 auto 2rem auto;
-    display: flex;
-    justify-content: center;
+  background-color: #ffffff;
+  border: 1px solid #C4B6A4;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(70, 59, 43, 0.1);
+  padding: 1rem;
+  width: 60%;
+  max-width: 60%;
+  height: 2.4rem;
+  justify-content: center;
 }
 
 .search-container form {
-    width: 100%;
-    display: flex;
-    gap: 0.8rem;
+  width: 100%;
+  gap: 0.5rem;
+  display: flex;
 }
 
 .search-container input[type='text'] {
-    flex: 1;
-    padding: 0.35rem 0.8rem;
-    border: 1px solid #C4B6A4;
-    border-radius: 10px;
-    font-size: 0.9rem;
-    outline: none;
-    background: #f4f1ed;
-    color: #0b0824;
-    transition: border-color 0.3s, box-shadow 0.3s;
+  flex: 1;
+  padding: 0.4rem 0.8rem;
+  border: 1px solid #C4B6A4;
+  border-radius: 24px;
+  font-size: 0.85rem;
+  outline: none;
+  background: #f4f1ed;
+  color: #0b0824;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  height: 2.4rem
 }
 
 .search-container input[type='text']:focus {
-    border-color: #928473;
-    box-shadow: 0 0 5px rgba(146, 132, 115, 0.5);
+  border-color: #928473;
+  box-shadow: 0 0 4px #928473;
 }
 
 .search-container button {
-    background-color: #463b2b;
-    color: #f4f1ed;
-    padding: 0.35rem 1.2rem;
-    font-size: 0.9rem;
-    font-weight: 500;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
+
+  background-color: #463b2b;
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 24px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s ease;
+  width: 100px;
+  height: 2.4rem;
 }
 
 .search-container button:hover {
-    background-color: #928473;
-    transform: translateY(-2px);
+  background-color: #928473;
+  transform: translateY(-2px);
 }
 
 .search-results {
-    max-width: 900px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
+  width: 50%;
+  max-width: 50%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
 }
 
 .product-list li {
-    list-style: none;
-    background-color: #fff;
-    padding: 1.5rem;
-    border: none;
-    border-radius: 16px;
-    text-align: center;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  list-style: none;
+  background-color: #fff;
+  padding: 1.5rem;
+  border: none;
+  border-radius: 16px;
+  text-align: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
 
 .product-list li:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
 .product-list li a {
-    text-decoration: none;
-    color: #5a5a5a;
-    font-weight: bold;
-    font-size: 1.2rem;
-    display: block;
+  text-decoration: none;
+  color: #5a5a5a;
+  font-weight: bold;
+  font-size: 1.2rem;
+  display: block;
 }
 
 .banner-search {
-    background-image: url('../Pictures/product_search.png');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    text-align: center;
-    height: 60vh;
-    min-height: 400px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 3rem;
-    position: relative;
-    color: #fff;
-    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+  background-image: url('../Pictures/product_search.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  text-align: center;
+  height: 60vh;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 3rem;
+  position: relative;
+  color: #fff;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
 }
-
