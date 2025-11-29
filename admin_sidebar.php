@@ -6,8 +6,8 @@
  * Created: 2025-11-19
  */
     echo
-    '<div class="admin-sidebar">
-        <h2>Admin Panel</h2>
+    '<aside class="admin-sidebar">
+        <a href="admin_panel.php"><h2>Admin Panel</h2></a>
         <a href="index.php">Home</a>
         <a href="view_register.php">Workshop Registrations</a>
         <a href="view_enquiry.php">Enquiries</a>
@@ -15,5 +15,5 @@
         <a href="view_login.php">Login History</a>
         <a href="recycle.php">Recycle Bin</a>
         <a href="view_promotion.php">Promotion Module</a>
-    </div>';
+    </aside>';
 ?>

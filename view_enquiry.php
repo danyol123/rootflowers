@@ -206,10 +206,8 @@ if (!function_exists('header_link')) {
 <body class="rf-root">
 
 <main class="admin-main">
-    <aside class="admin-sidebar">
-        <!-- Sidebar -->
-    	<?php include 'admin_sidebar.php'; ?>
-    </aside>
+    <!-- Sidebar -->
+    <?php include 'admin_sidebar.php'; ?>
 
     <section class="admin-content">
         <div class="rf-list-container">

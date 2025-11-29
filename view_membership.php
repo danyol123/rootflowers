@@ -213,14 +213,15 @@ if (!function_exists('header_link')) {
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" href="Pictures/Index/logo.png" type="image/png">
 	<title>Root Flower — Memberships</title>
 	<link rel="stylesheet" href="styles/styles.css">
 </head>
 <body class="rf-root">
 <main class="admin-main">
-	<aside class="admin-sidebar">
-		<?php include 'admin_sidebar.php'; ?>
-	</aside>
+	<!-- Sidebar -->
+	<?php include 'admin_sidebar.php'; ?>
+
 	<section class="admin-content">
 		<div class="rf-list-container">
 			<div class="rf-panel">

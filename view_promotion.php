@@ -159,16 +159,15 @@ $conn->close();
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="Pictures/Index/logo.png" type="image/png">
   <title>Root Flower - Promotion Module</title>
   <link rel="stylesheet" href="styles/styles.css">
 </head>
 <body class="rf-root">
 
 <main class="admin-main">
-    <aside class="admin-sidebar">
-        <!-- Sidebar -->
-        <?php include 'admin_sidebar.php'; ?>
-    </aside>
+    <!-- Sidebar -->
+    <?php include 'admin_sidebar.php'; ?>
 
     <section class="admin-content">
         <div class="rf-list-container">
