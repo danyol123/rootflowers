@@ -1,4 +1,10 @@
 <?php
+/*
+ * File: topup_result.php
+ * Description: Displays result of the top-up operation (success or failure).
+ * Author: Root Flower Team
+ * Created: 2025-11-29
+ */
 session_start();
 
 // Redirect if no status is set (prevent direct access)

@@ -1,6 +1,12 @@
 <?php
-    echo
-	'<footer>
+/*
+ * File: footer.php
+ * Description: Shared footer partial showing site links and social icons.
+ * Author: Root Flower Team
+ * Created: 2025-11-29
+ */
+  echo
+  '<footer>
     <div class="footer-col">
       <a href="index.php"><img src="Pictures/Index/logo.png" class="logo" alt="Logo"></a> 
       <h3>Follow us on social media</h3>
@@ -22,7 +28,8 @@
           <br>
           <p><a href="about_us.php">About Us</a></p>
           <p><a href="top_up.php">Top Up Wallet</a></p>
-          <p><a href="enhancement1.php">Enhancements</a></p>
+          <p><a href="enhancement1.php">Enhancements 1</a></p>
+          <p><a href="enhancement2.php">Enhancements 2</a></p>
           <p><a href="acknowledgement.php">Acknowledgement</a></p>
           
     </div>

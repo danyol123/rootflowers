@@ -1,4 +1,10 @@
 <?php
+/*
+ * File: view_promotion.php
+ * Description: Promotion admin page to upload and manage promotion images per section.
+ * Author: Root Flower Team
+ * Created: 2025-11-29
+ */
 session_start();
 
 // Check if admin is logged in
@@ -18,72 +24,91 @@ if ($conn->connect_error) {
 }
 
 $message = "";
+// CSRF token for admin forms
+if (!isset($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(16));
+}
+$csrf = $_SESSION['csrf_token'];
 
 // Handle File Upload
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['upload'])) {
     $section = $_POST['section'];
     $target_dir = "Pictures/Promotion/";
-    
-    // Ensure directory exists
-    if (!file_exists($target_dir)) {
-        mkdir($target_dir, 0777, true);
-    }
+    if (!file_exists($target_dir)) mkdir($target_dir, 0777, true);
 
-    $filename = basename($_FILES["fileToUpload"]["name"]);
-    $target_file = $target_dir . $filename;
-    $uploadOk = 1;
-    $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-
-    // Check if image file is a actual image or fake image
-    $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-    if($check !== false) {
+    // validate CSRF
+    if (!isset($_POST['csrf']) || $_POST['csrf'] !== $csrf) {
+        $message = 'Invalid CSRF token.';
+    } else {
+        $original_filename = basename($_FILES["fileToUpload"]["name"]);
         $uploadOk = 1;
-    } else {
-        $message = "File is not an image.";
-        $uploadOk = 0;
-    }
+        $imageFileType = strtolower(pathinfo($original_filename, PATHINFO_EXTENSION));
+        $allowed_ext = ['jpg','jpeg','png','gif'];
 
-    // Check if file already exists
-    if (file_exists($target_file)) {
-        $message = "Sorry, file already exists.";
-        $uploadOk = 0;
-    }
+        // Basic sanity checks
+        $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+        if ($check === false) {
+            $message = "File is not a valid image.";
+            $uploadOk = 0;
+        }
+        // Check file size (limit to 5MB)
+        if ($_FILES["fileToUpload"]["size"] > 5000000) {
+            $message = "Sorry, your file is too large.";
+            $uploadOk = 0;
+        }
+        // Validate extension
+        if (!in_array($imageFileType, $allowed_ext)) {
+            $message = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+            $uploadOk = 0;
+        }
 
-    // Check file size (limit to 5MB)
-    if ($_FILES["fileToUpload"]["size"] > 5000000) {
-        $message = "Sorry, your file is too large.";
-        $uploadOk = 0;
-    }
-
-    // Allow certain file formats
-    if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-    && $imageFileType != "gif" ) {
-        $message = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-        $uploadOk = 0;
-    }
-
-    if ($uploadOk == 0) {
-        if (empty($message)) $message = "Sorry, your file was not uploaded.";
-    } else {
-        if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-            // Insert into DB
-            $stmt = $conn->prepare("INSERT INTO promotion_images (section, image_path) VALUES (?, ?)");
-            $stmt->bind_param("ss", $section, $target_file);
-            if ($stmt->execute()) {
-                $message = "The file ". htmlspecialchars($filename). " has been uploaded.";
-            } else {
-                $message = "Error updating database: " . $conn->error;
+        // Validate MIME type
+        if ($uploadOk == 1) {
+            $finfo = finfo_open(FILEINFO_MIME_TYPE);
+            $mime = finfo_file($finfo, $_FILES["fileToUpload"]["tmp_name"]);
+            finfo_close($finfo);
+            if (!in_array($mime, ['image/jpeg','image/png','image/gif'])) {
+                $message = 'Uploaded file MIME type is not allowed.';
+                $uploadOk = 0;
             }
-            $stmt->close();
+        }
+
+        if ($uploadOk == 0) {
+            if (empty($message)) $message = "Sorry, your file was not uploaded.";
         } else {
-            $message = "Sorry, there was an error uploading your file.";
+            try {
+                $u = bin2hex(random_bytes(16));
+            } catch (Exception $e) {
+                $u = uniqid();
+            }
+            $new_filename = $u . '.' . $imageFileType;
+            $target_file = $target_dir . $new_filename;
+            if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+                // Insert into DB using server-side filename
+                $stmt = $conn->prepare("INSERT INTO promotion_images (section, image_path) VALUES (?, ?)");
+                $stmt->bind_param("ss", $section, $target_file);
+                if ($stmt->execute()) {
+                    $message = "The file has been uploaded.";
+                } else {
+                    $message = "Error updating database: " . $conn->error;
+                    // If DB insert failed, remove uploaded file
+                    if (file_exists($target_file)) unlink($target_file);
+                }
+                $stmt->close();
+            } else {
+                $message = "Sorry, there was an error moving the uploaded file.";
+            }
         }
     }
 }
 
-// Handle Deletion
-if (isset($_GET['delete_id'])) {
-    $id = $_GET['delete_id'];
+// Handle Deletion via POST (CSRF-protected)
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_id'])) {
+    // validate CSRF
+    if (!isset($_POST['csrf']) || $_POST['csrf'] !== $csrf) {
+        $message = 'Invalid CSRF token.';
+    } else {
+        $id = intval($_POST['delete_id']);
     
     // Get file path to delete file
     $stmt = $conn->prepare("SELECT image_path FROM promotion_images WHERE id = ?");
@@ -106,7 +131,8 @@ if (isset($_GET['delete_id'])) {
         }
         $del_stmt->close();
     }
-    $stmt->close();
+        $stmt->close();
+    }
 }
 
 // Fetch Images
@@ -156,7 +182,7 @@ $conn->close();
 
             <?php if (!empty($message)): ?>
                 <div class="rf-alert rf-alert-info">
-                    <?php echo $message; ?>
+                    <?php echo htmlspecialchars($message); ?>
                 </div>
             <?php endif; ?>
 
@@ -165,18 +191,22 @@ $conn->close();
                 <div class="promotion-content-area">
                     <?php foreach ($sections as $sec): ?>
                         <?php $secId = strtolower(str_replace(' ', '-', $sec)); ?>
-                        <div id="<?php echo $secId; ?>" class="rf-panel">
+                        <div id="<?php echo htmlspecialchars($secId); ?>" class="rf-panel">
                             <div class="section-header">
-                                <h2><?php echo $sec; ?></h2>
+                                <h2><?php echo htmlspecialchars($sec); ?></h2>
                             </div>
                             
                             <div class="image-grid">
                                 <?php if (count($images_by_section[$sec]) > 0): ?>
                                     <?php foreach ($images_by_section[$sec] as $img): ?>
                                         <div class="image-card">
-                                            <img src="<?php echo $img['image_path']; ?>" alt="Promotion Image" class="image-preview">
+                                            <img src="<?php echo htmlspecialchars($img['image_path']); ?>" alt="Promotion Image" class="image-preview">
                                             <div class="image-actions">
-                                                <a href="?delete_id=<?php echo $img['id']; ?>" class="rf-btn rf-btn-danger">Delete</a>
+                                                <form method="post" action="" class="rf-inline">
+                                                    <input type="hidden" name="csrf" value="<?php echo $csrf; ?>">
+                                                    <input type="hidden" name="delete_id" value="<?php echo intval($img['id']); ?>">
+                                                    <button type="submit" class="rf-btn rf-btn-danger">Delete</button>
+                                                </form>
                                             </div>
                                         </div>
                                     <?php endforeach; ?>
@@ -188,7 +218,8 @@ $conn->close();
                             <div class="upload-area">
                                 <h3 class="rf-upload-heading">Add New Image</h3>
                                 <form action="" method="post" enctype="multipart/form-data">
-                                    <input type="hidden" name="section" value="<?php echo $sec; ?>">
+                                    <input type="hidden" name="csrf" value="<?php echo $csrf; ?>">
+                                    <input type="hidden" name="section" value="<?php echo htmlspecialchars($sec); ?>">
                                     <input type="file" name="fileToUpload" required class="rf-btn rf-btn-ghost">
                                     <button type="submit" name="upload" class="rf-btn rf-btn-complete">Upload Image</button>
                                 </form>
@@ -205,7 +236,7 @@ $conn->close();
                             <ul class="category-list">
                                 <?php foreach ($sections as $sec): ?>
                                     <?php $secId = strtolower(str_replace(' ', '-', $sec)); ?>
-                                    <li><a href="#<?php echo $secId; ?>" class="category-item"><?php echo $sec; ?></a></li>
+                                    <li><a href="#<?php echo htmlspecialchars($secId); ?>" class="category-item"><?php echo htmlspecialchars($sec); ?></a></li>
                                 <?php endforeach; ?>
                             </ul>
                         </div>

@@ -1,4 +1,12 @@
 <?php
+$header_comment = "/*\n * File: CTable.php\n * Description: Creates essential database tables if they do not exist.\n * Author: Root Flower Team\n * Created: 2025-11-29\n */\n";
+// Print the header comment as a PHP comment on the file (no output)
+/*
+ * File: CTable.php
+ * Description: Creates essential database tables if they do not exist.
+ * Author: Root Flower Team
+ * Created: 2025-11-29
+ */
 $servername = "localhost";
 $username = "root";
 $password = "";

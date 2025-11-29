@@ -1,4 +1,10 @@
 <?php
+/*
+ * File: CDataBase.php
+ * Description: Database helper functions and connection logic for the site.
+ * Author: Root Flower Team
+ * Created: 2025-11-29
+ */
     $servername="localhost";
     $username="root";
     $password="";

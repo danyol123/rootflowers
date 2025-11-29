@@ -1,3 +1,12 @@
+<?php
+/*
+ * File: membership_process.php
+ * Description: Receives membership registration input and stores it in `memberships` table.
+ * Author: Root Flower Team
+ * Created: 2025-11-29
+ */
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,11 +49,37 @@
         $username = htmlspecialchars($_POST['username']);
         $email = htmlspecialchars($_POST['email']);
 
+        // Verify CSRF token
+        if (!isset($_POST['csrf']) || !isset($_SESSION['csrf_token']) || $_POST['csrf'] !== $_SESSION['csrf_token']) {
+            echo "<p class=\"rf-alert rf-alert-danger\">Invalid CSRF token.</p>";
+            echo "<p><a href='membership.php'>Return to the Entry Page</a></p>";
+            mysqli_close($conn);
+            include 'footer.php';
+            exit();
+        }
+
         // Accept password field OR password_hash
         if (isset($_POST['password'])) {
             $password_raw = $_POST['password'];
         } else {
-            $password_raw = $_POST['password_hash'];
+            $password_raw = isset($_POST['password_hash']) ? $_POST['password_hash'] : '';
+        }
+
+        // Validate password complexity: at least 8 characters, contains at least one letter and one number
+        $pw_ok = true;
+        if (trim($password_raw) === '') {
+            $pw_ok = false;
+            echo "<p class=\"rf-alert rf-alert-danger\">Password is required.</p>";
+        } else if (!preg_match('/[A-Za-z]/', $password_raw) || !preg_match('/[0-9]/', $password_raw) || strlen($password_raw) < 8) {
+            $pw_ok = false;
+            echo "<p class=\"rf-alert rf-alert-danger\">Password must be at least 8 characters and contain both letters and numbers.</p>";
+        }
+        
+        if (!$pw_ok) {
+            echo "<p><a href='membership.php'>Return to the Entry Page</a></p>";
+            mysqli_close($conn);
+            include 'footer.php';
+            exit();
         }
 
         // Hash password

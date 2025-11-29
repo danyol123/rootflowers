@@ -1,4 +1,10 @@
 <?php
+/*
+ * File: view_membership.php
+ * Description: Admin page for managing memberships (server-side create/edit/delete and sorting).
+ * Author: Root Flower Team
+ * Created: 2025-11-29
+ */
 session_start();
 
 // Basic admin check
@@ -24,6 +30,7 @@ if (!$conn) {
 }
 // create error container
 $create_errors = [];
+$errors = [];
 
 // Ensure necessary columns exist (for quick setup; in production use migrations)
 $alter_sql = "ALTER TABLE `memberships` 
@@ -82,6 +89,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 				$username = isset($_POST['username']) ? trim($_POST['username']) : '';
 				$email = isset($_POST['email']) ? trim($_POST['email']) : '';
 				$password = isset($_POST['password']) ? trim($_POST['password']) : '';
+				// Validate password complexity if provided
+				if ($password !== '') {
+					if (!preg_match('/[A-Za-z]/', $password) || !preg_match('/[0-9]/', $password) || strlen($password) < 8) {
+						$create_errors[] = 'Password must be at least 8 characters long and contain both letters and numbers.';
+						$shouldRedirect = false;
+						// fetch modal row to show in form
+						$stmt = $conn->prepare('SELECT * FROM memberships WHERE member_id = ? LIMIT 1');
+						$stmt->bind_param('i', $id);
+						$stmt->execute();
+						$res = $stmt->get_result();
+						if ($res && $res->num_rows > 0) $modal_row = $res->fetch_assoc();
+						$stmt->close();
+						break;
+					}
+				}
 				if ($password !== '') {
 					$password_hash = password_hash($password, PASSWORD_DEFAULT);
 					$stmt = $conn->prepare("UPDATE memberships SET firstname=?, lastname=?, username=?, email=?, password_hash=? WHERE member_id=?");
@@ -105,6 +127,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 				if ($username === '') $create_errors[] = 'Username is required.';
 				if ($email === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) $create_errors[] = 'Valid email is required.';
 				if ($password === '') $create_errors[] = 'Password is required.';
+				// Password complexity enforcement: require at least 8 chars, letters and numbers
+				if ($password !== '' && (!preg_match('/[A-Za-z]/', $password) || !preg_match('/[0-9]/', $password) || strlen($password) < 8)) {
+					$create_errors[] = 'Password must be at least 8 characters long and contain both letters and numbers.';
+				}
 				if (empty($create_errors)) {
 					$password_hash = password_hash($password, PASSWORD_DEFAULT);
 					$stmt = $conn->prepare("INSERT INTO memberships (firstname, lastname, username, email, password_hash) VALUES (?,?,?,?,?)");
@@ -209,6 +235,15 @@ if (!function_exists('header_link')) {
 						<hr>
 					<?php elseif ($edit_id): ?>
 						<h2>Edit Membership #<?php echo htmlspecialchars($modal_row['member_id']); ?></h2>
+						<?php if (!empty($create_errors)): ?>
+							<div class="rf-alert rf-alert-danger">
+								<ul>
+								<?php foreach ($create_errors as $err): ?>
+									<li><?php echo htmlspecialchars($err); ?></li>
+								<?php endforeach; ?>
+								</ul>
+							</div>
+						<?php endif; ?>
 						<form method="post">
 							<input type="hidden" name="csrf" value="<?php echo $csrf; ?>">
 							<input type="hidden" name="id" value="<?php echo intval($modal_row['member_id']); ?>">

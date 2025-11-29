@@ -1,4 +1,10 @@
 <?php
+/*
+ * File: topup_process.php
+ * Description: Handles top-up form submission for member accounts (accepts preset amounts or user input).
+ * Author: Root Flower Team
+ * Created: 2025-11-29
+ */
 session_start();
 
 // Ensure user is logged in
@@ -20,10 +26,24 @@ if ($conn->connect_error) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $amount = isset($_POST['amount']) ? floatval($_POST['amount']) : 0;
-    $payment_method = isset($_POST['payment_method']) ? $_POST['payment_method'] : '';
-    $bank = isset($_POST['bank']) ? $_POST['bank'] : '';
-    $account_number = isset($_POST['account_number']) ? $_POST['account_number'] : '';
+    // validate CSRF
+    if (!isset($_POST['csrf']) || !isset($_SESSION['csrf_token']) || $_POST['csrf'] !== $_SESSION['csrf_token']) {
+        $_SESSION['topup_message'] = "Invalid CSRF token.";
+        $_SESSION['topup_status'] = "error";
+        header("Location: top_up.php");
+        exit();
+    }
+
+    // use preset_amount if provided else fallback to amount
+    $amount = 0;
+    if (isset($_POST['preset_amount'])) {
+        $amount = floatval($_POST['preset_amount']);
+    } else {
+        $amount = isset($_POST['amount']) ? floatval($_POST['amount']) : 0;
+    }
+    $payment_method = isset($_POST['payment_method']) ? trim($_POST['payment_method']) : '';
+    $bank = isset($_POST['bank']) ? trim($_POST['bank']) : '';
+    $account_number = isset($_POST['account_number']) ? trim($_POST['account_number']) : '';
     $member_id = $_SESSION['member_id'];
 
     if ($amount < 5 || $amount > 500) {
@@ -32,6 +52,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header("Location: top_up.php");
         exit();
     }
+    // sanitize account number (digits only) to avoid injection
+    $account_number = preg_replace('/[^0-9]/', '', $account_number);
 
     // 1. Record transaction
     $stmt = $conn->prepare("INSERT INTO topup_history (member_id, amount, payment_method, bank, account_number, status) VALUES (?, ?, ?, ?, ?, 'success')");

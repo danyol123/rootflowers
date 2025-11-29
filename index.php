@@ -1,3 +1,11 @@
+<?php
+/*
+ * File: index.php
+ * Description: Landing page of Root Flower — displays promotions, products and news.
+ * Author: Root Flower Team
+ * Created: 2025-11-29
+ */
+?>
 <!DOCTYPE html>
 <html lang="en">
 

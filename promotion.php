@@ -1,4 +1,10 @@
 <?php
+/*
+ * File: promotion.php
+ * Description: Handles the public promotion listing, reading promotion images by section.
+ * Author: Root Flower Team
+ * Created: 2025-11-29
+ */
 // DB Connection
 $servername = "localhost";
 $username = "root";
@@ -93,7 +99,7 @@ $conn->close();
       </h1>
       <div class="discount">
         <?php foreach ($special_discount_images as $img): ?>
-            <figure><img src="<?php echo $img; ?>" alt="Special Discount"></figure>
+          <figure><img src="<?php echo htmlspecialchars($img); ?>" alt="Special Discount"></figure>
         <?php endforeach; ?>
       </div>
     </div>
@@ -103,7 +109,7 @@ $conn->close();
       </h1>
       <div class="earlybird">
         <?php foreach ($early_bird_images as $img): ?>
-            <figure><img src="<?php echo $img; ?>" alt="Early Bird"></figure>
+          <figure><img src="<?php echo htmlspecialchars($img); ?>" alt="Early Bird"></figure>
         <?php endforeach; ?>
       </div>
     </div>
@@ -113,7 +119,7 @@ $conn->close();
       </h1>
       <div class="giveaway">
         <?php foreach ($give_away_images as $img): ?>
-            <figure><img src="<?php echo $img; ?>" alt="Give Away"></figure>
+          <figure><img src="<?php echo htmlspecialchars($img); ?>" alt="Give Away"></figure>
         <?php endforeach; ?>
       </div>
     </div>

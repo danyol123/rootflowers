@@ -1,4 +1,10 @@
 <?php
+/*
+ * File: recycle.php
+ * Description: Server-side Recycle Bin for soft-delete, restore, and permanent delete actions.
+ * Author: Root Flower Team
+ * Created: 2025-11-29
+ */
 session_start();
 
 // Basic admin check
