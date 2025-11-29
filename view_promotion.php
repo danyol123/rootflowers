@@ -133,7 +133,7 @@ $conn->close();
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin - Promotion Module</title>
+  <title>Root Flower - Promotion Module</title>
   <link rel="stylesheet" href="styles/styles.css">
 </head>
 <body class="rf-root">
@@ -181,12 +181,12 @@ $conn->close();
                                         </div>
                                     <?php endforeach; ?>
                                 <?php else: ?>
-                                    <p class="rf-muted no-images-message">No images in this section.</p>
+                                    <p class="rf-muted rf-empty">No images in this section.</p>
                                 <?php endif; ?>
                             </div>
 
                             <div class="upload-area">
-                                <h3 class="upload-area-title">Add New Image</h3>
+                                <h3 class="rf-upload-heading">Add New Image</h3>
                                 <form action="" method="post" enctype="multipart/form-data">
                                     <input type="hidden" name="section" value="<?php echo $sec; ?>">
                                     <input type="file" name="fileToUpload" required class="rf-btn rf-btn-ghost">
@@ -199,7 +199,7 @@ $conn->close();
 
                 <!-- Inner Sidebar Area -->
                 <div class="promotion-sidebar-area">
-                    <aside class="activity-sidebar-container promotion-sidebar-admin" id="promotion-sidebar">
+                    <aside class="activity-sidebar-container activity-no-pad" id="promotion-sidebar">
                         <div class="activity-sidebar">
                             <h2>Promotion</h2>
                             <ul class="category-list">

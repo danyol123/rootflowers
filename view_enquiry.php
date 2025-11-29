@@ -275,11 +275,11 @@ if (!function_exists('header_link')) {
                     </div>
                         <div class="rf-nowrap">
                         <small class="rf-muted">Total active: <?php echo $active_result ? $active_result->num_rows : 0; ?></small>
-                            <a class="rf-btn rf-btn-ghost" href="?create=1" style="margin-left: .5rem">Create</a>
+                            <a class="rf-btn rf-btn-ghost rf-btn-ml" href="?create=1">Create</a>
                     </div>
                 </div>
                 <?php if (!empty($flash)): ?>
-                    <div class="rf-alert rf-alert-success" style="margin: 8px 0; padding: 8px 12px; border-radius: 6px; background: #eaf7ee; border:1px solid #c6efd0; color:#016c2e;">
+                    <div class="rf-alert rf-alert-success">
                         <?php echo htmlspecialchars($flash); ?>
                     </div>
                 <?php endif; ?>
@@ -320,7 +320,7 @@ if (!function_exists('header_link')) {
                                         </form>
 
                                         <!-- Delete button — sends to recycle.php (soft-delete) -->
-                                        <form method="post" action="recycle.php" class="rf-inline" onsubmit="return confirm('Are you sure you want to delete this enquiry? It will move to Recycle Bin.')">
+                                        <form method="post" action="recycle.php" class="rf-inline">
                                             <input type="hidden" name="csrf" value="<?php echo $csrf; ?>">
                                             <input type="hidden" name="table" value="enquiry">
                                             <input type="hidden" name="id" value="<?php echo intval($row['enquiry_id']); ?>">
@@ -387,7 +387,7 @@ if (!function_exists('header_link')) {
                                         </form>
 
                                         <!-- Move to Recycle (soft-delete) posts to recycle.php -->
-                                        <form method="post" action="recycle.php" class="rf-inline" onsubmit="return confirm('Move this completed enquiry to the Recycle Bin?');">
+                                        <form method="post" action="recycle.php" class="rf-inline">
                                             <input type="hidden" name="csrf" value="<?php echo $csrf; ?>">
                                             <input type="hidden" name="id" value="<?php echo intval($row['enquiry_id']); ?>">
                                             <input type="hidden" name="action" value="soft_delete">

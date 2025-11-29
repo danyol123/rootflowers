@@ -38,10 +38,11 @@
 
           <!-- Preset Amount Buttons -->
 <div class="preset-buttons">
-    <button type="button" class="preset-btn" onclick="setAmount(50)">RM50</button>
-    <button type="button" class="preset-btn" onclick="setAmount(100)">RM100</button>
-    <button type="button" class="preset-btn" onclick="setAmount(150)">RM150</button>
-    <button type="button" class="preset-btn" onclick="setAmount(200)">RM200</button>
+    <!-- Server-driven preset buttons: submit the form with an amount value -->
+    <button type="submit" class="preset-btn" name="amount" value="50">RM50</button>
+    <button type="submit" class="preset-btn" name="amount" value="100">RM100</button>
+    <button type="submit" class="preset-btn" name="amount" value="150">RM150</button>
+    <button type="submit" class="preset-btn" name="amount" value="200">RM200</button>
 </div>
 
 
@@ -86,11 +87,7 @@
 
 </main>
 
-<script>
-function setAmount(val) {
-    document.getElementById('amount').value = val;
-}
-</script>
+<!-- No JavaScript — preset options submit the selected amount server-side. -->
 
 <?php include 'footer.php'; ?>
 

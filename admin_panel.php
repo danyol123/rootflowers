@@ -8,7 +8,7 @@
   <meta name="author" content="Daniel, Josiah, Alvin, Kheldy">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="Pictures/Index/logo.png" type="image/png">
-  <title>Root Flower</title>
+  <title>Root Flower — Admin Panel</title>
   <link rel="stylesheet" href="styles/styles.css">
 </head>
 <body>

@@ -57,9 +57,9 @@ $result = $conn->query($sql);
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Root Flower — Logins</title>
+    <title>Root Flower — Login History</title>
     <link rel="stylesheet" href="styles/styles.css">
-    <style>.rf-agent { max-width: 600px; white-space:nowrap; overflow: hidden; text-overflow: ellipsis; }</style>
+    
 </head>
 <body class="rf-root">
 <main class="admin-main">
@@ -83,7 +83,7 @@ $result = $conn->query($sql);
 
                 <div class="rf-meta">
                     <div>
-                        <h1 class="rf-h1">User Logins</h1>
+                        <h1 class="rf-h1">Login History</h1>
                         <p class="rf-muted">All successful login events</p>
                     </div>
                     <div class="rf-nowrap">
@@ -121,7 +121,7 @@ $result = $conn->query($sql);
                                 <td><small class="rf-muted"><?php echo htmlspecialchars($row['login_at']); ?></small></td>
                                 <td class="rf-nowrap">
                                     <a class="rf-btn rf-btn-ghost rf-btn-view" href="?view=<?php echo intval($row['history_id']); ?>">View</a>
-                                    <form method="post" action="recycle.php" class="rf-inline" onsubmit="return confirm('Move this login to the Recycle Bin?');" style="display:inline-block">
+                                        <form method="post" action="recycle.php" class="rf-inline">
                                         <input type="hidden" name="csrf" value="<?php echo $csrf; ?>">
                                         <input type="hidden" name="table" value="login_history">
                                         <input type="hidden" name="id" value="<?php echo intval($row['history_id']); ?>">
