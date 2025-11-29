@@ -3,7 +3,7 @@
  * File: view_register.php
  * Description: Admin page for viewing and managing registrations (server-side CRUD, sorting).
  * Author: Root Flower Team
- * Created: 2025-11-29
+ * Created: 2025-10-29
  */
 session_start();
 

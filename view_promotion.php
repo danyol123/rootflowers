@@ -3,7 +3,7 @@
  * File: view_promotion.php
  * Description: Promotion admin page to upload and manage promotion images per section.
  * Author: Root Flower Team
- * Created: 2025-11-29
+ * Created: 2025-11-19
  */
 session_start();
 

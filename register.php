@@ -3,7 +3,7 @@
  * File: register.php
  * Description: Workshop registration form for users to sign up for workshops.
  * Author: Root Flower Team
- * Created: 2025-11-29
+ * Created: 2025-10-22
  */
 ?>
 <!DOCTYPE html>
@@ -27,7 +27,7 @@
 <main>
   <section class="form-section">
     <div class="form-container">
-      <h1>Workshop Registration</h1>
+      <h1 class="enquiry-title">Workshop Registration</h1>
         <?php
         // CSRF token
         if (!isset($_SESSION)) session_start();

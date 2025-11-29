@@ -3,7 +3,7 @@
  * File: admin_panel.php
  * Description: Admin dashboard - quick links to admin functions.
  * Author: Root Flower Team
- * Created: 2025-11-29
+ * Created: 2025-11-17
  */
 ?>
 <!DOCTYPE html>

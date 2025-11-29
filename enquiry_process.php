@@ -4,7 +4,7 @@ session_start();
  * File: enquiry_process.php
  * Description: Handles front-facing enquiry submissions, performs honeypot anti-spam check, and stores records.
  * Author: Root Flower Team
- * Created: 2025-11-29
+ * Created: 2025-10-29
  */
 ?>
 <!DOCTYPE html>

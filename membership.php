@@ -3,7 +3,7 @@
  * File: membership.php
  * Description: Public membership registration page (with client-side hints and CSRF token).
  * Author: Root Flower Team
- * Created: 2025-11-29
+ * Created: 2025-10-22
  */
 ?>
 <!DOCTYPE html>
@@ -27,7 +27,7 @@
 <main>
   <section class="form-section">
     <div class="form-container">
-        <h1>Join Rootflower</h1>
+        <h1 class="enquiry-title">Join Rootflower</h1>
         <?php
         if (!isset($_SESSION)) session_start();
         if (!isset($_SESSION['csrf_token'])) {

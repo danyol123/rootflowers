@@ -4,7 +4,7 @@ session_start();
  * File: register_process.php
  * Description: Process workshop registration submissions and shows confirmation.
  * Author: Root Flower Team
- * Created: 2025-11-29
+ * Created: 2025-10-29
  */
 ?>
 <!DOCTYPE html>

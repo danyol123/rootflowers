@@ -3,7 +3,7 @@
  * File: membership_process.php
  * Description: Receives membership registration input and stores it in `memberships` table.
  * Author: Root Flower Team
- * Created: 2025-11-29
+ * Created: 2025-10-29
  */
 session_start();
 ?>

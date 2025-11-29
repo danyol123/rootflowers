@@ -3,7 +3,7 @@
  * File: login_sucess.php
  * Description: Post-login confirmation for membership users.
  * Author: Root Flower Team
- * Created: 2025-11-29
+ * Created: 2025-11-19
  */
 session_start();
 

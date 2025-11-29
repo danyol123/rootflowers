@@ -3,7 +3,7 @@
  * File: admin_sidebar.php
  * Description: Sidebar for the admin interface with quick links.
  * Author: Root Flower Team
- * Created: 2025-11-29
+ * Created: 2025-11-19
  */
     echo
     '<div class="admin-sidebar">

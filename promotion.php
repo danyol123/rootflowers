@@ -3,7 +3,7 @@
  * File: promotion.php
  * Description: Handles the public promotion listing, reading promotion images by section.
  * Author: Root Flower Team
- * Created: 2025-11-29
+ * Created: 2025-10-22
  */
 // DB Connection
 $servername = "localhost";

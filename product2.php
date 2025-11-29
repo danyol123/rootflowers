@@ -3,7 +3,7 @@
  * File: product2.php
  * Description: CNY Decorations product page.
  * Author: Root Flower Team
- * Created: 2025-11-29
+ * Created: 2025-10-22
  */
 ?>
 <!DOCTYPE html>
