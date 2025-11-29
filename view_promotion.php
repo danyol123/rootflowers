@@ -156,7 +156,7 @@ $conn->close();
 
             <?php if (!empty($message)): ?>
                 <div class="rf-alert rf-alert-info">
-                    <?php echo $message; ?>
+                    <?php echo htmlspecialchars($message); ?>
                 </div>
             <?php endif; ?>
 
@@ -165,18 +165,18 @@ $conn->close();
                 <div class="promotion-content-area">
                     <?php foreach ($sections as $sec): ?>
                         <?php $secId = strtolower(str_replace(' ', '-', $sec)); ?>
-                        <div id="<?php echo $secId; ?>" class="rf-panel">
+                        <div id="<?php echo htmlspecialchars($secId); ?>" class="rf-panel">
                             <div class="section-header">
-                                <h2><?php echo $sec; ?></h2>
+                                <h2><?php echo htmlspecialchars($sec); ?></h2>
                             </div>
                             
                             <div class="image-grid">
                                 <?php if (count($images_by_section[$sec]) > 0): ?>
                                     <?php foreach ($images_by_section[$sec] as $img): ?>
                                         <div class="image-card">
-                                            <img src="<?php echo $img['image_path']; ?>" alt="Promotion Image" class="image-preview">
+                                            <img src="<?php echo htmlspecialchars($img['image_path']); ?>" alt="Promotion Image" class="image-preview">
                                             <div class="image-actions">
-                                                <a href="?delete_id=<?php echo $img['id']; ?>" class="rf-btn rf-btn-danger">Delete</a>
+                                                <a href="?delete_id=<?php echo intval($img['id']); ?>" class="rf-btn rf-btn-danger">Delete</a>
                                             </div>
                                         </div>
                                     <?php endforeach; ?>
@@ -188,7 +188,7 @@ $conn->close();
                             <div class="upload-area">
                                 <h3 class="rf-upload-heading">Add New Image</h3>
                                 <form action="" method="post" enctype="multipart/form-data">
-                                    <input type="hidden" name="section" value="<?php echo $sec; ?>">
+                                    <input type="hidden" name="section" value="<?php echo htmlspecialchars($sec); ?>">
                                     <input type="file" name="fileToUpload" required class="rf-btn rf-btn-ghost">
                                     <button type="submit" name="upload" class="rf-btn rf-btn-complete">Upload Image</button>
                                 </form>
@@ -205,7 +205,7 @@ $conn->close();
                             <ul class="category-list">
                                 <?php foreach ($sections as $sec): ?>
                                     <?php $secId = strtolower(str_replace(' ', '-', $sec)); ?>
-                                    <li><a href="#<?php echo $secId; ?>" class="category-item"><?php echo $sec; ?></a></li>
+                                    <li><a href="#<?php echo htmlspecialchars($secId); ?>" class="category-item"><?php echo htmlspecialchars($sec); ?></a></li>
                                 <?php endforeach; ?>
                             </ul>
                         </div>

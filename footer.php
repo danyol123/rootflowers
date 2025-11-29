@@ -22,7 +22,8 @@
           <br>
           <p><a href="about_us.php">About Us</a></p>
           <p><a href="top_up.php">Top Up Wallet</a></p>
-          <p><a href="enhancement1.php">Enhancements</a></p>
+          <p><a href="enhancement1.php">Enhancements 1</a></p>
+          <p><a href="enhancement2.php">Enhancements 2</a></p>
           <p><a href="acknowledgement.php">Acknowledgement</a></p>
           
     </div>
