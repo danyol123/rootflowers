@@ -1775,20 +1775,7 @@ a[data-social="Youtube"] {
   text-align: center;
 }
 
-.parallax {
-  background-image: var(--Par);
-}
 
-/* Banners */
-.banner-bouquet {
-  --bg: url("../Pictures/Product1/Banner1.jpg");
-  background: var(--bg) center/cover fixed no-repeat;
-}
-
-.banner-CNY {
-  --bg: url("../Pictures/Product2/Banner2.jpeg");
-  background: var(--bg) center/cover fixed no-repeat;
-}
 
 .banner-grand-opening {
   --bg: url("../Pictures/Product3/Banner3.jpeg");
@@ -1800,20 +1787,7 @@ a[data-social="Youtube"] {
   background: var(--bg) center/cover fixed no-repeat;
 }
 
-.banner-workshop {
-  --bg: url("../Pictures/Workshop/Banner1.jpg");
-  background: var(--bg) center/cover fixed no-repeat;
-}
 
-.banner-promotion {
-  --bg: url("../Pictures/Promotion/Banner1.jpeg");
-  background: var(--bg) center/cover fixed no-repeat;
-}
-
-.text-bloc p {
-  margin: 75px;
-  font-size: 22px;
-}
 
 /* Top Up Wallet */
 
@@ -3480,32 +3454,32 @@ table.rf-data-table td small {
   color: #fff;
   transform: translateY(-2px);
 }
+
 /* Top Up Module */
 .topup-result-container {
-    text-align: center;
+  text-align: center;
 }
 
 .topup-success-title {
-    color: #2bb673;
+  color: #2bb673;
 }
 
 .topup-failure-title {
-    color: #b00020;
+  color: #b00020;
 }
 
 .topup-details {
-    margin: 20px 0;
-    text-align: left;
-    display: inline-block;
+  margin: 20px 0;
+  text-align: left;
+  display: inline-block;
 }
 
 .topup-return-link-container {
-    margin-top: 30px;
+  margin-top: 30px;
 }
 
 .topup-return-link {
-    color: #928473;
-    text-decoration: none;
-    font-weight: bold;
+  color: #928473;
+  text-decoration: none;
+  font-weight: bold;
 }
-
