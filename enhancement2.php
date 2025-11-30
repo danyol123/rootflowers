@@ -15,7 +15,7 @@
     <meta name="author" content="Root Flower Team">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="Pictures/Index/logo.png" type="image/png">
-    <title>Root Flower — Enhancements (Assignment 2)</title>
+    <title>Root Flower</title>
     <link rel="stylesheet" href="styles/styles.css">
 </head>
 <body>
@@ -47,7 +47,7 @@
       Admin interface to manage the database: create new entries, update details, view data info, and soft-delete (move to Recycle).
     </p>
     <div class="enhancement-details">
-      <p><strong>Beyond requirements:</strong> The user management UI is fully server-driven with inline modals for create / view / edit, server-side sorting, CSRF tokens on all forms, and soft-delete flags that allow restore operations — this is more robust than a basic CRUD layout that relies on client-side JS.</p>
+      <p><strong>Beyond requirements:</strong> The user management UI is fully server-driven with inline modals for create / view / edit, server-side sorting, CSRF tokens on all forms, and soft-delete flags that allow restore operations.</p>
       <p><strong>Implementation steps:</strong> Add admin authentication checks for pages; implement POST-based forms with `csrf` tokens; use prepared statements for database actions; add `deleted`/`deleted_at` columns for soft deletes; implement `?view`/`?edit` GET-driven modals; add server-side validation and escape output via `htmlspecialchars()`.</p>
     </div>
     <div class="button-group">
@@ -66,7 +66,7 @@
       Admin module for uploading promotion images and managing sections. Includes image validation and server-side file handling.
     </p>
     <div class="enhancement-details">
-      <p><strong>Beyond requirements:</strong> This module does server-side image validation, MIME checks using `finfo`, renames files to server-generated safe filenames, and stores the path in the DB — much safer than simply uploading the raw client filename. It also prevents direct file-based XSS by escaping outputs and uses POST actions for deletion.</p>
+      <p><strong>Beyond requirements:</strong> This module does server-side image validation, MIME checks using `finfo`, renames files to server-generated safe filenames, and stores the path in the DB.</p>
       <p><strong>Implementation steps:</strong> Add `promotion_images` table and per-section grouping; implement `finfo` + `getimagesize()` checks for uploaded files; restrict file sizes and extensions; generate secure filenames (random hex); move files into `Pictures/Promotion/`; store file paths in DB; use POST+CSRF for deletion; optionally soft-delete via `recycle.php`.</p>
     </div>
     <div class="button-group">
@@ -83,7 +83,7 @@
       A secure, server-backed topup form to add credits to a member account. The UI uses server-side presets and validates values on the server.
     </p>
     <div class="enhancement-details">
-      <p><strong>Beyond requirements:</strong> The top-up flow stores transaction logs (`topup_history`), performs server-side validation and sanitization of amounts and account details, and uses secure transactions to update balance — more than simply adding a numeric form input.</p>
+      <p><strong>Beyond requirements:</strong> The top-up flow stores transaction logs (`topup_history`), performs server-side validation and sanitization of amounts and account details, and uses secure transactions to update balance.</p>
       <p><strong>Implementation steps:</strong> Add a `topup_history` table; convert preset client buttons to server-submitted `preset_amount`; validate `amount` server-side; insert transaction and update balance in a single safe transaction; set session feedback message and redirect to `topup_result.php`.</p>
     </div>
     <div class="button-group">
@@ -99,7 +99,7 @@
       Server-side product search that looks up products and matches keywords. Results are displayed with safe escaping to avoid XSS.
     </p>
     <div class="enhancement-details">
-      <p><strong>Beyond requirements:</strong> A server-backed, SQL-safe search implementation that supports partial matches, safely escapes output, and can scale to DB-backed product listings — safer and more scalable than exposing client-side filters only.</p>
+      <p><strong>Beyond requirements:</strong> A server-backed, SQL-safe search implementation that supports partial matches, safely escapes output, and can scale to DB-backed product listings.</p>
       <p><strong>Implementation steps:</strong> Add DB `products` table (or mapping); implement prepared `LIKE` or full-text `MATCH` query; sanitize `keyword` input; escape and paginate results. Implement a search results page with server-driven links to product pages.</p>
     </div>
     <div class="button-group">
@@ -132,7 +132,7 @@
       All table headers support server-driven sort parameters using an allow list to avoid SQL injection. See registration/enquiry/membership/login pages for examples.
     </p>
     <div class="enhancement-details">
-      <p><strong>Beyond requirements:</strong> This approach enforces safe sorting by using server-maintained whitelist of allowed columns and toggling sort direction — preventing SQL injection and making server-side lists robust without client-side scripts.</p>
+      <p><strong>Beyond requirements:</strong> This approach enforces safe sorting by using server-maintained whitelist of allowed columns and toggling sort direction.</p>
       <p><strong>Implementation steps:</strong> Implement an allow-list mapping `GET` sort keys to database columns; sanitize `dir` to `asc` or `desc`; build `ORDER BY` clause from validated keys only; render header links with toggled `dir` and direction icons; index columns used in sorts for performance.</p>
     </div>
     <div class="button-group">

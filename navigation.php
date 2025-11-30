@@ -16,6 +16,7 @@ echo
         <li class="dropdown">
           <a href="#">Products</a>
           <ul class="dropdown-content">
+            <li><a href="product_search.php">Product Search</a></li>
             <li><a href="product1.php">Hand bouquet</a></li>
             <li><a href="product2.php">CNY decoration</a></li>
             <li><a href="product3.php">Grand Opening</a></li>
@@ -35,11 +36,10 @@ echo
             <li><a href="register.php">Workshop Registration</a></li>
             <li><a href="enquiry.php">Enquiry Form</a></li>
             <li><a href="membership.php">Membership Registration</a></li>
-            <li><a href="login.php">Login</a></li>
+            <li><a href="top_up.php" class="topup-btn">Top Up Wallet</a></li>
           </ul>
         </li>
-        <li class="dropdown"><a href="top_up.php" class="topup-btn">Top Up Wallet</a></li>
-        <li class="dropdown"><a href="product_search.php">Product Search</a></li>
+        <li class="dropdown"><a href="login.php">Login</a></li>
         <li class="dropdown"><a href="about_us.php">About Us</a></li>
       </ul>
     </div>
