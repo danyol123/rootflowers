@@ -56,13 +56,13 @@ session_start();
           <?php
           // Display login message if redirected from protected page
           if (isset($_SESSION['login_message'])) {
-            echo '<p style="color: #d9534f; font-weight: bold; text-align: center; margin-bottom: 15px;">' . htmlspecialchars($_SESSION['login_message']) . '</p>';
+            echo '<p class="login-error">' . htmlspecialchars($_SESSION['login_message']) . '</p>';
             unset($_SESSION['login_message']);
           }
 
           // Display login error if authentication failed
           if (isset($_SESSION['login_error'])) {
-            echo '<p style="color: #d9534f; text-align: center;">' . htmlspecialchars($_SESSION['login_error']) . '</p>';
+            echo '<p class="login-error">' . htmlspecialchars($_SESSION['login_error']) . '</p>';
             unset($_SESSION['login_error']);
           }
           ?>
@@ -70,7 +70,7 @@ session_start();
           <button type="submit" class="login-btn">Login</button>
 
           <div class="login-links">
-            <a href="#">Forgot Password?</a>
+            <a href="enquiry.php">Forgot Password?</a>
             <a href="membership.php">Create an Account</a>
           </div>
         </form>

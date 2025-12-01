@@ -4149,3 +4149,31 @@ label[for="pot"] {
   color: #fff;
   text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
 }
+
+/* Admin Stuff */
+.login-error{
+  color: #d9534f; 
+  text-align: center;
+}
+
+.rf-admin-setting{
+  margin:0; 
+  font-size: 1.5rem;
+}
+
+.rf-admin-success{
+  background: #d1fae5; 
+  color: #065f46; 
+  margin-bottom: 1rem;
+}
+
+.rf-admin-error{
+  background: #fee2e2; 
+  color: #991b1b; 
+  margin-bottom: 1rem;
+}
+
+.rf-update-credentials{
+  background-color: #463b2b; 
+  color: white;
+}

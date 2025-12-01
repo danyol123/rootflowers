@@ -92,7 +92,7 @@ if (empty($_SESSION['csrf_token'])) {
     <?php include 'admin_sidebar.php'; ?>
 
     <!-- Right Content -->
-    <section class="admin-content" style="padding: 20px; width: 100%;">
+    <section class="admin-content">
       <div class="rf-list-container">
         <div class="rf-panel">
           <div class="rf-meta">
@@ -116,19 +116,19 @@ if (empty($_SESSION['csrf_token'])) {
         <div class="rf-panel">
           <div class="rf-meta">
             <div>
-              <h2 class="rf-h2" style="margin:0; font-size: 1.5rem;">Admin Settings</h2>
+              <h2 class="rf-h2 rf-admin-setting">Admin Settings</h2>
               <p class="rf-muted">Update your admin username and password.</p>
             </div>
           </div>
 
           <?php if ($message): ?>
-              <div class="rf-alert-info" style="background: #d1fae5; color: #065f46; margin-bottom: 1rem;">
+              <div class="rf-alert-info rf-admin-success">
                   <?php echo htmlspecialchars($message); ?>
               </div>
           <?php endif; ?>
           
           <?php if ($error): ?>
-              <div class="rf-alert-info" style="background: #fee2e2; color: #991b1b; margin-bottom: 1rem;">
+              <div class="rf-alert-info rf-admin-error">
                   <?php echo htmlspecialchars($error); ?>
               </div>
           <?php endif; ?>
@@ -143,7 +143,7 @@ if (empty($_SESSION['csrf_token'])) {
               <label for="password">New Password (leave blank to keep current)</label>
               <input type="password" name="password" id="password">
               
-              <button type="submit" class="rf-btn rf-btn-primary" style="background-color: #463b2b; color: white;">Update Credentials</button>
+              <button type="submit" class="rf-btn rf-btn-primary rf-update-credentials">Update Credentials</button>
           </form>
         </div>
 
