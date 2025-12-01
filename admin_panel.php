@@ -106,7 +106,7 @@ if (empty($_SESSION['csrf_token'])) {
             <a class="rf-btn rf-btn-ghost" href="view_register.php">Workshop Registrations</a>
             <a class="rf-btn rf-btn-ghost" href="view_enquiry.php">Enquiries</a>
             <a class="rf-btn rf-btn-ghost" href="view_membership.php">Memberships</a>
-            <a class="rf-btn rf-btn-ghost" href="view_login.php">Logins</a>
+            <a class="rf-btn rf-btn-ghost" href="view_login.php">Login History</a>
             <a class="rf-btn rf-btn-ghost" href="recycle.php">Recycle Bin</a>
             <a class="rf-btn rf-btn-ghost" href="view_promotion.php">Promotion Module</a>
           </div>
