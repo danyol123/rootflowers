@@ -45,6 +45,14 @@ session_start();
                     die("<p>Error: " . mysqli_connect_error() . "</p>");
                 }
 
+                // Honeypot check
+                if (!empty($_POST['website'])) {
+                    echo "<p>Error: Invalid submission detected.</p>";
+                    echo "<p><a href='membership.php'>Return to the Entry Page</a></p>";
+                    mysqli_close($conn);
+                    exit();
+                }
+
                 // Retrieve form data
                 $firstname = htmlspecialchars($_POST['firstname']);
                 $lastname = htmlspecialchars($_POST['lastname']);

@@ -53,6 +53,9 @@ session_start();
           <input type="password" id="password" name="password" placeholder="Enter your password" required>
         </div>
 
+        <!-- Honeypot field -->
+        <input type="hidden" name="website" id="pot" value="">
+
         <?php
         if (isset($_SESSION['login_error'])) {
             echo '<p>' . htmlspecialchars($_SESSION['login_error']) . '</p>';

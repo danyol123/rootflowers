@@ -121,6 +121,9 @@
         <label for="comments">Comments:</label>
         <textarea id="comments" name="comments" rows="4" cols="40" placeholder="Any special requests?"></textarea>
 
+        <!-- Honeypot field -->
+        <input type="hidden" name="website" id="pot" value="">
+
         <br>
         <div class="submit-buttons">
           <input type="submit" value="Register">
