@@ -1,4 +1,9 @@
 <?php
+// Start session if not already started
+if (session_status() === PHP_SESSION_NONE) {
+  session_start();
+}
+
 $top_up_link = 'top_up.php';
 $top_up_onclick = '';
 

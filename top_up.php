@@ -93,7 +93,7 @@ $conn->close();
 
                     <!-- Payment Method Selection -->
                     <label for="payment_method">Select Payment Method:</label>
-                    <select id="payment_method" name="payment_method" required>
+                    <select id="payment_method" name="payment_method" required onchange="toggleBankSelection()">
                         <option value="">-- Choose Payment Method --</option>
                         <option value="card">Debit / Credit Card</option>
                         <option value="online_banking">Online Banking / FPX</option>
@@ -101,36 +101,53 @@ $conn->close();
                         <option value="grabpay">GrabPay</option>
                         <option value="shopeepay">ShopeePay</option>
                         <option value="cash">Cash at Store</option>
-                </select>
+                    </select>
 
-                <!-- Bank Selection (For FPX / Online Banking) -->
-                <label for="bank">Select Bank (Malaysia):</label>
-                <select id="bank" name="bank">
-                    <option value="">-- Select Bank --</option>
-                    <option value="maybank">Maybank</option>
-                    <option value="cimb">CIMB Bank</option>
-                    <option value="public">Public Bank</option>
-                    <option value="rhb">RHB Bank</option>
-                    <option value="hlb">Hong Leong Bank</option>
-                    <option value="ambank">AmBank</option>
-                </select>
+                    <!-- Bank Selection (For FPX / Online Banking) -->
+                    <div id="bank-selection-container" style="display: none;">
+                        <label for="bank">Select Bank (Malaysia):</label>
+                        <select id="bank" name="bank">
+                            <option value="">-- Select Bank --</option>
+                            <option value="maybank">Maybank</option>
+                            <option value="cimb">CIMB Bank</option>
+                            <option value="public">Public Bank</option>
+                            <option value="rhb">RHB Bank</option>
+                            <option value="hlb">Hong Leong Bank</option>
+                            <option value="ambank">AmBank</option>
+                        </select>
+                    </div>
 
-                <!-- Account Number -->
-                <label for="account_number">Your Bank / E-Wallet Account Number:</label>
-                <input type="text" id="account_number" name="account_number" maxlength="20" required>
+                    <!-- Account Number -->
+                    <label for="account_number">Your Bank / E-Wallet Account Number:</label>
+                    <input type="text" id="account_number" name="account_number" maxlength="20" required>
 
-                <!-- Submit -->
-                <div class="submit-buttons">
-                    <input type="submit" value="Confirm Top Up">
-                    <input type="reset" value="Reset">
-                </div>
+                    <!-- Submit -->
+                    <div class="submit-buttons">
+                        <input type="submit" value="Confirm Top Up">
+                        <input type="reset" value="Reset">
+                    </div>
                 </form>
-            </div>
         </section>
 
     </main>
 
-    <!-- No client-side JS preset functions; server handles preset buttons -->
+    <!-- Client-side JS for Payment Method Logic -->
+    <script>
+        function toggleBankSelection() {
+            var paymentMethod = document.getElementById("payment_method").value;
+            var bankContainer = document.getElementById("bank-selection-container");
+            var bankSelect = document.getElementById("bank");
+
+            if (paymentMethod === "online_banking") {
+                bankContainer.style.display = "block";
+                bankSelect.setAttribute("required", "required");
+            } else {
+                bankContainer.style.display = "none";
+                bankSelect.removeAttribute("required");
+                bankSelect.value = ""; // Reset selection
+            }
+        }
+    </script>
 
     <?php include 'footer.php'; ?>
 
