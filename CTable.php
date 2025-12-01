@@ -136,10 +136,26 @@ $sql_admin = "CREATE TABLE IF NOT EXISTS admin (
         id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
         username VARCHAR(25) NOT NULL,
         password_hash VARCHAR(255) NOT NULL,
-        reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                      reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )";
 
 $conn->query($sql_admin);
+
+// Insert default admin user if table is empty
+$result_admin = $conn->query("SELECT COUNT(*) AS count FROM admin");
+if ($result_admin) {
+    $row_admin = $result_admin->fetch_assoc();
+    if ($row_admin['count'] == 0) {
+        $default_username = 'admin';
+        $default_password_hash = password_hash('admin', PASSWORD_DEFAULT);
+        $stmt_admin = $conn->prepare("INSERT INTO admin (username, password_hash) VALUES (?, ?)");
+        if ($stmt_admin) {
+            $stmt_admin->bind_param("ss", $default_username, $default_password_hash);
+            $stmt_admin->execute();
+            $stmt_admin->close();
+        }
+    }
+}
 
 // Create 'topup_history' table
 $sql_topup = "CREATE TABLE IF NOT EXISTS topup_history (
@@ -156,4 +172,4 @@ $sql_topup = "CREATE TABLE IF NOT EXISTS topup_history (
 $conn->query($sql_topup);
 
 $conn->close();
-?>
+?>                                                                                                                                                                                                                                         
