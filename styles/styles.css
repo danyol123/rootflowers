@@ -1134,18 +1134,7 @@ input[type="reset"]:hover {
   }
 }
 
-/* Footer Styles */
-footer * {
-  margin: 0;
-  padding: 0px;
-  box-sizing: border-box;
-}
-
-footer {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-
-  .rf-modal-inline {
+.rf-modal-inline {
     border: 1px solid #C4B6A4;
     background: #fff;
     padding: 14px;
@@ -1180,6 +1169,16 @@ footer {
     gap: .5rem;
   }
 
+/* Footer Styles */
+footer * {
+  margin: 0;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+footer {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-template-rows: auto;
   background: #9c8c7b;
   color: #0b0824;

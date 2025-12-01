@@ -103,42 +103,48 @@ session_start();
                 mysqli_stmt_store_result($check_stmt);
 
                 if (mysqli_stmt_num_rows($check_stmt) > 0) {
-                    echo "<p class=\"rf-alert rf-alert-danger\">Username '<strong>" . $username . "</strong>' is already taken. Please choose another one.</p>";
+                    echo "<p class=\"rf-alert rf-alert-danger\">Username '<strong>" . htmlspecialchars($username) . "</strong>' is already taken. Please choose another one.</p>";
                     echo "<p><a href='membership.php'>Return to the Entry Page</a></p>";
                     mysqli_stmt_close($check_stmt);
                     mysqli_close($conn);
-                    include 'footer.php';
-                    exit();
-                }
-                mysqli_stmt_close($check_stmt);
-
-                // Display submitted information (only if username is available)
-                echo "<p>Thank you for registering, <strong>$firstname $lastname!</strong></p>";
-                echo "<p><strong>Username:</strong> $username</p>";
-                echo "<p><strong>Email:</strong> $email</p>";
-
-                // Insert data
-                $sql = "INSERT INTO memberships (firstname, lastname, username, email, password_hash)
-                VALUES (?, ?, ?, ?, ?)";
-                $stmt = mysqli_prepare($conn, $sql);
-                mysqli_stmt_bind_param($stmt, "sssss", $firstname, $lastname, $username, $email, $password_hash);
-
-                if (mysqli_stmt_execute($stmt)) {
-                    echo "<p>Your membership has been recorded successfully.</p>";
+                    
+                    // --- FIX START: Set a flag and exit gracefully after the page structure is complete ---
+                    $duplicate_error = true;
+                    // --- FIX END ---
                 } else {
-                    echo "<p>Error: " . mysqli_error($conn) . "</p>";
+                    // Username is available, proceed with insertion
+                    mysqli_stmt_close($check_stmt); // Close the check statement here
+
+                    // Display submitted information
+                    echo "<p>Thank you for registering, <strong>$firstname $lastname!</strong></p>";
+                    echo "<p><strong>Username:</strong> $username</p>";
+                    echo "<p><strong>Email:</strong> $email</p>";
+
+                    // Insert data
+                    $sql = "INSERT INTO memberships (firstname, lastname, username, email, password_hash)
+                    VALUES (?, ?, ?, ?, ?)";
+                    $stmt = mysqli_prepare($conn, $sql);
+                    mysqli_stmt_bind_param($stmt, "sssss", $firstname, $lastname, $username, $email, $password_hash);
+
+                    if (mysqli_stmt_execute($stmt)) {
+                        echo "<p>Your membership has been recorded successfully.</p>";
+                    } else {
+                        echo "<p>Error: " . mysqli_error($conn) . "</p>";
+                    }
+
+                    mysqli_stmt_close($stmt);
+                    mysqli_close($conn);
                 }
 
-                echo "<p><a href='membership.php'>Return to the Entry Page</a></p>";
-
-                mysqli_stmt_close($stmt);
-                mysqli_close($conn);
+                // Only display the entry link if NO other error has already exited the script
+                if (!isset($duplicate_error)) {
+                    echo "<p><a href='membership.php'>Return to the Entry Page</a></p>";
+                }
                 ?>
             </div>
         </section>
     </main>
 
-    <!-- Footer -->
     <?php include 'footer.php'; ?>
 
 </body>
