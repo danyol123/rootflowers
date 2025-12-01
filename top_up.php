@@ -42,6 +42,27 @@ if ($row = $result->fetch_assoc()) {
 }
 $stmt->close();
 $conn->close();
+
+// Handle form state preservation
+$amount = '';
+$payment_method = '';
+$bank = '';
+$account_number = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['preset_amount'])) {
+        $amount = htmlspecialchars($_POST['preset_amount']);
+    } elseif (isset($_POST['amount'])) {
+        $amount = htmlspecialchars($_POST['amount']);
+    }
+
+    if (isset($_POST['payment_method']))
+        $payment_method = htmlspecialchars($_POST['payment_method']);
+    if (isset($_POST['bank']))
+        $bank = htmlspecialchars($_POST['bank']);
+    if (isset($_POST['account_number']))
+        $account_number = htmlspecialchars($_POST['account_number']);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -81,45 +102,69 @@ $conn->close();
 
                     <!-- Enter Amount -->
                     <label for="amount">Top Up Amount (RM):</label>
-                    <input type="number" id="amount" name="amount" min="5" max="500" required>
+                    <input type="number" id="amount" name="amount" min="5" max="500" required
+                        value="<?php echo $amount; ?>">
 
                     <!-- Preset Amount Buttons -->
                     <div class="preset-buttons">
-                        <button type="button" class="preset-btn" onclick="document.getElementById('amount').value = 50">RM50</button>
-                        <button type="button" class="preset-btn" onclick="document.getElementById('amount').value = 100">RM100</button>
-                        <button type="button" class="preset-btn" onclick="document.getElementById('amount').value = 150">RM150</button>
-                        <button type="button" class="preset-btn" onclick="document.getElementById('amount').value = 200">RM200</button>
+                        <button type="submit" class="preset-btn" name="preset_amount" value="50" formaction="top_up.php"
+                            formnovalidate>RM50</button>
+                        <button type="submit" class="preset-btn" name="preset_amount" value="100"
+                            formaction="top_up.php" formnovalidate>RM100</button>
+                        <button type="submit" class="preset-btn" name="preset_amount" value="150"
+                            formaction="top_up.php" formnovalidate>RM150</button>
+                        <button type="submit" class="preset-btn" name="preset_amount" value="200"
+                            formaction="top_up.php" formnovalidate>RM200</button>
                     </div>
 
                     <!-- Payment Method Selection -->
                     <label for="payment_method">Select Payment Method:</label>
-                    <select id="payment_method" name="payment_method" required onchange="toggleBankSelection()">
+                    <select id="payment_method" name="payment_method" required>
                         <option value="">-- Choose Payment Method --</option>
-                        <option value="card">Debit / Credit Card</option>
-                        <option value="online_banking">Online Banking / FPX</option>
-                        <option value="tng">Touch 'N Go eWallet</option>
-                        <option value="grabpay">GrabPay</option>
-                        <option value="shopeepay">ShopeePay</option>
-                        <option value="cash">Cash at Store</option>
+                        <option value="card" <?php if ($payment_method == 'card')
+                            echo 'selected'; ?>>Debit / Credit Card
+                        </option>
+                        <option value="online_banking" <?php if ($payment_method == 'online_banking')
+                            echo 'selected'; ?>>
+                            Online Banking / FPX</option>
+                        <option value="tng" <?php if ($payment_method == 'tng')
+                            echo 'selected'; ?>>Touch 'N Go eWallet
+                        </option>
+                        <option value="grabpay" <?php if ($payment_method == 'grabpay')
+                            echo 'selected'; ?>>GrabPay
+                        </option>
+                        <option value="shopeepay" <?php if ($payment_method == 'shopeepay')
+                            echo 'selected'; ?>>ShopeePay
+                        </option>
+                        <option value="cash" <?php if ($payment_method == 'cash')
+                            echo 'selected'; ?>>Cash at Store
+                        </option>
                     </select>
 
                     <!-- Bank Selection (For FPX / Online Banking) -->
-                    <div id="bank-selection-container" style="display: none;">
+                    <div id="bank-selection-container">
                         <label for="bank">Select Bank (Malaysia):</label>
                         <select id="bank" name="bank">
                             <option value="">-- Select Bank --</option>
-                            <option value="maybank">Maybank</option>
-                            <option value="cimb">CIMB Bank</option>
-                            <option value="public">Public Bank</option>
-                            <option value="rhb">RHB Bank</option>
-                            <option value="hlb">Hong Leong Bank</option>
-                            <option value="ambank">AmBank</option>
+                            <option value="maybank" <?php if ($bank == 'maybank')
+                                echo 'selected'; ?>>Maybank</option>
+                            <option value="cimb" <?php if ($bank == 'cimb')
+                                echo 'selected'; ?>>CIMB Bank</option>
+                            <option value="public" <?php if ($bank == 'public')
+                                echo 'selected'; ?>>Public Bank</option>
+                            <option value="rhb" <?php if ($bank == 'rhb')
+                                echo 'selected'; ?>>RHB Bank</option>
+                            <option value="hlb" <?php if ($bank == 'hlb')
+                                echo 'selected'; ?>>Hong Leong Bank</option>
+                            <option value="ambank" <?php if ($bank == 'ambank')
+                                echo 'selected'; ?>>AmBank</option>
                         </select>
                     </div>
 
                     <!-- Account Number -->
                     <label for="account_number">Your Bank / E-Wallet Account Number:</label>
-                    <input type="text" id="account_number" name="account_number" maxlength="20" required>
+                    <input type="text" id="account_number" name="account_number" maxlength="20" required
+                        value="<?php echo $account_number; ?>">
 
                     <!-- Submit -->
                     <div class="submit-buttons">
@@ -130,24 +175,6 @@ $conn->close();
         </section>
 
     </main>
-
-    <!-- Client-side JS for Payment Method Logic -->
-    <script>
-        function toggleBankSelection() {
-            var paymentMethod = document.getElementById("payment_method").value;
-            var bankContainer = document.getElementById("bank-selection-container");
-            var bankSelect = document.getElementById("bank");
-
-            if (paymentMethod === "online_banking") {
-                bankContainer.style.display = "block";
-                bankSelect.setAttribute("required", "required");
-            } else {
-                bankContainer.style.display = "none";
-                bankSelect.removeAttribute("required");
-                bankSelect.value = ""; // Reset selection
-            }
-        }
-    </script>
 
     <?php include 'footer.php'; ?>
 
