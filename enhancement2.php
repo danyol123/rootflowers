@@ -173,7 +173,7 @@
       <p><strong>Implementation steps:</strong> Add a field to the form (e.g., `website`); if populated, block or silently discard the submission and optionally log the attempt.</p>
     </div>
     <div class="button-group">
-      <a href="workshop.php" class="contact_us">Workshop Registration</a>
+      <a href="register.php" class="contact_us">Workshop Registration</a>
       <a href="enquiry.php" class="contact_us">Enquiry Form</a>
       <a href="membership.php" class="contact_us">Membership Registration</a>
       <a href="login.php" class="contact_us">Login</a>
