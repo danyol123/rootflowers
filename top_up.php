@@ -166,6 +166,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <input type="text" id="account_number" name="account_number" maxlength="20" required
                         value="<?php echo $account_number; ?>">
 
+                    <!-- Honeypot field -->
+                    <input type="hidden" name="website" id="pot" value="">
+
                     <!-- Submit -->
                     <div class="submit-buttons">
                         <input type="submit" value="Confirm Top Up">

@@ -34,6 +34,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     }
 
+    // Honeypot check
+    if (!empty($_POST['website'])) {
+        $_SESSION['topup_message'] = "Invalid submission detected.";
+        $_SESSION['topup_status'] = "error";
+        header("Location: top_up.php");
+        exit();
+    }
+
     // use preset_amount if provided else fallback to amount
     $amount = 0;
     if (isset($_POST['preset_amount'])) {
