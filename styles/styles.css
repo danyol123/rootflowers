@@ -2851,6 +2851,22 @@ img:hover+figcaption {
   min-height: 100vh;
 }
 
+/* Honeypot field */
+.hp-field {
+  display: none !important;
+}
+
+#pot,
+label[for="pot"] {
+  display: none !important;
+  visibility: hidden !important;
+  position: absolute !important;
+  left: -9999px !important;
+  width: 0 !important;
+  height: 0 !important;
+  opacity: 0 !important;
+}
+
 .admin-sidebar h2 {
   text-align: center;
   margin-bottom: 20px;
@@ -3509,3 +3525,9 @@ table.rf-data-table td small {
     font-weight: bold;
 }
 
+/* Honeypot anti-spam field - must remain hidden */
+.hp-field,
+#pot,
+label[for="pot"] {
+  display: none !important;
+}
