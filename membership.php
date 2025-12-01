@@ -47,7 +47,7 @@
 
             <!-- Username-->
             <label for="username">Username:</label>
-            <input type="text" id="username" name="username" maxlength="25" pattern="[A-Za-z]+" required>
+            <input type="text" id="username" name="username" maxlength="25" pattern="[A-Za-z0-9]+" required>
 
             <!-- Email -->
             <label for="email">Email Address:</label>
