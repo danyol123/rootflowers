@@ -37,6 +37,7 @@
     <a href="#tablesorting" class="contact_us">Table Sorting (Server-side)</a>
     <a href="#antispam" class="contact_us">Anti-spam</a>
     <a href="#passwordrules" class="contact_us">Password Strength Rules</a>
+    <a href="#caseinsensitivelogin" class="contact_us">Case-Insensitive Login</a>
   </section>
 
   <!-- User Management Module (Create, Edit, View, Delete) -->
@@ -190,6 +191,24 @@
     </div>
     <div class="button-group">
       <a href="membership.php" class="contact_us">Membership Registration</a>
+    </div>
+  </section>
+
+  <!-- Case-Insensitive Login (Username Matching) -->
+  <section class="section">
+    <h2 id="caseinsensitivelogin">Case-Insensitive Login (Username)</h2>
+    <img src="Pictures/Enhancements/placeholder.gif" alt="Case-Insensitive Login placeholder">
+    <p>
+      The login system allows users to enter their username in any letter case (e.g. <code>Alice</code>, <code>alice</code>, <code>ALICE</code>) and still authenticate successfully, reducing friction and user error without weakening password security.
+    </p>
+    <div class="enhancement-details">
+      <p><strong>Beyond requirements:</strong> Enhances usability by normalizing username comparison at query-time while preserving the originally cased username in storage and sessions for display consistency. Security is maintained by keeping passwords case-sensitive and hashed using <code>password_hash()</code>.</p>
+      <p><strong>Implementation steps:</strong> Use prepared statements with <code>LOWER(username) = LOWER(?)</code> in queries (see <code>login_process.php</code> for admin and membership checks); keep the stored username unchanged; apply <code>password_verify()</code> directly to the submitted password (no lowercasing) to retain full entropy; escape any echoed username with <code>htmlspecialchars()</code>; ensure updates to usernames in admin tools continue to use consistent case-insensitive matching logic; optionally add an index on <code>LOWER(username)</code> (or a generated column) for scalability.</p>
+    </div>
+    <div class="button-group">
+      <a href="login.php" class="contact_us">Login Form</a>
+      <a href="login_process.php" class="contact_us">Login Logic</a>
+      <a href="admin_panel.php" class="contact_us">Admin Settings</a>
     </div>
   </section>
   
