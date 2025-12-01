@@ -27,7 +27,6 @@
       <h2>Information</h2>
           <br>
           <p><a href="about_us.php">About Us</a></p>
-          <p><a href="top_up.php">Top Up Wallet</a></p>
           <p><a href="enhancement1.php">Enhancements 1</a></p>
           <p><a href="enhancement2.php">Enhancements 2</a></p>
           <p><a href="acknowledgement.php">Acknowledgement</a></p>
@@ -37,6 +36,7 @@
     <div class="footer-col">
       <h2>Products</h2>
           <br>
+          <p><a href="product_search.php">Product Search</a></p>
           <p><a href="product1.php">Hand Bouquet</a></p>
           <p><a href="product2.php">CNY Decorations</a></p>
           <p><a href="product3.php">Grand Opening</a></p>
@@ -56,6 +56,7 @@
           <p><a href="register.php">Workshop Registration</a></p>
           <p><a href="enquiry.php">Enquiry Form</a></p>
           <p><a href="membership.php">Membership Registration</a></p>
+          <p><a href="top_up.php">Top Up Wallet</a></p>
           <p><a href="login.php">Login</a></p>
     </div>
 
