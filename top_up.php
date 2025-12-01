@@ -9,6 +9,7 @@ session_start();
 
 // Ensure user is logged in
 if (!isset($_SESSION['member_id'])) {
+    $_SESSION['login_message'] = 'Please login first to access Top Up Wallet.';
     header('Location: login.php');
     exit();
 }
@@ -165,9 +166,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <label for="account_number">Your Bank / E-Wallet Account Number:</label>
                     <input type="text" id="account_number" name="account_number" maxlength="20" required
                         value="<?php echo $account_number; ?>">
-
-                    <!-- Honeypot field -->
-                    <input type="hidden" name="website" id="pot" value="">
 
                     <!-- Submit -->
                     <div class="submit-buttons">
