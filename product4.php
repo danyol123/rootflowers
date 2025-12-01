@@ -1,3 +1,11 @@
+<?php
+/*
+ * File: product4.php
+ * Description: Graduation product page.
+ * Author: Root Flower Team
+ * Created: 2025-10-22
+ */
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

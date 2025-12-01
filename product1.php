@@ -1,3 +1,11 @@
+<?php
+/*
+ * File: product1.php
+ * Description: Hand Bouquet product page with gallery and purchase options.
+ * Author: Root Flower Team
+ * Created: 2025-10-22
+ */
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

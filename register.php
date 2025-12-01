@@ -1,3 +1,11 @@
+<?php
+/*
+ * File: register.php
+ * Description: Workshop registration form for users to sign up for workshops.
+ * Author: Root Flower Team
+ * Created: 2025-10-22
+ */
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,8 +27,17 @@
 <main>
   <section class="form-section">
     <div class="form-container">
-      <h1>Workshop Registration</h1>
-      <form action="register_process.php" method="get" autocomplete="on">
+      <h1 class="enquiry-title">Workshop Registration</h1>
+        <?php
+        // CSRF token
+        if (!isset($_SESSION)) session_start();
+        if (!isset($_SESSION['csrf_token'])) {
+          $_SESSION['csrf_token'] = bin2hex(random_bytes(16));
+        }
+        $csrf = $_SESSION['csrf_token'];
+        ?>
+        <form action="register_process.php" method="post" autocomplete="on">
+        <input type="hidden" name="csrf" value="<?php echo $csrf; ?>">
         <!-- Name Inputs -->
         <label for="firstName">First Name:</label>
         <input type="text" id="firstName" name="firstName" maxlength="25" pattern="[A-Za-z\s]+" required title="Alphabetical characters only">

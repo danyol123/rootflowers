@@ -1,4 +1,10 @@
 <?php
+/*
+ * File: recycle.php
+ * Description: Server-side Recycle Bin for soft-delete, restore, and permanent delete actions.
+ * Author: Root Flower Team
+ * Created: 2025-11-23
+ */
 session_start();
 
 // Basic admin check
@@ -77,13 +83,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && in_array($action, ['soft_delete','p
         <title>Root Flower — Recycle</title>
         <meta name="viewport" content="width=device-width,initial-scale=1">
         <link rel="stylesheet" href="styles/styles.css">
+        <link rel="icon" href="Pictures/Index/logo.png" type="image/png">
     </head>
     <body class="rf-root">
     <main class="admin-main">
-        <aside class="admin-sidebar">
-            <!-- Sidebar -->
-            <?php include 'admin_sidebar.php'; ?>
-        </aside>
+        <!-- Sidebar -->
+        <?php include 'admin_sidebar.php'; ?>
 
         <section class="admin-content">
             <div class="rf-confirm">
@@ -191,14 +196,13 @@ $deleted_logins = $conn->query("SELECT * FROM login_history WHERE deleted = 1 OR
     <title>Recycle Bin — Root Flower</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel="stylesheet" href="styles/styles.css">
+    <link rel="icon" href="Pictures/Index/logo.png" type="image/png">
 </head>
 <body class="rf-root">
 
 <main class="admin-main">
-    <aside class="admin-sidebar">
-            <!-- Sidebar -->
-            <?php include 'admin_sidebar.php'; ?>
-        </aside>
+    <!-- Sidebar -->
+    <?php include 'admin_sidebar.php'; ?>
 
     <section class="admin-content">
         <div class="rf-list-container">

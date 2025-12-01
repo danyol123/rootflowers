@@ -1,3 +1,11 @@
+<?php
+/*
+ * File: enhancement1.php
+ * Description: Enhancement showcase (Module 1) that demonstrates UI/UX improvements.
+ * Author: Root Flower Team
+ * Created: 2025-10-22
+ */
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

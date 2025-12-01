@@ -1,4 +1,10 @@
 <?php
+/*
+ * File: view_login.php
+ * Description: Admin listing view for login history entries. Supports sorting and view modal.
+ * Author: Root Flower Team
+ * Created: 2025-11-17
+ */
 session_start();
 
 // Admin guard
@@ -57,15 +63,16 @@ $result = $conn->query($sql);
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="Pictures/Index/logo.png" type="image/png">
     <title>Root Flower — Login History</title>
     <link rel="stylesheet" href="styles/styles.css">
     
 </head>
 <body class="rf-root">
 <main class="admin-main">
-    <aside class="admin-sidebar">
-        <?php include 'admin_sidebar.php'; ?>
-    </aside>
+    <!-- Sidebar -->
+    <?php include 'admin_sidebar.php'; ?>
+
     <section class="admin-content">
         <div class="rf-list-container">
             <div class="rf-panel">

@@ -1,6 +1,13 @@
+<?php
+/*
+ * File: index.php
+ * Description: Landing page of Root Flower — displays promotions, products and news.
+ * Author: Root Flower Team
+ * Created: 2025-10-22
+ */
+?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="description" content="Root Flower">
@@ -248,7 +255,8 @@
       <h2>Information</h2>
       <br>
       <p><a href="about_us.php">About Us</a></p>
-      <p><a href="enhancement1.php">Enhancements</a></p>
+      <p><a href="enhancement1.php">Enhancements 1</a></p>
+      <p><a href="enhancement2.php">Enhancements 2</a></p>
       <p><a href="acknowledgement.php">Acknowledgement</a></p>
       <p><a href="https://youtu.be/xFXHkPPFxHY" target="_blank">Video Demonstration</a></p>
     </div>

@@ -1,4 +1,10 @@
 <?php
+/*
+ * File: login.php
+ * Description: Login page for members and admin with a simple form.
+ * Author: Root Flower Team
+ * Created: 2025-10-22
+ */
 session_start();
 ?>
 <!DOCTYPE html>
@@ -29,7 +35,14 @@ session_start();
     <div class="login-container">
       <h2 class="login-title">Welcome Back</h2>
       <p class="login-subtitle">Please log in to continue</p>
+      <?php
+      if (!isset($_SESSION['csrf_token'])) {
+          $_SESSION['csrf_token'] = bin2hex(random_bytes(16));
+      }
+      $csrf = $_SESSION['csrf_token'];
+      ?>
       <form class="login-form" action="login_process.php" method="post">
+        <input type="hidden" name="csrf" value="<?php echo $csrf; ?>">
         <div class="form-group">
           <label for="name">Username</label>
           <input type="text" id="name" name="username" placeholder="Enter your username" required>

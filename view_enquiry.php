@@ -1,4 +1,10 @@
 <?php
+/*
+ * File: view_enquiry.php
+ * Description: Admin page for viewing and managing enquiries (server-side CRUD, sorting).
+ * Author: Root Flower Team
+ * Created: 2025-10-29
+ */
 session_start();
 
 // Basic admin check - adjust according to your login implementation
@@ -200,10 +206,8 @@ if (!function_exists('header_link')) {
 <body class="rf-root">
 
 <main class="admin-main">
-    <aside class="admin-sidebar">
-        <!-- Sidebar -->
-    	<?php include 'admin_sidebar.php'; ?>
-    </aside>
+    <!-- Sidebar -->
+    <?php include 'admin_sidebar.php'; ?>
 
     <section class="admin-content">
         <div class="rf-list-container">

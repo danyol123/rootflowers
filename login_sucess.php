@@ -1,4 +1,10 @@
 <?php
+/*
+ * File: login_sucess.php
+ * Description: Post-login confirmation for membership users.
+ * Author: Root Flower Team
+ * Created: 2025-11-19
+ */
 session_start();
 
 // If the user is not logged in, redirect to the login page.
@@ -11,7 +17,11 @@ if (!isset($_SESSION['username'])) {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="description" content="Root Flower">
+    <meta name="keywords" content="Flowers, Shop, Kuching, Sarawak, Malaysia">
+    <meta name="author" content="Daniel, Josiah, Alvin, Kheldy">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="Pictures/Index/logo.png" type="image/png">
     <title>Login Successful</title>
     <link rel="stylesheet" href="styles/styles.css">
 </head>

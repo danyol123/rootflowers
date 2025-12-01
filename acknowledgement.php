@@ -1,3 +1,11 @@
+<?php
+/*
+ * File: acknowledgement.php
+ * Description: Acknowledgement & references page listing external resources.
+ * Author: Root Flower Team
+ * Created: 2025-10-22
+ */
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

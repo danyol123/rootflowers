@@ -1,4 +1,10 @@
 <?php
+/*
+ * File: enquiry.php
+ * Description: Public-facing enquiry form (honeypot implemented) for customers to send messages.
+ * Author: Root Flower Team
+ * Created: 2025-10-22
+ */
 session_start();
 ?>
 <!DOCTYPE html>
@@ -40,7 +46,14 @@ session_start();
         }
         ?>
 
+        <?php
+        if (!isset($_SESSION['csrf_token'])) {
+          $_SESSION['csrf_token'] = bin2hex(random_bytes(16));
+        }
+        $csrf = $_SESSION['csrf_token'];
+        ?>
         <form action="enquiry_process.php" method="post" class="enquiry-form">
+          <input type="hidden" name="csrf" value="<?php echo $csrf; ?>">
           <!-- First Name -->
             <label for="firstname">First Name:</label>
             <input type="text" id="firstname" name="firstname" maxlength="25" pattern="[A-Za-z]+" required>

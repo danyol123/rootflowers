@@ -1,3 +1,12 @@
+<?php
+session_start();
+/*
+ * File: enquiry_process.php
+ * Description: Handles front-facing enquiry submissions, performs honeypot anti-spam check, and stores records.
+ * Author: Root Flower Team
+ * Created: 2025-10-29
+ */
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,6 +48,14 @@
             echo "<p><a href='enquiry.php'>Return to the Entry Page</a></p>";
             mysqli_close($conn);
             exit();
+        }
+
+        // CSRF validation
+        if (!isset($_POST['csrf']) || !isset($_SESSION['csrf_token']) || $_POST['csrf'] !== $_SESSION['csrf_token']) {
+          echo "<p>Error: Invalid CSRF token.</p>";
+          echo "<p><a href='enquiry.php'>Return to the Entry Page</a></p>";
+          mysqli_close($conn);
+          exit();
         }
 
         // Get form data

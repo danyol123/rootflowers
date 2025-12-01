@@ -1,10 +1,18 @@
+<?php
+/*
+ * File: kheldy.php
+ * Description: Team profile page for Kheldy Nathanael.
+ * Author: Root Flower Team
+ * Created: 2025-10-22
+ */
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="Root Flowersss">
-    <meta name="keywords" content="Flowers">
-    <meta name="author" content="Daniel, Josiah, Alvin, Kheldy">
+    <meta name="description" content="Root Flower">
+    <meta name="keywords" content="Flowers, Shop, Kuching, Sarawak, Malaysia">
+    <meta name="author" content="Root Flower Team">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="Pictures/Index/logo.png" type="image/png">
     <title>Root Flower</title>
