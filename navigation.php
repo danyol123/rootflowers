@@ -6,6 +6,13 @@ if (session_status() === PHP_SESSION_NONE) {
 
 $top_up_link = 'top_up.php';
 
+$login_url = 'login.php';
+$login_label = 'Login';
+if (!empty($_SESSION['is_logged_in'])) {
+  $login_url = 'logout.php';
+  $login_label = 'Logout';
+}
+
 echo
   '
 <header>
@@ -41,7 +48,7 @@ echo
           </ul>
         </li>
         <li class="dropdown"><a href="about_us.php">About Us</a></li>
-        <li class="dropdown"><a href="login.php" class="login-navbar">Login</a></li>
+        <li class="dropdown"><a href="' . $login_url . '" class="login-navbar">' . $login_label . '</a></li>
       </ul>
     </div>
   </nav>
