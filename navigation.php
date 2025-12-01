@@ -12,6 +12,13 @@ if (!isset($_SESSION['member_id'])) {
   $top_up_onclick = 'onclick="alert(\'Please login first\'); return false;"';
 }
 
+$login_url = 'login.php';
+$login_label = 'Login';
+if (!empty($_SESSION['is_logged_in'])) {
+  $login_url = 'logout.php';
+  $login_label = 'Logout';
+}
+
 echo
   '
 <header>
@@ -47,7 +54,7 @@ echo
           </ul>
         </li>
         <li class="dropdown"><a href="about_us.php">About Us</a></li>
-        <li class="dropdown"><a href="login.php" class="login-navbar">Login</a></li>
+        <li class="dropdown"><a href="' . $login_url . '" class="login-navbar">' . $login_label . '</a></li>
       </ul>
     </div>
   </nav>

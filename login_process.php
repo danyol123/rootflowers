@@ -35,19 +35,47 @@ if (!$conn) {
     exit();
 }
 
-// Check Admin
-$stmt = $conn->prepare("SELECT id, username, password_hash FROM admin WHERE username = ? LIMIT 1");
+// Check Admin (case-insensitive username)
+$stmt = $conn->prepare("SELECT id, username, password_hash FROM admin WHERE LOWER(username) = LOWER(?) LIMIT 1");
 $stmt->bind_param("s", $username);
 $stmt->execute();
 $res = $stmt->get_result();
 
 if ($res && $res->num_rows > 0) {
     $admin = $res->fetch_assoc();
-    // Case-insensitive password check: verify hash against lowercase input
-    if (password_verify(strtolower($password), $admin['password_hash'])) {
+    if (password_verify($password, $admin['password_hash'])) {
         $_SESSION['is_admin'] = true;
         $_SESSION['username'] = $admin['username'];
         $_SESSION['admin_id'] = $admin['id'];
+        $_SESSION['is_logged_in'] = true;
+        $_SESSION['user_role'] = 'admin';
+
+        // Ensure admin has a linked membership record for wallet actions
+        $member_id = null;
+        $stmt_member = $conn->prepare('SELECT member_id FROM memberships WHERE LOWER(username) = LOWER(?) LIMIT 1');
+        $stmt_member->bind_param('s', $admin['username']);
+        $stmt_member->execute();
+        $res_member = $stmt_member->get_result();
+
+        if ($res_member && $res_member->num_rows > 0) {
+            $member = $res_member->fetch_assoc();
+            $member_id = $member['member_id'];
+        } else {
+            $default_firstname = 'Admin';
+            $default_lastname = 'User';
+            $default_email = $admin['username'] . '@rootflower.local';
+            $stmt_create = $conn->prepare('INSERT INTO memberships (firstname, lastname, username, email, password_hash, balance) VALUES (?, ?, ?, ?, ?, 0.00)');
+            $stmt_create->bind_param('sssss', $default_firstname, $default_lastname, $admin['username'], $default_email, $admin['password_hash']);
+            if ($stmt_create->execute()) {
+                $member_id = $conn->insert_id;
+            }
+            $stmt_create->close();
+        }
+
+        if ($member_id !== null) {
+            $_SESSION['member_id'] = $member_id;
+        }
+        $stmt_member->close();
 
         // Log history
         $ip = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : null;
@@ -64,8 +92,8 @@ if ($res && $res->num_rows > 0) {
 }
 $stmt->close();
 
-// Check Membership
-$stmt = $conn->prepare('SELECT member_id, username, email, password_hash FROM memberships WHERE username = ? LIMIT 1');
+// Check Membership (case-insensitive username)
+$stmt = $conn->prepare('SELECT member_id, username, email, password_hash FROM memberships WHERE LOWER(username) = LOWER(?) LIMIT 1');
 $stmt->bind_param('s', $username);
 $stmt->execute();
 $res = $stmt->get_result();
@@ -76,6 +104,8 @@ if ($res && $res->num_rows > 0) {
         $_SESSION['username'] = $user['username'];
         $_SESSION['email'] = $user['email'];
         $_SESSION['member_id'] = $user['member_id'];
+        $_SESSION['is_logged_in'] = true;
+        $_SESSION['user_role'] = 'member';
         
         // Log history
         $ip = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : null;
