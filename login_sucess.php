@@ -35,7 +35,7 @@ if (!isset($_SESSION['username'])) {
                 <p><strong>Username:</strong> <?php echo htmlspecialchars($_SESSION['username']); ?></p>
                 <p><strong>Email:</strong> <?php echo isset($_SESSION['email']) ? htmlspecialchars($_SESSION['email']) : 'N/A'; ?></p>
                 <p>You have successfully logged in.</p>
-                <p><a href="index.php">Return to the Entry Page</a></p>
+                <p><a href="index.php">Return to the Main Page</a></p>
             </div>
         </section>
     </main>

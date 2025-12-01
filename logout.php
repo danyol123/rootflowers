@@ -2,6 +2,8 @@
 /*
  * File: logout.php
  * Description: Ends the current user session and redirects to login.
+ * Author: Root Flower Team
+ * Created: 2025-12-01
  */
 session_start();
 

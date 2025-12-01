@@ -34,8 +34,8 @@
     <a href="#promotionmodule" class="contact_us">Promotion Module</a>
     <a href="#membertopup" class="contact_us">Member Topup</a>
     <a href="#productsearch" class="contact_us">Product Search</a>
-    <a href="#tablesorting" class="contact_us">Table Sorting (Server-side)</a>
-    <a href="#antispam" class="contact_us">Anti-spam</a>
+    <a href="#tablesorting" class="contact_us">Table Sorting</a>
+    <a href="#antispam" class="contact_us">Anti-spam (Honeypot)</a>
     <a href="#passwordrules" class="contact_us">Password Strength Rules</a>
     <a href="#caseinsensitivelogin" class="contact_us">Case-Insensitive Login</a>
   </section>
@@ -113,7 +113,7 @@
   <!-- Member Topup -->
   <section class="section">
     <h2 id="membertopup">Member Topup</h2>
-    <img src="Pictures/Enhancements/placeholder.gif" alt="Member Topup placeholder">
+    <img src="Pictures/Enhancements2/topup.png" alt="Member Topup">
     <p>
       A secure, server-backed topup form to add credits to a member account. The UI uses server-side presets and validates values on the server.
     </p>
@@ -131,10 +131,10 @@
     <h2 id="productsearch">Product Search</h2>
     <img src="Pictures/Enhancements2/product_search.png" alt="Product Search">
     <p>
-      Server-side product search that looks up products and matches keywords. Results are displayed with safe escaping to avoid XSS.
+      Server-side product search that looks up products and matches keywords.
     </p>
     <div class="enhancement-details">
-      <p><strong>Beyond requirements:</strong> A server-backed, SQL-safe search implementation that supports partial matches, safely escapes output, and can scale to DB-backed product listings.</p>
+      <p><strong>Beyond requirements:</strong> A server-backed, SQL-safe search implementation that supports partial matches and safely escapes output.</p>
       <p><strong>Implementation steps:</strong> Add DB `products` table (or mapping); implement prepared `LIKE` or full-text `MATCH` query; sanitize `keyword` input; escape and paginate results. Implement a search results page with server-driven links to product pages.</p>
     </div>
     <div class="button-group">
@@ -143,9 +143,9 @@
     </div>
   </section>
 
-  <!-- Server-side Table Sorting -->
+  <!-- Table Sorting -->
   <section class="section">
-    <h2 id="tablesorting">Server-side Table Sorting</h2>
+    <h2 id="tablesorting">Table Sorting</h2>
     <img src="Pictures/Enhancements2/sorting.png" alt="Table Sorting">
     <p>
       All table headers support server-driven sort parameters using an allow list to avoid SQL injection. See registration/enquiry/membership/login pages for examples.
@@ -167,14 +167,18 @@
     <h2 id="antispam">Anti-spam Protection (Honeypot)</h2>
     <img src="Pictures/Enhancements2/anti_spam.png" alt="Anti-spam">
     <p>
-      A honeypot field is implemented in form submissions (for example the Enquiry form). If this field is populated, the submission is silently discarded to prevent spambots.
+      A honeypot field is implemented in form submissions. If this hidden field is populated, the submission is silently discarded to prevent spambots.
     </p>
     <div class="enhancement-details">
-      <p><strong>Beyond requirements:</strong> Honeypot offers backend spam protection without adding CAPTCHA friction.</p>
+      <p><strong>Beyond requirements:</strong> Honeypot offers backend spam protection without adding CAPTCHA friction. It is invisible to users and prevents many automated spam bots while keeping UX smooth.</p></p>
       <p><strong>Implementation steps:</strong> Add a field to the form (e.g., `website`); if populated, block or silently discard the submission and optionally log the attempt.</p>
     </div>
     <div class="button-group">
+      <a href="register.php" class="contact_us">Workshop Registration</a>
       <a href="enquiry.php" class="contact_us">Enquiry Form</a>
+      <a href="membership.php" class="contact_us">Membership Registration</a>
+      <a href="login.php" class="contact_us">Login</a>
+      <a href="top_up.php" class="contact_us">Top-up</a>
     </div>
   </section>
 

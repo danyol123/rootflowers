@@ -18,16 +18,6 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-// Example table (Copy paste)
-$sql_users = "CREATE TABLE IF NOT EXISTS Logins (
-        id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-        username VARCHAR(25) NOT NULL,
-        password_hash VARCHAR(255) NOT NULL,
-        reg_date TIMESTAMP
-    )";
-
-$conn->query($sql_users);
-
 // Enquiry table
 $sql_enquiry = "CREATE TABLE IF NOT EXISTS enquiry (
         enquiry_id INT AUTO_INCREMENT PRIMARY KEY,
