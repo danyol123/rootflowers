@@ -3550,39 +3550,6 @@ label[for="pot"] {
   display: none !important;
 }
 
-/* Product Search Styles */
-.search-section {
-  background-color: #f9f5f0;
-  font-family: 'Lato', sans-serif;
-}
-
-.search-container {
-  background-color: #ffffff;
-  border: 1px solid #C4B6A4;
-  border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(70, 59, 43, 0.1);
-  width: 100%;
-  max-width: 700px;
-  margin: 0 auto 3rem auto;
-  display: flex;
-  justify-content: center;
-}
-
-.search-container form {
-  height: 10px;
-  width: 100%;
-  object-fit: cover;
-  background-color: #f9fafb;
-  border-bottom: 1px solid #e5e7eb;
-}
-
-.image-actions {
-  padding: 1rem;
-  text-align: center;
-  background: #f9fafb;
-  margin-top: auto;
-}
-
 /* Upload Form Styling */
 .upload-area {
   background: #f9fafb;
