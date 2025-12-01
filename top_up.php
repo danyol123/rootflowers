@@ -83,12 +83,12 @@ $conn->close();
                     <label for="amount">Top Up Amount (RM):</label>
                     <input type="number" id="amount" name="amount" min="5" max="500" required>
 
-                    <!-- Preset Amount Buttons as server-submitted values -->
+                    <!-- Preset Amount Buttons -->
                     <div class="preset-buttons">
-                        <button type="submit" class="preset-btn" name="preset_amount" value="50">RM50</button>
-                        <button type="submit" class="preset-btn" name="preset_amount" value="100">RM100</button>
-                        <button type="submit" class="preset-btn" name="preset_amount" value="150">RM150</button>
-                        <button type="submit" class="preset-btn" name="preset_amount" value="200">RM200</button>
+                        <button type="button" class="preset-btn" onclick="document.getElementById('amount').value = 50">RM50</button>
+                        <button type="button" class="preset-btn" onclick="document.getElementById('amount').value = 100">RM100</button>
+                        <button type="button" class="preset-btn" onclick="document.getElementById('amount').value = 150">RM150</button>
+                        <button type="button" class="preset-btn" onclick="document.getElementById('amount').value = 200">RM200</button>
                     </div>
 
                     <!-- Payment Method Selection -->
@@ -101,29 +101,29 @@ $conn->close();
                         <option value="grabpay">GrabPay</option>
                         <option value="shopeepay">ShopeePay</option>
                         <option value="cash">Cash at Store</option>
-                    </select>
+                </select>
 
-                    <!-- Bank Selection (For FPX / Online Banking) -->
-                    <label for="bank">Select Bank (Malaysia):</label>
-                    <select id="bank" name="bank">
-                        <option value="">-- Select Bank --</option>
-                        <option value="maybank">Maybank</option>
-                        <option value="cimb">CIMB Bank</option>
-                        <option value="public">Public Bank</option>
-                        <option value="rhb">RHB Bank</option>
-                        <option value="hlb">Hong Leong Bank</option>
-                        <option value="ambank">AmBank</option>
-                    </select>
+                <!-- Bank Selection (For FPX / Online Banking) -->
+                <label for="bank">Select Bank (Malaysia):</label>
+                <select id="bank" name="bank">
+                    <option value="">-- Select Bank --</option>
+                    <option value="maybank">Maybank</option>
+                    <option value="cimb">CIMB Bank</option>
+                    <option value="public">Public Bank</option>
+                    <option value="rhb">RHB Bank</option>
+                    <option value="hlb">Hong Leong Bank</option>
+                    <option value="ambank">AmBank</option>
+                </select>
 
-                    <!-- Account Number -->
-                    <label for="account_number">Your Bank / E-Wallet Account Number:</label>
-                    <input type="text" id="account_number" name="account_number" maxlength="20" required>
+                <!-- Account Number -->
+                <label for="account_number">Your Bank / E-Wallet Account Number:</label>
+                <input type="text" id="account_number" name="account_number" maxlength="20" required>
 
-                    <!-- Submit -->
-                    <div class="submit-buttons">
-                        <input type="submit" value="Confirm Top Up">
-                        <input type="reset" value="Reset">
-                    </div>
+                <!-- Submit -->
+                <div class="submit-buttons">
+                    <input type="submit" value="Confirm Top Up">
+                    <input type="reset" value="Reset">
+                </div>
                 </form>
             </div>
         </section>
