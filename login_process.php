@@ -23,77 +23,77 @@ if (!isset($_POST['csrf']) || !isset($_SESSION['csrf_token']) || $_POST['csrf'] 
 $username = isset($_POST['username']) ? trim($_POST['username']) : '';
 $password = isset($_POST['password']) ? $_POST['password'] : '';
 
-// Simple hardcoded admin check: Name: Admin, Password: Admin
+$servername = 'localhost';
+$dbuser = 'root';
+$dbpass = '';
+$dbname = 'DB';
+$conn = mysqli_connect($servername, $dbuser, $dbpass, $dbname);
 
-if (strtolower($username) == strtolower('Admin') && strtolower($password) == strtolower('Admin')){
-    $_SESSION['is_admin'] = true;
-    $_SESSION['username'] = 'admin';
-
-    // Record login into logins table
-    $servername = 'localhost';
-    $dbuser = 'root';
-    $dbpass = '';
-    $dbname = 'DB';
-    $conn = mysqli_connect($servername, $dbuser, $dbpass, $dbname);
-    if ($conn) {
-        $ip = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : null;
-        $ua = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : null;
-        $stmt = $conn->prepare("INSERT INTO login_history (username, ip, user_agent) VALUES (?, ?, ?)");
-        if ($stmt) {
-            $u = 'admin';
-            $stmt->bind_param('sss', $u, $ip, $ua);
-            $stmt->execute();
-            $stmt->close();
-        }
-        $conn->close();
-    }
-
-    // Redirect to admin panel
-    header('Location: admin_panel.php');
-    exit();
-} else {
-    // Try matching a membership user
-    $servername = 'localhost';
-    $dbuser = 'root';
-    $dbpass = '';
-    $dbname = 'DB';
-    $conn = mysqli_connect($servername, $dbuser, $dbpass, $dbname);
-    if ($conn) {
-                $stmt = $conn->prepare('SELECT member_id, username, email, password_hash FROM memberships WHERE username = ? LIMIT 1');
-        if ($stmt) {
-            $stmt->bind_param('s', $username);
-            $stmt->execute();
-            $res = $stmt->get_result();
-            if ($res && $res->num_rows > 0) {
-                $user = $res->fetch_assoc();
-                $stmt->close();
-                if (password_verify($password, $user['password_hash'])) {
-                    $_SESSION['username'] = $user['username'];
-                    $_SESSION['email'] = $user['email'];
-                    $_SESSION['member_id'] = $user['member_id'];
-                    // record login for membership user
-                    $ip = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : null;
-                    $ua = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : null;
-                    $stmt2 = $conn->prepare("INSERT INTO login_history (username, ip, user_agent) VALUES (?, ?, ?)");
-                    if ($stmt2) {
-                        $u = $user['username'];
-                        $stmt2->bind_param('sss', $u, $ip, $ua);
-                        $stmt2->execute();
-                        $stmt2->close();
-                    }
-                    $conn->close();
-                    header('Location: login_sucess.php');
-                    exit();
-                }
-            } else {
-                $stmt->close();
-            }
-        }
-        $conn->close();
-    }
-    // Set an error message and redirect back to login
-    $_SESSION['login_error'] = 'Invalid credentials. Please try again.';
+if (!$conn) {
+    $_SESSION['login_error'] = 'Database connection failed.';
     header('Location: login.php');
     exit();
 }
+
+// Check Admin
+$stmt = $conn->prepare("SELECT id, username, password_hash FROM admin WHERE username = ? LIMIT 1");
+$stmt->bind_param("s", $username);
+$stmt->execute();
+$res = $stmt->get_result();
+
+if ($res && $res->num_rows > 0) {
+    $admin = $res->fetch_assoc();
+    // Case-insensitive password check: verify hash against lowercase input
+    if (password_verify(strtolower($password), $admin['password_hash'])) {
+        $_SESSION['is_admin'] = true;
+        $_SESSION['username'] = $admin['username'];
+        $_SESSION['admin_id'] = $admin['id'];
+
+        // Log history
+        $ip = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : null;
+        $ua = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : null;
+        $stmt_log = $conn->prepare("INSERT INTO login_history (username, ip, user_agent) VALUES (?, ?, ?)");
+        $stmt_log->bind_param('sss', $admin['username'], $ip, $ua);
+        $stmt_log->execute();
+        $stmt_log->close();
+        
+        $conn->close();
+        header('Location: admin_panel.php');
+        exit();
+    }
+}
+$stmt->close();
+
+// Check Membership
+$stmt = $conn->prepare('SELECT member_id, username, email, password_hash FROM memberships WHERE username = ? LIMIT 1');
+$stmt->bind_param('s', $username);
+$stmt->execute();
+$res = $stmt->get_result();
+
+if ($res && $res->num_rows > 0) {
+    $user = $res->fetch_assoc();
+    if (password_verify($password, $user['password_hash'])) {
+        $_SESSION['username'] = $user['username'];
+        $_SESSION['email'] = $user['email'];
+        $_SESSION['member_id'] = $user['member_id'];
+        
+        // Log history
+        $ip = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : null;
+        $ua = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : null;
+        $stmt_log = $conn->prepare("INSERT INTO login_history (username, ip, user_agent) VALUES (?, ?, ?)");
+        $stmt_log->bind_param('sss', $user['username'], $ip, $ua);
+        $stmt_log->execute();
+        $stmt_log->close();
+
+        $conn->close();
+        header('Location: login_sucess.php');
+        exit();
+    }
+}
+$stmt->close();
+$conn->close();
+
+$_SESSION['login_error'] = 'Invalid credentials. Please try again.';
+header('Location: login.php');
+exit();
 ?>

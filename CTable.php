@@ -131,6 +131,16 @@ if ($result_bal->num_rows == 0) {
     $conn->query($sql_add_bal);
 }
 
+// Admin table
+$sql_admin = "CREATE TABLE IF NOT EXISTS admin (
+        id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+        username VARCHAR(25) NOT NULL,
+        password_hash VARCHAR(255) NOT NULL,
+        reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    )";
+
+$conn->query($sql_admin);
+
 // Create 'topup_history' table
 $sql_topup = "CREATE TABLE IF NOT EXISTS topup_history (
         id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,

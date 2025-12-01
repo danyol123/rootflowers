@@ -38,13 +38,11 @@ echo
             <li><a href="register.php">Workshop Registration</a></li>
             <li><a href="enquiry.php">Enquiry Form</a></li>
             <li><a href="membership.php">Membership Registration</a></li>
-            <li><a href="' . $top_up_link . '" ' . $top_up_onclick . '>Top Up Wallet</a></li>
+            <li><a href="' . $top_up_link . '" class="topup-btn" ' . $top_up_onclick . '>Top Up Wallet</a></li>
           </ul>
         </li>
         <li class="dropdown"><a href="about_us.php">About Us</a></li>
-        <li class="dropdown"><a href="login.php" class="login-btn"
-            style="background-color: #333; color: white; padding: 10px 20px; border-radius: 5px; margin-left: 10px;">Login</a>
-        </li>
+        <li class="dropdown"><a href="login.php" class="login-btn" style="background-color: #333; color: white; padding: 10px 20px; border-radius: 5px; margin-left: 10px;">Login</a></li>
       </ul>
     </div>
   </nav>
