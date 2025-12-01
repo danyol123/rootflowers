@@ -24,11 +24,11 @@ echo
         <li class="dropdown">
           <a href="#">Products</a>
           <ul class="dropdown-content">
+            <li><a href="product_search.php">Product Search</a></li>
             <li><a href="product1.php">Hand bouquet</a></li>
             <li><a href="product2.php">CNY decoration</a></li>
             <li><a href="product3.php">Grand Opening</a></li>
             <li><a href="product4.php">Graduation</a></li>
-            <li><a href="product_search.php">Product Search</a></li>
           </ul>
         </li>
         <li class="dropdown">
