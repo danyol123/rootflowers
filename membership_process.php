@@ -101,7 +101,6 @@ session_start();
                 echo "<p><strong>Email:</strong> $email</p>";
 
                 // Check for duplicate username
-                // Check for duplicate username
                 $check_sql = "SELECT member_id FROM memberships WHERE username = ?";
                 $check_stmt = mysqli_prepare($conn, $check_sql);
                 mysqli_stmt_bind_param($check_stmt, "s", $username);
