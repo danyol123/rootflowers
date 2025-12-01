@@ -95,13 +95,7 @@ session_start();
                 // Hash password
                 $password_hash = password_hash($password_raw, PASSWORD_DEFAULT);
 
-                // Display submitted information
-                echo "<p>Thank you for registering, <strong>$firstname $lastname!</strong></p>";
-                echo "<p><strong>Username:</strong> $username</p>";
-                echo "<p><strong>Email:</strong> $email</p>";
-
-                // Check for duplicate username
-                // Check for duplicate username
+                // Check for duplicate username BEFORE displaying success message
                 $check_sql = "SELECT member_id FROM memberships WHERE username = ?";
                 $check_stmt = mysqli_prepare($conn, $check_sql);
                 mysqli_stmt_bind_param($check_stmt, "s", $username);
@@ -117,6 +111,11 @@ session_start();
                     exit();
                 }
                 mysqli_stmt_close($check_stmt);
+
+                // Display submitted information (only if username is available)
+                echo "<p>Thank you for registering, <strong>$firstname $lastname!</strong></p>";
+                echo "<p><strong>Username:</strong> $username</p>";
+                echo "<p><strong>Email:</strong> $email</p>";
 
                 // Insert data
                 $sql = "INSERT INTO memberships (firstname, lastname, username, email, password_hash)
