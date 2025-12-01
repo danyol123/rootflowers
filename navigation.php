@@ -47,7 +47,7 @@ echo
           </ul>
         </li>
         <li class="dropdown"><a href="about_us.php">About Us</a></li>
-        <li class="dropdown"><a href="login.php" class="login-btn" style="background-color: #333; color: white; padding: 10px 20px; border-radius: 5px; margin-left: 10px;">Login</a></li>
+        <li class="dropdown"><a href="login.php" class="login-navbar">Login</a></li>
       </ul>
     </div>
   </nav>

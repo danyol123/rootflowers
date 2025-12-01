@@ -1093,6 +1093,22 @@ input[type="reset"]:hover {
   transform: translateY(-2px);
 }
 
+/* Login NAVBAR */
+.login-navbar {
+  background-color: #463b2b;
+  color: #f4f1ed;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.login-navbar:hover {
+  background-color: #928473;
+  transform: translateY(-2px);
+}
+
 /* Links */
 .login-links {
   display: flex;
