@@ -41,6 +41,16 @@ session_start();
             die("Connection failed: " . mysqli_connect_error());
         }
 
+        // Honeypot check
+        if (!empty($_POST['website'])) {
+            echo "<p>Error: Invalid submission detected.</p>";
+            echo "<p><a href='register.php'>Return to the Entry Page</a></p>";
+            mysqli_close($conn);
+            exit();
+        }
+            die("Connection failed: " . mysqli_connect_error());
+        }
+
         // Verify CSRF token
         if (!isset($_POST['csrf']) || !isset($_SESSION['csrf_token']) || $_POST['csrf'] !== $_SESSION['csrf_token']) {
             echo "<p>Invalid CSRF token. Please try again.</p>";

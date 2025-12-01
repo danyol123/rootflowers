@@ -20,6 +20,13 @@ if (!isset($_POST['csrf']) || !isset($_SESSION['csrf_token']) || $_POST['csrf'] 
     exit();
 }
 
+// Honeypot check
+if (!empty($_POST['website'])) {
+    $_SESSION['login_error'] = 'Invalid submission detected.';
+    header('Location: login.php');
+    exit();
+}
+
 $username = isset($_POST['username']) ? trim($_POST['username']) : '';
 $password = isset($_POST['password']) ? $_POST['password'] : '';
 

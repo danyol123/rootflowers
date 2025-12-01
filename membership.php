@@ -58,6 +58,8 @@
             <p>(Password must be at least 8 characters and include at least 1 letter and 1 number.)</p>
             <input type="password" id="password" name="password" pattern="^(?=.*[A-Za-z])(?=.*[0-9]).{8,}$" required>
 
+            <!-- Honeypot field -->
+            <input type="hidden" name="website" id="pot" value="">
 
             <!-- Submit -->
             <div class="submit-buttons">
