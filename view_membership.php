@@ -37,7 +37,8 @@ $alter_sql = "ALTER TABLE `memberships`
 	ADD COLUMN IF NOT EXISTS `deleted` TINYINT(1) NOT NULL DEFAULT 0,
 	ADD COLUMN IF NOT EXISTS `deleted_at` DATETIME NULL DEFAULT NULL,
 	ADD COLUMN IF NOT EXISTS `processed` TINYINT(1) NOT NULL DEFAULT 0,
-	ADD COLUMN IF NOT EXISTS `processed_at` DATETIME NULL DEFAULT NULL";
+	ADD COLUMN IF NOT EXISTS `processed_at` DATETIME NULL DEFAULT NULL,
+	ADD COLUMN IF NOT EXISTS `balance` DECIMAL(10,2) NOT NULL DEFAULT 0.00";
 @mysqli_query($conn, $alter_sql);
 
 // Handle POST actions for memberships (mark processed/mark open, update, create)
@@ -89,6 +90,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 				$username = isset($_POST['username']) ? trim($_POST['username']) : '';
 				$email = isset($_POST['email']) ? trim($_POST['email']) : '';
 				$password = isset($_POST['password']) ? trim($_POST['password']) : '';
+				$balance = isset($_POST['balance']) ? trim($_POST['balance']) : '0';
+				$balance = is_numeric($balance) ? round((float)$balance, 2) : 0.00;
 				// Validate password complexity if provided
 				if ($password !== '') {
 					if (!preg_match('/[A-Za-z]/', $password) || !preg_match('/[0-9]/', $password) || strlen($password) < 8) {
@@ -106,11 +109,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 				}
 				if ($password !== '') {
 					$password_hash = password_hash($password, PASSWORD_DEFAULT);
-					$stmt = $conn->prepare("UPDATE memberships SET firstname=?, lastname=?, username=?, email=?, password_hash=? WHERE member_id=?");
-					$stmt->bind_param('sssssi', $firstname, $lastname, $username, $email, $password_hash, $id);
+					$stmt = $conn->prepare("UPDATE memberships SET firstname=?, lastname=?, username=?, email=?, password_hash=?, balance=? WHERE member_id=?");
+					$stmt->bind_param('sssssdi', $firstname, $lastname, $username, $email, $password_hash, $balance, $id);
 				} else {
-					$stmt = $conn->prepare("UPDATE memberships SET firstname=?, lastname=?, username=?, email=? WHERE member_id=?");
-					$stmt->bind_param('ssssi', $firstname, $lastname, $username, $email, $id);
+					$stmt = $conn->prepare("UPDATE memberships SET firstname=?, lastname=?, username=?, email=?, balance=? WHERE member_id=?");
+					$stmt->bind_param('ssssdi', $firstname, $lastname, $username, $email, $balance, $id);
 				}
 				$stmt->execute();
 				$stmt->close();
@@ -121,6 +124,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 				$username = isset($_POST['username']) ? trim($_POST['username']) : '';
 				$email = isset($_POST['email']) ? trim($_POST['email']) : '';
 				$password = isset($_POST['password']) ? trim($_POST['password']) : '';
+				$balance = isset($_POST['balance']) ? trim($_POST['balance']) : '0';
+				$balance = is_numeric($balance) ? round((float)$balance, 2) : 0.00;
 				$create_errors = [];
 				if ($firstname === '') $create_errors[] = 'First name is required.';
 				if ($lastname === '') $create_errors[] = 'Last name is required.';
@@ -133,13 +138,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 				}
 				if (empty($create_errors)) {
 					$password_hash = password_hash($password, PASSWORD_DEFAULT);
-					$stmt = $conn->prepare("INSERT INTO memberships (firstname, lastname, username, email, password_hash) VALUES (?,?,?,?,?)");
-					$stmt->bind_param('sssss', $firstname, $lastname, $username, $email, $password_hash);
+					$stmt = $conn->prepare("INSERT INTO memberships (firstname, lastname, username, email, password_hash, balance) VALUES (?,?,?,?,?,?)");
+					$stmt->bind_param('sssssd', $firstname, $lastname, $username, $email, $password_hash, $balance);
 					$stmt->execute();
 					$stmt->close();
 					$_SESSION['flash'] = 'Membership created successfully.';
 				} else {
-					$modal_row = ['firstname'=>$firstname,'lastname'=>$lastname,'username'=>$username,'email'=>$email];
+					$modal_row = ['firstname'=>$firstname,'lastname'=>$lastname,'username'=>$username,'email'=>$email,'balance'=>$balance];
 					$create_mode = true;
 					$shouldRedirect = false;
 				}
@@ -159,6 +164,7 @@ $allowed_sorts = [
 	'name' => "CONCAT(firstname, ' ', lastname)",
 	'email' => 'email',
 	'username' => 'username',
+	'balance' => 'balance',
 	'reg_date' => 'reg_date',
 	'processed_at' => 'processed_at'
 ];
@@ -232,6 +238,7 @@ if (!function_exists('header_link')) {
 						<p><strong>Name:</strong> <?php echo htmlspecialchars($modal_row['firstname'] . ' ' . $modal_row['lastname']); ?></p>
 						<p><strong>Email:</strong> <a href="mailto:<?php echo htmlspecialchars($modal_row['email']); ?>"><?php echo htmlspecialchars($modal_row['email']); ?></a></p>
 						<p><strong>Username:</strong> <?php echo htmlspecialchars($modal_row['username']); ?></p>
+						<p><strong>Balance:</strong> RM <?php echo number_format((float)($modal_row['balance'] ?? 0), 2); ?></p>
 						<p><a class="rf-btn rf-btn-ghost rf-btn-edit" href="?edit=<?php echo intval($modal_row['member_id']); ?>">Edit</a> <a class="rf-btn rf-btn-ghost" href="view_membership.php">Close</a></p>
 						<hr>
 					<?php elseif ($edit_id): ?>
@@ -253,6 +260,7 @@ if (!function_exists('header_link')) {
 							<label>Last name<input type="text" name="lastname" value="<?php echo htmlspecialchars($modal_row['lastname']); ?>"></label>
 							<label>Username<input type="text" name="username" value="<?php echo htmlspecialchars($modal_row['username']); ?>"></label>
 							<label>Email<input type="email" name="email" value="<?php echo htmlspecialchars($modal_row['email']); ?>"></label>
+							<label>Balance (RM)<input type="number" step="0.01" name="balance" value="<?php echo htmlspecialchars(number_format((float)($modal_row['balance'] ?? 0), 2, '.', '')); ?>"></label>
 							<label>New Password (leave blank to keep current)<input type="password" name="password" value=""></label>
 							<div class="rf-inline">
 								<button class="rf-btn rf-btn-complete" type="submit">Save</button>
@@ -283,6 +291,7 @@ if (!function_exists('header_link')) {
 							<label>Last name<input type="text" name="lastname" value="<?php echo htmlspecialchars($modal_row['lastname'] ?? ''); ?>"></label>
 							<label>Username<input type="text" name="username" value="<?php echo htmlspecialchars($modal_row['username'] ?? ''); ?>"></label>
 							<label>Email<input type="email" name="email" value="<?php echo htmlspecialchars($modal_row['email'] ?? ''); ?>"></label>
+							<label>Balance (RM)<input type="number" step="0.01" name="balance" value="<?php echo htmlspecialchars(number_format((float)($modal_row['balance'] ?? 0), 2, '.', '')); ?>"></label>
 							<label>Password<input type="password" name="password" value=""></label>
 							<div class="rf-inline">
 								<button class="rf-btn rf-btn-complete" type="submit">Create</button>
@@ -313,6 +322,7 @@ if (!function_exists('header_link')) {
 								<?php echo header_link('name', 'Name'); ?>
 								<?php echo header_link('email', 'Email'); ?>
 								<?php echo header_link('username', 'Username'); ?>
+								<?php echo header_link('balance', 'Balance'); ?>
 								<?php echo header_link('reg_date', 'Registered At'); ?>
 								<th class="rf-nowrap">Actions</th>
 							</tr>
@@ -324,6 +334,7 @@ if (!function_exists('header_link')) {
 								<td><?php echo htmlspecialchars($row['firstname'] . ' ' . $row['lastname']); ?></td>
 								<td><a href="mailto:<?php echo htmlspecialchars($row['email']); ?>"><?php echo htmlspecialchars($row['email']); ?></a></td>
 								<td><?php echo htmlspecialchars($row['username']); ?></td>
+								<td>RM <?php echo number_format((float)$row['balance'], 2); ?></td>
 								<td><small class="rf-muted"><?php echo htmlspecialchars($row['reg_date']); ?></small></td>
 								<td class="rf-nowrap">
 									<div class="rf-actions">
@@ -377,6 +388,7 @@ if (!function_exists('header_link')) {
 								<?php echo header_link('name', 'Name'); ?>
 								<?php echo header_link('email', 'Email'); ?>
 								<?php echo header_link('username', 'Username'); ?>
+								<?php echo header_link('balance', 'Balance'); ?>
 								<?php echo header_link('processed_at', 'Processed At'); ?>
 								<th class="rf-nowrap">Actions</th>
 							</tr>
@@ -388,6 +400,7 @@ if (!function_exists('header_link')) {
 								<td><?php echo htmlspecialchars($row['firstname'] . ' ' . $row['lastname']); ?></td>
 								<td><a href="mailto:<?php echo htmlspecialchars($row['email']); ?>"><?php echo htmlspecialchars($row['email']); ?></a></td>
 								<td><?php echo htmlspecialchars($row['username']); ?></td>
+								<td>RM <?php echo number_format((float)$row['balance'], 2); ?></td>
 								<td><small class="rf-muted"><?php echo htmlspecialchars($row['processed_at']); ?></small></td>
 								<td class="rf-nowrap">
 									<div class="rf-actions">
