@@ -48,8 +48,6 @@ session_start();
             mysqli_close($conn);
             exit();
         }
-            die("Connection failed: " . mysqli_connect_error());
-        }
 
         // Verify CSRF token
         if (!isset($_POST['csrf']) || !isset($_SESSION['csrf_token']) || $_POST['csrf'] !== $_SESSION['csrf_token']) {
@@ -57,6 +55,7 @@ session_start();
             echo "<p><a href='register.php'>Return to the Entry Page</a></p>";
             exit();
         }
+        
         echo "<p>Thank you for registering, <strong>" . htmlspecialchars($_POST["firstName"]) . " " . htmlspecialchars($_POST["lastName"]) . "!</strong></p>";
         echo "<p><strong>Email:</strong> " . htmlspecialchars($_POST["email"]) . "</p>";
         echo "<p><strong>Address:</strong> " . htmlspecialchars($_POST["street"]) . ", " . htmlspecialchars($_POST["city"]) . ", " . htmlspecialchars($_POST["state"]) . ", " . htmlspecialchars($_POST["postcode"]) . "</p>";

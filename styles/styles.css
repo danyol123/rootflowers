@@ -3550,37 +3550,324 @@ label[for="pot"] {
   display: none !important;
 }
 
-/* Product Search Styles */
-.search-section {
-  background-color: #f9f5f0;
-  font-family: 'Lato', sans-serif;
+/* Upload Form Styling */
+.upload-area {
+  background: #f9fafb;
+  border: 2px dashed #d1d5db;
+  border-radius: 8px;
+  padding: 2rem;
+  text-align: center;
+  transition: border-color 0.2s;
 }
 
-.search-container {
-  background-color: #ffffff;
-  border: 1px solid #C4B6A4;
-  border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(70, 59, 43, 0.1);
-  width: 100%;
-  max-width: 700px;
-  margin: 0 auto 3rem auto;
+.upload-area:hover {
+  border-color: #9ca3af;
+}
+
+.upload-area input[type="file"] {
+  margin-bottom: 1rem;
+}
+
+/* Section Header */
+.section-header {
   display: flex;
-  justify-content: center;
-}
-
-.search-container form {
-  height: 10px;
-  width: 100%;
-  object-fit: cover;
-  background-color: #f9fafb;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
   border-bottom: 1px solid #e5e7eb;
 }
 
-.image-actions {
+.section-header h2 {
+  margin: 0;
+  color: #374151;
+  font-size: 1.5rem;
+}
+
+.rf-meta-header {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.rf-alert-info {
+  margin-bottom: 1.5rem;
   padding: 1rem;
+  background: #e0f2fe;
+  color: #0369a1;
+  border-radius: 6px;
+}
+
+.no-images-message {
+  grid-column: 1/-1;
   text-align: center;
+  padding: 2rem;
+}
+
+.upload-area-title {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  color: #4b5563;
+}
+
+.promotion-sidebar-admin {
+  padding: 0;
+}
+
+.promotion-content-section {
+  flex: 1;
+  padding-left: 10%;
+}
+
+/* End of Promotion Module Styling */
+
+/* Recycle */
+/* small namespaced helpers just for the confirmation UI (no inline attributes) */
+.rf-confirm {
+  max-width: 760px;
+  margin: 40px auto;
+  padding: 24px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+}
+
+.rf-confirm h2 {
+  margin: 0 0 12px;
+  color: #3b2a74;
+}
+
+.rf-confirm .rf-meta {
+  margin-bottom: 16px;
+  color: #444;
+}
+
+.rf-confirm .rf-preview {
+  background: #faf7ff;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.rf-confirm .rf-actions {
+  display: flex;
+  gap: 10px;
+}
+
+/* Top Up Preset Buttons */
+.preset-buttons {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-bottom: 1.2rem;
+}
+
+.preset-btn {
+  background-color: #f4f1ed;
+  border: 1px solid #C4B6A4;
+  color: #463b2b;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.preset-btn:hover {
+  background-color: #C4B6A4;
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+/* Top Up Module */
+.topup-result-container {
+  text-align: center;
+}
+
+.topup-success-title {
+  color: #2bb673;
+}
+
+.topup-failure-title {
+  color: #b00020;
+}
+
+.topup-details {
+  margin: 20px 0;
+  text-align: left;
+  display: inline-block;
+}
+
+.topup-return-link-container {
+  margin-top: 30px;
+}
+
+.topup-return-link {
+  color: #928473;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* Upload Form Styling */
+.upload-area {
   background: #f9fafb;
-  margin-top: auto;
+  border: 2px dashed #d1d5db;
+  border-radius: 8px;
+  padding: 2rem;
+  text-align: center;
+  transition: border-color 0.2s;
+}
+
+.upload-area:hover {
+  border-color: #9ca3af;
+}
+
+.upload-area input[type="file"] {
+  margin-bottom: 1rem;
+}
+
+/* Section Header */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.section-header h2 {
+  margin: 0;
+  color: #374151;
+  font-size: 1.5rem;
+}
+
+.rf-meta-header {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.rf-alert-info {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: #e0f2fe;
+  color: #0369a1;
+  border-radius: 6px;
+}
+
+.no-images-message {
+  grid-column: 1/-1;
+  text-align: center;
+  padding: 2rem;
+}
+
+.upload-area-title {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  color: #4b5563;
+}
+
+.promotion-sidebar-admin {
+  padding: 0;
+}
+
+.promotion-content-section {
+  flex: 1;
+  padding-left: 10%;
+}
+
+/* End of Promotion Module Styling */
+
+/* Recycle */
+/* small namespaced helpers just for the confirmation UI (no inline attributes) */
+.rf-confirm {
+  max-width: 760px;
+  margin: 40px auto;
+  padding: 24px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+}
+
+.rf-confirm h2 {
+  margin: 0 0 12px;
+  color: #3b2a74;
+}
+
+.rf-confirm .rf-meta {
+  margin-bottom: 16px;
+  color: #444;
+}
+
+.rf-confirm .rf-preview {
+  background: #faf7ff;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.rf-confirm .rf-actions {
+  display: flex;
+  gap: 10px;
+}
+
+/* Top Up Preset Buttons */
+.preset-buttons {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-bottom: 1.2rem;
+}
+
+.preset-btn {
+  background-color: #f4f1ed;
+  border: 1px solid #C4B6A4;
+  color: #463b2b;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.preset-btn:hover {
+  background-color: #C4B6A4;
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+/* Top Up Module */
+.topup-result-container {
+  text-align: center;
+}
+
+.topup-success-title {
+  color: #2bb673;
+}
+
+.topup-failure-title {
+  color: #b00020;
+}
+
+.topup-details {
+  margin: 20px 0;
+  text-align: left;
+  display: inline-block;
+}
+
+.topup-return-link-container {
+  margin-top: 30px;
+}
+
+.topup-return-link {
+  color: #928473;
+  text-decoration: none;
+  font-weight: bold;
 }
 
 /* Upload Form Styling */
@@ -3745,378 +4032,7 @@ label[for="pot"] {
 
 /* Product Search Styles */
 .search-section {
-  padding: 1rem;
-  background-color: #f9f5f0;
-  font-family: 'Lato', sans-serif;
-}
-
-.search-container {
-  background-color: #ffffff;
-  border: 1px solid #C4B6A4;
-  border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(70, 59, 43, 0.1);
-  width: 100%;
-  max-width: 700px;
-  margin: 0 auto auto auto;
-  display: flex;
-  justify-content: center;
-}
-
-.image-actions {
-  padding: 1rem;
-  text-align: center;
-  background: #f9fafb;
-  margin-top: auto;
-}
-
-/* Upload Form Styling */
-.upload-area {
-  background: #f9fafb;
-  border: 2px dashed #d1d5db;
-  border-radius: 8px;
-  padding: 2rem;
-  text-align: center;
-  transition: border-color 0.2s;
-}
-
-.upload-area:hover {
-  border-color: #9ca3af;
-}
-
-.upload-area input[type="file"] {
-  margin-bottom: 1rem;
-}
-
-/* Section Header */
-.section-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1.5rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid #e5e7eb;
-}
-
-.section-header h2 {
-  margin: 0;
-  color: #374151;
-  font-size: 1.5rem;
-}
-
-.rf-meta-header {
-  background: white;
-  padding: 20px;
-  border-radius: 8px;
-  margin-bottom: 20px;
-}
-
-.rf-alert-info {
-  margin-bottom: 1.5rem;
-  padding: 1rem;
-  background: #e0f2fe;
-  color: #0369a1;
-  border-radius: 6px;
-}
-
-.no-images-message {
-  grid-column: 1/-1;
-  text-align: center;
-  padding: 2rem;
-}
-
-.upload-area-title {
-  margin-top: 0;
-  margin-bottom: 1rem;
-  font-size: 1rem;
-  color: #4b5563;
-}
-
-.promotion-sidebar-admin {
-  padding: 0;
-}
-
-.promotion-content-section {
-  flex: 1;
-  padding-left: 10%;
-}
-
-/* End of Promotion Module Styling */
-
-/* Recycle */
-/* small namespaced helpers just for the confirmation UI (no inline attributes) */
-.rf-confirm {
-  max-width: 760px;
-  margin: 40px auto;
-  padding: 24px;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
-}
-
-.rf-confirm h2 {
-  margin: 0 0 12px;
-  color: #3b2a74;
-}
-
-.rf-confirm .rf-meta {
-  margin-bottom: 16px;
-  color: #444;
-}
-
-.rf-confirm .rf-preview {
-  background: #faf7ff;
-  padding: 12px;
-  border-radius: 8px;
-  margin-bottom: 16px;
-}
-
-.rf-confirm .rf-actions {
-  display: flex;
-  gap: 10px;
-}
-
-/* Top Up Preset Buttons */
-.preset-buttons {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-  margin-bottom: 1.2rem;
-}
-
-.preset-btn {
-  background-color: #f4f1ed;
-  border: 1px solid #C4B6A4;
-  color: #463b2b;
-  padding: 10px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: all 0.3s ease;
-}
-
-.preset-btn:hover {
-  background-color: #C4B6A4;
-  color: #fff;
-  transform: translateY(-2px);
-}
-
-/* Top Up Module */
-.topup-result-container {
-  text-align: center;
-}
-
-.topup-success-title {
-  color: #2bb673;
-}
-
-.topup-failure-title {
-  color: #b00020;
-}
-
-.topup-details {
-  margin: 20px 0;
-  text-align: left;
-  display: inline-block;
-}
-
-.topup-return-link-container {
-  margin-top: 30px;
-}
-
-.topup-return-link {
-  color: #928473;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-/* Product Search Styles */
-.search-section {
-  padding: 1rem;
-  background-color: #f9f5f0;
-  font-family: 'Lato', sans-serif;
-}
-
-.search-container {
-  background-color: #ffffff;
-  border: 1px solid #C4B6A4;
-  border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(70, 59, 43, 0.1);
-  width: 100%;
-  max-width: 700px;
-  margin: 0 auto auto auto;
-  display: flex;
-  justify-content: center;
-}
-
-.image-actions {
-  padding: 1rem;
-  text-align: center;
-  background: #f9fafb;
-  margin-top: auto;
-}
-
-/* Upload Form Styling */
-.upload-area {
-  background: #f9fafb;
-  border: 2px dashed #d1d5db;
-  border-radius: 8px;
-  padding: 2rem;
-  text-align: center;
-  transition: border-color 0.2s;
-}
-
-.upload-area:hover {
-  border-color: #9ca3af;
-}
-
-.upload-area input[type="file"] {
-  margin-bottom: 1rem;
-}
-
-/* Section Header */
-.section-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1.5rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid #e5e7eb;
-}
-
-.section-header h2 {
-  margin: 0;
-  color: #374151;
-  font-size: 1.5rem;
-}
-
-.rf-meta-header {
-  background: white;
-  padding: 20px;
-  border-radius: 8px;
-  margin-bottom: 20px;
-}
-
-.rf-alert-info {
-  margin-bottom: 1.5rem;
-  padding: 1rem;
-  background: #e0f2fe;
-  color: #0369a1;
-  border-radius: 6px;
-}
-
-.no-images-message {
-  grid-column: 1/-1;
-  text-align: center;
-  padding: 2rem;
-}
-
-.upload-area-title {
-  margin-top: 0;
-  margin-bottom: 1rem;
-  font-size: 1rem;
-  color: #4b5563;
-}
-
-.promotion-sidebar-admin {
-  padding: 0;
-}
-
-.promotion-content-section {
-  flex: 1;
-  padding-left: 10%;
-}
-
-/* End of Promotion Module Styling */
-
-/* Recycle */
-/* small namespaced helpers just for the confirmation UI (no inline attributes) */
-.rf-confirm {
-  max-width: 760px;
-  margin: 40px auto;
-  padding: 24px;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
-}
-
-.rf-confirm h2 {
-  margin: 0 0 12px;
-  color: #3b2a74;
-}
-
-.rf-confirm .rf-meta {
-  margin-bottom: 16px;
-  color: #444;
-}
-
-.rf-confirm .rf-preview {
-  background: #faf7ff;
-  padding: 12px;
-  border-radius: 8px;
-  margin-bottom: 16px;
-}
-
-.rf-confirm .rf-actions {
-  display: flex;
-  gap: 10px;
-}
-
-/* Top Up Preset Buttons */
-.preset-buttons {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-  margin-bottom: 1.2rem;
-}
-
-.preset-btn {
-  background-color: #f4f1ed;
-  border: 1px solid #C4B6A4;
-  color: #463b2b;
-  padding: 10px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: all 0.3s ease;
-}
-
-.preset-btn:hover {
-  background-color: #C4B6A4;
-  color: #fff;
-  transform: translateY(-2px);
-}
-
-/* Top Up Module */
-.topup-result-container {
-  text-align: center;
-}
-
-.topup-success-title {
-  color: #2bb673;
-}
-
-.topup-failure-title {
-  color: #b00020;
-}
-
-.topup-details {
-  margin: 20px 0;
-  text-align: left;
-  display: inline-block;
-}
-
-.topup-return-link-container {
-  margin-top: 30px;
-}
-
-.topup-return-link {
-  color: #928473;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-/* Product Search Styles */
-.search-section {
+  padding: 3rem;
   background-color: #f9f5f0;
   font-family: 'Lato', sans-serif;
 }
@@ -4128,6 +4044,7 @@ label[for="pot"] {
   box-shadow: 0 4px 12px rgba(70, 59, 43, 0.1);
   padding: 1rem;
   width: 60%;
+  margin: 0 auto auto auto;
   max-width: 60%;
   height: 2.4rem;
   justify-content: center;
@@ -4137,6 +4054,11 @@ label[for="pot"] {
   width: 100%;
   gap: 0.5rem;
   display: flex;
+  height: 10px;
+  width: 100%;
+  object-fit: cover;
+  background-color: #f9fafb;
+  border-bottom: 1px solid #e5e7eb;
 }
 
 .search-container input[type='text'] {
@@ -4194,6 +4116,7 @@ label[for="pot"] {
   text-align: center;
   transition: all 0.3s ease;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  margin-bottom: 1rem;
 }
 
 .product-list li:hover {
@@ -4222,7 +4145,6 @@ label[for="pot"] {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-bottom: 3rem;
   position: relative;
   color: #fff;
   text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
